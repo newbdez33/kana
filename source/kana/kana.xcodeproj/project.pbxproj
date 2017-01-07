@@ -12,6 +12,7 @@
 		CE1F2A361E211C5E004A627C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1F2A341E211C5E004A627C /* Main.storyboard */; };
 		CE1F2A381E211C5E004A627C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE1F2A371E211C5E004A627C /* Assets.xcassets */; };
 		CE1F2A3B1E211C5E004A627C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1F2A391E211C5E004A627C /* LaunchScreen.storyboard */; };
+		CE1F2A451E211F4B004A627C /* Hosohuwafont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE1F2A441E211F4B004A627C /* Hosohuwafont.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		CE1F2A371E211C5E004A627C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE1F2A3A1E211C5E004A627C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE1F2A3C1E211C5E004A627C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE1F2A441E211F4B004A627C /* Hosohuwafont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hosohuwafont.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 		CE1F2A2F1E211C5E004A627C /* kana */ = {
 			isa = PBXGroup;
 			children = (
+				CE1F2A421E211F4B004A627C /* resources */,
 				CE1F2A301E211C5E004A627C /* AppDelegate.swift */,
 				CE1F2A321E211C5E004A627C /* ViewController.swift */,
 				CE1F2A341E211C5E004A627C /* Main.storyboard */,
@@ -62,6 +65,22 @@
 				CE1F2A3C1E211C5E004A627C /* Info.plist */,
 			);
 			path = kana;
+			sourceTree = "<group>";
+		};
+		CE1F2A421E211F4B004A627C /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				CE1F2A431E211F4B004A627C /* fonts */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		CE1F2A431E211F4B004A627C /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				CE1F2A441E211F4B004A627C /* Hosohuwafont.ttf */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE1F2A3B1E211C5E004A627C /* LaunchScreen.storyboard in Resources */,
+				CE1F2A451E211F4B004A627C /* Hosohuwafont.ttf in Resources */,
 				CE1F2A381E211C5E004A627C /* Assets.xcassets in Resources */,
 				CE1F2A361E211C5E004A627C /* Main.storyboard in Resources */,
 			);
