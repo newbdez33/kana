@@ -18,6 +18,10 @@
 		CE7EA5641E2657FB0043357D /* KanaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EA5631E2657FB0043357D /* KanaViewController.swift */; };
 		CE7EA5671E26582C0043357D /* Kana.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE7EA5691E26582C0043357D /* Kana.storyboard */; };
 		CE7EA56C1E265C4B0043357D /* UIColor+Kana.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EA56B1E265C4B0043357D /* UIColor+Kana.swift */; };
+		CE7EA5711E26742F0043357D /* KanaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EA56F1E26742F0043357D /* KanaCell.swift */; };
+		CE7EA5721E26742F0043357D /* KanaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7EA5701E26742F0043357D /* KanaCell.xib */; };
+		CE7EA5751E26761E0043357D /* KanaHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EA5731E26761E0043357D /* KanaHeaderView.swift */; };
+		CE7EA5761E26761E0043357D /* KanaHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7EA5741E26761E0043357D /* KanaHeaderView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +51,10 @@
 		CE7EA5631E2657FB0043357D /* KanaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KanaViewController.swift; sourceTree = "<group>"; };
 		CE7EA5681E26582C0043357D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Kana.storyboard; sourceTree = "<group>"; };
 		CE7EA56B1E265C4B0043357D /* UIColor+Kana.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Kana.swift"; sourceTree = "<group>"; };
+		CE7EA56F1E26742F0043357D /* KanaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KanaCell.swift; sourceTree = "<group>"; };
+		CE7EA5701E26742F0043357D /* KanaCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KanaCell.xib; sourceTree = "<group>"; };
+		CE7EA5731E26761E0043357D /* KanaHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KanaHeaderView.swift; sourceTree = "<group>"; };
+		CE7EA5741E26761E0043357D /* KanaHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KanaHeaderView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +91,7 @@
 			children = (
 				CE7EA56A1E265C210043357D /* extensions */,
 				CE1F2A421E211F4B004A627C /* resources */,
+				CE7EA56D1E2674010043357D /* views */,
 				CE1F2A301E211C5E004A627C /* AppDelegate.swift */,
 				CE1F2A321E211C5E004A627C /* QuestionController.swift */,
 				CE1F2A341E211C5E004A627C /* Question.storyboard */,
@@ -117,6 +126,25 @@
 				CE7EA56B1E265C4B0043357D /* UIColor+Kana.swift */,
 			);
 			path = extensions;
+			sourceTree = "<group>";
+		};
+		CE7EA56D1E2674010043357D /* views */ = {
+			isa = PBXGroup;
+			children = (
+				CE7EA56E1E26740D0043357D /* cells */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		CE7EA56E1E26740D0043357D /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				CE7EA56F1E26742F0043357D /* KanaCell.swift */,
+				CE7EA5701E26742F0043357D /* KanaCell.xib */,
+				CE7EA5731E26761E0043357D /* KanaHeaderView.swift */,
+				CE7EA5741E26761E0043357D /* KanaHeaderView.xib */,
+			);
+			path = cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,7 +211,9 @@
 				CE1F2A3B1E211C5E004A627C /* LaunchScreen.storyboard in Resources */,
 				CE1F2A451E211F4B004A627C /* Hosohuwafont.ttf in Resources */,
 				CE1F2A381E211C5E004A627C /* Assets.xcassets in Resources */,
+				CE7EA5761E26761E0043357D /* KanaHeaderView.xib in Resources */,
 				CE1F2A361E211C5E004A627C /* Question.storyboard in Resources */,
+				CE7EA5721E26742F0043357D /* KanaCell.xib in Resources */,
 				CE7EA5671E26582C0043357D /* Kana.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -195,9 +225,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE7EA5711E26742F0043357D /* KanaCell.swift in Sources */,
 				CE7EA56C1E265C4B0043357D /* UIColor+Kana.swift in Sources */,
 				CE7EA5641E2657FB0043357D /* KanaViewController.swift in Sources */,
 				CE1F2A331E211C5E004A627C /* QuestionController.swift in Sources */,
+				CE7EA5751E26761E0043357D /* KanaHeaderView.swift in Sources */,
 				CE1F2A311E211C5E004A627C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
