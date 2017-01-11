@@ -7,12 +7,23 @@
 //
 
 import UIKit
+import JZSpringRefresh
 
 class QuestionViewController: UIViewController {
 
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let bottom = scrollView.addSpringRefresh(position: .bottom, actionHandlere: { (v:JZSpringRefresh) in
+            let vc = UIStoryboard(name: "Kana", bundle: nil).instantiateInitialViewController()
+            self.present(vc!, animated: true, completion: { 
+                //
+            })
+        })
+        bottom.text = "五十音図"
+        bottom.readyColor = UIColor.kanaKeyRedColor()
     }
 
     override func didReceiveMemoryWarning() {

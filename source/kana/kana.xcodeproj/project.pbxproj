@@ -13,7 +13,26 @@
 		CE1F2A381E211C5E004A627C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE1F2A371E211C5E004A627C /* Assets.xcassets */; };
 		CE1F2A3B1E211C5E004A627C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1F2A391E211C5E004A627C /* LaunchScreen.storyboard */; };
 		CE1F2A451E211F4B004A627C /* Hosohuwafont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE1F2A441E211F4B004A627C /* Hosohuwafont.ttf */; };
+		CE7EA5581E25223F0043357D /* JZSpringRefresh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7EA5571E25223F0043357D /* JZSpringRefresh.framework */; };
+		CE7EA5591E25223F0043357D /* JZSpringRefresh.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CE7EA5571E25223F0043357D /* JZSpringRefresh.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CE7EA5641E2657FB0043357D /* KanaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EA5631E2657FB0043357D /* KanaViewController.swift */; };
+		CE7EA5671E26582C0043357D /* Kana.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE7EA5691E26582C0043357D /* Kana.storyboard */; };
+		CE7EA56C1E265C4B0043357D /* UIColor+Kana.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EA56B1E265C4B0043357D /* UIColor+Kana.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CE7EA5561E25211E0043357D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CE7EA5591E25223F0043357D /* JZSpringRefresh.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		CE1F2A2D1E211C5E004A627C /* kana.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kana.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -24,6 +43,10 @@
 		CE1F2A3A1E211C5E004A627C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE1F2A3C1E211C5E004A627C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE1F2A441E211F4B004A627C /* Hosohuwafont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hosohuwafont.ttf; sourceTree = "<group>"; };
+		CE7EA5571E25223F0043357D /* JZSpringRefresh.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JZSpringRefresh.framework; path = Carthage/Build/iOS/JZSpringRefresh.framework; sourceTree = "<group>"; };
+		CE7EA5631E2657FB0043357D /* KanaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KanaViewController.swift; sourceTree = "<group>"; };
+		CE7EA5681E26582C0043357D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Kana.storyboard; sourceTree = "<group>"; };
+		CE7EA56B1E265C4B0043357D /* UIColor+Kana.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Kana.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE7EA5581E25223F0043357D /* JZSpringRefresh.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +64,7 @@
 		CE1F2A241E211C5E004A627C = {
 			isa = PBXGroup;
 			children = (
+				CE7EA5571E25223F0043357D /* JZSpringRefresh.framework */,
 				CE1F2A2F1E211C5E004A627C /* kana */,
 				CE1F2A2E1E211C5E004A627C /* Products */,
 			);
@@ -56,6 +81,7 @@
 		CE1F2A2F1E211C5E004A627C /* kana */ = {
 			isa = PBXGroup;
 			children = (
+				CE7EA56A1E265C210043357D /* extensions */,
 				CE1F2A421E211F4B004A627C /* resources */,
 				CE1F2A301E211C5E004A627C /* AppDelegate.swift */,
 				CE1F2A321E211C5E004A627C /* QuestionController.swift */,
@@ -63,6 +89,8 @@
 				CE1F2A371E211C5E004A627C /* Assets.xcassets */,
 				CE1F2A391E211C5E004A627C /* LaunchScreen.storyboard */,
 				CE1F2A3C1E211C5E004A627C /* Info.plist */,
+				CE7EA5631E2657FB0043357D /* KanaViewController.swift */,
+				CE7EA5691E26582C0043357D /* Kana.storyboard */,
 			);
 			path = kana;
 			sourceTree = "<group>";
@@ -83,6 +111,14 @@
 			path = fonts;
 			sourceTree = "<group>";
 		};
+		CE7EA56A1E265C210043357D /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CE7EA56B1E265C4B0043357D /* UIColor+Kana.swift */,
+			);
+			path = extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -93,6 +129,7 @@
 				CE1F2A291E211C5E004A627C /* Sources */,
 				CE1F2A2A1E211C5E004A627C /* Frameworks */,
 				CE1F2A2B1E211C5E004A627C /* Resources */,
+				CE7EA5561E25211E0043357D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -147,6 +184,7 @@
 				CE1F2A451E211F4B004A627C /* Hosohuwafont.ttf in Resources */,
 				CE1F2A381E211C5E004A627C /* Assets.xcassets in Resources */,
 				CE1F2A361E211C5E004A627C /* Question.storyboard in Resources */,
+				CE7EA5671E26582C0043357D /* Kana.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,6 +195,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE7EA56C1E265C4B0043357D /* UIColor+Kana.swift in Sources */,
+				CE7EA5641E2657FB0043357D /* KanaViewController.swift in Sources */,
 				CE1F2A331E211C5E004A627C /* QuestionController.swift in Sources */,
 				CE1F2A311E211C5E004A627C /* AppDelegate.swift in Sources */,
 			);
@@ -179,6 +219,14 @@
 				CE1F2A3A1E211C5E004A627C /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		CE7EA5691E26582C0043357D /* Kana.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE7EA5681E26582C0043357D /* Base */,
+			);
+			name = Kana.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -282,6 +330,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 72T2SXUWHC;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = kana/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -299,6 +352,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 72T2SXUWHC;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = kana/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -329,6 +387,7 @@
 				CE1F2A411E211C5E004A627C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
