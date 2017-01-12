@@ -40,27 +40,36 @@ class KanaViewController: UIViewController {
 
 }
 
-extension KanaViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension KanaViewController : UICollectionViewDelegate, UICollectionViewDataSource, KanaCollectionViewDelegateFlowLayout {
     
     // MARK: - UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "KanaCell", for: indexPath) as! KanaCell
-        cell.backgroundColor = UIColor.yellow
         return cell
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 50;
+        return 5;
     }
     
-    // Cell Size Change
+    // Layout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 150, height: 150)
+        let numberOfCells:CGFloat = 5.0
+        let margin:CGFloat = 10.0
+        let width = self.view.bounds.size.width / numberOfCells - margin - margin/2
+        let retval = CGSize(width: width, height: width)
+        return retval
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        let margin:CGFloat = 10.0
+        return UIEdgeInsets(top: margin+8, left: margin, bottom: margin, right: margin)
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionElementKindSectionHeader {
@@ -71,8 +80,20 @@ extension KanaViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let size = CGSize(width: 400, height: 50)
-        return size
+        if section == 0 {
+            let size = CGSize(width: UIScreen.main.bounds.width, height: 140)
+            return size
+        }
+        return CGSize.zero
+    }
+    
+    //
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, backgroundColorForSectionAt section: Int) -> UIColor {
+        if section % 2 == 0 {
+            return UIColor.white
+        } else {
+            return UIColor.kanaKeyGrayColor()
+        }
     }
     
 }
