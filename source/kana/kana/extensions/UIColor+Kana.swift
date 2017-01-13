@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftHEXColors
 
 extension UIColor {
     class func kanaKeyRedColor() -> UIColor {
@@ -15,6 +16,6 @@ extension UIColor {
     }
     
     class func kanaKeyGrayColor() -> UIColor {
-        return UIColor(red: 0.333, green: 0.333, blue: 0.333, alpha: 1)
+        return UIColor(hexString: "f8f8f8")!
     }
 }

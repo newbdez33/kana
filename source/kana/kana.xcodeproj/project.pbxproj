@@ -28,6 +28,8 @@
 		CE7EA5801E27ADE00043357D /* KanaFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EA57F1E27ADE00043357D /* KanaFlowLayout.swift */; };
 		CE7EA5821E27AEC40043357D /* KanaLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EA5811E27AEC40043357D /* KanaLayoutAttributes.swift */; };
 		CE7EA5841E27B7090043357D /* KanaSectionColorReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EA5831E27B7090043357D /* KanaSectionColorReusableView.swift */; };
+		CE7EA5861E27C1190043357D /* SwiftHEXColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7EA5851E27C1190043357D /* SwiftHEXColors.framework */; };
+		CE7EA5871E27C1190043357D /* SwiftHEXColors.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CE7EA5851E27C1190043357D /* SwiftHEXColors.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +39,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				CE7EA5871E27C1190043357D /* SwiftHEXColors.framework in Embed Frameworks */,
 				CE7EA5591E25223F0043357D /* JZSpringRefresh.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -67,6 +70,7 @@
 		CE7EA57F1E27ADE00043357D /* KanaFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KanaFlowLayout.swift; sourceTree = "<group>"; };
 		CE7EA5811E27AEC40043357D /* KanaLayoutAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KanaLayoutAttributes.swift; sourceTree = "<group>"; };
 		CE7EA5831E27B7090043357D /* KanaSectionColorReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KanaSectionColorReusableView.swift; sourceTree = "<group>"; };
+		CE7EA5851E27C1190043357D /* SwiftHEXColors.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHEXColors.framework; path = Carthage/Build/iOS/SwiftHEXColors.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE7EA5861E27C1190043357D /* SwiftHEXColors.framework in Frameworks */,
 				CE7EA5581E25223F0043357D /* JZSpringRefresh.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,6 +89,7 @@
 		CE1F2A241E211C5E004A627C = {
 			isa = PBXGroup;
 			children = (
+				CE7EA5851E27C1190043357D /* SwiftHEXColors.framework */,
 				CE7EA5571E25223F0043357D /* JZSpringRefresh.framework */,
 				CE1F2A2F1E211C5E004A627C /* kana */,
 				CE1F2A2E1E211C5E004A627C /* Products */,
