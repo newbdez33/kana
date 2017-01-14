@@ -125,6 +125,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="Qhc-O9-vDn" id="f7u-te-xzK"/>
+                        <outlet property="questionLabel" destination="sP3-u1-49x" id="gwG-0a-aRZ"/>
                         <outlet property="scrollView" destination="U5o-Rs-CIl" id="hyh-tf-o6q"/>
                     </connections>
                 </viewController>

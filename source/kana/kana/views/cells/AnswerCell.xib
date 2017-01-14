@@ -24,7 +24,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ネ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAL-5N-TAx">
-                        <rect key="frame" x="121.5" y="121.5" width="80" height="80"/>
+                        <rect key="frame" x="121.5" y="122" width="80" height="80"/>
                         <fontDescription key="fontDescription" name="Hosofuwafont" family="Hosofuwafont" pointSize="80"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -36,6 +36,9 @@
                 <constraint firstItem="eAL-5N-TAx" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="nrN-eY-agD"/>
             </constraints>
             <size key="customSize" width="323" height="323"/>
+            <connections>
+                <outlet property="kanaLabel" destination="eAL-5N-TAx" id="bIE-sz-ris"/>
+            </connections>
             <point key="canvasLocation" x="161.5" y="188.5"/>
         </collectionViewCell>
     </objects>

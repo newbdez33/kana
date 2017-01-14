@@ -13,7 +13,7 @@ enum KanaType: Int {
 }
 
 struct AppConfig {
-    static var answersCount = 4
+    static var answersCount:Int = 4
     
     static let monographs:[[[String]]] = [
         [["a", "あ", "ア"], ["i", "い", "イ"], ["u", "う", "ウ"], ["e", "え", "エ"], ["o", "お", "オ"]],
