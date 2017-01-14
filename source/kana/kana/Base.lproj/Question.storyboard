@@ -55,12 +55,12 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vzi-em-kNW" userLabel="answer">
-                                                <rect key="frame" x="0.0" y="376" width="375" height="283"/>
+                                                <rect key="frame" x="0.0" y="376" width="375" height="291"/>
                                                 <subviews>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Qhc-O9-vDn">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="283"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="291"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Zfl-Lm-OGf">
+                                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Zfl-Lm-OGf">
                                                             <size key="itemSize" width="50" height="50"/>
                                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -99,7 +99,7 @@
                                             <constraint firstAttribute="trailing" secondItem="vzi-em-kNW" secondAttribute="trailing" id="PCL-wD-IY2"/>
                                             <constraint firstItem="vzi-em-kNW" firstAttribute="leading" secondItem="TQU-Yr-NIn" secondAttribute="leading" id="X9o-cl-BI6"/>
                                             <constraint firstItem="LLM-m7-01M" firstAttribute="leading" secondItem="TQU-Yr-NIn" secondAttribute="leading" id="ffA-xg-YQY"/>
-                                            <constraint firstItem="LLM-m7-01M" firstAttribute="top" secondItem="vzi-em-kNW" secondAttribute="bottom" constant="8" id="s19-V5-Dxm"/>
+                                            <constraint firstItem="LLM-m7-01M" firstAttribute="top" secondItem="vzi-em-kNW" secondAttribute="bottom" id="s19-V5-Dxm"/>
                                             <constraint firstItem="J3G-Ru-5n5" firstAttribute="leading" secondItem="TQU-Yr-NIn" secondAttribute="leading" id="sTO-xS-q45"/>
                                             <constraint firstItem="J3G-Ru-5n5" firstAttribute="top" secondItem="TQU-Yr-NIn" secondAttribute="top" id="w1L-Mc-NaQ"/>
                                         </constraints>

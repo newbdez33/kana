@@ -22,4 +22,8 @@ extension UIColor {
     class func kanaBlackColor() -> UIColor {
         return UIColor(hexString: "171412")!
     }
+    
+    class func kanaIncorrectAnswerBackgroundColor() -> UIColor {
+        return UIColor(hexString: "F08F90")!
+    }
 }

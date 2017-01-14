@@ -18,6 +18,9 @@ class QuestionViewController: UIViewController {
     var currentQuestioKana:[String] = []
     var currentAnswers:[[String]] = []
     
+    var isShowingCorrectAnswer = false
+    var correctAnswerLabelKanaType:KanaType = .roma
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,14 +44,44 @@ class QuestionViewController: UIViewController {
     }
     
     // MARK: - 
+    func answerAction(kana:[String]) {
+        
+        if isShowingCorrectAnswer == true {
+            isShowingCorrectAnswer = false
+        }
+        
+        if kana[KanaType.roma.rawValue] == currentQuestioKana[KanaType.roma.rawValue] {
+            //correct
+            nextQuestion()
+        }else {
+            //incorrect
+            isShowingCorrectAnswer = true
+            //show correct answer with red background
+            for i in 0...currentAnswers.count-1 {
+                let ans = currentAnswers[i]
+                if ans[KanaType.roma.rawValue] == currentQuestioKana[KanaType.roma.rawValue] {
+                    let indexPath = IndexPath(item: i, section: 0)
+                    collectionView.reloadItems(at: [indexPath])
+                    return
+                }
+            }
+        }
+        
+    }
+    
     func nextQuestion() {
         // random kana picking
         currentQuestioKana = randomKana()
         
         // random answer picking
         currentAnswers.removeAll()
-        for _ in 0...AppConfig.answersCount {
-            currentAnswers.append(randomKana(excludeRoma: currentQuestioKana[KanaType.roma.rawValue]))
+        let randomCorrectAnswerIndex = Int(arc4random_uniform(UInt32(AppConfig.answersCount)))
+        for i in 0...AppConfig.answersCount {
+            if i == randomCorrectAnswerIndex {
+                currentAnswers.append(currentQuestioKana)
+            }else {
+                currentAnswers.append(randomKana(excludeRoma: currentQuestioKana[KanaType.roma.rawValue]))
+            }
         }
         
         questionLabel.text = randomType(ofKana: currentQuestioKana)
@@ -81,12 +114,22 @@ extension QuestionViewController : UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AnswerCell", for: indexPath) as! AnswerCell
         let kana = currentAnswers[indexPath.row]
+        cell.backgroundColor = UIColor.clear
+        cell.kanaLabel.textColor = UIColor.kanaBlackColor()
         cell.kanaLabel.text = randomType(ofKana: kana)
+        
+        if isShowingCorrectAnswer {
+            if kana[KanaType.roma.rawValue] == currentQuestioKana[KanaType.roma.rawValue] {
+                cell.backgroundColor = UIColor.kanaIncorrectAnswerBackgroundColor()
+                cell.kanaLabel.textColor = UIColor.white
+            }
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        nextQuestion()
+        let kana = currentAnswers[indexPath.row]
+        answerAction(kana: kana)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
