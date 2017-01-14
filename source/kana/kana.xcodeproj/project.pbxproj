@@ -198,6 +198,7 @@
 				CE1F2A2A1E211C5E004A627C /* Frameworks */,
 				CE1F2A2B1E211C5E004A627C /* Resources */,
 				CE7EA5561E25211E0043357D /* Embed Frameworks */,
+				CE7EA58B1E2A61AB0043357D /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -260,6 +261,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CE7EA58B1E2A61AB0043357D /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/JZSpringRefresh.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftHEXColors.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CE1F2A291E211C5E004A627C /* Sources */ = {
