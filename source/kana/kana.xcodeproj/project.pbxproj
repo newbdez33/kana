@@ -460,8 +460,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.salmonapps.app.kana;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a7ae5c63-f8db-45ec-882a-1d6ed1aab750";
-				PROVISIONING_PROFILE_SPECIFIER = "OK-ADHOC";
+				PROVISIONING_PROFILE = "85a11103-974b-42a7-9b63-3fa812b87fcd";
+				PROVISIONING_PROFILE_SPECIFIER = "kana-appstore";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
