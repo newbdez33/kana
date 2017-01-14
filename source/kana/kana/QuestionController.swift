@@ -48,20 +48,20 @@ class QuestionViewController: UIViewController {
         // random answer picking
         currentAnswers.removeAll()
         for _ in 0...AppConfig.answersCount {
-            currentAnswers.append(randomKana())
+            currentAnswers.append(randomKana(excludeRoma: currentQuestioKana[KanaType.roma.rawValue]))
         }
         
         questionLabel.text = randomType(ofKana: currentQuestioKana)
         collectionView.reloadData()
     }
     
-    func randomKana() -> [String] {
+    func randomKana(excludeRoma:String = "") -> [String] {
         
         let section = Int(arc4random_uniform(UInt32(AppConfig.monographs.count)))
         let index =  Int(arc4random_uniform(UInt32(AppConfig.monographs[section].count)))
         let kana = AppConfig.monographs[section][index]
-        if kana[0] == "" {
-            return randomKana()
+        if kana[KanaType.roma.rawValue] == "" || kana[KanaType.roma.rawValue] == excludeRoma {
+            return randomKana(excludeRoma: excludeRoma)
         }
         
         return kana
