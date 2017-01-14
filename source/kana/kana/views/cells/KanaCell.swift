@@ -10,6 +10,9 @@ import UIKit
 
 class KanaCell: UICollectionViewCell {
 
+    @IBOutlet weak var kanaLabel: UILabel!
+    @IBOutlet weak var romaLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

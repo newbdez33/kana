@@ -18,4 +18,8 @@ extension UIColor {
     class func kanaKeyGrayColor() -> UIColor {
         return UIColor(hexString: "f8f8f8")!
     }
+    
+    class func kanaBlackColor() -> UIColor {
+        return UIColor(hexString: "171412")!
+    }
 }

@@ -17,26 +17,38 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="KanaCell" id="gTV-IL-0wX" customClass="KanaCell" customModule="kana" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="175" height="164"/>
+            <rect key="frame" x="0.0" y="0.0" width="223" height="61"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="175" height="164"/>
+                <rect key="frame" x="0.0" y="0.0" width="223" height="61"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k8T-db-mIT">
-                        <rect key="frame" x="0.0" y="0.0" width="175" height="164"/>
+                        <rect key="frame" x="0.0" y="0.0" width="223" height="61"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="あ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wzr-Cm-8MY">
-                                <rect key="frame" x="72.5" y="67" width="30" height="30"/>
+                                <rect key="frame" x="96.5" y="4" width="30" height="30"/>
                                 <fontDescription key="fontDescription" name="Hosofuwafont" family="Hosofuwafont" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="a" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5f4-kg-Ybu">
+                                <rect key="frame" x="0.0" y="38" width="223" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="gMd-a8-4jN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="5f4-kg-Ybu" secondAttribute="trailing" id="0hY-Sv-jan"/>
+                            <constraint firstItem="5f4-kg-Ybu" firstAttribute="top" secondItem="wzr-Cm-8MY" secondAttribute="bottom" constant="4" id="4Lw-Rf-2bP"/>
                             <constraint firstItem="wzr-Cm-8MY" firstAttribute="centerX" secondItem="k8T-db-mIT" secondAttribute="centerX" id="Rp5-Ef-W7U"/>
-                            <constraint firstItem="wzr-Cm-8MY" firstAttribute="centerY" secondItem="k8T-db-mIT" secondAttribute="centerY" id="v5t-wl-Bfh"/>
+                            <constraint firstItem="5f4-kg-Ybu" firstAttribute="leading" secondItem="k8T-db-mIT" secondAttribute="leading" id="vKl-Hq-OhE"/>
+                            <constraint firstItem="wzr-Cm-8MY" firstAttribute="top" secondItem="k8T-db-mIT" secondAttribute="top" constant="4" id="xg0-2Y-UIr"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -47,8 +59,12 @@
                 <constraint firstItem="k8T-db-mIT" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="HyL-87-RRE"/>
                 <constraint firstAttribute="bottom" secondItem="k8T-db-mIT" secondAttribute="bottom" id="RNl-Yi-Eqw"/>
             </constraints>
-            <size key="customSize" width="175" height="164"/>
-            <point key="canvasLocation" x="87.5" y="109"/>
+            <size key="customSize" width="223" height="61"/>
+            <connections>
+                <outlet property="kanaLabel" destination="wzr-Cm-8MY" id="0Zr-P9-AjT"/>
+                <outlet property="romaLabel" destination="5f4-kg-Ybu" id="ApH-it-w5G"/>
+            </connections>
+            <point key="canvasLocation" x="111.5" y="57.5"/>
         </collectionViewCell>
     </objects>
 </document>

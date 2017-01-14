@@ -36,6 +36,9 @@
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Hosofuwafont" family="Hosofuwafont" pointSize="30"/>
                                     <state key="normal" title="あ"/>
+                                    <connections>
+                                        <action selector="hirakanaAction:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="TmG-Wf-VCG"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -49,13 +52,16 @@
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tRI-Ex-99Y">
                                     <rect key="frame" x="91" y="13.5" width="80" height="80"/>
-                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" red="0.090196078430000007" green="0.078431372550000003" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="80" id="0AT-2h-9p0"/>
                                         <constraint firstAttribute="width" constant="80" id="9g7-38-1JH"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Hosofuwafont" family="Hosofuwafont" pointSize="30"/>
                                     <state key="normal" title="ア"/>
+                                    <connections>
+                                        <action selector="katakanaAction:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="zov-mJ-jPq"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -11,6 +11,12 @@ import JZSpringRefresh
 
 class KanaViewController: UIViewController {
     
+    var currentKanaType:KanaType = .hiragana {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -40,20 +46,35 @@ class KanaViewController: UIViewController {
 
 }
 
+extension KanaViewController : KanaHeaderDelegate {
+    
+    func katakanaAction(_ sender: UIButton) {
+        currentKanaType = .katakana
+    }
+    
+    func hirakanaAction(_ sender: UIButton) {
+        currentKanaType = .hiragana
+    }
+}
+
 extension KanaViewController : UICollectionViewDelegate, UICollectionViewDataSource, KanaCollectionViewDelegateFlowLayout {
     
     // MARK: - UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "KanaCell", for: indexPath) as! KanaCell
+        let kanaArray = AppConfig.monographs[indexPath.section][indexPath.row]
+        cell.kanaLabel.text = kanaArray[currentKanaType.rawValue]
+        cell.romaLabel.text = kanaArray[KanaType.roma.rawValue]
         return cell
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 10
+        return AppConfig.monographs.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5;
+        let chars = AppConfig.monographs[section]
+        return chars.count;
     }
     
     // Layout
@@ -61,7 +82,7 @@ extension KanaViewController : UICollectionViewDelegate, UICollectionViewDataSou
         let numberOfCells:CGFloat = 5.0
         let margin:CGFloat = 10.0
         let width = self.view.bounds.size.width / numberOfCells - margin - margin/2
-        let retval = CGSize(width: width, height: width)
+        let retval = CGSize(width: width, height: 60)
         return retval
     }
     
@@ -73,7 +94,8 @@ extension KanaViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionElementKindSectionHeader {
-            let v = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "KanaHeaderView", for: indexPath)
+            let v = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "KanaHeaderView", for: indexPath) as! KanaHeaderView
+            v.delegate = self
             return v
         }
         return UICollectionReusableView()
