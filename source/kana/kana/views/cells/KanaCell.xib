@@ -27,18 +27,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="223" height="61"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="あ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wzr-Cm-8MY">
-                                <rect key="frame" x="96.5" y="4" width="30" height="30"/>
-                                <fontDescription key="fontDescription" name="Hosofuwafont" family="Hosofuwafont" pointSize="30"/>
+                                <rect key="frame" x="95.5" y="4" width="32" height="32"/>
+                                <fontDescription key="fontDescription" name="Hosofuwafont" family="Hosofuwafont" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="a" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5f4-kg-Ybu">
-                                <rect key="frame" x="0.0" y="38" width="223" height="21"/>
+                                <rect key="frame" x="0.0" y="40" width="223" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="gMd-a8-4jN"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="Hosofuwafont" family="Hosofuwafont" pointSize="18"/>
+                                <color key="textColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
