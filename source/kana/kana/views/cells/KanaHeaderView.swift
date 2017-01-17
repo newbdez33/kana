@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Crashlytics
 
 protocol KanaHeaderDelegate {
     func hirakanaAction(_ sender:UIButton)
@@ -29,6 +30,7 @@ class KanaHeaderView: UICollectionReusableView {
     }
     
     @IBAction func hirakanaAction(_ sender: UIButton) {
+
         delegate?.hirakanaAction(sender)
         hirakanaButton.backgroundColor = UIColor.kanaKeyRedColor()
         katakanaButton.backgroundColor = UIColor.kanaBlackColor()
