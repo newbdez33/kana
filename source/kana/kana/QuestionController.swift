@@ -152,7 +152,7 @@ extension QuestionViewController : UICollectionViewDelegate, UICollectionViewDat
     
     // Cell Size Change
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 150, height: 150)
+        return CGSize(width: UIScreen.main.bounds.size.width/2, height: collectionView.bounds.size.height/2)
     }
     
 }
