@@ -302,6 +302,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/JZSpringRefresh.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftHEXColors.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/MonkeyKing.framework",
 			);
 			name = Carthage;
 			outputPaths = (
