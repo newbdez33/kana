@@ -149,10 +149,10 @@
             </objects>
             <point key="canvasLocation" x="117.59999999999999" y="122.78860569715144"/>
         </scene>
-        <!--View Controller-->
+        <!--Menu View Controller-->
         <scene sceneID="xCd-d0-4X9">
             <objects>
-                <viewController id="Rww-X1-CLo" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MenuViewController" id="Rww-X1-CLo" customClass="MenuViewController" customModule="kana" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nMw-aN-ebL"/>
                         <viewControllerLayoutGuide type="bottom" id="Vha-dc-Hk2"/>
@@ -164,6 +164,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6xr-35-Xnr">
                                 <rect key="frame" x="174" y="32" width="26" height="32"/>
                                 <state key="normal" image="share-arrow"/>
+                                <connections>
+                                    <action selector="shareAction:" destination="Rww-X1-CLo" eventType="touchUpInside" id="HVd-1p-87o"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

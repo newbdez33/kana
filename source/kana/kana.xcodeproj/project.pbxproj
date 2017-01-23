@@ -32,6 +32,8 @@
 		CE7EA5841E27B7090043357D /* KanaSectionColorReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7EA5831E27B7090043357D /* KanaSectionColorReusableView.swift */; };
 		CE7EA5861E27C1190043357D /* SwiftHEXColors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7EA5851E27C1190043357D /* SwiftHEXColors.framework */; };
 		CE7EA5871E27C1190043357D /* SwiftHEXColors.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CE7EA5851E27C1190043357D /* SwiftHEXColors.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CE9D4A221E36313300FD0ED8 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9D4A211E36313300FD0ED8 /* MenuViewController.swift */; };
+		CE9D4A241E36395A00FD0ED8 /* MonkeyKing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9D4A231E36395A00FD0ED8 /* MonkeyKing.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,7 +62,7 @@
 		CE1F2A441E211F4B004A627C /* Hosohuwafont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hosohuwafont.ttf; sourceTree = "<group>"; };
 		CE4A9CC81E2E4C3400EE82CC /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		CE4A9CC91E2E4C3400EE82CC /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		CE7EA5571E25223F0043357D /* JZSpringRefresh.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JZSpringRefresh.framework; path = Carthage/Build/iOS/JZSpringRefresh.framework; sourceTree = "<group>"; };
+		CE7EA5571E25223F0043357D /* JZSpringRefresh.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JZSpringRefresh.framework; path = ../../Carthage/Build/iOS/JZSpringRefresh.framework; sourceTree = "<group>"; };
 		CE7EA5631E2657FB0043357D /* KanaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KanaViewController.swift; sourceTree = "<group>"; };
 		CE7EA5681E26582C0043357D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Kana.storyboard; sourceTree = "<group>"; };
 		CE7EA56B1E265C4B0043357D /* UIColor+Kana.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Kana.swift"; sourceTree = "<group>"; };
@@ -74,7 +76,9 @@
 		CE7EA57F1E27ADE00043357D /* KanaFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KanaFlowLayout.swift; sourceTree = "<group>"; };
 		CE7EA5811E27AEC40043357D /* KanaLayoutAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KanaLayoutAttributes.swift; sourceTree = "<group>"; };
 		CE7EA5831E27B7090043357D /* KanaSectionColorReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KanaSectionColorReusableView.swift; sourceTree = "<group>"; };
-		CE7EA5851E27C1190043357D /* SwiftHEXColors.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHEXColors.framework; path = Carthage/Build/iOS/SwiftHEXColors.framework; sourceTree = "<group>"; };
+		CE7EA5851E27C1190043357D /* SwiftHEXColors.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHEXColors.framework; path = ../../Carthage/Build/iOS/SwiftHEXColors.framework; sourceTree = "<group>"; };
+		CE9D4A211E36313300FD0ED8 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuViewController.swift; path = views/layouts/MenuViewController.swift; sourceTree = "<group>"; };
+		CE9D4A231E36395A00FD0ED8 /* MonkeyKing.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MonkeyKing.framework; path = Carthage/Build/iOS/MonkeyKing.framework; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE7EA5861E27C1190043357D /* SwiftHEXColors.framework in Frameworks */,
+				CE9D4A241E36395A00FD0ED8 /* MonkeyKing.framework in Frameworks */,
 				CE4A9CCA1E2E4C3400EE82CC /* Crashlytics.framework in Frameworks */,
 				CE7EA5581E25223F0043357D /* JZSpringRefresh.framework in Frameworks */,
 				CE4A9CCB1E2E4C3500EE82CC /* Fabric.framework in Frameworks */,
@@ -95,8 +100,6 @@
 		CE1F2A241E211C5E004A627C = {
 			isa = PBXGroup;
 			children = (
-				CE7EA5851E27C1190043357D /* SwiftHEXColors.framework */,
-				CE7EA5571E25223F0043357D /* JZSpringRefresh.framework */,
 				CE1F2A2F1E211C5E004A627C /* kana */,
 				CE1F2A2E1E211C5E004A627C /* Products */,
 			);
@@ -120,6 +123,7 @@
 				CE7EA56D1E2674010043357D /* views */,
 				CE1F2A301E211C5E004A627C /* AppDelegate.swift */,
 				CE1F2A321E211C5E004A627C /* QuestionController.swift */,
+				CE9D4A211E36313300FD0ED8 /* MenuViewController.swift */,
 				CE1F2A341E211C5E004A627C /* Question.storyboard */,
 				CE7EA5631E2657FB0043357D /* KanaViewController.swift */,
 				CE7EA5691E26582C0043357D /* Kana.storyboard */,
@@ -149,6 +153,9 @@
 		CE4A9CC71E2E4C3400EE82CC /* venders */ = {
 			isa = PBXGroup;
 			children = (
+				CE9D4A231E36395A00FD0ED8 /* MonkeyKing.framework */,
+				CE7EA5851E27C1190043357D /* SwiftHEXColors.framework */,
+				CE7EA5571E25223F0043357D /* JZSpringRefresh.framework */,
 				CE4A9CC81E2E4C3400EE82CC /* Crashlytics.framework */,
 				CE4A9CC91E2E4C3400EE82CC /* Fabric.framework */,
 			);
@@ -325,6 +332,7 @@
 				CE7EA56C1E265C4B0043357D /* UIColor+Kana.swift in Sources */,
 				CE7EA5641E2657FB0043357D /* KanaViewController.swift in Sources */,
 				CE7EA5821E27AEC40043357D /* KanaLayoutAttributes.swift in Sources */,
+				CE9D4A221E36313300FD0ED8 /* MenuViewController.swift in Sources */,
 				CE1F2A331E211C5E004A627C /* QuestionController.swift in Sources */,
 				CE7EA5791E2798290043357D /* AnswerCell.swift in Sources */,
 				CE7EA5751E26761E0043357D /* KanaHeaderView.swift in Sources */,
