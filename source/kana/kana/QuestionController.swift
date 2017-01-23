@@ -14,6 +14,7 @@ class QuestionViewController: UIViewController {
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var constraintQuestionTop: NSLayoutConstraint!
     
     var currentQuestioKana:[String] = []
     var currentAnswers:[[String]] = []
@@ -116,6 +117,23 @@ class QuestionViewController: UIViewController {
         return text
     }
 
+}
+
+extension QuestionViewController : UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        //print(scrollView.contentOffset.y)
+        if constraintQuestionTop.constant == 0 {
+            if scrollView.contentOffset.y < -80 {
+                constraintQuestionTop.constant = 80
+            }
+        }else {
+            if scrollView.contentOffset.y >= 80 {
+                constraintQuestionTop.constant = 0
+            }
+        }
+    }
+    
 }
 
 extension QuestionViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

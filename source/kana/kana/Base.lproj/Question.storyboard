@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -25,20 +25,29 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U5o-Rs-CIl">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U5o-Rs-CIl">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZg-9o-vMh">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="eoA-ff-VHa"/>
+                                        </constraints>
+                                        <connections>
+                                            <segue destination="Rww-X1-CLo" kind="embed" id="AXC-Jl-SRN"/>
+                                        </connections>
+                                    </containerView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TQU-Yr-NIn">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J3G-Ru-5n5" userLabel="question">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="376"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="417.33333333333331"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ね" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="sP3-u1-49x">
-                                                        <rect key="frame" x="122" y="122.5" width="131" height="130.5"/>
+                                                        <rect key="frame" x="134.66666666666669" y="136.33333333333331" width="144.66666666666669" height="144.33333333333331"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="sP3-u1-49x" secondAttribute="height" multiplier="1:1" id="GLh-sV-0gQ"/>
                                                         </constraints>
@@ -55,10 +64,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vzi-em-kNW" userLabel="answer">
-                                                <rect key="frame" x="0.0" y="376" width="375" height="291"/>
+                                                <rect key="frame" x="0.0" y="417.33333333333326" width="414" height="318.66666666666674"/>
                                                 <subviews>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Qhc-O9-vDn">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="291"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="318.66666666666669"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Zfl-Lm-OGf">
                                                             <size key="itemSize" width="50" height="50"/>
@@ -82,7 +91,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LLM-m7-01M" userLabel="oto indicator">
-                                                <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="736" width="414" height="0.0"/>
                                                 <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" id="sdM-Cg-SyZ"/>
@@ -108,12 +117,17 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="TQU-Yr-NIn" secondAttribute="trailing" id="317-Zj-k72"/>
                                     <constraint firstItem="TQU-Yr-NIn" firstAttribute="leading" secondItem="U5o-Rs-CIl" secondAttribute="leading" id="ELb-Ia-Kbr"/>
-                                    <constraint firstItem="TQU-Yr-NIn" firstAttribute="top" secondItem="U5o-Rs-CIl" secondAttribute="top" id="TPr-GV-U9B"/>
+                                    <constraint firstAttribute="trailing" secondItem="sZg-9o-vMh" secondAttribute="trailing" id="Mnx-FG-ZJz"/>
+                                    <constraint firstItem="TQU-Yr-NIn" firstAttribute="top" secondItem="U5o-Rs-CIl" secondAttribute="top" id="Rmq-yt-Vdf"/>
+                                    <constraint firstItem="sZg-9o-vMh" firstAttribute="leading" secondItem="U5o-Rs-CIl" secondAttribute="leading" id="rKT-aO-agq"/>
                                     <constraint firstAttribute="bottom" secondItem="TQU-Yr-NIn" secondAttribute="bottom" id="zme-aM-WML"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="0gj-wc-3tz"/>
+                                </connections>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="U5o-Rs-CIl" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="8tG-Vn-IJQ"/>
                             <constraint firstItem="TQU-Yr-NIn" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="IEr-MM-Ppb"/>
@@ -121,10 +135,12 @@
                             <constraint firstItem="TQU-Yr-NIn" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="lVw-3i-R08"/>
                             <constraint firstAttribute="trailing" secondItem="U5o-Rs-CIl" secondAttribute="trailing" id="qyq-vM-WdP"/>
                             <constraint firstAttribute="bottom" secondItem="U5o-Rs-CIl" secondAttribute="bottom" id="wLK-lC-UVm"/>
+                            <constraint firstItem="sZg-9o-vMh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="wxl-Ht-5P9"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="Qhc-O9-vDn" id="f7u-te-xzK"/>
+                        <outlet property="constraintQuestionTop" destination="Rmq-yt-Vdf" id="8ql-o4-abA"/>
                         <outlet property="questionLabel" destination="sP3-u1-49x" id="gwG-0a-aRZ"/>
                         <outlet property="scrollView" destination="U5o-Rs-CIl" id="hyh-tf-o6q"/>
                     </connections>
@@ -133,5 +149,38 @@
             </objects>
             <point key="canvasLocation" x="117.59999999999999" y="122.78860569715144"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="xCd-d0-4X9">
+            <objects>
+                <viewController id="Rww-X1-CLo" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nMw-aN-ebL"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vha-dc-Hk2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="R4S-ra-Wbs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6xr-35-Xnr">
+                                <rect key="frame" x="174" y="32" width="26" height="32"/>
+                                <state key="normal" image="share-arrow"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6xr-35-Xnr" firstAttribute="centerX" secondItem="R4S-ra-Wbs" secondAttribute="centerX" id="QBZ-FT-AKE"/>
+                            <constraint firstItem="Vha-dc-Hk2" firstAttribute="top" secondItem="6xr-35-Xnr" secondAttribute="bottom" constant="16" id="T0Q-NK-Mce"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="80"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="odW-l5-B5Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="960" y="122"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="share-arrow" width="26" height="32"/>
+    </resources>
 </document>
