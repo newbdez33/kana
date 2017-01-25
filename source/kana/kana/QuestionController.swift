@@ -8,6 +8,7 @@
 
 import UIKit
 import JZSpringRefresh
+import RealmSwift
 
 class QuestionViewController: UIViewController {
 
@@ -44,29 +45,57 @@ class QuestionViewController: UIViewController {
     }
     
     // MARK: - 
-    func answerAction(kana:[String]) {
+    func answerAction(index:Int) {
         
-        if isShowingCorrectAnswer == true {
+        let kana = currentAnswers[index]
+        
+        if isShowingCorrectAnswer == true { //case of user incorrect answer
             isShowingCorrectAnswer = false
         }
         
+        let correct_idx = findCorrectAnswerIndex()
+
         if kana[KanaType.roma.rawValue] == currentQuestioKana[KanaType.roma.rawValue] {
             //correct
+            addStat(index: index, is_correct: true, cost: 0)
             nextQuestion()
         }else {
             //incorrect
+            addStat(index: index, is_correct: false, cost: 0)
             isShowingCorrectAnswer = true
             //show correct answer with red background
-            for i in 0...currentAnswers.count-1 {
-                let ans = currentAnswers[i]
-                if ans[KanaType.roma.rawValue] == currentQuestioKana[KanaType.roma.rawValue] {
-                    let indexPath = IndexPath(item: i, section: 0)
-                    collectionView.reloadItems(at: [indexPath])
-                    return
-                }
+            if correct_idx >= 0 {
+                let indexPath = IndexPath(item: correct_idx, section: 0)
+                collectionView.reloadItems(at: [indexPath])
             }
         }
         
+    }
+    
+    func findCorrectAnswerIndex() -> Int {
+        for i in 0...currentAnswers.count-1 {
+            let ans = currentAnswers[i]
+            if ans[KanaType.roma.rawValue] == currentQuestioKana[KanaType.roma.rawValue] {
+                return i
+            }
+        }
+        return -1
+    }
+    
+    func addStat(index:Int, is_correct:Bool, cost:Float) {
+        let stat = Stat(kana: questionLabel.text!,
+                        kana_roma: currentQuestioKana[KanaType.roma.rawValue],
+                        questions: currentAnswerLabels.joined(separator: ","),
+                        answer: currentAnswerLabels[index],
+                        answer_roma: currentAnswers[index][KanaType.roma.rawValue],
+                        is_correct: is_correct,
+                        cost: cost)
+        guard let realm = try? Realm() else {
+            return
+        }
+        let _ = try? realm.write {
+            realm.add(stat)
+        }
     }
     
     func nextQuestion() {
@@ -156,8 +185,7 @@ extension QuestionViewController : UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let kana = currentAnswers[indexPath.row]
-        answerAction(kana: kana)
+        answerAction(index: indexPath.row)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

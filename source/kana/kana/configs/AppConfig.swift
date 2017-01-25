@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 enum KanaType: Int {
     case roma = 0, hiragana, katakana
@@ -54,6 +55,20 @@ struct AppConfig {
         [["bya", "びゃ", "ビャ"], ["byu", "びゅ", "ビュ"], ["byo", "びょ", "ビョ"]],
         [["pya", "ぴゃ", "ピャ"], ["pyu", "ぴゅ", "ピュ"], ["pyo", "ぴょ", "ピョ"]]
     ]
+    
+    static func realmConfig() -> Realm.Configuration {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
+        let directory = URL(fileURLWithPath: path!)
+        let realmPath = directory.appendingPathComponent("db.realm")
+        print(realmPath.path)
+        var config = Realm.Configuration(schemaVersion: 1, migrationBlock: { migration, oldSchemaVersion in
+            //
+        })
+        
+        config.fileURL = realmPath
+        
+        return config
+    }
     
     func printFonts() {
         let fontFamilyNames = UIFont.familyNames

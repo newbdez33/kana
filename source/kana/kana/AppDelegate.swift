@@ -10,6 +10,7 @@ import UIKit
 import Fabric
 import Crashlytics
 import MonkeyKing
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,8 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        Realm.Configuration.defaultConfiguration = AppConfig.realmConfig()
         Fabric.with([Crashlytics.self])
-        //printFonts()
+
         return true
     }
     
