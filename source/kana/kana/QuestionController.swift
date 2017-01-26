@@ -21,6 +21,7 @@ class QuestionViewController: UIViewController {
     var currentAnswers:[[String]] = []
     var currentAnswerLabels:[String] = []
     var isShowingCorrectAnswer = false
+    var timer:Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,13 +48,18 @@ class QuestionViewController: UIViewController {
     // MARK: - 
     func answerAction(index:Int) {
         
+        if timer != nil {
+            timer!.invalidate()
+            timer = nil
+        }
+        
         let kana = currentAnswers[index]
         
         if isShowingCorrectAnswer == true { //case of user incorrect answer
             isShowingCorrectAnswer = false
         }
         
-        let correct_idx = findCorrectAnswerIndex()
+        
 
         if kana[KanaType.roma.rawValue] == currentQuestioKana[KanaType.roma.rawValue] {
             //correct
@@ -62,14 +68,20 @@ class QuestionViewController: UIViewController {
         }else {
             //incorrect
             addStat(index: index, is_correct: false, cost: 0)
-            isShowingCorrectAnswer = true
-            //show correct answer with red background
-            if correct_idx >= 0 {
-                let indexPath = IndexPath(item: correct_idx, section: 0)
-                collectionView.reloadItems(at: [indexPath])
-            }
+            incorrect()
         }
         
+    }
+    
+    func incorrect() {
+        let correct_idx = findCorrectAnswerIndex()
+        
+        isShowingCorrectAnswer = true
+        //show correct answer with red background
+        if correct_idx >= 0 {
+            let indexPath = IndexPath(item: correct_idx, section: 0)
+            collectionView.reloadItems(at: [indexPath])
+        }
     }
     
     func findCorrectAnswerIndex() -> Int {
@@ -121,6 +133,11 @@ class QuestionViewController: UIViewController {
         
         questionLabel.text = questionKanaText
         collectionView.reloadData()
+        
+        timer = Timer.scheduledTimer(withTimeInterval: AppConfig.questiomTimeLimit, repeats: false, block: { (t:Timer) in
+            print("time out")
+            self.incorrect()
+        })
     }
     
     func randomKana(excludeRoma:String = "") -> [String] {
