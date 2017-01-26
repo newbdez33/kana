@@ -26,6 +26,7 @@ class QuestionViewController: UIViewController {
     var currentAnswerLabels:[String] = []
     var isShowingCorrectAnswer = false
     var timer:Timer?
+    var currentQuestionStartTime:TimeInterval = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +57,8 @@ class QuestionViewController: UIViewController {
             timer!.invalidate()
             timer = nil
         }
+
+        let cost = Date().timeIntervalSince1970 - currentQuestionStartTime
         
         let kana = currentAnswers[index]
         
@@ -67,11 +70,11 @@ class QuestionViewController: UIViewController {
 
         if kana[KanaType.roma.rawValue] == currentQuestioKana[KanaType.roma.rawValue] {
             //correct
-            addStat(index: index, is_correct: true, cost: 0)
+            addStat(index: index, is_correct: true, cost: cost)
             nextQuestion()
         }else {
             //incorrect
-            addStat(index: index, is_correct: false, cost: 0)
+            addStat(index: index, is_correct: false, cost: cost)
             incorrect()
         }
         
@@ -98,7 +101,7 @@ class QuestionViewController: UIViewController {
         return -1
     }
     
-    func addStat(index:Int, is_correct:Bool, cost:Float) {
+    func addStat(index:Int, is_correct:Bool, cost:Double) {
         let stat = Stat(kana: questionLabel.text!,
                         kana_roma: currentQuestioKana[KanaType.roma.rawValue],
                         questions: currentAnswerLabels.joined(separator: ","),
@@ -142,12 +145,14 @@ class QuestionViewController: UIViewController {
             print("time out")
             self.incorrect()
         })
+        currentQuestionStartTime = Date().timeIntervalSince1970 //timestamp
         
         updateStatisticsLabels()
     }
     
     func updateStatisticsLabels() {
         totalLabel.text = "\(Stat.totalCount())"
+        avgLabel.text = "\(Stat.totalAvgTime().roundTo(places: 2))"
     }
     
     func randomKana(excludeRoma:String = "") -> [String] {

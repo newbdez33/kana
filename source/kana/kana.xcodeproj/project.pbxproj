@@ -39,6 +39,7 @@
 		CEE6BB301E38D66E0068E184 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB2F1E38D66E0068E184 /* Realm.framework */; };
 		CEE6BB311E38D66E0068E184 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB2F1E38D66E0068E184 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CEE6BB341E38D9F50068E184 /* Stat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE6BB331E38D9F50068E184 /* Stat.swift */; };
+		CEE6BB381E39E3AF0068E184 /* Double+Kana.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE6BB371E39E3AF0068E184 /* Double+Kana.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -87,8 +88,9 @@
 		CE9D4A211E36313300FD0ED8 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuViewController.swift; path = views/layouts/MenuViewController.swift; sourceTree = "<group>"; };
 		CE9D4A231E36395A00FD0ED8 /* MonkeyKing.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MonkeyKing.framework; path = Carthage/Build/iOS/MonkeyKing.framework; sourceTree = SOURCE_ROOT; };
 		CEE6BB2B1E3792FB0068E184 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = SOURCE_ROOT; };
-		CEE6BB2F1E38D66E0068E184 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		CEE6BB2F1E38D66E0068E184 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = ../../Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		CEE6BB331E38D9F50068E184 /* Stat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stat.swift; sourceTree = "<group>"; };
+		CEE6BB371E39E3AF0068E184 /* Double+Kana.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Kana.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +114,6 @@
 		CE1F2A241E211C5E004A627C = {
 			isa = PBXGroup;
 			children = (
-				CEE6BB2F1E38D66E0068E184 /* Realm.framework */,
 				CE1F2A2F1E211C5E004A627C /* kana */,
 				CE1F2A2E1E211C5E004A627C /* Products */,
 			);
@@ -167,6 +168,7 @@
 		CE4A9CC71E2E4C3400EE82CC /* venders */ = {
 			isa = PBXGroup;
 			children = (
+				CEE6BB2F1E38D66E0068E184 /* Realm.framework */,
 				CEE6BB2B1E3792FB0068E184 /* RealmSwift.framework */,
 				CE9D4A231E36395A00FD0ED8 /* MonkeyKing.framework */,
 				CE7EA5851E27C1190043357D /* SwiftHEXColors.framework */,
@@ -181,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				CE7EA56B1E265C4B0043357D /* UIColor+Kana.swift */,
+				CEE6BB371E39E3AF0068E184 /* Double+Kana.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				CE7EA5641E2657FB0043357D /* KanaViewController.swift in Sources */,
 				CE7EA5821E27AEC40043357D /* KanaLayoutAttributes.swift in Sources */,
 				CE9D4A221E36313300FD0ED8 /* MenuViewController.swift in Sources */,
+				CEE6BB381E39E3AF0068E184 /* Double+Kana.swift in Sources */,
 				CE1F2A331E211C5E004A627C /* QuestionController.swift in Sources */,
 				CE7EA5791E2798290043357D /* AnswerCell.swift in Sources */,
 				CE7EA5751E26761E0043357D /* KanaHeaderView.swift in Sources */,

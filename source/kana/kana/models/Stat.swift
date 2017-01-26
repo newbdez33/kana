@@ -17,9 +17,9 @@ final class Stat: Object {
     dynamic var answer = "" //user's answer
     dynamic var answer_roma = ""
     dynamic var is_correct = false
-    dynamic var cost:Float = 0.0
+    dynamic var cost:Double = 0.0
     
-    convenience init(kana: String, kana_roma: String, questions: String, answer: String, answer_roma: String, is_correct: Bool, cost:Float) {
+    convenience init(kana: String, kana_roma: String, questions: String, answer: String, answer_roma: String, is_correct: Bool, cost:Double) {
         self.init()
         self.kana = kana
         self.kana_roma = kana_roma
@@ -36,5 +36,13 @@ final class Stat: Object {
         }
         let query = realm.objects(Stat.self)
         return query.count
+    }
+    
+    class func totalAvgTime() -> Double {
+        guard let realm = try? Realm() else {
+            return 0
+        }
+        let query = realm.objects(Stat.self)
+        return query.average(ofProperty: "cost")!
     }
 }
