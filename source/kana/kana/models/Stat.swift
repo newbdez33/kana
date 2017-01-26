@@ -45,4 +45,23 @@ final class Stat: Object {
         let query = realm.objects(Stat.self)
         return query.average(ofProperty: "cost")!
     }
+    
+    class func lastAvgTime() -> Double {
+        guard let realm = try? Realm() else {
+            return 0
+        }
+        let query = realm.objects(Stat.self).sorted(byKeyPath: "dt", ascending:false)
+        var total:Double = 0
+        var count = 0
+        let totalCount = AppConfig.statisticsLastCount > query.count ? query.count : AppConfig.statisticsLastCount
+        for i in 0..<totalCount {
+            let item = query[i]
+            total += item.cost
+            count += 1
+        }
+        if total == 0 {
+            return 0
+        }
+        return total/Double(count)
+    }
 }

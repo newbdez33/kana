@@ -18,6 +18,7 @@ class QuestionViewController: UIViewController {
     @IBOutlet weak var constraintQuestionTop: NSLayoutConstraint!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var avgLabel: UILabel!
+    @IBOutlet weak var lastAvgTitleLabel: UILabel!
     @IBOutlet weak var lastAvgLabel: UILabel!
     @IBOutlet weak var comboLabel: UILabel!
     
@@ -141,8 +142,7 @@ class QuestionViewController: UIViewController {
         questionLabel.text = questionKanaText
         collectionView.reloadData()
         
-        timer = Timer.scheduledTimer(withTimeInterval: AppConfig.questiomTimeLimit, repeats: false, block: { (t:Timer) in
-            print("time out")
+        timer = Timer.scheduledTimer(withTimeInterval: AppConfig.questionTimeLimit, repeats: false, block: { (t:Timer) in
             self.incorrect()
         })
         currentQuestionStartTime = Date().timeIntervalSince1970 //timestamp
@@ -151,8 +151,12 @@ class QuestionViewController: UIViewController {
     }
     
     func updateStatisticsLabels() {
+        
+        lastAvgTitleLabel.text = "最近\(AppConfig.statisticsLastCount)个:"
+        
         totalLabel.text = "\(Stat.totalCount())"
         avgLabel.text = "\(Stat.totalAvgTime().roundTo(places: 2))"
+        lastAvgLabel.text = "\(Stat.lastAvgTime().roundTo(places: 2))"
     }
     
     func randomKana(excludeRoma:String = "") -> [String] {

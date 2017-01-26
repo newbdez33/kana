@@ -226,6 +226,7 @@
                         <outlet property="comboLabel" destination="S3T-Zg-jPb" id="pKr-go-EPJ"/>
                         <outlet property="constraintQuestionTop" destination="Rmq-yt-Vdf" id="8ql-o4-abA"/>
                         <outlet property="lastAvgLabel" destination="WxM-YX-edE" id="RHd-kk-lOh"/>
+                        <outlet property="lastAvgTitleLabel" destination="4EX-ZD-FXK" id="Jz8-ko-h33"/>
                         <outlet property="questionLabel" destination="sP3-u1-49x" id="gwG-0a-aRZ"/>
                         <outlet property="scrollView" destination="U5o-Rs-CIl" id="hyh-tf-o6q"/>
                         <outlet property="totalLabel" destination="nhr-pO-v7b" id="dFe-fR-vfz"/>
