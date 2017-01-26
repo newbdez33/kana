@@ -9,9 +9,14 @@
 import UIKit
 import JZSpringRefresh
 import RealmSwift
+import GoogleMobileAds
 
 class QuestionViewController: UIViewController {
 
+    @IBOutlet weak var questionViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var bannerView: GADBannerView!
+    @IBOutlet weak var adView: UIView!
+    @IBOutlet weak var adViewHeight: NSLayoutConstraint!
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -82,6 +87,9 @@ class QuestionViewController: UIViewController {
     }
     
     func incorrect() {
+        
+        showBanner()
+        
         let correct_idx = findCorrectAnswerIndex()
         
         isShowingCorrectAnswer = true
@@ -139,6 +147,8 @@ class QuestionViewController: UIViewController {
     }
     
     func nextQuestion() {
+        
+        hideBanner()
         
         // random kana picking
         currentQuestioKana = randomKana()
@@ -203,6 +213,19 @@ class QuestionViewController: UIViewController {
         }
         
         return text
+    }
+    
+    func hideBanner() {
+        adViewHeight.constant = 0
+        questionViewHeight.constant = 0
+    }
+    
+    func showBanner() {
+        bannerView.adUnitID = "ca-app-pub-1295607594822275/7264793113"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        adViewHeight.constant = 50
+        questionViewHeight.constant = -50
     }
 
 }

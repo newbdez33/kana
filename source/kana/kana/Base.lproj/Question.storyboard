@@ -44,7 +44,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J3G-Ru-5n5" userLabel="question">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="417"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="441.66666666666669"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8IM-P5-8eV" userLabel="staticts">
                                                         <rect key="frame" x="0.0" y="28" width="414" height="80"/>
@@ -126,7 +126,7 @@
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ね" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="sP3-u1-49x">
-                                                        <rect key="frame" x="135" y="137" width="144" height="144"/>
+                                                        <rect key="frame" x="134.33333333333331" y="149" width="145.33333333333331" height="145"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="sP3-u1-49x" secondAttribute="height" multiplier="1:1" id="GLh-sV-0gQ"/>
                                                         </constraints>
@@ -145,11 +145,28 @@
                                                     <constraint firstItem="sP3-u1-49x" firstAttribute="centerX" secondItem="J3G-Ru-5n5" secondAttribute="centerX" id="r8M-Pl-CZo"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wiX-Go-yhD">
+                                                <rect key="frame" x="0.0" y="441.66666666666669" width="414" height="0.0"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I95-rY-NZ9" customClass="GADBannerView">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.56078431370000004" green="0.1137254902" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" id="3F1-YG-hvY"/>
+                                                    <constraint firstAttribute="bottom" secondItem="I95-rY-NZ9" secondAttribute="bottom" id="Qn4-pq-EKF"/>
+                                                    <constraint firstAttribute="trailing" secondItem="I95-rY-NZ9" secondAttribute="trailing" id="x0I-lo-pEI"/>
+                                                    <constraint firstItem="I95-rY-NZ9" firstAttribute="top" secondItem="wiX-Go-yhD" secondAttribute="top" id="yVE-ky-PuA"/>
+                                                    <constraint firstItem="I95-rY-NZ9" firstAttribute="leading" secondItem="wiX-Go-yhD" secondAttribute="leading" id="yoW-0e-4TY"/>
+                                                </constraints>
+                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vzi-em-kNW" userLabel="answer">
-                                                <rect key="frame" x="0.0" y="417" width="414" height="319"/>
+                                                <rect key="frame" x="0.0" y="441.66666666666674" width="414" height="294.33333333333326"/>
                                                 <subviews>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Qhc-O9-vDn">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="319"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="294.33333333333331"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Zfl-Lm-OGf">
                                                             <size key="itemSize" width="50" height="50"/>
@@ -182,17 +199,20 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="J3G-Ru-5n5" firstAttribute="height" secondItem="TQU-Yr-NIn" secondAttribute="height" multiplier="0.6" constant="-24.199999999999989" id="66e-gU-dri"/>
+                                            <constraint firstItem="wiX-Go-yhD" firstAttribute="leading" secondItem="TQU-Yr-NIn" secondAttribute="leading" id="30v-Jk-kYL"/>
+                                            <constraint firstItem="J3G-Ru-5n5" firstAttribute="height" secondItem="TQU-Yr-NIn" secondAttribute="height" multiplier="0.6" id="66e-gU-dri"/>
+                                            <constraint firstAttribute="trailing" secondItem="wiX-Go-yhD" secondAttribute="trailing" id="AgV-HD-iUM"/>
                                             <constraint firstAttribute="bottom" secondItem="LLM-m7-01M" secondAttribute="bottom" id="BYj-36-J09"/>
                                             <constraint firstAttribute="trailing" secondItem="LLM-m7-01M" secondAttribute="trailing" id="Dkd-ZD-FxL"/>
                                             <constraint firstAttribute="trailing" secondItem="J3G-Ru-5n5" secondAttribute="trailing" id="HUD-NN-Chh"/>
-                                            <constraint firstItem="vzi-em-kNW" firstAttribute="top" secondItem="J3G-Ru-5n5" secondAttribute="bottom" id="NHa-rF-Rhp"/>
                                             <constraint firstAttribute="trailing" secondItem="vzi-em-kNW" secondAttribute="trailing" id="PCL-wD-IY2"/>
+                                            <constraint firstItem="wiX-Go-yhD" firstAttribute="top" secondItem="J3G-Ru-5n5" secondAttribute="bottom" id="X5y-fj-zAy"/>
                                             <constraint firstItem="vzi-em-kNW" firstAttribute="leading" secondItem="TQU-Yr-NIn" secondAttribute="leading" id="X9o-cl-BI6"/>
                                             <constraint firstItem="LLM-m7-01M" firstAttribute="leading" secondItem="TQU-Yr-NIn" secondAttribute="leading" id="ffA-xg-YQY"/>
                                             <constraint firstItem="LLM-m7-01M" firstAttribute="top" secondItem="vzi-em-kNW" secondAttribute="bottom" id="s19-V5-Dxm"/>
                                             <constraint firstItem="J3G-Ru-5n5" firstAttribute="leading" secondItem="TQU-Yr-NIn" secondAttribute="leading" id="sTO-xS-q45"/>
                                             <constraint firstItem="J3G-Ru-5n5" firstAttribute="top" secondItem="TQU-Yr-NIn" secondAttribute="top" id="w1L-Mc-NaQ"/>
+                                            <constraint firstItem="vzi-em-kNW" firstAttribute="top" secondItem="wiX-Go-yhD" secondAttribute="bottom" id="yrW-2B-VQA"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -221,13 +241,17 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="adView" destination="wiX-Go-yhD" id="4F3-Mb-MBh"/>
+                        <outlet property="adViewHeight" destination="3F1-YG-hvY" id="iok-Uy-bb8"/>
                         <outlet property="avgLabel" destination="DoL-2r-9ns" id="0SV-RP-NY2"/>
+                        <outlet property="bannerView" destination="I95-rY-NZ9" id="ykG-p5-qKy"/>
                         <outlet property="collectionView" destination="Qhc-O9-vDn" id="f7u-te-xzK"/>
                         <outlet property="comboLabel" destination="S3T-Zg-jPb" id="pKr-go-EPJ"/>
                         <outlet property="constraintQuestionTop" destination="Rmq-yt-Vdf" id="8ql-o4-abA"/>
                         <outlet property="lastAvgLabel" destination="WxM-YX-edE" id="RHd-kk-lOh"/>
                         <outlet property="lastAvgTitleLabel" destination="4EX-ZD-FXK" id="Jz8-ko-h33"/>
                         <outlet property="questionLabel" destination="sP3-u1-49x" id="gwG-0a-aRZ"/>
+                        <outlet property="questionViewHeight" destination="66e-gU-dri" id="cjC-tJ-wNU"/>
                         <outlet property="scrollView" destination="U5o-Rs-CIl" id="hyh-tf-o6q"/>
                         <outlet property="totalLabel" destination="nhr-pO-v7b" id="dFe-fR-vfz"/>
                     </connections>

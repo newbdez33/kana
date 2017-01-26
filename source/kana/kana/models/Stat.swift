@@ -43,6 +43,9 @@ final class Stat: Object {
             return 0
         }
         let query = realm.objects(Stat.self)
+        if query.count == 0 {
+            return 0
+        }
         return query.average(ofProperty: "cost")!
     }
     

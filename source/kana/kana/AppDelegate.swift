@@ -11,6 +11,7 @@ import Fabric
 import Crashlytics
 import MonkeyKing
 import RealmSwift
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        FIRApp.configure()
+        GADMobileAds.configure(withApplicationID: "ca-app-pub-1295607594822275~2834593518")
         
         Realm.Configuration.defaultConfiguration = AppConfig.realmConfig()
         Fabric.with([Crashlytics.self])

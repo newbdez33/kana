@@ -57,6 +57,7 @@
 		CEE6BB6F1E3A0A4B0068E184 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB651E3A09C00068E184 /* CoreMedia.framework */; };
 		CEE6BB711E3A0A680068E184 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB701E3A0A680068E184 /* MediaPlayer.framework */; };
 		CEE6BB731E3A0A8B0068E184 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB721E3A0A8B0068E184 /* MobileCoreServices.framework */; };
+		CEE6BB751E3A0D3C0068E184 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEE6BB741E3A0D3C0068E184 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -130,6 +131,7 @@
 		CEE6BB6D1E3A0A290068E184 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		CEE6BB701E3A0A680068E184 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		CEE6BB721E3A0A8B0068E184 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		CEE6BB741E3A0D3C0068E184 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +203,7 @@
 				CE7EA5691E26582C0043357D /* Kana.storyboard */,
 				CE1F2A371E211C5E004A627C /* Assets.xcassets */,
 				CE1F2A391E211C5E004A627C /* LaunchScreen.storyboard */,
+				CEE6BB741E3A0D3C0068E184 /* GoogleService-Info.plist */,
 				CE1F2A3C1E211C5E004A627C /* Info.plist */,
 			);
 			path = kana;
@@ -395,6 +398,7 @@
 			files = (
 				CE1F2A3B1E211C5E004A627C /* LaunchScreen.storyboard in Resources */,
 				CE1F2A451E211F4B004A627C /* Hosohuwafont.ttf in Resources */,
+				CEE6BB751E3A0D3C0068E184 /* GoogleService-Info.plist in Resources */,
 				CE1F2A381E211C5E004A627C /* Assets.xcassets in Resources */,
 				CE7EA5761E26761E0043357D /* KanaHeaderView.xib in Resources */,
 				CE1F2A361E211C5E004A627C /* Question.storyboard in Resources */,
@@ -537,6 +541,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -580,6 +585,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -611,6 +617,7 @@
 				PROVISIONING_PROFILE = "3ee246ba-7d5a-474a-a4cb-7420e353ad77";
 				PROVISIONING_PROFILE_SPECIFIER = "kana-dev";
 				SWIFT_VERSION = 3.0;
+				USER_HEADER_SEARCH_PATHS = kana/venders/Firebase;
 			};
 			name = Debug;
 		};
@@ -639,6 +646,7 @@
 				PROVISIONING_PROFILE = "85a11103-974b-42a7-9b63-3fa812b87fcd";
 				PROVISIONING_PROFILE_SPECIFIER = "kana-appstore";
 				SWIFT_VERSION = 3.0;
+				USER_HEADER_SEARCH_PATHS = kana/venders/Firebase;
 			};
 			name = Release;
 		};
