@@ -64,4 +64,5 @@ final class Stat: Object {
         }
         return total/Double(count)
     }
+    
 }

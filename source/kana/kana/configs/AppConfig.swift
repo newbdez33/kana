@@ -14,6 +14,9 @@ enum KanaType: Int {
 }
 
 struct AppConfig {
+    static let keyBestCombo = "user.stat.bestCombo"
+    static let keyCurrentCombo = "user.stat.currentCombo"
+    
     static var answersCount:Int = 4
     static var questionTimeLimit:Double = 5
     static var statisticsLastCount:Int = 10

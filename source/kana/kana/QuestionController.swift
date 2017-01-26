@@ -66,15 +66,15 @@ class QuestionViewController: UIViewController {
         if isShowingCorrectAnswer == true { //case of user incorrect answer
             isShowingCorrectAnswer = false
         }
-        
-        
 
         if kana[KanaType.roma.rawValue] == currentQuestioKana[KanaType.roma.rawValue] {
             //correct
+            updateBestCombo(is_correct: true)
             addStat(index: index, is_correct: true, cost: cost)
             nextQuestion()
         }else {
             //incorrect
+            updateBestCombo(is_correct: false)
             addStat(index: index, is_correct: false, cost: cost)
             incorrect()
         }
@@ -118,6 +118,26 @@ class QuestionViewController: UIViewController {
         }
     }
     
+    func updateBestCombo(is_correct:Bool) {
+        
+        var current = UserDefaults.standard.integer(forKey: AppConfig.keyCurrentCombo)
+        let best = UserDefaults.standard.integer(forKey: AppConfig.keyBestCombo)
+        
+        if is_correct {
+            current += 1
+        }else {
+            current = 0
+        }
+        UserDefaults.standard.set(current, forKey: AppConfig.keyCurrentCombo)
+        
+        if current > best {
+            UserDefaults.standard.set(current, forKey: AppConfig.keyBestCombo)
+        }
+        
+        UserDefaults.standard.synchronize()
+        
+    }
+    
     func nextQuestion() {
         
         // random kana picking
@@ -157,6 +177,9 @@ class QuestionViewController: UIViewController {
         totalLabel.text = "\(Stat.totalCount())"
         avgLabel.text = "\(Stat.totalAvgTime().roundTo(places: 2))"
         lastAvgLabel.text = "\(Stat.lastAvgTime().roundTo(places: 2))"
+        
+        let best = UserDefaults.standard.integer(forKey: AppConfig.keyBestCombo)
+        comboLabel.text = "\(best)"
     }
     
     func randomKana(excludeRoma:String = "") -> [String] {
