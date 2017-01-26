@@ -40,6 +40,23 @@
 		CEE6BB311E38D66E0068E184 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB2F1E38D66E0068E184 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CEE6BB341E38D9F50068E184 /* Stat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE6BB331E38D9F50068E184 /* Stat.swift */; };
 		CEE6BB381E39E3AF0068E184 /* Double+Kana.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE6BB371E39E3AF0068E184 /* Double+Kana.swift */; };
+		CEE6BB501E3A08590068E184 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB481E3A08580068E184 /* FirebaseAnalytics.framework */; };
+		CEE6BB511E3A08590068E184 /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB491E3A08580068E184 /* FirebaseCore.framework */; };
+		CEE6BB521E3A08590068E184 /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB4A1E3A08580068E184 /* FirebaseInstanceID.framework */; };
+		CEE6BB531E3A08590068E184 /* GoogleInterchangeUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB4B1E3A08590068E184 /* GoogleInterchangeUtilities.framework */; };
+		CEE6BB541E3A08590068E184 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB4C1E3A08590068E184 /* GoogleMobileAds.framework */; };
+		CEE6BB551E3A08590068E184 /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB4D1E3A08590068E184 /* GoogleSymbolUtilities.framework */; };
+		CEE6BB561E3A08590068E184 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB4E1E3A08590068E184 /* GoogleToolboxForMac.framework */; };
+		CEE6BB5A1E3A094B0068E184 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB591E3A094B0068E184 /* AVFoundation.framework */; };
+		CEE6BB5C1E3A096C0068E184 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB5B1E3A096C0068E184 /* CoreMotion.framework */; };
+		CEE6BB5E1E3A09870068E184 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB5D1E3A09870068E184 /* MessageUI.framework */; };
+		CEE6BB601E3A09980068E184 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB5F1E3A09980068E184 /* libsqlite3.tbd */; };
+		CEE6BB621E3A09A30068E184 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB611E3A09A30068E184 /* CoreTelephony.framework */; };
+		CEE6BB6C1E3A0A0E0068E184 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB6B1E3A0A0E0068E184 /* AudioToolbox.framework */; };
+		CEE6BB6E1E3A0A290068E184 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB6D1E3A0A290068E184 /* GLKit.framework */; };
+		CEE6BB6F1E3A0A4B0068E184 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB651E3A09C00068E184 /* CoreMedia.framework */; };
+		CEE6BB711E3A0A680068E184 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB701E3A0A680068E184 /* MediaPlayer.framework */; };
+		CEE6BB731E3A0A8B0068E184 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB721E3A0A8B0068E184 /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -91,6 +108,28 @@
 		CEE6BB2F1E38D66E0068E184 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = ../../Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		CEE6BB331E38D9F50068E184 /* Stat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stat.swift; sourceTree = "<group>"; };
 		CEE6BB371E39E3AF0068E184 /* Double+Kana.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Kana.swift"; sourceTree = "<group>"; };
+		CEE6BB481E3A08580068E184 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAnalytics.framework; sourceTree = "<group>"; };
+		CEE6BB491E3A08580068E184 /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = "<group>"; };
+		CEE6BB4A1E3A08580068E184 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseInstanceID.framework; sourceTree = "<group>"; };
+		CEE6BB4B1E3A08590068E184 /* GoogleInterchangeUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleInterchangeUtilities.framework; sourceTree = "<group>"; };
+		CEE6BB4C1E3A08590068E184 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
+		CEE6BB4D1E3A08590068E184 /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
+		CEE6BB4E1E3A08590068E184 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleToolboxForMac.framework; sourceTree = "<group>"; };
+		CEE6BB4F1E3A08590068E184 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		CEE6BB571E3A08AB0068E184 /* Firebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
+		CEE6BB591E3A094B0068E184 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		CEE6BB5B1E3A096C0068E184 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		CEE6BB5D1E3A09870068E184 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		CEE6BB5F1E3A09980068E184 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		CEE6BB611E3A09A30068E184 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		CEE6BB631E3A09B00068E184 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		CEE6BB651E3A09C00068E184 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		CEE6BB671E3A09CC0068E184 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CEE6BB691E3A09DB0068E184 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CEE6BB6B1E3A0A0E0068E184 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		CEE6BB6D1E3A0A290068E184 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		CEE6BB701E3A0A680068E184 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		CEE6BB721E3A0A8B0068E184 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,11 +137,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEE6BB731E3A0A8B0068E184 /* MobileCoreServices.framework in Frameworks */,
+				CEE6BB711E3A0A680068E184 /* MediaPlayer.framework in Frameworks */,
+				CEE6BB6F1E3A0A4B0068E184 /* CoreMedia.framework in Frameworks */,
+				CEE6BB6E1E3A0A290068E184 /* GLKit.framework in Frameworks */,
+				CEE6BB6C1E3A0A0E0068E184 /* AudioToolbox.framework in Frameworks */,
+				CEE6BB621E3A09A30068E184 /* CoreTelephony.framework in Frameworks */,
+				CEE6BB601E3A09980068E184 /* libsqlite3.tbd in Frameworks */,
+				CEE6BB5E1E3A09870068E184 /* MessageUI.framework in Frameworks */,
+				CEE6BB5C1E3A096C0068E184 /* CoreMotion.framework in Frameworks */,
+				CEE6BB5A1E3A094B0068E184 /* AVFoundation.framework in Frameworks */,
+				CEE6BB501E3A08590068E184 /* FirebaseAnalytics.framework in Frameworks */,
 				CE7EA5861E27C1190043357D /* SwiftHEXColors.framework in Frameworks */,
+				CEE6BB511E3A08590068E184 /* FirebaseCore.framework in Frameworks */,
 				CE9D4A241E36395A00FD0ED8 /* MonkeyKing.framework in Frameworks */,
+				CEE6BB551E3A08590068E184 /* GoogleSymbolUtilities.framework in Frameworks */,
 				CEE6BB2D1E38D5D90068E184 /* RealmSwift.framework in Frameworks */,
 				CE4A9CCA1E2E4C3400EE82CC /* Crashlytics.framework in Frameworks */,
+				CEE6BB561E3A08590068E184 /* GoogleToolboxForMac.framework in Frameworks */,
+				CEE6BB541E3A08590068E184 /* GoogleMobileAds.framework in Frameworks */,
 				CEE6BB301E38D66E0068E184 /* Realm.framework in Frameworks */,
+				CEE6BB531E3A08590068E184 /* GoogleInterchangeUtilities.framework in Frameworks */,
+				CEE6BB521E3A08590068E184 /* FirebaseInstanceID.framework in Frameworks */,
 				CE7EA5581E25223F0043357D /* JZSpringRefresh.framework in Frameworks */,
 				CE4A9CCB1E2E4C3500EE82CC /* Fabric.framework in Frameworks */,
 			);
@@ -116,6 +172,7 @@
 			children = (
 				CE1F2A2F1E211C5E004A627C /* kana */,
 				CE1F2A2E1E211C5E004A627C /* Products */,
+				CEE6BB581E3A094A0068E184 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -168,6 +225,7 @@
 		CE4A9CC71E2E4C3400EE82CC /* venders */ = {
 			isa = PBXGroup;
 			children = (
+				CEE6BB471E3A08580068E184 /* Firebase */,
 				CEE6BB2F1E38D66E0068E184 /* Realm.framework */,
 				CEE6BB2B1E3792FB0068E184 /* RealmSwift.framework */,
 				CE9D4A231E36395A00FD0ED8 /* MonkeyKing.framework */,
@@ -234,6 +292,42 @@
 				CEE6BB331E38D9F50068E184 /* Stat.swift */,
 			);
 			path = models;
+			sourceTree = "<group>";
+		};
+		CEE6BB471E3A08580068E184 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				CEE6BB571E3A08AB0068E184 /* Firebase.h */,
+				CEE6BB481E3A08580068E184 /* FirebaseAnalytics.framework */,
+				CEE6BB491E3A08580068E184 /* FirebaseCore.framework */,
+				CEE6BB4A1E3A08580068E184 /* FirebaseInstanceID.framework */,
+				CEE6BB4B1E3A08590068E184 /* GoogleInterchangeUtilities.framework */,
+				CEE6BB4C1E3A08590068E184 /* GoogleMobileAds.framework */,
+				CEE6BB4D1E3A08590068E184 /* GoogleSymbolUtilities.framework */,
+				CEE6BB4E1E3A08590068E184 /* GoogleToolboxForMac.framework */,
+				CEE6BB4F1E3A08590068E184 /* module.modulemap */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		CEE6BB581E3A094A0068E184 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CEE6BB721E3A0A8B0068E184 /* MobileCoreServices.framework */,
+				CEE6BB701E3A0A680068E184 /* MediaPlayer.framework */,
+				CEE6BB6D1E3A0A290068E184 /* GLKit.framework */,
+				CEE6BB6B1E3A0A0E0068E184 /* AudioToolbox.framework */,
+				CEE6BB691E3A09DB0068E184 /* CoreGraphics.framework */,
+				CEE6BB671E3A09CC0068E184 /* QuartzCore.framework */,
+				CEE6BB651E3A09C00068E184 /* CoreMedia.framework */,
+				CEE6BB631E3A09B00068E184 /* CoreAudio.framework */,
+				CEE6BB611E3A09A30068E184 /* CoreTelephony.framework */,
+				CEE6BB5F1E3A09980068E184 /* libsqlite3.tbd */,
+				CEE6BB5D1E3A09870068E184 /* MessageUI.framework */,
+				CEE6BB5B1E3A096C0068E184 /* CoreMotion.framework */,
+				CEE6BB591E3A094B0068E184 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -503,10 +597,15 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/kana/venders",
+					"$(PROJECT_DIR)/kana/venders/Firebase",
 				);
 				INFOPLIST_FILE = kana/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.salmonapps.app.kana;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3ee246ba-7d5a-474a-a4cb-7420e353ad77";
@@ -526,10 +625,15 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/kana/venders",
+					"$(PROJECT_DIR)/kana/venders/Firebase",
 				);
 				INFOPLIST_FILE = kana/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.salmonapps.app.kana;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "85a11103-974b-42a7-9b63-3fa812b87fcd";
