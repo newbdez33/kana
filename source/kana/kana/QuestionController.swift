@@ -16,6 +16,10 @@ class QuestionViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var constraintQuestionTop: NSLayoutConstraint!
+    @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var avgLabel: UILabel!
+    @IBOutlet weak var lastAvgLabel: UILabel!
+    @IBOutlet weak var comboLabel: UILabel!
     
     var currentQuestioKana:[String] = []
     var currentAnswers:[[String]] = []
@@ -138,6 +142,12 @@ class QuestionViewController: UIViewController {
             print("time out")
             self.incorrect()
         })
+        
+        updateStatisticsLabels()
+    }
+    
+    func updateStatisticsLabels() {
+        totalLabel.text = "\(Stat.totalCount())"
     }
     
     func randomKana(excludeRoma:String = "") -> [String] {

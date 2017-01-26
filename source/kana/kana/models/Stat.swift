@@ -29,4 +29,12 @@ final class Stat: Object {
         self.is_correct = is_correct
         self.cost = cost
     }
+    
+    class func totalCount() -> Int {
+        guard let realm = try? Realm() else {
+            return 0
+        }
+        let query = realm.objects(Stat.self)
+        return query.count
+    }
 }
