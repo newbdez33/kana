@@ -176,6 +176,7 @@
 		CEE6BBBE1E3A208D0068E184 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		CEE6BBBF1E3A208D0068E184 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEE6BBC01E3A21230068E184 /* String+Kana.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Kana.swift"; sourceTree = "<group>"; };
+		CEE6BBC21E3A26FF0068E184 /* kana.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = kana.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +234,7 @@
 		CE1F2A2F1E211C5E004A627C /* kana */ = {
 			isa = PBXGroup;
 			children = (
+				CEE6BBC21E3A26FF0068E184 /* kana.entitlements */,
 				CE4A9CC71E2E4C3400EE82CC /* venders */,
 				CE7EA57B1E279F130043357D /* configs */,
 				CE7EA56A1E265C210043357D /* extensions */,
@@ -417,6 +419,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 72T2SXUWHC;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -710,6 +717,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = kana/kana.entitlements;
 				DEVELOPMENT_TEAM = 72T2SXUWHC;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -738,6 +746,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = kana/kana.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 72T2SXUWHC;
 				FRAMEWORK_SEARCH_PATHS = (
