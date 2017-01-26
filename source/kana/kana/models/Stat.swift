@@ -42,7 +42,7 @@ final class Stat: Object {
         guard let realm = try? Realm() else {
             return 0
         }
-        let query = realm.objects(Stat.self)
+        let query = realm.objects(Stat.self).filter("cost > 0 ")
         if query.count == 0 {
             return 0
         }

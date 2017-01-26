@@ -1,0 +1,27 @@
+
+/* Class = "UILabel"; text = "最近10个:"; ObjectID = "4EX-ZD-FXK"; */
+"4EX-ZD-FXK.text" = "最近10个:";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "DoL-2r-9ns"; */
+"DoL-2r-9ns.text" = "0";
+
+/* Class = "UILabel"; text = "平均:"; ObjectID = "MZN-sR-IAq"; */
+"MZN-sR-IAq.text" = "平均:";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "S3T-Zg-jPb"; */
+"S3T-Zg-jPb.text" = "0";
+
+/* Class = "UILabel"; text = "最长连击:"; ObjectID = "VlL-v5-bLI"; */
+"VlL-v5-bLI.text" = "最长连击:";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "WxM-YX-edE"; */
+"WxM-YX-edE.text" = "0";
+
+/* Class = "UILabel"; text = "总数:"; ObjectID = "aG7-uG-pJH"; */
+"aG7-uG-pJH.text" = "总数:";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "nhr-pO-v7b"; */
+"nhr-pO-v7b.text" = "0";
+
+/* Class = "UILabel"; text = "ね"; ObjectID = "sP3-u1-49x"; */
+"sP3-u1-49x.text" = "ね";

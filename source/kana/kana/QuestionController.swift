@@ -13,6 +13,7 @@ import GoogleMobileAds
 
 class QuestionViewController: UIViewController {
 
+    @IBOutlet weak var statLabelWidth: NSLayoutConstraint!
     @IBOutlet weak var questionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var adView: UIView!
@@ -36,6 +37,9 @@ class QuestionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        lastAvgTitleLabel.text = String.localizedStringWithFormat(.lastNAvg, AppConfig.statisticsLastCount)
+        statLabelWidth.constant = lastAvgTitleLabel.intrinsicContentSize.width
         
         let bottom = scrollView.addSpringRefresh(position: .bottom, actionHandlere: { (v:JZSpringRefresh) in
             let vc = UIStoryboard(name: "Kana", bundle: nil).instantiateInitialViewController()
@@ -111,6 +115,11 @@ class QuestionViewController: UIViewController {
     }
     
     func addStat(index:Int, is_correct:Bool, cost:Double) {
+        var cost = cost
+        if cost > AppConfig.questionTimeLimit {
+            cost = 0
+        }
+        
         let stat = Stat(kana: questionLabel.text!,
                         kana_roma: currentQuestioKana[KanaType.roma.rawValue],
                         questions: currentAnswerLabels.joined(separator: ","),
@@ -181,8 +190,6 @@ class QuestionViewController: UIViewController {
     }
     
     func updateStatisticsLabels() {
-        
-        lastAvgTitleLabel.text = "最近\(AppConfig.statisticsLastCount)个:"
         
         totalLabel.text = "\(Stat.totalCount())"
         avgLabel.text = "\(Stat.totalAvgTime().roundTo(places: 2))"

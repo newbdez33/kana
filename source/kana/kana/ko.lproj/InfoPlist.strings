@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  kana
+
+  Created by JackyZ on 2017/01/26.
+  Copyright © 2017年 Salmonapps. All rights reserved.
+*/
+
+CFBundleDisplayName = "가나";
