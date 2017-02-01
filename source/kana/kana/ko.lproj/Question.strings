@@ -1,24 +1,24 @@
 
 /* Class = "UILabel"; text = "最近10个:"; ObjectID = "4EX-ZD-FXK"; */
-"4EX-ZD-FXK.text" = "最近10个:";
+"4EX-ZD-FXK.text" = "10 평균 최근:";
 
 /* Class = "UILabel"; text = "0"; ObjectID = "DoL-2r-9ns"; */
 "DoL-2r-9ns.text" = "0";
 
 /* Class = "UILabel"; text = "平均:"; ObjectID = "MZN-sR-IAq"; */
-"MZN-sR-IAq.text" = "平均:";
+"MZN-sR-IAq.text" = "평균:";
 
 /* Class = "UILabel"; text = "0"; ObjectID = "S3T-Zg-jPb"; */
 "S3T-Zg-jPb.text" = "0";
 
 /* Class = "UILabel"; text = "最长连击:"; ObjectID = "VlL-v5-bLI"; */
-"VlL-v5-bLI.text" = "最长连击:";
+"VlL-v5-bLI.text" = "최대 타자:";
 
 /* Class = "UILabel"; text = "0"; ObjectID = "WxM-YX-edE"; */
 "WxM-YX-edE.text" = "0";
 
 /* Class = "UILabel"; text = "总数:"; ObjectID = "aG7-uG-pJH"; */
-"aG7-uG-pJH.text" = "总数:";
+"aG7-uG-pJH.text" = "합계:";
 
 /* Class = "UILabel"; text = "0"; ObjectID = "nhr-pO-v7b"; */
 "nhr-pO-v7b.text" = "0";

@@ -58,7 +58,6 @@
 		CEE6BB711E3A0A680068E184 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB701E3A0A680068E184 /* MediaPlayer.framework */; };
 		CEE6BB731E3A0A8B0068E184 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB721E3A0A8B0068E184 /* MobileCoreServices.framework */; };
 		CEE6BB751E3A0D3C0068E184 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEE6BB741E3A0D3C0068E184 /* GoogleService-Info.plist */; };
-		CEE6BB981E3A1A5F0068E184 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEE6BB971E3A1A5E0068E184 /* Info.plist */; };
 		CEE6BBA81E3A1D1A0068E184 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE6BBAA1E3A1D1A0068E184 /* InfoPlist.strings */; };
 		CEE6BBB51E3A1FED0068E184 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE6BBB71E3A1FED0068E184 /* Localizable.strings */; };
 		CEE6BBC11E3A21230068E184 /* String+Kana.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE6BBC01E3A21230068E184 /* String+Kana.swift */; };
@@ -167,7 +166,6 @@
 		CEE6BBB11E3A1D220068E184 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CEE6BBB21E3A1EC60068E184 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CEE6BBB61E3A1FED0068E184 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		CEE6BBB81E3A20870068E184 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEE6BBB91E3A20880068E184 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		CEE6BBBA1E3A20890068E184 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEE6BBBB1E3A208A0068E184 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -466,7 +464,6 @@
 				CE1F2A361E211C5E004A627C /* Question.storyboard in Resources */,
 				CE7EA5721E26742F0043357D /* KanaCell.xib in Resources */,
 				CE7EA5671E26582C0043357D /* Kana.storyboard in Resources */,
-				CEE6BB981E3A1A5F0068E184 /* Info.plist in Resources */,
 				CEE6BBA81E3A1D1A0068E184 /* InfoPlist.strings in Resources */,
 				CE7EA57A1E2798290043357D /* AnswerCell.xib in Resources */,
 			);
@@ -601,7 +598,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				CEE6BBB61E3A1FED0068E184 /* Base */,
-				CEE6BBB81E3A20870068E184 /* en */,
 				CEE6BBB91E3A20880068E184 /* zh-Hans */,
 				CEE6BBBA1E3A20890068E184 /* ja */,
 				CEE6BBBB1E3A208A0068E184 /* de */,

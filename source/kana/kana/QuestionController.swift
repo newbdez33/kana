@@ -192,8 +192,8 @@ class QuestionViewController: UIViewController {
     func updateStatisticsLabels() {
         
         totalLabel.text = "\(Stat.totalCount())"
-        avgLabel.text = "\(Stat.totalAvgTime().roundTo(places: 2))"
-        lastAvgLabel.text = "\(Stat.lastAvgTime().roundTo(places: 2))"
+        avgLabel.text = "\(Stat.totalAvgTime().roundTo(places: 2))s"
+        lastAvgLabel.text = "\(Stat.lastAvgTime().roundTo(places: 2))s"
         
         let best = UserDefaults.standard.integer(forKey: AppConfig.keyBestCombo)
         comboLabel.text = "\(best)"
