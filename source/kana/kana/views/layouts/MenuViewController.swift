@@ -46,7 +46,7 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
-            mail.setToRecipients(["newbdez33#kana.feedback@gmail.com"])
+            mail.setToRecipients(["newbdez33+kana.feedback@gmail.com"])
             mail.setSubject(.Feedback)
             mail.setMessageBody("", isHTML: false)
             

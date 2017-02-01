@@ -34,7 +34,7 @@ final class Stat: Object {
         guard let realm = try? Realm() else {
             return 0
         }
-        let query = realm.objects(Stat.self)
+        let query = realm.objects(Stat.self).filter("cost > 0 ")
         return query.count
     }
     
@@ -53,7 +53,7 @@ final class Stat: Object {
         guard let realm = try? Realm() else {
             return 0
         }
-        let query = realm.objects(Stat.self).sorted(byKeyPath: "dt", ascending:false)
+        let query = realm.objects(Stat.self).filter("cost > 0 ").sorted(byKeyPath: "dt", ascending:false)
         var total:Double = 0
         var count = 0
         let totalCount = AppConfig.statisticsLastCount > query.count ? query.count : AppConfig.statisticsLastCount

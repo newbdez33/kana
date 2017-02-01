@@ -200,6 +200,8 @@ class QuestionViewController: UIViewController {
         collectionView.reloadData()
         
         timer = Timer.scheduledTimer(withTimeInterval: AppConfig.questionTimeLimit, repeats: false, block: { (t:Timer) in
+            self.updateBestCombo(is_correct: false)
+            self.addStat(index: 0, is_correct: false, cost: 0)
             self.incorrect()
         })
         currentQuestionStartTime = Date().timeIntervalSince1970 //timestamp

@@ -6,5 +6,5 @@
   Copyright © 2017年 Salmonapps. All rights reserved.
 */
 "LastNAvg" = "Last %d avg:";
-"IntroText" = "El software más simple para practicar silabario japonés.\nSolo recuerda al cerebro que no funciona, vamos a convertirlo en memoria muscular";
-"Feedback" = "problemas de realimentación";
+"IntroText" = "A tiny and light app for practicing Japanese syllabary.\nLet's turn it into muscle memory!";
+"Feedback" = "Feedback";
