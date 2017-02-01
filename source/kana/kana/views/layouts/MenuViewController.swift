@@ -9,9 +9,10 @@
 //http://www.flaticon.com/packs/outicons
 
 import UIKit
+import MessageUI
 import MonkeyKing
 
-class MenuViewController: UIViewController {
+class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
     let shareURL = URL(string: "https://itunes.apple.com/app/id1195345471")!
     let messageStr:String  = .IntroText
@@ -20,7 +21,10 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        if !MFMailComposeViewController.canSendMail() {
+            let v = self.view.viewWithTag(1)
+            v?.isHidden = true
+        }
     }
     
     @IBAction func shareAction(_ sender: UIButton) {
@@ -32,6 +36,28 @@ class MenuViewController: UIViewController {
         
         present(activityViewController, animated: true, completion: nil)
 
+    }
+    
+    @IBAction func feedbackAction(_ sender: UIButton) {
+        sendEmail()
+    }
+    
+    func sendEmail() {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["newbdez33#kana.feedback@gmail.com"])
+            mail.setSubject(.Feedback)
+            mail.setMessageBody("", isHTML: false)
+            
+            present(mail, animated: true)
+        } else {
+            // show failure alert
+        }
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
     }
     
     func qqActivity() -> AnyActivity {

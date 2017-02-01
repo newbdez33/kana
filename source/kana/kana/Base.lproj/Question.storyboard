@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -145,7 +146,7 @@
                                                     <constraint firstItem="sP3-u1-49x" firstAttribute="centerX" secondItem="J3G-Ru-5n5" secondAttribute="centerX" id="r8M-Pl-CZo"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wiX-Go-yhD">
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wiX-Go-yhD">
                                                 <rect key="frame" x="0.0" y="442" width="414" height="0.0"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I95-rY-NZ9" customClass="GADBannerView">
@@ -274,17 +275,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6xr-35-Xnr">
-                                <rect key="frame" x="174" y="32" width="26" height="32"/>
+                                <rect key="frame" x="287" y="32" width="26" height="32"/>
                                 <state key="normal" image="share-arrow"/>
                                 <connections>
                                     <action selector="shareAction:" destination="Rww-X1-CLo" eventType="touchUpInside" id="HVd-1p-87o"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2av-K6-XWl">
+                                <rect key="frame" x="329" y="35" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="228-l4-vTY"/>
+                                    <constraint firstAttribute="width" constant="30" id="P8M-8N-TdH"/>
+                                </constraints>
+                                <state key="normal" image="email-icon"/>
+                                <connections>
+                                    <action selector="feedbackAction:" destination="Rww-X1-CLo" eventType="touchUpInside" id="J0E-a7-NAA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="6xr-35-Xnr" firstAttribute="centerX" secondItem="R4S-ra-Wbs" secondAttribute="centerX" id="QBZ-FT-AKE"/>
+                            <constraint firstItem="2av-K6-XWl" firstAttribute="centerY" secondItem="6xr-35-Xnr" secondAttribute="centerY" constant="2" id="J8U-Hn-tja"/>
+                            <constraint firstItem="2av-K6-XWl" firstAttribute="leading" secondItem="6xr-35-Xnr" secondAttribute="trailing" constant="16" id="MQF-Ya-Wtb"/>
                             <constraint firstItem="Vha-dc-Hk2" firstAttribute="top" secondItem="6xr-35-Xnr" secondAttribute="bottom" constant="16" id="T0Q-NK-Mce"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2av-K6-XWl" secondAttribute="trailing" id="pXu-6a-b9G"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -292,10 +306,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="odW-l5-B5Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="960" y="122"/>
+            <point key="canvasLocation" x="958.69565217391312" y="121.46739130434784"/>
         </scene>
     </scenes>
     <resources>
+        <image name="email-icon" width="42" height="42"/>
         <image name="share-arrow" width="26" height="32"/>
     </resources>
 </document>

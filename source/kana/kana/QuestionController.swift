@@ -10,6 +10,7 @@ import UIKit
 import JZSpringRefresh
 import RealmSwift
 import GoogleMobileAds
+import AVFoundation
 
 class QuestionViewController: UIViewController {
 
@@ -27,6 +28,9 @@ class QuestionViewController: UIViewController {
     @IBOutlet weak var lastAvgTitleLabel: UILabel!
     @IBOutlet weak var lastAvgLabel: UILabel!
     @IBOutlet weak var comboLabel: UILabel!
+    
+    var correctSoundEffect: AVAudioPlayer?
+    var incorrectSoundEffect: AVAudioPlayer?
     
     var currentQuestioKana:[String] = []
     var currentAnswers:[[String]] = []
@@ -52,6 +56,7 @@ class QuestionViewController: UIViewController {
         
         collectionView.register(UINib(nibName: "AnswerCell", bundle: nil), forCellWithReuseIdentifier: "AnswerCell")
         
+        prepareSoundEffects()
         nextQuestion()
     }
 
@@ -61,6 +66,17 @@ class QuestionViewController: UIViewController {
     }
     
     // MARK: - 
+    func prepareSoundEffects() {
+        do {
+            correctSoundEffect = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "correct.wav", ofType:nil)!))
+            correctSoundEffect?.prepareToPlay()
+            incorrectSoundEffect = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "incorrect.wav", ofType:nil)!))
+            incorrectSoundEffect?.prepareToPlay()
+        } catch {
+            // couldn't load file :(
+        }
+        
+    }
     func answerAction(index:Int) {
         
         if timer != nil {
@@ -78,11 +94,13 @@ class QuestionViewController: UIViewController {
 
         if kana[KanaType.roma.rawValue] == currentQuestioKana[KanaType.roma.rawValue] {
             //correct
+            correctSoundEffect?.play()
             updateBestCombo(is_correct: true)
             addStat(index: index, is_correct: true, cost: cost)
             nextQuestion()
         }else {
             //incorrect
+            incorrectSoundEffect?.play()
             updateBestCombo(is_correct: false)
             addStat(index: index, is_correct: false, cost: cost)
             incorrect()
@@ -231,7 +249,7 @@ class QuestionViewController: UIViewController {
         bannerView.adUnitID = "ca-app-pub-1295607594822275/7264793113"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
-        adViewHeight.constant = 50
+        adViewHeight.constant = 55
         questionViewHeight.constant = -50
     }
 

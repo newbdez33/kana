@@ -34,6 +34,8 @@
 		CE7EA5871E27C1190043357D /* SwiftHEXColors.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CE7EA5851E27C1190043357D /* SwiftHEXColors.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CE9D4A221E36313300FD0ED8 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9D4A211E36313300FD0ED8 /* MenuViewController.swift */; };
 		CE9D4A241E36395A00FD0ED8 /* MonkeyKing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9D4A231E36395A00FD0ED8 /* MonkeyKing.framework */; };
+		CEB1F59B1E421170006E3ACE /* correct.wav in Resources */ = {isa = PBXBuildFile; fileRef = CEB1F59A1E421170006E3ACE /* correct.wav */; };
+		CEB1F59D1E421351006E3ACE /* incorrect.wav in Resources */ = {isa = PBXBuildFile; fileRef = CEB1F59C1E421351006E3ACE /* incorrect.wav */; };
 		CEE6BB2D1E38D5D90068E184 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB2B1E3792FB0068E184 /* RealmSwift.framework */; };
 		CEE6BB2E1E38D5D90068E184 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB2B1E3792FB0068E184 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CEE6BB301E38D66E0068E184 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB2F1E38D66E0068E184 /* Realm.framework */; };
@@ -107,6 +109,8 @@
 		CE7EA5851E27C1190043357D /* SwiftHEXColors.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHEXColors.framework; path = ../../Carthage/Build/iOS/SwiftHEXColors.framework; sourceTree = "<group>"; };
 		CE9D4A211E36313300FD0ED8 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuViewController.swift; path = views/layouts/MenuViewController.swift; sourceTree = "<group>"; };
 		CE9D4A231E36395A00FD0ED8 /* MonkeyKing.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MonkeyKing.framework; path = Carthage/Build/iOS/MonkeyKing.framework; sourceTree = SOURCE_ROOT; };
+		CEB1F59A1E421170006E3ACE /* correct.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correct.wav; sourceTree = "<group>"; };
+		CEB1F59C1E421351006E3ACE /* incorrect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = incorrect.wav; sourceTree = "<group>"; };
 		CEE6BB2B1E3792FB0068E184 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = SOURCE_ROOT; };
 		CEE6BB2F1E38D66E0068E184 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = ../../Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		CEE6BB331E38D9F50068E184 /* Stat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stat.swift; sourceTree = "<group>"; };
@@ -258,6 +262,7 @@
 		CE1F2A421E211F4B004A627C /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				CEB1F5991E421170006E3ACE /* sound */,
 				CE1F2A431E211F4B004A627C /* fonts */,
 			);
 			path = resources;
@@ -334,6 +339,15 @@
 				CE7EA5831E27B7090043357D /* KanaSectionColorReusableView.swift */,
 			);
 			path = layouts;
+			sourceTree = "<group>";
+		};
+		CEB1F5991E421170006E3ACE /* sound */ = {
+			isa = PBXGroup;
+			children = (
+				CEB1F59C1E421351006E3ACE /* incorrect.wav */,
+				CEB1F59A1E421170006E3ACE /* correct.wav */,
+			);
+			path = sound;
 			sourceTree = "<group>";
 		};
 		CEE6BB321E38D7900068E184 /* models */ = {
@@ -456,9 +470,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE1F2A3B1E211C5E004A627C /* LaunchScreen.storyboard in Resources */,
+				CEB1F59B1E421170006E3ACE /* correct.wav in Resources */,
 				CEE6BBB51E3A1FED0068E184 /* Localizable.strings in Resources */,
 				CE1F2A451E211F4B004A627C /* Hosohuwafont.ttf in Resources */,
 				CEE6BB751E3A0D3C0068E184 /* GoogleService-Info.plist in Resources */,
+				CEB1F59D1E421351006E3ACE /* incorrect.wav in Resources */,
 				CE1F2A381E211C5E004A627C /* Assets.xcassets in Resources */,
 				CE7EA5761E26761E0043357D /* KanaHeaderView.xib in Resources */,
 				CE1F2A361E211C5E004A627C /* Question.storyboard in Resources */,

@@ -30,20 +30,20 @@
 				<string>kana</string>
 			</array>
 		</dict>
-        <dict>
-            <key>CFBundleTypeRole</key>
-            <string>Editor</string>
-            <key>CFBundleURLName</key>
-            <string>QQ</string>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>tencent1105892489</string>
-                <string>QQ41EA9489</string>
-            </array>
-        </dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>QQ</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>tencent1105892489</string>
+				<string>QQ41EA9489</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>5</string>
+	<string>6</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -58,6 +58,14 @@
 			</dict>
 		</array>
 	</dict>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>weixin</string>
+		<string>mqqapi</string>
+		<string>weibosdk</string>
+		<string>alipay</string>
+		<string>alipayshare</string>
+	</array>
 	<key>LSHasLocalizedDisplayName</key>
 	<true/>
 	<key>LSRequiresIPhoneOS</key>
@@ -85,15 +93,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>weixin</string>
-        <string>mqqapi</string>
-        <string>weibosdk</string>
-        <string>alipay</string>
-        <string>alipayshare</string>
-    </array>
-    <key>LSRequiresIPhoneOS</key>
-    <true/>
 </dict>
 </plist>

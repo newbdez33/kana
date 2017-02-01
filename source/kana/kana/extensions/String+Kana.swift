@@ -15,4 +15,5 @@ fileprivate func NSLocalizedString(_ key: String) -> String {
 extension String {
     static let lastNAvg = NSLocalizedString("LastNAvg")
     static let IntroText = NSLocalizedString("IntroText")
+    static let Feedback = NSLocalizedString("Feedback")
 }
