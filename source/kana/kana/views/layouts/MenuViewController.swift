@@ -11,6 +11,7 @@
 import UIKit
 import MessageUI
 import MonkeyKing
+import Crashlytics
 
 class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
@@ -29,12 +30,29 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
     
     @IBAction func shareAction(_ sender: UIButton) {
         
-        
         let shareItems:[Any] = [img, messageStr, shareURL]
 
         let activityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)    //[qqActivity()]
         activityViewController.popoverPresentationController?.sourceView = sender
         activityViewController.popoverPresentationController?.sourceRect = sender.bounds
+
+        activityViewController.completionWithItemsHandler = {(type:UIActivityType?, completed:Bool, items:[Any]?, error:Error?) in
+            
+            if !completed {
+                //cancelled
+                return
+            }
+            
+            //shared successfully
+            let activity:String = type!.rawValue
+            let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+            //
+            Answers.logShare(withMethod: activity,
+                                       contentName: "Sharing app",
+                                       contentType: activity,
+                                       contentId: "app-version-\(version!)",
+                                       customAttributes: [:])
+        }
         present(activityViewController, animated: true, completion: nil)
 
     }
