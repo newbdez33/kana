@@ -67,6 +67,8 @@ class QuestionViewController: UIViewController {
     
     // MARK: - 
     func prepareSoundEffects() {
+        let audioSession = AVAudioSession.sharedInstance()
+        try!audioSession.setCategory(AVAudioSessionCategoryPlayback, with: AVAudioSessionCategoryOptions.mixWithOthers) //Causes audio from other sessions to be ducked (reduced in volume) while audio from this session plays
         do {
             correctSoundEffect = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "correct.wav", ofType:nil)!))
             correctSoundEffect?.prepareToPlay()
