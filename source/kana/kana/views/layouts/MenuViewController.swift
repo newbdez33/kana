@@ -33,7 +33,8 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
         let shareItems:[Any] = [img, messageStr, shareURL]
 
         let activityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)    //[qqActivity()]
-        
+        activityViewController.popoverPresentationController?.sourceView = sender
+        activityViewController.popoverPresentationController?.sourceRect = sender.bounds
         present(activityViewController, animated: true, completion: nil)
 
     }
