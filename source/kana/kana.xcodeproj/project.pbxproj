@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8544DD0E251AED8600020352 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8544DD0D251AED8600020352 /* CoreServices.framework */; };
 		CE1F2A311E211C5E004A627C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F2A301E211C5E004A627C /* AppDelegate.swift */; };
 		CE1F2A331E211C5E004A627C /* QuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F2A321E211C5E004A627C /* QuestionController.swift */; };
 		CE1F2A361E211C5E004A627C /* Question.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1F2A341E211C5E004A627C /* Question.storyboard */; };
@@ -45,10 +46,8 @@
 		CEE6BB601E3A09980068E184 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB5F1E3A09980068E184 /* libsqlite3.tbd */; };
 		CEE6BB621E3A09A30068E184 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB611E3A09A30068E184 /* CoreTelephony.framework */; };
 		CEE6BB6C1E3A0A0E0068E184 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB6B1E3A0A0E0068E184 /* AudioToolbox.framework */; };
-		CEE6BB6E1E3A0A290068E184 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB6D1E3A0A290068E184 /* GLKit.framework */; };
 		CEE6BB6F1E3A0A4B0068E184 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB651E3A09C00068E184 /* CoreMedia.framework */; };
 		CEE6BB711E3A0A680068E184 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB701E3A0A680068E184 /* MediaPlayer.framework */; };
-		CEE6BB731E3A0A8B0068E184 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE6BB721E3A0A8B0068E184 /* MobileCoreServices.framework */; };
 		CEE6BB751E3A0D3C0068E184 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEE6BB741E3A0D3C0068E184 /* GoogleService-Info.plist */; };
 		CEE6BBA81E3A1D1A0068E184 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE6BBAA1E3A1D1A0068E184 /* InfoPlist.strings */; };
 		CEE6BBB51E3A1FED0068E184 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE6BBB71E3A1FED0068E184 /* Localizable.strings */; };
@@ -56,6 +55,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8544DD0D251AED8600020352 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		CE1F2A2D1E211C5E004A627C /* kana.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kana.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE1F2A301E211C5E004A627C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE1F2A321E211C5E004A627C /* QuestionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionController.swift; sourceTree = "<group>"; };
@@ -65,7 +65,6 @@
 		CE1F2A441E211F4B004A627C /* Hosohuwafont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hosohuwafont.ttf; sourceTree = "<group>"; };
 		CE4A9CC81E2E4C3400EE82CC /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		CE4A9CC91E2E4C3400EE82CC /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		CE7EA5571E25223F0043357D /* JZSpringRefresh.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JZSpringRefresh.framework; path = ../../Carthage/Build/iOS/JZSpringRefresh.framework; sourceTree = "<group>"; };
 		CE7EA5631E2657FB0043357D /* KanaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KanaViewController.swift; sourceTree = "<group>"; };
 		CE7EA5681E26582C0043357D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Kana.storyboard; sourceTree = "<group>"; };
 		CE7EA56B1E265C4B0043357D /* UIColor+Kana.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Kana.swift"; sourceTree = "<group>"; };
@@ -79,13 +78,9 @@
 		CE7EA57F1E27ADE00043357D /* KanaFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KanaFlowLayout.swift; sourceTree = "<group>"; };
 		CE7EA5811E27AEC40043357D /* KanaLayoutAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KanaLayoutAttributes.swift; sourceTree = "<group>"; };
 		CE7EA5831E27B7090043357D /* KanaSectionColorReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KanaSectionColorReusableView.swift; sourceTree = "<group>"; };
-		CE7EA5851E27C1190043357D /* SwiftHEXColors.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHEXColors.framework; path = ../../Carthage/Build/iOS/SwiftHEXColors.framework; sourceTree = "<group>"; };
 		CE9D4A211E36313300FD0ED8 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuViewController.swift; path = views/layouts/MenuViewController.swift; sourceTree = "<group>"; };
-		CE9D4A231E36395A00FD0ED8 /* MonkeyKing.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MonkeyKing.framework; path = Carthage/Build/iOS/MonkeyKing.framework; sourceTree = SOURCE_ROOT; };
 		CEB1F59A1E421170006E3ACE /* correct.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correct.wav; sourceTree = "<group>"; };
 		CEB1F59C1E421351006E3ACE /* incorrect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = incorrect.wav; sourceTree = "<group>"; };
-		CEE6BB2B1E3792FB0068E184 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = SOURCE_ROOT; };
-		CEE6BB2F1E38D66E0068E184 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = ../../Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		CEE6BB371E39E3AF0068E184 /* Double+Kana.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Kana.swift"; sourceTree = "<group>"; };
 		CEE6BB481E3A08580068E184 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAnalytics.framework; sourceTree = "<group>"; };
 		CEE6BB491E3A08580068E184 /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = "<group>"; };
@@ -158,10 +153,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEE6BB731E3A0A8B0068E184 /* MobileCoreServices.framework in Frameworks */,
 				CEE6BB711E3A0A680068E184 /* MediaPlayer.framework in Frameworks */,
 				CEE6BB6F1E3A0A4B0068E184 /* CoreMedia.framework in Frameworks */,
-				CEE6BB6E1E3A0A290068E184 /* GLKit.framework in Frameworks */,
+				8544DD0E251AED8600020352 /* CoreServices.framework in Frameworks */,
 				CEE6BB6C1E3A0A0E0068E184 /* AudioToolbox.framework in Frameworks */,
 				CEE6BB621E3A09A30068E184 /* CoreTelephony.framework in Frameworks */,
 				CEE6BB601E3A09980068E184 /* libsqlite3.tbd in Frameworks */,
@@ -247,11 +241,6 @@
 			isa = PBXGroup;
 			children = (
 				CEE6BB471E3A08580068E184 /* Firebase */,
-				CEE6BB2F1E38D66E0068E184 /* Realm.framework */,
-				CEE6BB2B1E3792FB0068E184 /* RealmSwift.framework */,
-				CE9D4A231E36395A00FD0ED8 /* MonkeyKing.framework */,
-				CE7EA5851E27C1190043357D /* SwiftHEXColors.framework */,
-				CE7EA5571E25223F0043357D /* JZSpringRefresh.framework */,
 				CE4A9CC81E2E4C3400EE82CC /* Crashlytics.framework */,
 				CE4A9CC91E2E4C3400EE82CC /* Fabric.framework */,
 			);
@@ -343,6 +332,7 @@
 		CEE6BB581E3A094A0068E184 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8544DD0D251AED8600020352 /* CoreServices.framework */,
 				CEE6BB721E3A0A8B0068E184 /* MobileCoreServices.framework */,
 				CEE6BB701E3A0A680068E184 /* MediaPlayer.framework */,
 				CEE6BB6D1E3A0A290068E184 /* GLKit.framework */,
@@ -370,8 +360,6 @@
 				CE1F2A291E211C5E004A627C /* Sources */,
 				CE1F2A2A1E211C5E004A627C /* Frameworks */,
 				CE1F2A2B1E211C5E004A627C /* Resources */,
-				CE7EA58B1E2A61AB0043357D /* Carthage */,
-				CE4A9CC61E2E494400EE82CC /* Fabric */,
 			);
 			buildRules = (
 			);
@@ -389,13 +377,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = Salmonapps;
 				TargetAttributes = {
 					CE1F2A2C1E211C5E004A627C = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 72T2SXUWHC;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1200;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Push = {
@@ -407,7 +395,7 @@
 			};
 			buildConfigurationList = CE1F2A281E211C5E004A627C /* Build configuration list for PBXProject "kana" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -452,37 +440,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		CE4A9CC61E2E494400EE82CC /* Fabric */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Fabric;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PROJECT_DIR}/kana/venders/Fabric.framework/run\" be267c870371d122cf90b237a5fa052164a4a9d5 f11e768ac853513e35a91d70c36af3829b3f3206538601b18fbafa670a9f8ebd";
-		};
-		CE7EA58B1E2A61AB0043357D /* Carthage */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Carthage;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CE1F2A291E211C5E004A627C /* Sources */ = {
@@ -613,6 +570,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -637,7 +595,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
@@ -673,6 +631,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -691,7 +650,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
@@ -725,8 +684,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3ee246ba-7d5a-474a-a4cb-7420e353ad77";
 				PROVISIONING_PROFILE_SPECIFIER = "kana-dev";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.2;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 5.0;
 				USER_HEADER_SEARCH_PATHS = kana/venders/Firebase;
 			};
 			name = Debug;
@@ -756,8 +715,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "85a11103-974b-42a7-9b63-3fa812b87fcd";
 				PROVISIONING_PROFILE_SPECIFIER = "kana-appstore";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.2;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 5.0;
 				USER_HEADER_SEARCH_PATHS = kana/venders/Firebase;
 			};
 			name = Release;

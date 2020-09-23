@@ -9,23 +9,22 @@
 import UIKit
 
 extension UIColor {
+    
     class func kanaKeyRedColor() -> UIColor {
         //81.6, 0.8, 10.
         return UIColor(red: 0.816, green: 0.08, blue: 0.106, alpha: 1)
     }
     
     class func kanaKeyGrayColor() -> UIColor {
-        return UIColor.white
-        //return UIColor(hexString: "f8f8f8")!
+        return UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1.00)
     }
     
     class func kanaBlackColor() -> UIColor {
-        return UIColor.white
-        //return UIColor(hexString: "171412")!
+        return UIColor(red: 0.09, green: 0.08, blue: 0.07, alpha: 1.00)
     }
     
     class func kanaIncorrectAnswerBackgroundColor() -> UIColor {
-        return UIColor.white
-        //return UIColor(hexString: "F08F90")!
+        return UIColor(red: 0.94, green: 0.56, blue: 0.56, alpha: 1.00)
     }
 }
+
