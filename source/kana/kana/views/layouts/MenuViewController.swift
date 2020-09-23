@@ -10,7 +10,6 @@
 
 import UIKit
 import MessageUI
-import MonkeyKing
 import Crashlytics
 
 class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate {
@@ -36,7 +35,7 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
         activityViewController.popoverPresentationController?.sourceView = sender
         activityViewController.popoverPresentationController?.sourceRect = sender.bounds
 
-        activityViewController.completionWithItemsHandler = {(type:UIActivityType?, completed:Bool, items:[Any]?, error:Error?) in
+        activityViewController.completionWithItemsHandler = {(type:UIActivity.ActivityType?, completed:Bool, items:[Any]?, error:Error?) in
             
             if !completed {
                 //cancelled
@@ -79,18 +78,18 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
         controller.dismiss(animated: true)
     }
     
-    func qqActivity() -> AnyActivity {
-        MonkeyKing.registerAccount(.qq(appID: "1105892489"))
-        let sessionMessage = MonkeyKing.Message.qq(.friends(info: (title: "QQ", description: messageStr, thumbnail: UIImage(named: "share-app-icon")!, media: MonkeyKing.Media.url(shareURL))))
-        let qqActivity = AnyActivity(
-            type: UIActivityType(rawValue: "com.salmonapps.kana.qq.session"),
-            title: "QQ",
-            image: UIImage(named: "QQ")!,
-            message: sessionMessage,
-            completionHandler: { success in
-                print("Session success: \(success)")
-        })
-        return qqActivity
-    }
+//    func qqActivity() -> AnyActivity {
+//        MonkeyKing.registerAccount(.qq(appID: "1105892489"))
+//        let sessionMessage = MonkeyKing.Message.qq(.friends(info: (title: "QQ", description: messageStr, thumbnail: UIImage(named: "share-app-icon")!, media: MonkeyKing.Media.url(shareURL))))
+//        let qqActivity = AnyActivity(
+//            type: UIActivityType(rawValue: "com.salmonapps.kana.qq.session"),
+//            title: "QQ",
+//            image: UIImage(named: "QQ")!,
+//            message: sessionMessage,
+//            completionHandler: { success in
+//                print("Session success: \(success)")
+//        })
+//        return qqActivity
+//    }
 
 }

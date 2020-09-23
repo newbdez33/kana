@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import JZSpringRefresh
 
 class KanaViewController: UIViewController {
     
@@ -23,18 +22,18 @@ class KanaViewController: UIViewController {
         super.viewDidLoad()
 
         //
-        let top = collectionView.addSpringRefresh(position: .top, actionHandlere: { (_) in
-            self.dismiss(animated: true, completion: { 
-                //
-            })
-        })
-            
-        top.text = "戻る"
-        top.readyColor = UIColor.kanaKeyRedColor()
+//        let top = collectionView.addSpringRefresh(position: .top, actionHandlere: { (_) in
+//            self.dismiss(animated: true, completion: {
+//                //
+//            })
+//        })
+//            
+//        top.text = "戻る"
+//        top.readyColor = UIColor.kanaKeyRedColor()
         
         //collectionView
         collectionView.register(UINib(nibName: "KanaCell", bundle: nil), forCellWithReuseIdentifier: "KanaCell")
-        collectionView.register(UINib(nibName: "KanaHeaderView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "KanaHeaderView")
+        collectionView.register(UINib(nibName: "KanaHeaderView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "KanaHeaderView")
 
         collectionView.reloadData()
     }
@@ -93,7 +92,7 @@ extension KanaViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionElementKindSectionHeader {
+        if kind == UICollectionView.elementKindSectionHeader {
             let v = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "KanaHeaderView", for: indexPath) as! KanaHeaderView
             v.delegate = self
             return v

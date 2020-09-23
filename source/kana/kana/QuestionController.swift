@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import JZSpringRefresh
-import RealmSwift
 import GoogleMobileAds
 import AVFoundation
 
@@ -45,14 +43,14 @@ class QuestionViewController: UIViewController {
         lastAvgTitleLabel.text = String.localizedStringWithFormat(.lastNAvg, AppConfig.statisticsLastCount)
         statLabelWidth.constant = lastAvgTitleLabel.intrinsicContentSize.width
         
-        let bottom = scrollView.addSpringRefresh(position: .bottom, actionHandlere: { (v:JZSpringRefresh) in
-            let vc = UIStoryboard(name: "Kana", bundle: nil).instantiateInitialViewController()
-            self.present(vc!, animated: true, completion: { 
-                //
-            })
-        })
-        bottom.text = "五十音図"
-        bottom.readyColor = UIColor.kanaKeyRedColor()
+//        let bottom = scrollView.addSpringRefresh(position: .bottom, actionHandlere: { (v:JZSpringRefresh) in
+//            let vc = UIStoryboard(name: "Kana", bundle: nil).instantiateInitialViewController()
+//            self.present(vc!, animated: true, completion: {
+//                //
+//            })
+//        })
+//        bottom.text = "五十音図"
+//        bottom.readyColor = UIColor.kanaKeyRedColor()
         
         collectionView.register(UINib(nibName: "AnswerCell", bundle: nil), forCellWithReuseIdentifier: "AnswerCell")
         
@@ -68,7 +66,7 @@ class QuestionViewController: UIViewController {
     // MARK: - 
     func prepareSoundEffects() {
         let audioSession = AVAudioSession.sharedInstance()
-        try!audioSession.setCategory(AVAudioSessionCategoryPlayback, with: AVAudioSessionCategoryOptions.mixWithOthers) //Causes audio from other sessions to be ducked (reduced in volume) while audio from this session plays
+        try! audioSession.setCategory(.playback, mode: .default, options: [.mixWithOthers]) //Causes audio from other sessions to be ducked (reduced in volume) while audio from this session plays
         do {
             correctSoundEffect = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "correct.wav", ofType:nil)!))
             correctSoundEffect?.prepareToPlay()
@@ -140,19 +138,19 @@ class QuestionViewController: UIViewController {
             cost = 0
         }
         
-        let stat = Stat(kana: questionLabel.text!,
-                        kana_roma: currentQuestioKana[KanaType.roma.rawValue],
-                        questions: currentAnswerLabels.joined(separator: ","),
-                        answer: currentAnswerLabels[index],
-                        answer_roma: currentAnswers[index][KanaType.roma.rawValue],
-                        is_correct: is_correct,
-                        cost: cost)
-        guard let realm = try? Realm() else {
-            return
-        }
-        let _ = try? realm.write {
-            realm.add(stat)
-        }
+//        let stat = Stat(kana: questionLabel.text!,
+//                        kana_roma: currentQuestioKana[KanaType.roma.rawValue],
+//                        questions: currentAnswerLabels.joined(separator: ","),
+//                        answer: currentAnswerLabels[index],
+//                        answer_roma: currentAnswers[index][KanaType.roma.rawValue],
+//                        is_correct: is_correct,
+//                        cost: cost)
+//        guard let realm = try? Realm() else {
+//            return
+//        }
+//        let _ = try? realm.write {
+//            realm.add(stat)
+//        }
     }
     
     func updateBestCombo(is_correct:Bool) {
@@ -213,12 +211,12 @@ class QuestionViewController: UIViewController {
     
     func updateStatisticsLabels() {
         
-        totalLabel.text = "\(Stat.totalCount())"
-        avgLabel.text = "\(Stat.totalAvgTime().roundTo(places: 2))s"
-        lastAvgLabel.text = "\(Stat.lastAvgTime().roundTo(places: 2))s"
-        
-        let best = UserDefaults.standard.integer(forKey: AppConfig.keyBestCombo)
-        comboLabel.text = "\(best)"
+//        totalLabel.text = "\(Stat.totalCount())"
+//        avgLabel.text = "\(Stat.totalAvgTime().roundTo(places: 2))s"
+//        lastAvgLabel.text = "\(Stat.lastAvgTime().roundTo(places: 2))s"
+//        
+//        let best = UserDefaults.standard.integer(forKey: AppConfig.keyBestCombo)
+//        comboLabel.text = "\(best)"
     }
     
     func randomKana(excludeRoma:String = "") -> [String] {
@@ -314,3 +312,8 @@ extension QuestionViewController : UICollectionViewDelegate, UICollectionViewDat
     
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
+	return input.rawValue
+}
