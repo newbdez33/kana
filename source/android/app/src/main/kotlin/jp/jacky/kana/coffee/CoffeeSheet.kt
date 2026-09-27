@@ -141,8 +141,9 @@ private fun CoffeeContent(
                         .padding(bottom = 64.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
+                    // The badge overlaps the circle's edge, so the circle is a shaped background, not a clip.
                     Box(
-                        Modifier.size(96.dp).clip(CircleShape).background(KanaColors.accent.copy(alpha = 0.07f)),
+                        Modifier.size(96.dp).background(KanaColors.accent.copy(alpha = 0.07f), CircleShape),
                         contentAlignment = Alignment.Center,
                     ) {
                         Icon(

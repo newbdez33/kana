@@ -51,9 +51,19 @@ The scheme uses `Configuration.storekit` for local purchases when launched from
 Xcode. StoreKit unit tests create their own test session. Screenshot tests run
 only when their capture environment is configured.
 
+### Android
+
+The Android app lives in [source/android](source/android/README.md) (Kotlin, Jetpack Compose,
+minSdk 26). Build and test with the Gradle wrapper:
+
+```sh
+cd source/android
+./gradlew :app:testDebugUnitTest :app:assembleDebug
+```
+
 The public website lives in [site/](site/README.md).
 
 ## Roadmap
 
-An Android version and a Google Play release are planned. See [TODO.md](TODO.md)
-for implementation, testing, and store submission tasks.
+The Android app is implemented and awaits its Google Play release. See [TODO.md](TODO.md)
+for the store submission tasks.

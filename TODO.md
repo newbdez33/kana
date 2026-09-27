@@ -84,8 +84,8 @@
 
 ## 6. Android 版实现与上架
 
-- [ ] **实现 Android 版**：对齐 iOS 的五秒四选一练习、连对挑战、设备内统计、五十音图、离线使用和多语言界面。
-- [ ] **接入广告与咖啡支持**：接入 Android AdMob、同意流程和 Google Play Billing；广告仅在答错或超时后触发，支持一次性咖啡购买与恢复。
+- [x] **实现 Android 版**：对齐 iOS 的五秒四选一练习、连对挑战、设备内统计、五十音图、离线使用和多语言界面。2026-09-27 完成：`source/android/`（Kotlin + Compose），设计见 `docs/specs/2026-09-27-android-app-design.md`。
+- [x] **接入广告与咖啡支持**：接入 Android AdMob、同意流程和 Google Play Billing；广告仅在答错或超时后触发，支持一次性咖啡购买与恢复。2026-09-27 完成；正式广告 ID 与 Play 商品要等主人在 AdMob / Play Console 建好后填入 `source/android/gradle.properties`。
 - [ ] **测试并上架 Google Play**：完成手机与平板测试、广告及购买验证、隐私申报、多语言介绍与截图，提交审核并发布。
 
 ## 已定事项（2026-09-27）
