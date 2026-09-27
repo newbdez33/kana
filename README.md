@@ -39,4 +39,5 @@ Xcode. StoreKit unit tests create their own test session. Screenshot tests run
 only when their capture environment is configured.
 
 The public website lives in [site/](site/README.md).
-App Store descriptions and release notes live in [store/](store/README.md).
+App Store artwork, descriptions, release notes, and a preview generator live in
+[store/](store/README.md).

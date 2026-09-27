@@ -69,9 +69,11 @@
 - [x] 内购 `com.salmonapps.app.kana.coffee` 状态 READY_TO_SUBMIT（审核截图用的是菜单页）。
 - [x] Build：build 11 / 13 导出失败（缺 1024 图标，已补 `Icon-1024.png`）；build 14 上传后被 Apple 判为 Invalid（ITMS-90535：`de.lproj` / `ja.lproj` 里 2017 年遗留的 Info.plist 副本被当资源打进包），已删除并在 project.yml 排除 `**/Info.plist`；`UIRequiredDeviceCapabilities` 整个去掉（对已上架 App 不能新增 arm64 要求）。**build 15 已处理完成（VALID）并挂到 1.1.0**，`ITSAppUsesNonExemptEncryption=false` 在 Info.plist 里。
 - [ ] **App Privacy（数据收集标签）**：2026-09-27 网页确认仍未填写；Chrome 现已登录 ASC。需按当前 Google Mobile Ads 和 Firebase Analytics 的实际收集行为填写，包括用途、身份关联与追踪情况，不能仅凭应用没有登录账号就判断为不关联身份。
-- [x] **TestFlight 1.1.0 (16)**：新界面发布构建已上传，Apple 处理状态 VALID，内部测试状态 IN_BETA_TESTING，已挂到 1.1.0。已向现有内部测试账号 `newbdez33@gmail.com` 重发邀请，补齐中日英测试说明。
+- [x] **TestFlight 1.1.0 (17)**：新界面与五十音图颜色修复已上传，Apple 处理状态 VALID，内部测试状态 IN_BETA_TESTING，已挂到 1.1.0。中日英测试说明已更新；两个现有内部测试账号均在测试组，新增账号已接受邀请并安装过测试版。
+- [x] **五十音图文字颜色**：系统深色模式下出现白底白字；五十音图统一使用浅色外观。iPhone 浅色 / 深色与 iPad 深色三组截图测试通过，并逐张确认文字可读。
 - [x] 商店介绍与更新说明：en-US / ja / zh-Hans / zh-Hant / ko 已更新，对应文案保存在 `store/metadata.json`。内购审核截图已替换为新支持页面，审核说明已更新为菜单按钮 → 咖啡入口 → 购买 / 恢复。
 - [x] 新界面商店截图：5 种商店语言 × iPhone / iPad × 4 张，共 40 张，已全部上传并确认 COMPLETE；旧图已替换。新增 `--store-listing` 截图模式，10 组模拟器截图测试全部通过。
+- [x] **参考 menkyo 更新商店素材**：大标题、简短卖点与原生截图组合，保留 Kana 暖纸色和朱红色；依次介绍练习、统计、五十音图与咖啡去广告。五种语言的介绍、宣传文本、更新说明及 40 张图片已同步 ASC。`scripts/render-store.swift` 可重复生成，HTML 预览与说明见 `store/README.md`。
 - [ ] 主人用真机 + 沙盒账号测一次：广告、同意弹窗 / ATT、购买、恢复。
 - [ ] 提审：等主人一句话再 submit（App 与内购一起提交）。提审后在 AdMob 观察 eCPM 是否从 $0.09 回升。
 - 备注：App Review 联系电话还是 2017 年填的国内号码，如需更新请在 ASC 改。

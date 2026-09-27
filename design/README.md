@@ -10,6 +10,9 @@ reference and coffee support are direct actions; sharing, feedback, and required
 ad privacy controls are in the overflow menu. The question timer pauses while
 the menu and its sheets are open.
 
+The kana chart uses the same light appearance as the practice and coffee screens.
+Its text stays readable when the device uses Dark Mode.
+
 **Buy me a coffee** opens a warm paper sheet with a cup illustration, a permanent
 ad-removal benefit, the StoreKit price, a one-time purchase note, and restore.
 Loading, retry, pending approval, cancellation, and purchase completion have
@@ -44,6 +47,9 @@ The HTML file contains its fonts and icons. It supports Chinese, Japanese, and
 English, sample or empty statistics, and simulated purchase states. The preview
 uses a sample ¥300 price; the app uses the price returned by StoreKit.
 
+The [store artwork and copy](../store/README.md) use a separate HTML preview with
+five languages, iPhone and iPad layouts, and full-size screenshot links.
+
 ## Capture again
 
 Boot an iOS simulator and pass its UDID. Each run needs a new output directory.
@@ -71,7 +77,9 @@ without running purchase transactions. Use this mode for localized store images.
 - The seven-state capture test passed in English, Japanese, and Simplified Chinese
   on iPhone, and in English on iPad Pro 13-inch.
 - Store listing captures passed for all five store languages on iPhone 18 Pro Max
-  and iPad Pro 13-inch. All 40 listing screenshots are uploaded to version 1.1.0.
+  and iPad Pro 13-inch. All 40 composed listing screenshots are uploaded to version 1.1.0.
+- The kana chart capture passed on iPhone in Light and Dark Mode and on iPad in
+  Dark Mode. The chart text was checked in each capture.
 - The local Xcode 27 run stalled while finalizing the full suite's result bundle
   after all tests passed. The test logs were saved before stopping the process.
   The separate capture runs completed and produced valid result bundles.
