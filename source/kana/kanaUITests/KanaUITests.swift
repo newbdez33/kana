@@ -23,10 +23,16 @@ final class KanaUITests: XCTestCase {
     }
 
     private func attach(_ name: String) {
-        let attachment = XCTAttachment(screenshot: app.screenshot())
+        let screenshot = app.screenshot()
+        let attachment = XCTAttachment(screenshot: screenshot)
         attachment.name = name
         attachment.lifetime = .keepAlways
         add(attachment)
+        // Optional plain PNG export for scripted runs: TEST_RUNNER_KANA_SHOT_DIR=/path xcodebuild test ...
+        if let directory = ProcessInfo.processInfo.environment["KANA_SHOT_DIR"] {
+            let url = URL(fileURLWithPath: directory).appendingPathComponent("\(name).png")
+            try? screenshot.pngRepresentation.write(to: url)
+        }
     }
 
     func testQuestionScreenShowsStatisticsAndAnswers() {
@@ -51,10 +57,13 @@ final class KanaUITests: XCTestCase {
 
     func testMenuOffersCoffeeAndRestore() {
         XCTAssertTrue(app.collectionViews.firstMatch.cells.firstMatch.waitForExistence(timeout: 10))
-        app.swipeUp()
+        // The menu row is tucked above the question; pulling down reveals it.
+        app.swipeDown()
+        sleep(1)
         let coffee = app.buttons["☕ Buy me a coffee"]
         XCTAssertTrue(coffee.waitForExistence(timeout: 5))
-        XCTAssertTrue(app.buttons["Restore"].exists)
+        XCTAssertTrue(coffee.isHittable)
+        XCTAssertTrue(app.buttons["Restore"].isHittable)
         attach("menu")
     }
 }

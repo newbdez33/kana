@@ -19,44 +19,47 @@
 ## 0. 不用改代码就能做的
 
 - [x] ~~**AdMob 付款门槛**~~：余额 $1,463.81 卡在 $1,500 自定义门槛下，Verification 标签页 Address Verification 为 Completed。2026-09-27 主人决定：门槛不动，不处理。
-- [ ] **App Store Connect Marketing URL**：1.0.1 的 Marketing / Support URL 都是空的，AdMob crawler 靠这个找 app-ads.txt。填 `https://kana.jacky.jp/`（这类字段可直接改，不需要提交新版本）。要等第 1 节的站点上线后再填。
+- [ ] **App Store Connect Marketing URL**：1.0.1 的 Marketing / Support URL 都是空的，AdMob crawler 靠这个找 app-ads.txt。2026-09-27 用 API 试过：线上版本的 marketingUrl / supportUrl / privacyPolicyUrl 都返回 409「当前状态不可编辑」，只能在新版本 1.1.0 上设置，随第 5 节发版一起生效。
 
 ## 1. 主页 + app-ads.txt（https://kana.jacky.jp/）
 
 参考 menkyo_practice：`hosting/`（纯静态 HTML，无 JS）+ `bank-hosting/wrangler.json`（Cloudflare Worker static assets + custom domain）。
 
-- [ ] 新建 `site/`：`index.html`（日文）、`en.html`、`zh.html`、`privacy/`（三语隐私政策，UMP / ATT / App Store 隐私标签都需要这个 URL）、App Store 徽章链接 `https://apps.apple.com/jp/app/id1195345471`。
-- [ ] `site/app-ads.txt` 内容一行：`google.com, pub-1295607594822275, DIRECT, f08c47fec0942fa0`（与 menkyo `config/app-ads.txt` 和 https://jacky.jp/app-ads.txt 相同）。
-- [ ] `site/wrangler.json`：`name` = `kana-site`，`account_id` = `69b20790d259a1817f268a2c782ec7d1`，`routes` = `[{ "pattern": "kana.jacky.jp", "zone_id": "bad0a183259c863f56b9691468c3a756", "custom_domain": true }]`，`assets.directory` 指向静态目录。`npx wrangler deploy` 会自动创建 `kana.jacky.jp` 的 DNS 记录（目前没有该记录）。
-- [ ] 验证：`curl -sI -A Google-adstxt https://kana.jacky.jp/app-ads.txt` 返回 200 且 `text/plain`。
-- [ ] 完成第 0 节的 Marketing URL 后，在 AdMob Apps > app-ads.txt 等 crawler（最多 7 天），状态变为 verified。
+- [x] `site/public/`：`index.html`（日文）、`en.html`、`zh.html`、`privacy/`（三语隐私政策）。线上地址用无后缀路径：`/`、`/en`、`/zh`、`/privacy/`、`/privacy/en`、`/privacy/zh`。
+- [x] `site/public/app-ads.txt`：`google.com, pub-1295607594822275, DIRECT, f08c47fec0942fa0`。
+- [x] `site/wrangler.json` + `wrangler deploy`（2026-09-27 上线，Worker `kana-site`，自定义域名 kana.jacky.jp 已自动建 DNS）。部署用 wrangler profile `kana-site`（已绑定到 `site/` 目录；这个 profile 有 zone / routes 权限，menkyo 的 profile 没有）。
+- [x] 验证：`https://kana.jacky.jp/app-ads.txt` 返回 200 `text/plain`，Google-adstxt UA 也正常。
+- [ ] 1.1.0 上线并带上 Marketing URL 后，在 AdMob Apps > app-ads.txt 等 crawler（最多 7 天），状态变为 verified。
 
 ## 2. 升级 AdMob SDK 到 13.x + UMP 同意流程
 
-- [ ] 删除 `venders/Firebase/` 下的 GoogleMobileAds 等旧框架，用 SPM 引入 `swift-package-manager-google-mobile-ads`（13.x，最新 13.10.0，需要 Xcode 26.2+，本机 Xcode 27.0 满足）。UMP 和隐私清单随包自带。
-- [ ] `Info.plist` 加 `GADApplicationIdentifier` = `ca-app-pub-1295607594822275~2834593518`（现在靠已废弃的 `GADMobileAds.configure(withApplicationID:)`）、`SKAdNetworkItems`（Google 官方列表 50 个，可直接复制 menkyo 的）、`NSUserTrackingUsageDescription`（三语）。
-- [ ] API 改名（v12 起）：`GADBannerView` → `BannerView`、`GADRequest` → `Request`、`GADMobileAds` → `MobileAds`；`Question.storyboard` 里 `customClass="GADBannerView"` 要一起改，并设置 `adSize`（现在 storyboard 高度 0，靠代码把约束改成 55）。
-- [ ] UMP：启动时 `ConsentInformation.shared.requestConsentInfoUpdate` → `ConsentForm.loadAndPresentIfRequired` → `canRequestAds` 为真后再 `MobileAds.shared.start`，之后才允许 `showBanner()`。ATT 在同意表单之后、App 处于 active 时请求。
-- [ ] AdMob 后台 Privacy & messaging：现有的 European / US 消息只勾选了两个 Menkyo App，需要把 Japanese kana 也加进去，并填隐私政策 URL（第 1 节）。
+- [x] 删除 `venders/`，用 SPM 引入 GoogleMobileAds 13.10.0 + GoogleUserMessagingPlatform 3.1.0（`source/kana/project.yml`，XcodeGen 生成工程）。
+- [x] `Info.plist`：`GADApplicationIdentifier`、50 个 `SKAdNetworkItems`、`NSUserTrackingUsageDescription`（9 个语言的 InfoPlist.strings）。
+- [x] API 改名：`BannerView` / `Request`；storyboard 里保留 `customClass="GADBannerView"`（ObjC 运行时名不变）；`showBanner()` 用 `currentOrientationAnchoredAdaptiveBanner` 并按实际高度改约束。
+- [x] UMP：`services/AdsManager.swift`（requestConsentInfoUpdate → loadAndPresentIfRequired → ATT → MobileAds.start，`isReady` 后才允许 showBanner；菜单里有「广告隐私设置」入口，仅在 Google 要求时显示）。
+- [x] AdMob Privacy & messaging：European / US 两条消息都已加入 Japanese kana（各 3 apps，仍为 Published），隐私 URL 填 https://kana.jacky.jp/privacy/en。⚠ 操作时误把同一 URL 填到了未发布的「Bricks!」App 上，后台不允许清空，主人有空可以在 AdMob > Apps 里改掉。
 - [ ] 决定 `answer-below` 广告单元的去留（代码里从未使用）。
 
 ## 3. 工程现代化（第 2 节的前置条件，Xcode 27 现在编不过）
 
-- [ ] Deployment target 10.0 → 15.0（Xcode 27 最低），`UIRequiredDeviceCapabilities` armv7 → arm64，Swift 5.0 → 6 语言模式随 Xcode 默认。
-- [ ] 删除 Fabric / Crashlytics（服务已关闭，`Answers.logShare` 等调用一并删）。不再接崩溃收集。
-- [ ] Firebase 3.x → firebase-ios-sdk 12.x（SPM）。保留 FirebaseAnalytics（AdMob 后台的用户指标依赖它），`FIRApp.configure()` → `FirebaseApp.configure()`。`GoogleService-Info.plist` 可以继续用。
-- [ ] Realm：realm-cocoa 2.3.0 二进制无法在新 Swift 下导入。线上 1.0.1 用它保存每道题的答题记录，并在练习页顶部显示「总答题数 / 平均秒数 / 最近 10 次平均」；2020-09 的 `366679f`（upgrade to swift 4 staging，未发布）把写入和显示都注释掉了，所以当前源码里 Realm 是死代码，但老用户手机上有数据。2026-09-27 决定：删掉 Realm，改用 Codable JSON 文件存记录并恢复这三个数字的显示（老用户的历史统计归零一次）。
-- [ ] 删除没在用的依赖：MonkeyKing、JZSpringRefresh、SwiftHEXColors（调用全部是注释掉的），Cartfile 一并删除。
-- [ ] 删除没在用的推送配置：`aps-environment` entitlement、FirebaseInstanceID。
-- [ ] `xcodebuild` 在模拟器上跑通，真机装一次确认广告、音效、分享都正常。
+- [x] Deployment target 15.0，arm64，Swift 5 语言模式，版本号改由 `MARKETING_VERSION` / `CURRENT_PROJECT_VERSION` 控制（1.1.0 / 11）。iOS 27 要求 Scene 生命周期，新增 `SceneDelegate.swift` + `UIApplicationSceneManifest`（没有它 App 启动即崩）。
+- [x] 删除 Fabric / Crashlytics。
+- [x] Firebase 12.19.2（SPM，只保留 FirebaseAnalytics），`FirebaseApp.configure()`。
+- [ ] Realm：realm-cocoa 2.3.0 二进制无法在新 Swift 下导入。线上 1.0.1 用它保存每道题的答题记录，并在练习页顶部显示「总答题数 / 平均秒数 / 最近 10 次平均」；2020-09 的 `366679f`（upgrade to swift 4 staging，未发布）把写入和显示都注释掉了，所以当前源码里 Realm 是死代码，但老用户手机上有数据。2026-09-27 完成：`models/StatStore.swift`（Application Support/stats.json，只存总数、总耗时、最近 10 次），练习页三个数字恢复显示。
+- [x] 删除 Carthage 依赖（MonkeyKing、JZSpringRefresh、SwiftHEXColors、Realm）和 Cartfile。
+- [x] 删除 `kana.entitlements`（推送）和 FirebaseInstanceID。
+- [x] 模拟器（iPhone 18 Pro / iOS 27）编译、运行通过；`xcodebuild test`：单元测试 8 个（StatStore 4、StoreKit 4）+ UI 测试 3 个全部通过。测试广告在答错后正常显示。
+- [ ] 真机装一次确认广告、音效、分享都正常（需要主人的手机）。
+- 备注：`xcodebuild test` 在测试全部结束后不会自动退出（要 `pkill`），结果包因此不完整；UI 测试截图改为通过 `TEST_RUNNER_KANA_SHOT_DIR=/path` 直接落盘。本机 Xcode 27 没有 Simulator.app 图形界面，只能用 `simctl` + XCUITest。
 
 ## 4. 「请作者喝咖啡」去广告（内购）
 
-- [ ] App Store Connect：确认 Paid Apps Agreement、税务和银行信息有效（和 menkyo 同一个开发者账号 72T2SXUWHC，应该已经生效）；新建非消耗型内购 `com.salmonapps.app.kana.coffee`，三语名称 / 描述，定价（建议 ¥300 档）。
-- [ ] 代码（StoreKit 2，不需要服务器）：`Product.products(for:)` 取价格、`purchase()`、`Transaction.currentEntitlements` 判断已购买、`AppStore.sync()` 做 Restore；结果存 `UserDefaults` 键 `adsRemoved`。
-- [ ] 菜单页（`MenuViewController` / `Kana.storyboard`）加「☕ 请作者喝咖啡（去广告）」和「恢复购买」两个按钮（审核要求有 Restore）。
-- [ ] `QuestionViewController.showBanner()` 开头检查 `adsRemoved`，已购买就不加载 banner，也不再弹 UMP / ATT。
-- [ ] 沙盒账号测试购买、恢复、删除重装后恢复。
+- [x] App Store Connect：用 API 新建非消耗型内购 `com.salmonapps.app.kana.coffee`（ASC id 6816632915，5 个语言的名称 / 描述，日本 ¥300 为基准价、175 个地区可用，审核截图已上传）。
+- [x] 代码：`services/Store.swift`（StoreKit 2：`Product.products`、`purchase()`、`Transaction.currentEntitlements`、`AppStore.sync()`；`adsRemoved` 存 UserDefaults 并广播通知）。
+- [x] 菜单行（`Question.storyboard` 的 MenuViewController 场景）加「☕ 请作者喝杯咖啡」「恢复购买」按钮，8 个语言的 Localizable.strings。
+- [x] `showBanner()` 先检查 `adsRemoved` 和 `AdsManager.isReady`；已购买时不再走 UMP / ATT。
+- [x] 本地 StoreKit 配置（`source/kana/Configuration.storekit`）+ 单元测试覆盖购买 / 恢复 / 无购买恢复。
+- [ ] 沙盒账号在真机上测一次购买、恢复（需要主人的手机和沙盒账号）。
 
 ## 5. 发版
 
