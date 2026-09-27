@@ -20,6 +20,7 @@ class KanaViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .light
 
         //
 //        let top = collectionView.addSpringRefresh(position: .top, actionHandlere: { (_) in
