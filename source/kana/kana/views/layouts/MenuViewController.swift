@@ -16,6 +16,7 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
     @IBOutlet weak var coffeeButton: UIButton!
     @IBOutlet weak var restoreButton: UIButton!
     @IBOutlet weak var privacyButton: UIButton!
+    @IBOutlet weak var chartButton: UIButton!
 
     let shareURL = URL(string: "https://itunes.apple.com/app/id1195345471")!
     let messageStr:String  = .IntroText
@@ -31,6 +32,7 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
 
         restoreButton.setTitle(.restore, for: .normal)
         privacyButton.setTitle(.adPrivacy, for: .normal)
+        chartButton.setTitle(String.chart + " ›", for: .normal)
         updatePurchaseButtons()
         NotificationCenter.default.addObserver(self, selector: #selector(updatePurchaseButtons), name: .adsRemovedDidChange, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updatePurchaseButtons), name: .adsReadyDidChange, object: nil)
@@ -79,6 +81,13 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
 
     @IBAction func privacyAction(_ sender: UIButton) {
         AdsManager.shared.presentPrivacyOptions(from: self)
+    }
+
+    /// The gojūon chart; presented as a sheet so it can be swiped away.
+    @IBAction func chartAction(_ sender: UIButton) {
+        guard let chart = UIStoryboard(name: "Kana", bundle: nil).instantiateInitialViewController() else { return }
+        chart.view.accessibilityIdentifier = "kanaChart"
+        present(chart, animated: true)
     }
 
     func showAlert(title: String, message: String) {

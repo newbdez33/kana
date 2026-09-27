@@ -42,6 +42,7 @@
 		B0B2B368BEA30709E1A8C3AB /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B936188F2791409D0561F03F /* MessageUI.framework */; };
 		B4662219AADE770E97C8A382 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1CBDE60E256351F8ADE3EAD9 /* Info.plist */; };
 		B9FED4E01CE5137AF3C54EEE /* KanaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02949F9F73A215C8F29204 /* KanaUITests.swift */; };
+		BA0B5371700CC86D49B1AEBF /* StoreScreenshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637CB105B414C641DB76A29C /* StoreScreenshotTests.swift */; };
 		CD43A75DF1FE1F6510B48EAE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F377374968FF116E20FFBE6 /* GoogleService-Info.plist */; };
 		D1D4FA713BEFDF5DC1B3DD5C /* AnswerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26372ABC5CCAEEAF89FB645A /* AnswerCell.xib */; };
 		D6F03D2F9CBFBA278ECD1081 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CFB585B6AD5F2A889634779 /* StoreKit.framework */; };
@@ -100,6 +101,7 @@
 		54684617CBD0C9914B9C220F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Question.strings; sourceTree = "<group>"; };
 		5CB1C4190A7692BC05E24699 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5D4349CE46B777242EF71177 /* String+Kana.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Kana.swift"; sourceTree = "<group>"; };
+		637CB105B414C641DB76A29C /* StoreScreenshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreScreenshotTests.swift; sourceTree = "<group>"; };
 		66680FCCE35D48154B04AD37 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Kana.strings; sourceTree = "<group>"; };
 		682CA4CC88228BA029469EF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Kana.storyboard; sourceTree = "<group>"; };
 		696AB297BB0B39D5B97D757C /* KanaFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanaFlowLayout.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				7D02949F9F73A215C8F29204 /* KanaUITests.swift */,
+				637CB105B414C641DB76A29C /* StoreScreenshotTests.swift */,
 			);
 			path = kanaUITests;
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9FED4E01CE5137AF3C54EEE /* KanaUITests.swift in Sources */,
+				BA0B5371700CC86D49B1AEBF /* StoreScreenshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -762,7 +766,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 72T2SXUWHC;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -824,7 +828,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 72T2SXUWHC;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

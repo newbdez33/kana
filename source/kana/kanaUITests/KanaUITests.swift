@@ -55,6 +55,19 @@ final class KanaUITests: XCTestCase {
         attach("next-question")
     }
 
+    func testMenuOpensKanaChart() {
+        XCTAssertTrue(app.collectionViews.firstMatch.cells.firstMatch.waitForExistence(timeout: 10))
+        app.swipeDown()
+        sleep(1)
+        let chartButton = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Kana chart")).firstMatch
+        XCTAssertTrue(chartButton.waitForExistence(timeout: 5))
+        chartButton.tap()
+        let chart = app.otherElements["kanaChart"]
+        XCTAssertTrue(chart.waitForExistence(timeout: 5))
+        XCTAssertGreaterThan(chart.collectionViews.firstMatch.cells.count, 20)
+        attach("chart")
+    }
+
     func testMenuOffersCoffeeAndRestore() {
         XCTAssertTrue(app.collectionViews.firstMatch.cells.firstMatch.waitForExistence(timeout: 10))
         // The menu row is tucked above the question; pulling down reveals it.

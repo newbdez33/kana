@@ -322,6 +322,16 @@
                                     <action selector="privacyAction:" destination="Rww-X1-CLo" eventType="touchUpInside" id="prv-02-act"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cht-01-btn">
+                                <rect key="frame" x="279" y="4" width="80" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                <state key="normal" title="五十音図 ›">
+                                    <color key="titleColor" red="0.09" green="0.08" blue="0.07" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="chartAction:" destination="Rww-X1-CLo" eventType="touchUpInside" id="cht-02-act"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -336,6 +346,9 @@
                             <constraint firstItem="6xr-35-Xnr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rst-01-btn" secondAttribute="trailing" constant="8" id="rst-05-gap"/>
                             <constraint firstItem="prv-01-btn" firstAttribute="leading" secondItem="R4S-ra-Wbs" secondAttribute="leadingMargin" id="prv-03-lea"/>
                             <constraint firstItem="cof-01-btn" firstAttribute="top" secondItem="prv-01-btn" secondAttribute="bottom" id="prv-04-top"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cht-01-btn" secondAttribute="trailing" id="cht-03-tra"/>
+                            <constraint firstItem="cht-01-btn" firstAttribute="centerY" secondItem="prv-01-btn" secondAttribute="centerY" id="cht-04-cey"/>
+                            <constraint firstItem="cht-01-btn" firstAttribute="height" secondItem="prv-01-btn" secondAttribute="height" id="cht-05-hei"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -344,6 +357,7 @@
                         <outlet property="coffeeButton" destination="cof-01-btn" id="cof-05-out"/>
                         <outlet property="restoreButton" destination="rst-01-btn" id="rst-06-out"/>
                         <outlet property="privacyButton" destination="prv-01-btn" id="prv-05-out"/>
+                        <outlet property="chartButton" destination="cht-01-btn" id="cht-06-out"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="odW-l5-B5Q" userLabel="First Responder" sceneMemberID="firstResponder"/>

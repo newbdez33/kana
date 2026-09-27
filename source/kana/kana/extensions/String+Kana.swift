@@ -26,4 +26,5 @@ extension String {
     static let restoreNoneMessage = NSLocalizedString("RestoreNoneMessage")
     static let purchaseFailedTitle = NSLocalizedString("PurchaseFailedTitle")
     static let ok = NSLocalizedString("OK")
+    static let chart = NSLocalizedString("Chart")
 }
