@@ -1,25 +1,38 @@
 # Kana · 五十音
 
-A small iPhone and iPad app for practising Japanese kana. Match hiragana,
-katakana, and romaji in quick, handwritten quizzes.
+Four choices. Five seconds. How long can you keep your streak?
+
+Kana is a small iPhone and iPad app for reading basic Japanese kana. Match
+hiragana, katakana, and romaji, and try to beat your record.
 
 [App Store](https://apps.apple.com/app/id1195345471) · [Website](https://kana.jacky.jp/)
 
-- Four answers per question, with feedback when an answer is wrong or time runs out.
-- A quiet statistics bar: answers, average time, the last ten answers, and best streak.
-- A kana chart, available from the menu button or a pull-down gesture.
-- **Buy me a coffee**: an optional, one-time purchase that removes ads, with purchase restore.
+- Four answers and five seconds per question. Incorrect answers and timeouts reveal the correct answer.
+- Practice statistics: answer count, average time, the average for the last ten answers, and best streak.
+- A kana chart with hiragana, katakana, and romaji. The timer pauses while the menu or a sheet is open.
+- Offline practice with no account required. Practice statistics stay on the device.
+- Ads appear only after an incorrect answer or a timeout.
+- **Buy me a coffee**: optional support for the author through a one-time purchase, with no subscription.
 - English, Japanese, Simplified Chinese, Traditional Chinese, Korean, German, French, and Spanish.
 
 ## Screenshots
 
-| Practice | Coffee support | Thank you |
-| --- | --- | --- |
-| <img src="design/screenshots/en-practice.png" width="240" alt="Practice screen with four statistics and handwritten kana"> | <img src="design/screenshots/en-coffee.png" width="240" alt="Coffee support sheet with a localized price and restore button"> | <img src="design/screenshots/en-thanks.png" width="240" alt="Thank-you screen after a successful purchase"> |
+| Practice | Statistics | Kana chart | Coffee support |
+| --- | --- | --- | --- |
+| <img src="store/screenshots/en-practice.png" width="200" alt="Four choices and five seconds per question"> | <img src="store/screenshots/en-statistics.png" width="200" alt="Answer count, response times, and best streak"> | <img src="store/screenshots/en-chart.png" width="200" alt="Hiragana and katakana reference chart"> | <img src="store/screenshots/en-coffee.png" width="200" alt="Buy me a coffee to support the author"> |
 
-Native iPhone simulator captures with sample statistics and a local StoreKit test
-purchase. See [the design notes](design/README.md) for Chinese, Japanese, and iPad
-screenshots, the interactive preview, and capture instructions.
+Store artwork uses native simulator captures with sample statistics and a local
+StoreKit price. See [the store materials](store/README.md) for five languages,
+iPhone and iPad layouts, and the HTML preview. [The design notes](design/README.md)
+cover native UI states and capture instructions.
+
+## Release status
+
+Version **1.1.0 (17)** and the coffee purchase were submitted to App Review on
+September 27, 2026. Both are **Waiting for Review** as of that date. The app will
+release automatically after approval. The release includes the statistics and
+coffee redesign, updated ad consent controls, and the kana chart text fix for
+Dark Mode.
 
 ## Build and test
 
@@ -39,5 +52,8 @@ Xcode. StoreKit unit tests create their own test session. Screenshot tests run
 only when their capture environment is configured.
 
 The public website lives in [site/](site/README.md).
-App Store artwork, descriptions, release notes, and a preview generator live in
-[store/](store/README.md).
+
+## Roadmap
+
+An Android version and a Google Play release are planned. See [TODO.md](TODO.md)
+for implementation, testing, and store submission tasks.
