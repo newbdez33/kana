@@ -5,17 +5,42 @@
   Created by JackyZ on 2017/01/26.
   Copyright © 2017年 Salmonapps. All rights reserved.
 */
-"LastNAvg" = "Last %d avg:";
 "IntroText" = "A tiny and light app for practicing Japanese syllabary.\nLet's turn it into muscle memory!";
 "Feedback" = "Feedback";
-"Coffee" = "☕ Offrir un café à l'auteur";
-"CoffeeThanks" = "☕ Merci !";
+"Coffee" = "Offrez-moi un café";
+"CoffeeThanks" = "Merci pour le café";
 "Restore" = "Restaurer l'achat";
 "AdPrivacy" = "Options de confidentialité des annonces";
 "ThanksTitle" = "Merci !";
-"ThanksMessage" = "Les publicités ont disparu. Bon entraînement !";
+"ThanksMessage" = "Votre soutien aide cette petite app à grandir.\nProfitez de vos exercices sans publicité.";
 "RestoreNoneTitle" = "Rien à restaurer";
 "RestoreNoneMessage" = "Aucun achat précédent n'a été trouvé pour ce compte Apple.";
 "PurchaseFailedTitle" = "Achat non effectué";
 "OK" = "OK";
 "Chart" = "Tableau des kana";
+"Practice" = "Votre pratique";
+"StatAnswers" = "Réponses";
+"StatAverage" = "Temps moyen";
+"StatRecent" = "%d dernières";
+"StatBest" = "Meilleure série";
+"StatSeconds" = "%@ s";
+"Menu" = "Ouvrir le menu";
+"CloseMenu" = "Fermer le menu";
+"Close" = "Fermer";
+"More" = "Plus";
+"Share" = "Partager Kana";
+"Support" = "Offrir un café";
+"CoffeeMessage" = "Si cette petite app vous aide à apprendre,\nun café est un bel encouragement.";
+"CoffeeBenefit" = "Entraînez-vous sans publicité";
+"CoffeeSupported" = "Merci · Publicités supprimées";
+"CoffeePrice" = "Offrir un café · %@";
+"CoffeeTerms" = "Achat unique · Sans abonnement";
+"CoffeeLoading" = "Chargement du prix";
+"CoffeeUnavailable" = "Le prix est indisponible pour le moment. Veuillez réessayer.";
+"CoffeePending" = "En attente";
+"CoffeePendingMessage" = "Votre achat attend une autorisation.\nLes publicités seront ensuite supprimées.";
+"CoffeePurchasing" = "Confirmation de l’achat";
+"CoffeeRestoring" = "Restauration de l’achat";
+"ContinuePractice" = "Reprendre la pratique";
+"Retry" = "Réessayer";
+"PurchaseUnverified" = "L’achat n’a pas pu être vérifié. Veuillez réessayer.";

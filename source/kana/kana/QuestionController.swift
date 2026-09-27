@@ -12,7 +12,9 @@ import AVFoundation
 
 class QuestionViewController: UIViewController {
 
-    @IBOutlet weak var statLabelWidth: NSLayoutConstraint!
+    @IBOutlet weak var statisticsView: StatisticsView!
+    @IBOutlet weak var contentHeight: NSLayoutConstraint!
+    @IBOutlet weak var questionCenterY: NSLayoutConstraint!
     @IBOutlet weak var questionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var bannerView: BannerView!
     @IBOutlet weak var adView: UIView!
@@ -21,11 +23,6 @@ class QuestionViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var constraintQuestionTop: NSLayoutConstraint!
-    @IBOutlet weak var totalLabel: UILabel!
-    @IBOutlet weak var avgLabel: UILabel!
-    @IBOutlet weak var lastAvgTitleLabel: UILabel!
-    @IBOutlet weak var lastAvgLabel: UILabel!
-    @IBOutlet weak var comboLabel: UILabel!
     
     var correctSoundEffect: AVAudioPlayer?
     var incorrectSoundEffect: AVAudioPlayer?
@@ -36,12 +33,15 @@ class QuestionViewController: UIViewController {
     var isShowingCorrectAnswer = false
     var timer:Timer?
     var currentQuestionStartTime:TimeInterval = 0
+    private var questionPausedAt: TimeInterval?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .light
+        view.backgroundColor = .kanaKeyGrayColor()
         
-        lastAvgTitleLabel.text = String.localizedStringWithFormat(.lastNAvg, AppConfig.statisticsLastCount)
-        statLabelWidth.constant = lastAvgTitleLabel.intrinsicContentSize.width
+        statisticsView.menuButton.addTarget(self, action: #selector(toggleMenu), for: .touchUpInside)
+        configureQuestionLayout()
 
         bannerView.adUnitID = "ca-app-pub-1295607594822275/7264793113"
         bannerView.rootViewController = self
@@ -59,6 +59,31 @@ class QuestionViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         AdsManager.shared.gatherConsent(from: self)
+    }
+
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        updateContentHeight()
+    }
+
+    private func configureQuestionLayout() {
+        let area = UILayoutGuide()
+        let questionView = questionLabel.superview!
+        questionView.addLayoutGuide(area)
+        questionCenterY.isActive = false
+        NSLayoutConstraint.activate([
+            area.topAnchor.constraint(equalTo: statisticsView.bottomAnchor),
+            area.bottomAnchor.constraint(equalTo: questionView.bottomAnchor),
+            questionLabel.centerYAnchor.constraint(equalTo: area.centerYAnchor),
+            questionLabel.heightAnchor.constraint(lessThanOrEqualTo: area.heightAnchor, multiplier: 0.85),
+            questionLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 240)
+        ])
+    }
+
+    private func updateContentHeight() {
+        guard isViewLoaded, let contentHeight else { return }
+        contentHeight.constant = -view.safeAreaInsets.top - view.safeAreaInsets.bottom - constraintQuestionTop.constant
+        collectionView.collectionViewLayout.invalidateLayout()
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,6 +106,7 @@ class QuestionViewController: UIViewController {
         
     }
     func answerAction(index:Int) {
+        if constraintQuestionTop.constant > 0 { setMenuExpanded(false) }
         
         if timer != nil {
             timer!.invalidate()
@@ -112,6 +138,7 @@ class QuestionViewController: UIViewController {
     }
     
     func incorrect() {
+        updateStatisticsLabels()
         
         showBanner()
         
@@ -164,6 +191,7 @@ class QuestionViewController: UIViewController {
     }
     
     func nextQuestion() {
+        isShowingCorrectAnswer = false
         
         hideBanner()
         
@@ -189,24 +217,31 @@ class QuestionViewController: UIViewController {
         questionLabel.text = questionKanaText
         collectionView.reloadData()
         
-        timer = Timer.scheduledTimer(withTimeInterval: AppConfig.questionTimeLimit, repeats: false, block: { (t:Timer) in
+        currentQuestionStartTime = Date().timeIntervalSince1970 //timestamp
+        questionPausedAt = constraintQuestionTop.constant > 0 ? currentQuestionStartTime : nil
+        startQuestionTimer()
+        
+        updateStatisticsLabels()
+    }
+
+    private func startQuestionTimer() {
+        timer?.invalidate()
+        timer = nil
+        guard questionPausedAt == nil, !isShowingCorrectAnswer else { return }
+        let remaining = AppConfig.questionTimeLimit - (Date().timeIntervalSince1970 - currentQuestionStartTime)
+        timer = Timer.scheduledTimer(withTimeInterval: max(remaining, 0.01), repeats: false) { [weak self] _ in
+            guard let self else { return }
             self.updateBestCombo(is_correct: false)
             self.addStat(index: 0, is_correct: false, cost: 0)
             self.incorrect()
-        })
-        currentQuestionStartTime = Date().timeIntervalSince1970 //timestamp
-        
-        updateStatisticsLabels()
+        }
     }
     
     func updateStatisticsLabels() {
         let stats = StatStore.shared
-        totalLabel.text = "\(stats.totalCount)"
-        avgLabel.text = "\(stats.totalAvgTime.roundTo(places: 2))s"
-        lastAvgLabel.text = "\(stats.lastAvgTime.roundTo(places: 2))s"
-
         let best = UserDefaults.standard.integer(forKey: AppConfig.keyBestCombo)
-        comboLabel.text = "\(best)"
+        statisticsView.update(totalCount: stats.totalCount, averageTime: stats.totalAvgTime,
+                              recentTime: stats.lastAvgTime, bestCombo: best)
     }
     
     func randomKana(excludeRoma:String = "") -> [String] {
@@ -237,6 +272,32 @@ class QuestionViewController: UIViewController {
         return children.compactMap { $0 as? MenuViewController }.first
     }
 
+    @objc private func toggleMenu() {
+        setMenuExpanded(constraintQuestionTop.constant == 0)
+    }
+
+    func setMenuExpanded(_ expanded: Bool) {
+        guard expanded != (constraintQuestionTop.constant > 0) else { return }
+        constraintQuestionTop.constant = expanded ? 80 : 0
+        if expanded {
+            timer?.invalidate()
+            timer = nil
+            questionPausedAt = Date().timeIntervalSince1970
+        } else if let pausedAt = questionPausedAt {
+            // Time spent in the menu or support sheet is not answer time.
+            currentQuestionStartTime += Date().timeIntervalSince1970 - pausedAt
+            questionPausedAt = nil
+            startQuestionTimer()
+        }
+        updateContentHeight()
+        menuController?.setExpanded(expanded)
+        statisticsView.menuButton.setImage(UIImage(systemName: expanded ? "chevron.up" : "line.3.horizontal"), for: .normal)
+        statisticsView.menuButton.accessibilityLabel = expanded ? .closeMenu : .menu
+        UIView.animate(withDuration: UIAccessibility.isReduceMotionEnabled ? 0 : 0.25) {
+            self.view.layoutIfNeeded()
+        }
+    }
+
     func hideBanner() {
         adViewHeight.constant = 0
         questionViewHeight.constant = 0
@@ -262,16 +323,13 @@ class QuestionViewController: UIViewController {
 extension QuestionViewController : UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        //print(scrollView.contentOffset.y)
         if constraintQuestionTop.constant == 0 {
-            if scrollView.contentOffset.y < -80 {
-                constraintQuestionTop.constant = 80
-                menuController?.setExpanded(true)
+            if scrollView.contentOffset.y + scrollView.adjustedContentInset.top < -60 {
+                setMenuExpanded(true)
             }
         }else {
             if scrollView.contentOffset.y >= 80 {
-                constraintQuestionTop.constant = 0
-                menuController?.setExpanded(false)
+                setMenuExpanded(false)
             }
         }
     }
@@ -311,7 +369,7 @@ extension QuestionViewController : UICollectionViewDelegate, UICollectionViewDat
     
     // Cell Size Change
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.size.width/2, height: collectionView.bounds.size.height/2)
+        return CGSize(width: collectionView.bounds.width/2, height: collectionView.bounds.height/2)
     }
     
 }

@@ -56,7 +56,8 @@
 
 - [x] App Store Connect：用 API 新建非消耗型内购 `com.salmonapps.app.kana.coffee`（ASC id 6816632915，5 个语言的名称 / 描述，日本 ¥300 为基准价、175 个地区可用，审核截图已上传）。
 - [x] 代码：`services/Store.swift`（StoreKit 2：`Product.products`、`purchase()`、`Transaction.currentEntitlements`、`AppStore.sync()`；`adsRemoved` 存 UserDefaults 并广播通知）。
-- [x] 菜单行（`Question.storyboard` 的 MenuViewController 场景）加「☕ 请作者喝杯咖啡」「恢复购买」按钮，8 个语言的 Localizable.strings。
+- [x] 统计与咖啡支持重新设计：统计改为四列数字栏，菜单增加可见入口；「Buy me a coffee」打开独立支持面板，显示本地价格、永久去广告说明、一次性购买说明及恢复入口。保留 8 个语言，支持加载、重试、等待批准和感谢状态。
+- [x] 展开菜单与支持面板时暂停答题计时；修正安全区布局，底部答案完整显示。设计预览和原生截图见 `design/README.md`，项目介绍与截图见 `README.md`。
 - [x] `showBanner()` 先检查 `adsRemoved` 和 `AdsManager.isReady`；已购买时不再走 UMP / ATT。
 - [x] 本地 StoreKit 配置（`source/kana/Configuration.storekit`）+ 单元测试覆盖购买 / 恢复 / 无购买恢复。
 - [ ] 沙盒账号在真机上测一次购买、恢复（需要主人的手机和沙盒账号）。
@@ -68,6 +69,7 @@
 - [x] 内购 `com.salmonapps.app.kana.coffee` 状态 READY_TO_SUBMIT（审核截图用的是菜单页）。
 - [x] Build：build 11 / 13 导出失败（缺 1024 图标，已补 `Icon-1024.png`）；build 14 上传后被 Apple 判为 Invalid（ITMS-90535：`de.lproj` / `ja.lproj` 里 2017 年遗留的 Info.plist 副本被当资源打进包），已删除并在 project.yml 排除 `**/Info.plist`；`UIRequiredDeviceCapabilities` 整个去掉（对已上架 App 不能新增 arm64 要求）。**build 15 已处理完成（VALID）并挂到 1.1.0**，`ITSAppUsesNonExemptEncryption=false` 在 Info.plist 里。
 - [ ] **App Privacy（数据收集标签）要主人在 App Store Connect 网页上填**（API 没有这个接口，Chrome 里也没登录 ASC）。建议答案：收集「Identifiers › Device ID」「Usage Data › Product Interaction」「Usage Data › Advertising Data」，用途 Third-Party Advertising + Analytics，不与用户身份关联（Not linked）、用于追踪（Used for tracking，因为 AdMob + ATT）；不收集其他类别。
+- [ ] 本次界面改动需要新的发布构建，并更新 App Store 与内购审核截图；当前已上传的 build 15 和截图仍为旧界面。
 - [ ] 主人用真机 + 沙盒账号测一次：广告、同意弹窗 / ATT、购买、恢复。
 - [ ] 提审：等主人一句话再 submit（App 与内购一起提交）。提审后在 AdMob 观察 eCPM 是否从 $0.09 回升。
 - 备注：App Review 联系电话还是 2017 年填的国内号码，如需更新请在 ASC 改。

@@ -18,14 +18,27 @@ enum StoreError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .productUnavailable: return "The product is not available right now."
-        case .unverified: return "The purchase could not be verified."
+        case .productUnavailable: return .coffeeUnavailable
+        case .unverified: return .purchaseUnverified
         }
     }
 }
 
+enum CoffeePurchaseOutcome {
+    case purchased, cancelled, pending
+}
+
 @MainActor
-final class Store {
+protocol CoffeeStore: AnyObject {
+    var adsRemoved: Bool { get }
+    var coffeePrice: String? { get }
+    func loadProduct() async
+    func purchaseCoffee() async throws -> CoffeePurchaseOutcome
+    func restore() async throws -> Bool
+}
+
+@MainActor
+final class Store: CoffeeStore {
 
     static let shared = Store()
     static let coffeeProductID = "com.salmonapps.app.kana.coffee"
@@ -40,6 +53,7 @@ final class Store {
         }
     }
     private(set) var coffeeProduct: Product?
+    var coffeePrice: String? { coffeeProduct?.displayPrice }
     private var updatesTask: Task<Void, Never>?
 
     private init() {
@@ -48,6 +62,7 @@ final class Store {
 
     /// Call once at launch.
     func start() {
+        guard updatesTask == nil else { return }
         updatesTask = Task { [weak self] in
             for await result in Transaction.updates {
                 await self?.handle(result)
@@ -75,8 +90,7 @@ final class Store {
         adsRemoved = owned
     }
 
-    /// Returns true when the purchase completed, false when cancelled or pending.
-    func purchaseCoffee() async throws -> Bool {
+    func purchaseCoffee() async throws -> CoffeePurchaseOutcome {
         if coffeeProduct == nil { await loadProduct() }
         guard let product = coffeeProduct else { throw StoreError.productUnavailable }
 
@@ -86,11 +100,13 @@ final class Store {
             guard case .verified(let transaction) = verification else { throw StoreError.unverified }
             adsRemoved = true
             await transaction.finish()
-            return true
-        case .userCancelled, .pending:
-            return false
+            return .purchased
+        case .userCancelled:
+            return .cancelled
+        case .pending:
+            return .pending
         @unknown default:
-            return false
+            return .cancelled
         }
     }
 

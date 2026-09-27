@@ -56,6 +56,9 @@ targets:
   kanaTests:
     type: bundle.unit-test
     platform: iOS
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: "YES"
     sources:
       - path: kanaTests
       - path: Configuration.storekit
@@ -66,6 +69,9 @@ targets:
   kanaUITests:
     type: bundle.ui-testing
     platform: iOS
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: "YES"
     sources:
       - path: kanaUITests
     dependencies:

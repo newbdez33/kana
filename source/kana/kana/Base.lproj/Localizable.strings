@@ -5,17 +5,42 @@
   Created by JackyZ on 2017/01/26.
   Copyright © 2017年 Salmonapps. All rights reserved.
 */
-"LastNAvg" = "Last %d avg:";
 "IntroText" = "A tiny and light app for practicing Japanese syllabary.\nLet's turn it into muscle memory!";
 "Feedback" = "Feedback";
-"Coffee" = "☕ Buy me a coffee";
-"CoffeeThanks" = "☕ Thank you!";
+"Coffee" = "Buy me a coffee";
+"CoffeeThanks" = "Thanks for the coffee";
 "Restore" = "Restore";
 "AdPrivacy" = "Ad privacy options";
 "ThanksTitle" = "Thank you!";
-"ThanksMessage" = "Ads are gone. Enjoy your practice!";
+"ThanksMessage" = "Your support keeps this little app growing.\nEnjoy your practice, now without ads.";
 "RestoreNoneTitle" = "Nothing to restore";
 "RestoreNoneMessage" = "No previous purchase was found for this Apple Account.";
 "PurchaseFailedTitle" = "Purchase not completed";
 "OK" = "OK";
 "Chart" = "Kana chart";
+"Practice" = "Your practice";
+"StatAnswers" = "Answers";
+"StatAverage" = "Avg. time";
+"StatRecent" = "Last %d avg.";
+"StatBest" = "Best streak";
+"StatSeconds" = "%@s";
+"Menu" = "Open menu";
+"CloseMenu" = "Close menu";
+"Close" = "Close";
+"More" = "More";
+"Share" = "Share Kana";
+"Support" = "Buy me a coffee";
+"CoffeeMessage" = "If this little app helps you learn,\na little coffee goes a long way.";
+"CoffeeBenefit" = "Ad-free practice, from now on";
+"CoffeeSupported" = "Supported · Ads removed";
+"CoffeePrice" = "Buy me a coffee · %@";
+"CoffeeTerms" = "One-time purchase · No subscription";
+"CoffeeLoading" = "Loading price";
+"CoffeeUnavailable" = "The price is unavailable right now. Please try again.";
+"CoffeePending" = "Awaiting approval";
+"CoffeePendingMessage" = "Your purchase is awaiting approval.\nAds will be removed once it is approved.";
+"CoffeePurchasing" = "Confirming purchase";
+"CoffeeRestoring" = "Restoring purchase";
+"ContinuePractice" = "Back to practice";
+"Retry" = "Try again";
+"PurchaseUnverified" = "The purchase could not be verified. Please try again.";

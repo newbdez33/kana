@@ -11,8 +11,12 @@ final class StoreTests: XCTestCase {
     override func setUp() async throws {
         try await super.setUp()
         session = try SKTestSession(configurationFileNamed: "Configuration")
+        session.resetToDefaultState()
+        session.storefront = "JPN"
+        session.locale = Locale(identifier: "ja_JP")
         session.disableDialogs = true
         session.clearTransactions()
+        Store.shared.start()
         UserDefaults.standard.removeObject(forKey: "user.purchase.adsRemoved")
         await Store.shared.refreshEntitlements()
     }
@@ -33,7 +37,7 @@ final class StoreTests: XCTestCase {
 
         let purchased = try await Store.shared.purchaseCoffee()
 
-        XCTAssertTrue(purchased)
+        XCTAssertEqual(purchased, .purchased)
         XCTAssertTrue(Store.shared.adsRemoved)
         XCTAssertTrue(UserDefaults.standard.bool(forKey: "user.purchase.adsRemoved"))
     }
@@ -52,6 +56,16 @@ final class StoreTests: XCTestCase {
         let restored = try await Store.shared.restore()
 
         XCTAssertFalse(restored)
+        XCTAssertFalse(Store.shared.adsRemoved)
+    }
+
+    func testPendingPurchaseDoesNotRemoveAds() async throws {
+        session.askToBuyEnabled = true
+        defer { session.askToBuyEnabled = false }
+
+        let outcome = try await Store.shared.purchaseCoffee()
+
+        XCTAssertEqual(outcome, .pending)
         XCTAssertFalse(Store.shared.adsRemoved)
     }
 }

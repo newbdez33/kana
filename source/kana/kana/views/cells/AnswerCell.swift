@@ -13,7 +13,8 @@ class AnswerCell: UICollectionViewCell {
     @IBOutlet weak var kanaLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        layer.borderWidth = 0.5 / UIScreen.main.scale
+        layer.borderColor = UIColor.kanaBlackColor().withAlphaComponent(0.08).cgColor
     }
 
 }

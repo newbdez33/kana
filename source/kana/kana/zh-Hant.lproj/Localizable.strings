@@ -5,17 +5,42 @@
   Created by JackyZ on 2017/01/26.
   Copyright © 2017年 Salmonapps. All rights reserved.
 */
-"LastNAvg" = "最後%d個:";
 "IntroText" = "極簡的日語假名50音學習、練習軟件。\n通過訓練達到對日語假名的肌肉記憶吧！";
 "Feedback" = "問題反饋";
-"Coffee" = "☕ 請作者喝杯咖啡";
-"CoffeeThanks" = "☕ 謝謝你！";
+"Coffee" = "請作者喝杯咖啡";
+"CoffeeThanks" = "謝謝你的咖啡";
 "Restore" = "恢復購買";
 "AdPrivacy" = "廣告隱私設定";
 "ThanksTitle" = "謝謝！";
-"ThanksMessage" = "廣告已移除，練習愉快！";
+"ThanksMessage" = "你的支持，讓這個小應用繼續成長。\n廣告已移除，安心練習吧。";
 "RestoreNoneTitle" = "沒有可恢復的購買";
 "RestoreNoneMessage" = "這個 Apple 帳戶下沒有找到先前的購買記錄。";
 "PurchaseFailedTitle" = "購買未完成";
 "OK" = "好";
 "Chart" = "五十音圖";
+"Practice" = "練習紀錄";
+"StatAnswers" = "累計答題";
+"StatAverage" = "平均用時";
+"StatRecent" = "最近 %d 題";
+"StatBest" = "最長連對";
+"StatSeconds" = "%@秒";
+"Menu" = "開啟選單";
+"CloseMenu" = "收起選單";
+"Close" = "關閉";
+"More" = "更多";
+"Share" = "分享 Kana";
+"Support" = "請喝咖啡";
+"CoffeeMessage" = "如果 Kana 幫到了你的學習，\n一杯咖啡，就是一份小小的鼓勵。";
+"CoffeeBenefit" = "永久移除廣告，專心練習";
+"CoffeeSupported" = "已支持 · 永久移除廣告";
+"CoffeePrice" = "請喝咖啡 · %@";
+"CoffeeTerms" = "一次性購買 · 無訂閱";
+"CoffeeLoading" = "正在取得價格";
+"CoffeeUnavailable" = "暫時無法取得價格，請稍後重試。";
+"CoffeePending" = "等待批准";
+"CoffeePendingMessage" = "購買正在等待批准。\n批准後將自動移除廣告。";
+"CoffeePurchasing" = "正在確認購買";
+"CoffeeRestoring" = "正在恢復購買";
+"ContinuePractice" = "繼續練習";
+"Retry" = "重新載入";
+"PurchaseUnverified" = "無法驗證此購買，請重試。";

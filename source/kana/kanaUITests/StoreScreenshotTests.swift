@@ -6,11 +6,6 @@ import XCTest
 /// KANA_SHOT_LANG selects the app language (en, ja, zh-Hans, zh-Hant, ko); default en.
 final class StoreScreenshotTests: XCTestCase {
 
-    private static let chartTitles = [
-        "en": "Kana chart", "ja": "五十音図", "zh-Hans": "五十音图", "zh-Hant": "五十音圖", "ko": "오십음도",
-        "de": "Kana-Tabelle", "fr": "Tableau des kana", "es": "Tabla de kana",
-    ]
-
     private var app: XCUIApplication!
     private var directory: String!
     private var language = "en"
@@ -53,12 +48,11 @@ final class StoreScreenshotTests: XCTestCase {
         }
         save("01-question")
 
-        app.swipeDown()
+        app.buttons["menuToggle"].tap()
         sleep(1)
         save("02-menu")
 
-        let title = StoreScreenshotTests.chartTitles[language] ?? "Kana chart"
-        let chartButton = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", title)).firstMatch
+        let chartButton = app.buttons["chartMenu"]
         XCTAssertTrue(chartButton.waitForExistence(timeout: 5))
         chartButton.tap()
         XCTAssertTrue(app.otherElements["kanaChart"].waitForExistence(timeout: 5))

@@ -39,7 +39,10 @@ final class KanaUITests: XCTestCase {
         let answers = app.collectionViews.firstMatch.cells
         XCTAssertTrue(answers.firstMatch.waitForExistence(timeout: 10))
         XCTAssertEqual(answers.count, 4)
-        XCTAssertTrue(app.staticTexts["Total:"].exists)
+        XCTAssertTrue(app.otherElements["statTotal"].exists)
+        XCTAssertTrue(app.otherElements["statAverage"].exists)
+        XCTAssertTrue(app.otherElements["statRecent"].exists)
+        XCTAssertTrue(app.otherElements["statBest"].exists)
         attach("question")
     }
 
@@ -59,7 +62,7 @@ final class KanaUITests: XCTestCase {
         XCTAssertTrue(app.collectionViews.firstMatch.cells.firstMatch.waitForExistence(timeout: 10))
         app.swipeDown()
         sleep(1)
-        let chartButton = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Kana chart")).firstMatch
+        let chartButton = app.buttons["chartMenu"]
         XCTAssertTrue(chartButton.waitForExistence(timeout: 5))
         chartButton.tap()
         let chart = app.otherElements["kanaChart"]
@@ -68,15 +71,21 @@ final class KanaUITests: XCTestCase {
         attach("chart")
     }
 
-    func testMenuOffersCoffeeAndRestore() {
+    func testMenuOpensSupportAndReturnsToPractice() {
         XCTAssertTrue(app.collectionViews.firstMatch.cells.firstMatch.waitForExistence(timeout: 10))
-        // The menu row is tucked above the question; pulling down reveals it.
-        app.swipeDown()
-        sleep(1)
-        let coffee = app.buttons["☕ Buy me a coffee"]
+        app.buttons["menuToggle"].tap()
+        let coffee = app.buttons["coffeeMenu"]
         XCTAssertTrue(coffee.waitForExistence(timeout: 5))
         XCTAssertTrue(coffee.isHittable)
-        XCTAssertTrue(app.buttons["Restore"].isHittable)
         attach("menu")
+        coffee.tap()
+        XCTAssertTrue(app.otherElements["coffeeSheet"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["coffeePurchase"].exists)
+        XCTAssertTrue(app.buttons["coffeeRestore"].isHittable)
+        attach("support")
+        app.buttons["coffeeClose"].tap()
+        XCTAssertTrue(app.buttons["menuToggle"].isHittable)
+        app.buttons["menuToggle"].tap()
+        XCTAssertFalse(app.buttons["coffeeMenu"].isHittable)
     }
 }

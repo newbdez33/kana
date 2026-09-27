@@ -2,33 +2,35 @@ import XCTest
 import StoreKitTest
 @testable import kana
 
-/// Drives the real purchase UI inside the app (hosted test) with a StoreKit test
-/// session so that a host-side script can take simulator screenshots.
-/// Protocol: the test writes `<name>.marker` into KANA_SHOT_DIR and waits until the
-/// host deletes it (after `xcrun simctl io screenshot`). Skipped unless
-/// TEST_RUNNER_KANA_SHOT_DIR is set.
+/// Exports simulator captures through a host process. The host captures the screen
+/// when a marker appears in KANA_SHOT_DIR, then removes that marker.
 @available(iOS 17.0, *)
 @MainActor
 final class PurchaseScreenshotTests: XCTestCase {
-
     private var session: SKTestSession!
     private var directory: URL!
 
     override func setUp() async throws {
         try await super.setUp()
+        continueAfterFailure = false
         guard let path = ProcessInfo.processInfo.environment["KANA_SHOT_DIR"] else {
             throw XCTSkip("KANA_SHOT_DIR is not set")
         }
         directory = URL(fileURLWithPath: path)
         session = try SKTestSession(configurationFileNamed: "Configuration")
+        session.resetToDefaultState()
+        session.storefront = "JPN"
+        session.locale = Locale(identifier: "ja_JP")
         session.disableDialogs = true
         session.clearTransactions()
-        UserDefaults.standard.removeObject(forKey: "user.purchase.adsRemoved")
+        Store.shared.start()
         await Store.shared.refreshEntitlements()
+        await Store.shared.loadProduct()
     }
 
     override func tearDown() async throws {
-        session.clearTransactions()
+        session?.clearTransactions()
+        await Store.shared.refreshEntitlements()
         try await super.tearDown()
     }
 
@@ -38,71 +40,75 @@ final class PurchaseScreenshotTests: XCTestCase {
         return window!.rootViewController as! QuestionViewController
     }
 
-    private func revealMenu() {
-        let vc = question
-        vc.constraintQuestionTop.constant = 80
-        vc.menuController?.setExpanded(true)
-        vc.view.layoutIfNeeded()
-    }
-
-    private func snapshot(_ name: String) async {
-        try? await Task.sleep(nanoseconds: 1_200_000_000)
+    private func snapshot(_ name: String) async throws {
+        try await Task.sleep(nanoseconds: 600_000_000)
         let marker = directory.appendingPathComponent("\(name).marker")
-        FileManager.default.createFile(atPath: marker.path, contents: nil)
-        for _ in 0..<60 {
-            try? await Task.sleep(nanoseconds: 500_000_000)
+        try Data().write(to: marker)
+        for _ in 0..<80 {
+            try await Task.sleep(nanoseconds: 250_000_000)
             if !FileManager.default.fileExists(atPath: marker.path) { return }
         }
+        XCTFail("The host did not capture \(name)")
     }
 
-    private func waitForAlert(on controller: UIViewController) async -> UIAlertController? {
-        for _ in 0..<40 {
-            if let alert = controller.presentedViewController as? UIAlertController { return alert }
-            try? await Task.sleep(nanoseconds: 250_000_000)
+    private func waitUntil(_ condition: () -> Bool) async throws {
+        for _ in 0..<80 {
+            if condition() { return }
+            try await Task.sleep(nanoseconds: 100_000_000)
         }
-        return nil
+        XCTFail("The expected UI state did not appear")
     }
 
-    func testAPurchaseAndRestoreFlow() async throws {
+    func testCaptureRedesign() async throws {
         let menu = try XCTUnwrap(question.menuController)
-        revealMenu()
-        await snapshot("01-menu")
+        question.setMenuExpanded(false)
+        question.timer?.invalidate()
+        question.hideBanner()
+        question.isShowingCorrectAnswer = false
+        question.questionLabel.text = "ね"
+        question.currentAnswerLabels = ["ぬ", "ne", "れ", "ナ"]
+        question.collectionView.reloadData()
+        question.statisticsView.update(totalCount: 0, averageTime: 0, recentTime: 0, bestCombo: 0)
+        try await snapshot("01-empty")
 
-        // Purchase through the real button; the test session confirms the sheet silently.
+        // Fixed display values make the layout comparable across languages.
+        question.statisticsView.update(totalCount: 128, averageTime: 1.82, recentTime: 1.46, bestCombo: 24)
+        try await snapshot("02-practice")
+        question.setMenuExpanded(true)
+        try await snapshot("03-menu")
+
         menu.coffeeAction(menu.coffeeButton)
-        let thanks = await waitForAlert(on: menu)
-        XCTAssertNotNil(thanks)
-        XCTAssertTrue(Store.shared.adsRemoved)
-        await snapshot("03-thanks")
-        thanks?.dismiss(animated: false)
-        try? await Task.sleep(nanoseconds: 400_000_000)
-        await snapshot("04-menu-after-purchase")
+        try await waitUntil { menu.presentedViewController is CoffeeViewController }
+        let coffee = try XCTUnwrap(menu.presentedViewController as? CoffeeViewController)
+        try await waitUntil { coffee.purchaseButton.isEnabled && coffee.purchaseButton.configuration?.title?.contains(Store.shared.coffeePrice ?? "missing") == true }
+        try await snapshot("04-coffee")
 
-        // A wrong answer no longer shows the banner slot.
+        coffee.purchaseAction()
+        try await waitUntil { Store.shared.adsRemoved && coffee.purchaseButton.configuration?.title == .continuePractice }
+        XCTAssertTrue(coffee.restoreButton.isHidden)
+        try await snapshot("05-thanks")
         question.incorrect()
-        await snapshot("05-wrong-answer-no-ad")
+        XCTAssertEqual(question.adViewHeight.constant, 0)
 
-        // Fresh install without a purchase: restore finds nothing.
         session.clearTransactions()
         await Store.shared.refreshEntitlements()
+        session.askToBuyEnabled = true
+        coffee.purchaseAction()
+        try await waitUntil { coffee.statusLabel.text == .coffeePendingMessage }
         XCTAssertFalse(Store.shared.adsRemoved)
-        question.nextQuestion()
-        revealMenu()
-        menu.restoreAction(menu.restoreButton)
-        let none = await waitForAlert(on: menu)
-        XCTAssertNotNil(none)
-        await snapshot("06-restore-none")
-        none?.dismiss(animated: false)
-    }
+        try await snapshot("06-pending")
+        let transaction = try XCTUnwrap(session.allTransactions().first)
+        try session.approveAskToBuyTransaction(identifier: transaction.identifier)
+        try await waitUntil { Store.shared.adsRemoved }
+        XCTAssertEqual(coffee.purchaseButton.configuration?.title, .continuePractice)
+        session.askToBuyEnabled = false
 
-    func testBPurchaseSheet() async throws {
-        let menu = try XCTUnwrap(question.menuController)
-        revealMenu()
-        session.disableDialogs = false
-        // The system confirmation sheet stays up until a person taps it, so this
-        // purchase is left pending and only photographed.
-        menu.coffeeAction(menu.coffeeButton)
-        try? await Task.sleep(nanoseconds: 2_500_000_000)
-        await snapshot("02-purchase-sheet")
+        session.clearTransactions()
+        await Store.shared.refreshEntitlements()
+        coffee.restoreAction()
+        try await waitUntil { coffee.presentedViewController is UIAlertController }
+        try await snapshot("07-restore-none")
+        coffee.dismiss(animated: false)
+        menu.dismiss(animated: false)
     }
 }

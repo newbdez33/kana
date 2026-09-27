@@ -6,17 +6,14 @@
 //  Copyright © 2017年 Salmonapps. All rights reserved.
 //
 
-//http://www.flaticon.com/packs/outicons
-
 import UIKit
 import MessageUI
 
 class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate {
 
-    @IBOutlet weak var coffeeButton: UIButton!
-    @IBOutlet weak var restoreButton: UIButton!
-    @IBOutlet weak var privacyButton: UIButton!
-    @IBOutlet weak var chartButton: UIButton!
+    let coffeeButton = UIButton(type: .system)
+    let chartButton = UIButton(type: .system)
+    private let moreButton = UIButton(type: .system)
 
     let shareURL = URL(string: "https://itunes.apple.com/app/id1195345471")!
     let messageStr:String  = .IntroText
@@ -24,73 +21,98 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .kanaKeyGrayColor()
 
-        if !MFMailComposeViewController.canSendMail() {
-            let v = self.view.viewWithTag(1)
-            v?.isHidden = true
-        }
+        configureButton(chartButton, title: .chart, symbol: "square.grid.3x3", action: #selector(chartAction))
+        configureButton(coffeeButton, title: .support, symbol: "cup.and.saucer", action: #selector(coffeeAction))
+        coffeeButton.accessibilityIdentifier = "coffeeMenu"
+        chartButton.accessibilityIdentifier = "chartMenu"
+        moreButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+        moreButton.tintColor = .kanaSecondaryColor
+        moreButton.accessibilityLabel = .more
+        moreButton.accessibilityIdentifier = "moreMenu"
+        moreButton.showsMenuAsPrimaryAction = true
 
-        restoreButton.setTitle(.restore, for: .normal)
-        privacyButton.setTitle(.adPrivacy, for: .normal)
-        chartButton.setTitle(String.chart + " ›", for: .normal)
+        let row = UIStackView(arrangedSubviews: [chartButton, UIView(), coffeeButton, moreButton])
+        row.spacing = 12
+        row.alignment = .center
+        row.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(row)
+        let preferredWidth = row.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40)
+        preferredWidth.priority = .defaultHigh
+        NSLayoutConstraint.activate([
+            row.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            row.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -6),
+            row.widthAnchor.constraint(lessThanOrEqualToConstant: 560),
+            row.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, constant: -40),
+            preferredWidth,
+            chartButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 44),
+            coffeeButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 44),
+            moreButton.widthAnchor.constraint(equalToConstant: 44),
+            moreButton.heightAnchor.constraint(equalToConstant: 44)
+        ])
         updatePurchaseButtons()
         NotificationCenter.default.addObserver(self, selector: #selector(updatePurchaseButtons), name: .adsRemovedDidChange, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updatePurchaseButtons), name: .adsReadyDidChange, object: nil)
     }
 
-    private var isExpanded = false
+    private func configureButton(_ button: UIButton, title: String, symbol: String, action: Selector) {
+        var configuration = UIButton.Configuration.plain()
+        configuration.title = title
+        configuration.image = UIImage(systemName: symbol)
+        configuration.imagePadding = 8
+        configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 17, weight: .regular)
+        configuration.baseForegroundColor = .kanaBlackColor()
+        configuration.contentInsets = .zero
+        configuration.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attributes in
+            var attributes = attributes
+            attributes.font = .systemFont(ofSize: 14, weight: .medium)
+            return attributes
+        }
+        button.configuration = configuration
+        button.addTarget(self, action: action, for: .touchUpInside)
+    }
 
-    /// The top row (chart, ad privacy) sits under the status bar while the menu is
-    /// collapsed, so it is only shown once the menu has been pulled down.
     func setExpanded(_ expanded: Bool) {
-        isExpanded = expanded
-        updatePurchaseButtons()
+        view.isHidden = !expanded
+        view.accessibilityElementsHidden = !expanded
     }
 
     @objc func updatePurchaseButtons() {
-        let removed = Store.shared.adsRemoved
-        coffeeButton.setTitle(removed ? .coffeeThanks : .coffee, for: .normal)
-        coffeeButton.isEnabled = !removed
-        restoreButton.isHidden = removed
-        chartButton.isHidden = !isExpanded
-        privacyButton.isHidden = !isExpanded || removed || !AdsManager.shared.isPrivacyOptionsRequired
-    }
+        var configuration = coffeeButton.configuration
+        configuration?.baseForegroundColor = .kanaAccentColor
+        configuration?.image = UIImage(systemName: Store.shared.adsRemoved ? "heart" : "cup.and.saucer")
+        coffeeButton.configuration = configuration
 
-    // MARK: - Purchase
-
-    @IBAction func coffeeAction(_ sender: UIButton) {
-        sender.isEnabled = false
-        Task {
-            do {
-                if try await Store.shared.purchaseCoffee() {
-                    showAlert(title: .thanksTitle, message: .thanksMessage)
-                }
-            } catch {
-                showAlert(title: .purchaseFailedTitle, message: error.localizedDescription)
-            }
-            updatePurchaseButtons()
+        var actions = [UIAction(title: .share, image: UIImage(systemName: "square.and.arrow.up")) { [weak self] _ in
+            guard let self else { return }
+            self.shareAction(self.moreButton)
+        }]
+        if MFMailComposeViewController.canSendMail() {
+            actions.append(UIAction(title: .Feedback, image: UIImage(systemName: "envelope")) { [weak self] _ in
+                self?.sendEmail()
+            })
         }
-    }
-
-    @IBAction func restoreAction(_ sender: UIButton) {
-        sender.isEnabled = false
-        Task {
-            do {
-                if try await Store.shared.restore() {
-                    showAlert(title: .thanksTitle, message: .thanksMessage)
-                } else {
-                    showAlert(title: .restoreNoneTitle, message: .restoreNoneMessage)
-                }
-            } catch {
-                showAlert(title: .purchaseFailedTitle, message: error.localizedDescription)
-            }
-            sender.isEnabled = true
-            updatePurchaseButtons()
+        if !Store.shared.adsRemoved && AdsManager.shared.isPrivacyOptionsRequired {
+            actions.append(UIAction(title: .adPrivacy, image: UIImage(systemName: "hand.raised")) { [weak self] _ in
+                guard let self else { return }
+                AdsManager.shared.presentPrivacyOptions(from: self)
+            })
         }
+        moreButton.menu = UIMenu(children: actions)
     }
 
-    @IBAction func privacyAction(_ sender: UIButton) {
-        AdsManager.shared.presentPrivacyOptions(from: self)
+    @objc func coffeeAction(_ sender: UIButton) {
+        let coffee = CoffeeViewController()
+        let regularWidth = traitCollection.horizontalSizeClass == .regular
+        coffee.modalPresentationStyle = regularWidth ? .formSheet : .pageSheet
+        coffee.preferredContentSize = CGSize(width: 520, height: 720)
+        if let sheet = coffee.sheetPresentationController {
+            if !regularWidth { sheet.detents = [.large()] }
+            sheet.prefersGrabberVisible = !regularWidth
+            sheet.preferredCornerRadius = 28
+        }
+        present(coffee, animated: true)
     }
 
     /// The gojūon chart; presented as a sheet so it can be swiped away.

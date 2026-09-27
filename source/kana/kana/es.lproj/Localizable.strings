@@ -5,17 +5,42 @@
   Created by JackyZ on 2017/01/26.
   Copyright © 2017年 Salmonapps. All rights reserved.
 */
-"LastNAvg" = "Last %d avg:";
 "IntroText" = "A tiny and light app for practicing Japanese syllabary.\nLet's turn it into muscle memory!";
 "Feedback" = "Feedback";
-"Coffee" = "☕ Invítame a un café";
-"CoffeeThanks" = "☕ ¡Gracias!";
+"Coffee" = "Invítame a un café";
+"CoffeeThanks" = "Gracias por el café";
 "Restore" = "Restaurar compra";
 "AdPrivacy" = "Opciones de privacidad de anuncios";
 "ThanksTitle" = "¡Gracias!";
-"ThanksMessage" = "Los anuncios han desaparecido. ¡Disfruta practicando!";
+"ThanksMessage" = "Tu apoyo ayuda a que esta pequeña app crezca.\nDisfruta de la práctica, ahora sin anuncios.";
 "RestoreNoneTitle" = "Nada que restaurar";
 "RestoreNoneMessage" = "No se encontró ninguna compra anterior para esta cuenta de Apple.";
 "PurchaseFailedTitle" = "Compra no completada";
 "OK" = "OK";
 "Chart" = "Tabla de kana";
+"Practice" = "Tu práctica";
+"StatAnswers" = "Respuestas";
+"StatAverage" = "Tiempo medio";
+"StatRecent" = "Últimas %d";
+"StatBest" = "Mejor racha";
+"StatSeconds" = "%@ s";
+"Menu" = "Abrir menú";
+"CloseMenu" = "Cerrar menú";
+"Close" = "Cerrar";
+"More" = "Más";
+"Share" = "Compartir Kana";
+"Support" = "Invitar a un café";
+"CoffeeMessage" = "Si esta pequeña app te ayuda a aprender,\nun café es un gran apoyo.";
+"CoffeeBenefit" = "Practica sin anuncios, para siempre";
+"CoffeeSupported" = "Gracias · Sin anuncios";
+"CoffeePrice" = "Invitar a un café · %@";
+"CoffeeTerms" = "Compra única · Sin suscripción";
+"CoffeeLoading" = "Cargando el precio";
+"CoffeeUnavailable" = "El precio no está disponible ahora. Inténtalo de nuevo.";
+"CoffeePending" = "Pendiente de aprobación";
+"CoffeePendingMessage" = "Tu compra está pendiente de aprobación.\nLos anuncios se eliminarán cuando se apruebe.";
+"CoffeePurchasing" = "Confirmando la compra";
+"CoffeeRestoring" = "Restaurando la compra";
+"ContinuePractice" = "Seguir practicando";
+"Retry" = "Reintentar";
+"PurchaseUnverified" = "No se pudo verificar la compra. Inténtalo de nuevo.";
