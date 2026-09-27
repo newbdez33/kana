@@ -33,11 +33,11 @@
 | Play 商品 ID | `jp.jacky.kana.coffee`，一次性商品，购买后 acknowledge，永不消耗 |
 | 视觉 | 复刻 iOS 现有设计，固定浅色 |
 | 位置 | `source/android/`，与 `source/kana` 并列 |
-| SDK | minSdk 26，compileSdk / targetSdk 36 |
-| 工具链 | Gradle 9.3.1（本机已缓存）、AGP 9.1.x、Kotlin 2.4.x、JDK 21（`/opt/homebrew/opt/openjdk@21`） |
+| SDK | minSdk 26，targetSdk 36，compileSdk 37.0（Compose 1.12 要求 compileSdk 37；`platforms;android-37.0` 已安装） |
+| 工具链 | Gradle 9.6.0（wrapper 首次运行下载）、AGP 9.4.1（内置 Kotlin，不再应用 `org.jetbrains.kotlin.android`）、Kotlin 2.4.20、JDK 21（`/opt/homebrew/opt/openjdk@21`） |
 | 依赖版本 | 实施时取各库最新稳定版，统一记录在 `gradle/libs.versions.toml` |
 | 版本号 | versionName `1.0.0`，versionCode `1` |
-| 依赖注入 | 手写 `AppContainer`，不用 Hilt；不用 Navigation 库 |
+| 依赖注入 | 手写 `AppContainer`，不用 Hilt；不用 Navigation 库；不用 kotlinx.serialization（统计 JSON 用 Android 自带的 `org.json`） |
 | 流程 | 所有改动在 `newbdez33/android-app` 分支上走 PR |
 
 ## 3. 工程结构
@@ -74,9 +74,9 @@ source/android/
 
 Gradle 要点：
 
-- 插件：`com.android.application`、`org.jetbrains.kotlin.android`、`org.jetbrains.kotlin.plugin.compose`、`org.jetbrains.kotlin.plugin.serialization`。
+- 插件：`com.android.application`（AGP 9 内置 Kotlin）、`org.jetbrains.kotlin.plugin.compose`；根构建脚本用 `buildscript.classpath` 把 Kotlin Gradle 插件钉在与 Compose 编译器插件相同的版本。
 - `buildFeatures { compose = true; buildConfig = true }`。
-- 依赖：Compose BOM（material3、ui-tooling-preview、material-icons-extended）、activity-compose、lifecycle-viewmodel-compose、lifecycle-runtime-compose、kotlinx-coroutines-android、kotlinx-serialization-json、play-services-ads、user-messaging-platform、billing-ktx（8.x）。测试：junit4、kotlinx-coroutines-test、androidx.test（runner、rules、ext.junit）、compose ui-test-junit4、ui-test-manifest。
+- 依赖：Compose BOM（material3、ui-tooling-preview、material-icons-extended）、activity-compose、lifecycle-viewmodel-compose、lifecycle-runtime-compose、kotlinx-coroutines-android、play-services-ads（25.x）、user-messaging-platform（4.x）、billing-ktx（9.x）。测试：junit4、kotlinx-coroutines-test、org.json（JVM 单元测试用）、androidx.test（core、runner、rules、ext.junit）、compose ui-test-junit4、ui-test-manifest。假实现放在 `src/sharedTest/kotlin`，同时进入 `test` 与 `androidTest` 源集。
 - Release：`isMinifyEnabled = true`、`isShrinkResources = true`，签名从仓库外的 `key.properties` 读取（keyAlias / keyPassword / storeFile / storePassword），与 menkyo 相同；`preReleaseBuild` 前检查四个值齐全且 keystore 文件存在。
 - 广告 ID：
   - debug 固定用 Google 测试 ID：App ID `ca-app-pub-3940256099942544~3347511713`，自适应横幅 `ca-app-pub-3940256099942544/9214589741`。
@@ -93,7 +93,7 @@ Gradle 要点：
 | 包 | 内容 | 职责 |
 | --- | --- | --- |
 | （根） | `KanaApplication`、`MainActivity`、`KanaApp` composable | 建 `AppContainer`；edge-to-edge；把 Activity 生命周期转给广告和同意流程；根据状态显示练习页和面板 |
-| `di` | `AppContainer` 接口、`DefaultAppContainer` | 持有单例：`statStore`、`coffeeStore`、`adsManager`、`soundPlayer`、`random`、`timeSource`、`shareActions` |
+| `di` | `AppContainer` 接口、`DefaultAppContainer` | 持有单例：`statStore`、`coffeeStore`、`adsManager`、`soundPlayer`、`random`、`clock`、`timeLimitMillis`（UI 测试放宽限时）、`shareActions` |
 | `practice` | `Kana`、`KanaForm`、`KanaTable`、`Question`、`QuestionEngine`、`PracticeViewModel`、`PracticeUiState`、`PracticeScreen` 及子组件 | 出题、计时、答题、统计栏、菜单、横幅槽位 |
 | `stats` | `StatSummary`、`StatStore` | 统计持久化 |
 | `ads` | `AdsManager` 接口、`GoogleAdsManager`、`BannerAd` composable | 同意流程、SDK 初始化、隐私选项、横幅视图 |
@@ -166,7 +166,7 @@ interface ShareActions { fun share(activity: Activity); fun canSendFeedback(): B
 
 统计（`StatStore`）：
 
-- `StatSummary(totalCount, totalCost, recentCosts[≤10], currentStreak, bestStreak)`，JSON 存于 `filesDir/stats.json`，用 kotlinx.serialization 显式 `StatSummary.serializer()`，写入先写临时文件再重命名。
+- `StatSummary(totalCount, totalCost, recentCosts[≤10], currentStreak, bestStreak)`，JSON 存于 `filesDir/stats.json`，用 Android 自带的 `org.json` 读写，写入先写临时文件再原子重命名。
 - `add(cost)` 只接受 `0 < cost ≤ 5`：计数加一、累加耗时、追加到最近列表并裁到 10 个。
 - 派生值：`averageSeconds = totalCost / totalCount`，`recentSeconds = recentCosts 平均`；`totalCount == 0` 时两者为 `null`，界面显示「—」。
 - 文件损坏或缺失时从零开始，不提示。
@@ -229,6 +229,8 @@ interface ShareActions { fun share(activity: Activity); fun canSendFeedback(): B
 
 ## 7. 广告与同意
 
+Google 已把 `play-services-ads` 标为维护模式并推荐 Next-Gen SDK；本版沿用 `play-services-ads` 25.x，与 iOS 使用的 GMA SDK 13 对应，后续再评估迁移。
+
 - 启动（`MainActivity.onStart`）且未购买时调用 `gatherConsent(activity)`，每次进程只执行一次：
   1. `ConsentInformation.requestConsentInfoUpdate`（`setTagForUnderAgeOfConsent(false)`）。
   2. 成功后 `UserMessagingPlatform.loadAndShowConsentFormIfRequired(activity)`。
@@ -237,7 +239,7 @@ interface ShareActions { fun share(activity: Activity); fun canSendFeedback(): B
   5. 请求失败时不做重试，`isReady` 保持原值；App 其余功能正常。
 - `privacyOptionsRequired` 取自 `privacyOptionsRequirementStatus == REQUIRED`，同意流程结束后更新；`showPrivacyOptions` 调用 `UserMessagingPlatform.showPrivacyOptionsForm`。
 - debug 构建可通过 `gradle.properties` 的 `kana.ads.debugGeography=eea` 打开 `ConsentDebugSettings`（EEA + 当前设备 hash），用于手动检查同意表单；默认关闭。
-- 横幅（`BannerAd`）：`AdView` 在 Activity 作用域创建一次，`adUnitId = BuildConfig.ADMOB_BANNER_ID`，尺寸 `AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(context, 窗口宽度 dp)`；`PracticeUiState.bannerRequested` 变为 true 且允许时 `loadAd(AdRequest)`；`onAdFailedToLoad` 回调 `bannerFailed()` 收起槽位；随 Activity 生命周期 `pause / resume / destroy`。
+- 横幅（`BannerAd`）：`AdView` 在 Activity 作用域创建一次，`adUnitId = BuildConfig.ADMOB_BANNER_ID`，尺寸 `AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(context, 窗口宽度 dp)`（SDK 25 起标记弃用，但替代的 large 版本最高占屏 20%，与 iOS 的横幅高度不符，故沿用）；`PracticeUiState.bannerRequested` 变为 true 且允许时 `loadAd(AdRequest)`；`onAdFailedToLoad` 回调 `bannerFailed()` 收起槽位；随 Activity 生命周期 `pause / resume / destroy`。
 - Manifest：`APPLICATION_ID` meta-data；`INTERNET`、`ACCESS_NETWORK_STATE` 权限由 SDK 合并；`AD_ID` 权限由 SDK 自动声明，不额外处理。
 
 ## 8. 咖啡内购（`PlayCoffeeStore`）
