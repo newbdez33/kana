@@ -38,12 +38,22 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
         NotificationCenter.default.addObserver(self, selector: #selector(updatePurchaseButtons), name: .adsReadyDidChange, object: nil)
     }
 
+    private var isExpanded = false
+
+    /// The top row (chart, ad privacy) sits under the status bar while the menu is
+    /// collapsed, so it is only shown once the menu has been pulled down.
+    func setExpanded(_ expanded: Bool) {
+        isExpanded = expanded
+        updatePurchaseButtons()
+    }
+
     @objc func updatePurchaseButtons() {
         let removed = Store.shared.adsRemoved
         coffeeButton.setTitle(removed ? .coffeeThanks : .coffee, for: .normal)
         coffeeButton.isEnabled = !removed
         restoreButton.isHidden = removed
-        privacyButton.isHidden = removed || !AdsManager.shared.isPrivacyOptionsRequired
+        chartButton.isHidden = !isExpanded
+        privacyButton.isHidden = !isExpanded || removed || !AdsManager.shared.isPrivacyOptionsRequired
     }
 
     // MARK: - Purchase

@@ -47,6 +47,9 @@ class QuestionViewController: UIViewController {
         bannerView.rootViewController = self
         NotificationCenter.default.addObserver(self, selector: #selector(adsRemovedDidChange), name: .adsRemovedDidChange, object: nil)
 
+        questionLabel.accessibilityIdentifier = "questionLabel"
+        menuController?.setExpanded(false)
+
         collectionView.register(UINib(nibName: "AnswerCell", bundle: nil), forCellWithReuseIdentifier: "AnswerCell")
 
         prepareSoundEffects()
@@ -229,6 +232,11 @@ class QuestionViewController: UIViewController {
         return text
     }
     
+    /// The menu row embedded above the question (revealed by pulling down).
+    var menuController: MenuViewController? {
+        return children.compactMap { $0 as? MenuViewController }.first
+    }
+
     func hideBanner() {
         adViewHeight.constant = 0
         questionViewHeight.constant = 0
@@ -258,10 +266,12 @@ extension QuestionViewController : UIScrollViewDelegate {
         if constraintQuestionTop.constant == 0 {
             if scrollView.contentOffset.y < -80 {
                 constraintQuestionTop.constant = 80
+                menuController?.setExpanded(true)
             }
         }else {
             if scrollView.contentOffset.y >= 80 {
                 constraintQuestionTop.constant = 0
+                menuController?.setExpanded(false)
             }
         }
     }

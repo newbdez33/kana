@@ -31,9 +31,15 @@ final class StoreScreenshotTests: XCTestCase {
     func testCaptureStoreScreenshots() {
         let answers = app.collectionViews.firstMatch.cells
         XCTAssertTrue(answers.firstMatch.waitForExistence(timeout: 10))
-        // Answering starts a fresh question, so the capture shows an untouched question.
-        answers.element(boundBy: 0).tap()
-        usleep(600_000)
+        // Tap answers until the question changes: a correct answer starts a fresh,
+        // untouched question with a full timer, which is what the capture should show.
+        let questionLabel = app.staticTexts["questionLabel"]
+        let firstQuestion = questionLabel.label
+        for index in 0..<4 {
+            answers.element(boundBy: index).tap()
+            usleep(300_000)
+            if questionLabel.label != firstQuestion { break }
+        }
         save("01-question")
 
         app.swipeDown()
