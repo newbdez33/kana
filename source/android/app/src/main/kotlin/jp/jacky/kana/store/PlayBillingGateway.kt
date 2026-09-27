@@ -47,10 +47,10 @@ class PlayBillingGateway(context: Context, private val productId: String) : Bill
         }
     }
 
-    override suspend fun queryCoffeePurchases(): List<PurchaseRecord> = suspendCancellableCoroutine { continuation ->
+    override suspend fun queryCoffeePurchases(): List<PurchaseRecord>? = suspendCancellableCoroutine { continuation ->
         val params = QueryPurchasesParams.newBuilder().setProductType(ProductType.INAPP).build()
         client.queryPurchasesAsync(params) { result, purchases ->
-            val records = if (result.responseCode == BillingResponseCode.OK) purchases.toRecords() else emptyList()
+            val records = if (result.responseCode == BillingResponseCode.OK) purchases.toRecords() else null
             if (continuation.isActive) continuation.resume(records)
         }
     }

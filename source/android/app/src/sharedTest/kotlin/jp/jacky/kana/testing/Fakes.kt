@@ -56,6 +56,7 @@ class FakeCoffeeStore(initialAdsRemoved: Boolean = false, var productPrice: Stri
 class FakeAdsManager : AdsManager {
     override val isReady = MutableStateFlow(false)
     override val privacyOptionsRequired = MutableStateFlow(false)
+    override val consentFormVisible = MutableStateFlow(false)
     var gatherConsentCalls = 0
     var showPrivacyOptionsCalls = 0
     override fun gatherConsent(activity: Activity) { gatherConsentCalls++ }
@@ -79,6 +80,8 @@ class FakeBillingGateway : BillingGateway {
     override val purchaseUpdates = MutableSharedFlow<PurchaseUpdate>(extraBufferCapacity = 8)
     var connectResult = 0 // BillingResponseCode.OK
     var purchases: List<PurchaseRecord> = emptyList()
+    /** When true, queryCoffeePurchases reports a failed query. */
+    var queryFails = false
     var product: CoffeeProduct? = CoffeeProduct("¥300", null)
     var launchResult = 0
     /** Runs inside launchBillingFlow, so tests can emit the Play callback. */
@@ -87,7 +90,7 @@ class FakeBillingGateway : BillingGateway {
     var connectCalls = 0
 
     override suspend fun connect(): Int { connectCalls++; return connectResult }
-    override suspend fun queryCoffeePurchases(): List<PurchaseRecord> = purchases
+    override suspend fun queryCoffeePurchases(): List<PurchaseRecord>? = if (queryFails) null else purchases
     override suspend fun queryCoffeeProduct(): CoffeeProduct? = product
     override suspend fun acknowledge(token: String): Int { acknowledged += token; return 0 }
     override fun launchBillingFlow(activity: Activity, product: CoffeeProduct): Int {

@@ -196,6 +196,24 @@ class PracticeViewModelTest {
     }
 
     @Test
+    fun `consent form pauses the timer`() = runTest(dispatcher) {
+        val vm = viewModel()
+        ads.consentFormVisible.value = true
+        runCurrent()
+        advanceTimeBy(10_000)
+        runCurrent()
+        assertFalse(vm.state.value.revealCorrect)
+        ads.consentFormVisible.value = false
+        runCurrent()
+        advanceTimeBy(4_999)
+        runCurrent()
+        assertFalse(vm.state.value.revealCorrect)
+        advanceTimeBy(2)
+        runCurrent()
+        assertTrue(vm.state.value.revealCorrect)
+    }
+
+    @Test
     fun `answering collapses the menu`() = runTest(dispatcher) {
         val vm = viewModel()
         vm.toggleMenu()

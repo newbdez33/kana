@@ -30,6 +30,9 @@ class GoogleAdsManager(
     private val _privacyOptionsRequired = MutableStateFlow(false)
     override val privacyOptionsRequired: StateFlow<Boolean> = _privacyOptionsRequired.asStateFlow()
 
+    private val _consentFormVisible = MutableStateFlow(false)
+    override val consentFormVisible: StateFlow<Boolean> = _consentFormVisible.asStateFlow()
+
     private val consent: ConsentInformation by lazy { UserMessagingPlatform.getConsentInformation(app) }
     private var gathered = false
     private var starting = false
@@ -55,7 +58,9 @@ class GoogleAdsManager(
             activity,
             params,
             {
+                _consentFormVisible.value = true
                 UserMessagingPlatform.loadAndShowConsentFormIfRequired(activity) { _ ->
+                    _consentFormVisible.value = false
                     updatePrivacyOptions()
                     startIfAllowed()
                 }

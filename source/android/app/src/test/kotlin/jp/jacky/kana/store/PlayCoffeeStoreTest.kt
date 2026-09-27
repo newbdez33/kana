@@ -126,11 +126,41 @@ class PlayCoffeeStoreTest {
     }
 
     @Test
-    fun `connection failure leaves the price unknown`() = runTest {
+    fun `connection failure leaves the price unknown and reports on restore`() = runTest {
         gateway.connectResult = BillingResponseCode.BILLING_UNAVAILABLE
         val store = PlayCoffeeStore(gateway, storage, backgroundScope)
         store.loadProduct()
         assertEquals(null, store.price.value)
-        assertFalse(store.restore())
+        try {
+            store.restore()
+            fail("expected StoreException.Billing")
+        } catch (e: StoreException.Billing) {
+            assertEquals(BillingResponseCode.BILLING_UNAVAILABLE, e.responseCode)
+        }
+    }
+
+    @Test
+    fun `a failed purchase query keeps the cached entitlement`() = runTest {
+        storage.write(true)
+        gateway.queryFails = true
+        val store = PlayCoffeeStore(gateway, storage, backgroundScope)
+        store.start()
+        runCurrent()
+        assertTrue(store.adsRemoved.value)
+        assertTrue(storage.read())
+        assertEquals("¥300", store.price.value) // the price still loads
+    }
+
+    @Test
+    fun `restore reports a billing error instead of nothing to restore`() = runTest {
+        gateway.queryFails = true
+        val store = PlayCoffeeStore(gateway, storage, backgroundScope)
+        try {
+            store.restore()
+            fail("expected StoreException.Billing")
+        } catch (e: StoreException.Billing) {
+            assertEquals(BillingResponseCode.ERROR, e.responseCode)
+        }
+        assertFalse(store.adsRemoved.value)
     }
 }

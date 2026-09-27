@@ -36,7 +36,13 @@ class PlayCoffeeStore(
             }
         }
         scope.launch {
-            refreshEntitlement()
+            // Play may be unreachable at launch: keep the cached entitlement and retry on the next
+            // launch or on restore.
+            try {
+                refreshEntitlement()
+            } catch (e: StoreException) {
+                // keep the cached value
+            }
             loadProduct()
         }
     }
@@ -82,9 +88,13 @@ class PlayCoffeeStore(
         return _adsRemoved.value
     }
 
+    /** Asks Play for the coffee purchase; throws [StoreException.Billing] when Play cannot answer. */
     private suspend fun refreshEntitlement() {
-        if (gateway.connect() != BillingResponseCode.OK) return
-        applyRecords(gateway.queryCoffeePurchases(), fromQuery = true)
+        val connect = gateway.connect()
+        if (connect != BillingResponseCode.OK) throw StoreException.Billing(connect, "connect")
+        val records = gateway.queryCoffeePurchases()
+            ?: throw StoreException.Billing(BillingResponseCode.ERROR, "queryPurchases")
+        applyRecords(records, fromQuery = true)
     }
 
     /** Acknowledges new purchases and updates the entitlement. A full query may also revoke it. */

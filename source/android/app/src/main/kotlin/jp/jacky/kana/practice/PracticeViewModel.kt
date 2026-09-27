@@ -56,6 +56,7 @@ class PracticeViewModel(
     private var questionStartedAt = clock.nowMillis()
     private var pausedAt: Long? = null
     private var inBackground = false
+    private var consentFormVisible = false
     private var timerJob: Job? = null
 
     init {
@@ -74,6 +75,12 @@ class PracticeViewModel(
                         privacyOptionsAvailable = privacy && !removed,
                     )
                 }
+            }
+        }
+        viewModelScope.launch {
+            adsManager.consentFormVisible.collect { visible ->
+                consentFormVisible = visible
+                refreshPause()
             }
         }
         startTimer()
@@ -150,7 +157,8 @@ class PracticeViewModel(
         refreshPause()
     }
 
-    private fun isPaused(): Boolean = _state.value.menuExpanded || _state.value.sheet != null || inBackground
+    private fun isPaused(): Boolean =
+        _state.value.menuExpanded || _state.value.sheet != null || inBackground || consentFormVisible
 
     private fun refreshPause() {
         val paused = isPaused()

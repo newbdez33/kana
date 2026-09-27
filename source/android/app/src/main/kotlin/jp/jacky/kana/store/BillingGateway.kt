@@ -21,7 +21,8 @@ data class PurchaseUpdate(val responseCode: Int, val records: List<PurchaseRecor
 interface BillingGateway {
     val purchaseUpdates: SharedFlow<PurchaseUpdate>
     suspend fun connect(): Int
-    suspend fun queryCoffeePurchases(): List<PurchaseRecord>
+    /** Records for the coffee product, or null when the query itself failed. */
+    suspend fun queryCoffeePurchases(): List<PurchaseRecord>?
     suspend fun queryCoffeeProduct(): CoffeeProduct?
     suspend fun acknowledge(token: String): Int
     fun launchBillingFlow(activity: Activity, product: CoffeeProduct): Int
