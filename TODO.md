@@ -1,10 +1,14 @@
 # TODO — kana（五十音）复活计划
 
-审计日期：2026-09-27。逐项完成后在这里打勾；决策点见文末「待主人拍板」。
+更新日期：2026-09-27。逐项完成后在这里打勾；已确认的决策见文末「已定事项」。
 
 ## 现状摘要
 
-| 项目 | 现状 |
+1.1.0 (17) 已通过 TestFlight 验收，并于 2026-09-27 21:31（日本时间）与咖啡内购一起提交审核，两项均为 **Waiting for Review**。审核通过后自动发布。商店文案、40 张截图和隐私标签已更新；后续计划增加 Android 版并上架 Google Play。
+
+### 初始审计基线（改造前）
+
+| 项目 | 初始状态 |
 | --- | --- |
 | App Store 线上版本 | 1.0.1 (10)，2017-02-14 发布，App ID 1195345471，Bundle `com.salmonapps.app.kana` |
 | AdMob SDK | GoogleMobileAds **7.16.0**（2017-01，手动放在 `source/kana/kana/venders/Firebase/`）。7.x 已于 2023-06-30 sunset，Google 标注「广告有可能不再投放」 |
@@ -19,7 +23,7 @@
 ## 0. 不用改代码就能做的
 
 - [x] ~~**AdMob 付款门槛**~~：余额 $1,463.81 卡在 $1,500 自定义门槛下，Verification 标签页 Address Verification 为 Completed。2026-09-27 主人决定：门槛不动，不处理。
-- [ ] **App Store Connect Marketing URL**：1.0.1 的 Marketing / Support URL 都是空的，AdMob crawler 靠这个找 app-ads.txt。2026-09-27 用 API 试过：线上版本的 marketingUrl / supportUrl / privacyPolicyUrl 都返回 409「当前状态不可编辑」，只能在新版本 1.1.0 上设置，随第 5 节发版一起生效。
+- [x] **App Store Connect Marketing URL**：1.1.0 的 Marketing / Support URL 与隐私政策 URL 已配置，随版本上线生效。线上 1.0.1 不支持直接编辑这些字段；AdMob 抓取验证仍见第 1 节。
 
 ## 1. 主页 + app-ads.txt（https://kana.jacky.jp/）
 
@@ -40,7 +44,7 @@
 - [x] AdMob Privacy & messaging：European / US 两条消息都已加入 Japanese kana（各 3 apps，仍为 Published），隐私 URL 填 https://kana.jacky.jp/privacy/en。⚠ 操作时误把同一 URL 填到了未发布的「Bricks!」App 上，后台不允许清空，主人有空可以在 AdMob > Apps 里改掉。
 - [ ] 决定 `answer-below` 广告单元的去留（代码里从未使用）。
 
-## 3. 工程现代化（第 2 节的前置条件，Xcode 27 现在编不过）
+## 3. 工程现代化
 
 - [x] Deployment target 15.0，arm64，Swift 5 语言模式，版本号改由 `MARKETING_VERSION` / `CURRENT_PROJECT_VERSION` 控制（1.1.0 / 11）。iOS 27 要求 Scene 生命周期，新增 `SceneDelegate.swift` + `UIApplicationSceneManifest`（没有它 App 启动即崩）。
 - [x] 删除 Fabric / Crashlytics。
@@ -66,17 +70,24 @@
 
 - [x] App Store Connect 版本 1.1.0 已用 API 建好（id cf9a54ab-…），5 个语言的 What's New、Marketing / Support URL（kana.jacky.jp）、隐私政策 URL 都已填；年龄分级的新问卷（广告、健康、社交等新字段）已填。
 - [x] 截图：UI 测试在 iPhone 18 Pro Max（1320×2868）和 iPad Pro 13"（2064×2752）模拟器上按 en / ja / zh-Hans / zh-Hant / ko 各抓 3 张（题目、下拉菜单、五十音图），已上传到 1.1.0 的 APP_IPHONE_67 / APP_IPAD_PRO_3GEN_129，2017 年的 5.5" / 12.9" 旧图已删。
-- [x] 内购 `com.salmonapps.app.kana.coffee` 状态 READY_TO_SUBMIT（审核截图用的是菜单页）。
-- [x] Build：build 11 / 13 导出失败（缺 1024 图标，已补 `Icon-1024.png`）；build 14 上传后被 Apple 判为 Invalid（ITMS-90535：`de.lproj` / `ja.lproj` 里 2017 年遗留的 Info.plist 副本被当资源打进包），已删除并在 project.yml 排除 `**/Info.plist`；`UIRequiredDeviceCapabilities` 整个去掉（对已上架 App 不能新增 arm64 要求）。**build 15 已处理完成（VALID）并挂到 1.1.0**，`ITSAppUsesNonExemptEncryption=false` 在 Info.plist 里。
-- [ ] **App Privacy（数据收集标签）**：2026-09-27 网页确认仍未填写；Chrome 现已登录 ASC。需按当前 Google Mobile Ads 和 Firebase Analytics 的实际收集行为填写，包括用途、身份关联与追踪情况，不能仅凭应用没有登录账号就判断为不关联身份。
+- [x] 内购 `com.salmonapps.app.kana.coffee` 已与 1.1.0 (17) 一起提交，状态 Waiting for Review；审核截图使用咖啡支持面板。
+- [x] Build：补齐 `Icon-1024.png`，删除误打包的旧版 Info.plist 副本，并在 project.yml 排除 `**/Info.plist`；去掉 `UIRequiredDeviceCapabilities`，保留已上架 App 的设备兼容范围。**build 17 已处理完成（VALID）并随 1.1.0 提交审核**，`ITSAppUsesNonExemptEncryption=false` 在 Info.plist 里。
+- [x] **App Privacy（数据收集标签）**：已按归档中的 SDK 隐私清单与 Google 官方文档核对数据类型、用途、身份关联及追踪情况，并在 App Store Connect 发布。
 - [x] **TestFlight 1.1.0 (17)**：新界面与五十音图颜色修复已上传，Apple 处理状态 VALID，内部测试状态 IN_BETA_TESTING，已挂到 1.1.0。中日英测试说明已更新；两个现有内部测试账号均在测试组，新增账号已接受邀请并安装过测试版。
 - [x] **五十音图文字颜色**：系统深色模式下出现白底白字；五十音图统一使用浅色外观。iPhone 浅色 / 深色与 iPad 深色三组截图测试通过，并逐张确认文字可读。
 - [x] 商店介绍与更新说明：en-US / ja / zh-Hans / zh-Hant / ko 已更新，对应文案保存在 `store/metadata.json`。内购审核截图已替换为新支持页面，审核说明已更新为菜单按钮 → 咖啡入口 → 购买 / 恢复。
 - [x] 新界面商店截图：5 种商店语言 × iPhone / iPad × 4 张，共 40 张，已全部上传并确认 COMPLETE；旧图已替换。新增 `--store-listing` 截图模式，10 组模拟器截图测试全部通过。
-- [x] **参考 menkyo 更新商店素材**：大标题、简短卖点与原生截图组合，保留 Kana 暖纸色和朱红色；依次介绍练习、统计、五十音图与咖啡去广告。五种语言的介绍、宣传文本、更新说明及 40 张图片已同步 ASC。`scripts/render-store.swift` 可重复生成，HTML 预览与说明见 `store/README.md`。
+- [x] **参考 menkyo 更新商店素材**：大标题、简短卖点与原生截图组合，保留 Kana 暖纸色和朱红色；依次介绍练习、统计、五十音图与咖啡支持。五种语言的介绍、宣传文本、更新说明及 40 张图片已同步 ASC。宣传文案突出五秒答题与连对挑战，说明广告仅在答错或超时后触发；咖啡介绍为自愿支持作者。`scripts/render-store.swift` 可重复生成，HTML 预览与说明见 `store/README.md`。
 - [ ] 主人用真机 + 沙盒账号测一次：广告、同意弹窗 / ATT、购买、恢复。
-- [ ] 提审：等主人一句话再 submit（App 与内购一起提交）。提审后在 AdMob 观察 eCPM 是否从 $0.09 回升。
+- [x] **TestFlight 验收与提审**：用户已确认可以提审。1.1.0 (17) 与咖啡内购于 2026-09-27 21:31（日本时间）一起提交，两项均为 Waiting for Review，审核通过后自动发布。[审核记录](https://appstoreconnect.apple.com/apps/1195345471/distribution/reviewsubmissions/details/85c4f677-85ad-4bfe-a944-ca6a7ec9a0f4)。
+- [ ] 上线后确认商店版本、截图和链接，并在 AdMob 观察填充率与 eCPM。
 - 备注：App Review 联系电话还是 2017 年填的国内号码，如需更新请在 ASC 改。
+
+## 6. Android 版实现与上架
+
+- [ ] **实现 Android 版**：对齐 iOS 的五秒四选一练习、连对挑战、设备内统计、五十音图、离线使用和多语言界面。
+- [ ] **接入广告与咖啡支持**：接入 Android AdMob、同意流程和 Google Play Billing；广告仅在答错或超时后触发，支持一次性咖啡购买与恢复。
+- [ ] **测试并上架 Google Play**：完成手机与平板测试、广告及购买验证、隐私申报、多语言介绍与截图，提交审核并发布。
 
 ## 已定事项（2026-09-27）
 
@@ -85,4 +96,4 @@
 3. 咖啡：一次性买断（非消耗型），¥300 档。
 4. 不保留崩溃收集。
 5. 主页先出 preview（Tailscale URL）给主人确认，再部署。
-6. 所有改动走 PR：https://github.com/newbdez33/kana/pull/1
+6. 所有改动走 PR；首批改动见 https://github.com/newbdez33/kana/pull/1。

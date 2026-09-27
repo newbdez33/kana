@@ -26,7 +26,7 @@ and the optional coffee purchase, in that order.
 
 | Practice | Statistics | Kana chart | Coffee support |
 | --- | --- | --- | --- |
-| <img src="screenshots/en-practice.png" width="200" alt="Four choices and five seconds per question"> | <img src="screenshots/en-statistics.png" width="200" alt="Practice statistics at a glance"> | <img src="screenshots/en-chart.png" width="200" alt="Built-in hiragana and katakana chart"> | <img src="screenshots/en-coffee.png" width="200" alt="Optional coffee purchase for permanent ad removal"> |
+| <img src="screenshots/en-practice.png" width="200" alt="Four choices and five seconds per question"> | <img src="screenshots/en-statistics.png" width="200" alt="Practice statistics at a glance"> | <img src="screenshots/en-chart.png" width="200" alt="Built-in hiragana and katakana chart"> | <img src="screenshots/en-coffee.png" width="200" alt="Buy me a coffee to support the author"> |
 
 The 40 store images cover five languages and two sizes: iPhone 18 Pro Max
 (1320 × 2868) and iPad Pro 13-inch (2064 × 2752). They use fixed sample statistics
