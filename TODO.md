@@ -18,7 +18,7 @@
 
 ## 0. 不用改代码就能做的
 
-- [ ] **AdMob 付款门槛**：余额 $1,463.81 卡在 $1,500 自定义门槛下，按现在每月约 $1.5 的速度还要两年。在 Payments > Manage settings > Payment schedule 把门槛调回最低值（$100）即可在下个付款周期打款。先确认 ****3706 这张国内银行卡还能收款。Verification 标签页已看过：Address Verification 为 Completed，没有待办。（需要主人本人操作）
+- [x] ~~**AdMob 付款门槛**~~：余额 $1,463.81 卡在 $1,500 自定义门槛下，Verification 标签页 Address Verification 为 Completed。2026-09-27 主人决定：门槛不动，不处理。
 - [ ] **App Store Connect Marketing URL**：1.0.1 的 Marketing / Support URL 都是空的，AdMob crawler 靠这个找 app-ads.txt。填 `https://kana.jacky.jp/`（这类字段可直接改，不需要提交新版本）。要等第 1 节的站点上线后再填。
 
 ## 1. 主页 + app-ads.txt（https://kana.jacky.jp/）
@@ -43,9 +43,9 @@
 ## 3. 工程现代化（第 2 节的前置条件，Xcode 27 现在编不过）
 
 - [ ] Deployment target 10.0 → 15.0（Xcode 27 最低），`UIRequiredDeviceCapabilities` armv7 → arm64，Swift 5.0 → 6 语言模式随 Xcode 默认。
-- [ ] 删除 Fabric / Crashlytics（服务已关闭，`Answers.logShare` 等调用一并删）。如果还想要崩溃收集，改用 SPM 的 FirebaseCrashlytics。
+- [ ] 删除 Fabric / Crashlytics（服务已关闭，`Answers.logShare` 等调用一并删）。不再接崩溃收集。
 - [ ] Firebase 3.x → firebase-ios-sdk 12.x（SPM）。保留 FirebaseAnalytics（AdMob 后台的用户指标依赖它），`FIRApp.configure()` → `FirebaseApp.configure()`。`GoogleService-Info.plist` 可以继续用。
-- [ ] Realm：realm-cocoa 2.3.0 二进制无法在新 Swift 下导入。线上 1.0.1 用它保存每道题的答题记录，并在练习页顶部显示「总答题数 / 平均秒数 / 最近 10 次平均」；2020-09 的 `366679f`（upgrade to swift 4 staging，未发布）把写入和显示都注释掉了，所以当前源码里 Realm 是死代码，但老用户手机上有数据。二选一：① SPM 升到 realm-swift 20.x（Realm 2024 年起已停止维护，包体大）；② 删掉 Realm，改用 Codable JSON 文件存记录并恢复这三个数字的显示（老用户的历史统计归零一次）。
+- [ ] Realm：realm-cocoa 2.3.0 二进制无法在新 Swift 下导入。线上 1.0.1 用它保存每道题的答题记录，并在练习页顶部显示「总答题数 / 平均秒数 / 最近 10 次平均」；2020-09 的 `366679f`（upgrade to swift 4 staging，未发布）把写入和显示都注释掉了，所以当前源码里 Realm 是死代码，但老用户手机上有数据。2026-09-27 决定：删掉 Realm，改用 Codable JSON 文件存记录并恢复这三个数字的显示（老用户的历史统计归零一次）。
 - [ ] 删除没在用的依赖：MonkeyKing、JZSpringRefresh、SwiftHEXColors（调用全部是注释掉的），Cartfile 一并删除。
 - [ ] 删除没在用的推送配置：`aps-environment` entitlement、FirebaseInstanceID。
 - [ ] `xcodebuild` 在模拟器上跑通，真机装一次确认广告、音效、分享都正常。
@@ -63,9 +63,11 @@
 - [ ] 版本 1.1.0 (11)；App Privacy 标签补广告、崩溃数据；截图更新（6.9" iPhone、13" iPad）；What's New 三语。
 - [ ] 提审后在 AdMob 观察 eCPM 是否从 $0.09 回升。
 
-## 待主人拍板
+## 已定事项（2026-09-27）
 
-1. 付款门槛要不要调低、国内银行卡是否还能收款（第 0 节）。
-2. Realm 升级还是换成 JSON 文件（第 3 节）。
-3. 咖啡定价和是否只做一次性买断（第 4 节）。
-4. 是否保留崩溃收集（Crashlytics）。
+1. 付款门槛不动。
+2. Realm 删除，换 JSON 文件。
+3. 咖啡：一次性买断（非消耗型），¥300 档。
+4. 不保留崩溃收集。
+5. 主页先出 preview（Tailscale URL）给主人确认，再部署。
+6. 所有改动走 PR：https://github.com/newbdez33/kana/pull/1

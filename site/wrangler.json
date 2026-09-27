@@ -1,0 +1,21 @@
+{
+  "name": "kana-site",
+  "account_id": "69b20790d259a1817f268a2c782ec7d1",
+  "compatibility_date": "2026-09-27",
+  "workers_dev": false,
+  "preview_urls": false,
+  "send_metrics": false,
+  "observability": { "enabled": false },
+  "routes": [
+    {
+      "pattern": "kana.jacky.jp",
+      "zone_id": "bad0a183259c863f56b9691468c3a756",
+      "custom_domain": true
+    }
+  ],
+  "assets": {
+    "directory": "./public",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}
