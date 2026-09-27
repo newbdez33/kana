@@ -42,7 +42,6 @@
 - [x] API 改名：`BannerView` / `Request`；storyboard 里保留 `customClass="GADBannerView"`（ObjC 运行时名不变）；`showBanner()` 用 `currentOrientationAnchoredAdaptiveBanner` 并按实际高度改约束。
 - [x] UMP：`services/AdsManager.swift`（requestConsentInfoUpdate → loadAndPresentIfRequired → ATT → MobileAds.start，`isReady` 后才允许 showBanner；菜单里有「广告隐私设置」入口，仅在 Google 要求时显示）。
 - [x] AdMob Privacy & messaging：European / US 两条消息都已加入 Japanese kana（各 3 apps，仍为 Published），隐私 URL 填 https://kana.jacky.jp/privacy/en。（操作时误把同一 URL 填到了未发布的「Bricks!」App 上，2026-09-27 主人决定不处理。）
-- [ ] 决定 `answer-below` 广告单元的去留（代码里从未使用）。
 
 ## 3. 工程现代化
 
