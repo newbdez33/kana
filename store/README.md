@@ -4,10 +4,18 @@
 screenshot captions for version 1.1.0 in English, Japanese, Simplified Chinese,
 Traditional Chinese, and Korean. The store copy is saved in App Store Connect.
 The `appName` field is the label on the artwork; it does not rename the app.
+The English store name is `Japanese kana - learning`, with the subtitle
+`Challenge yourself`. Both fit the current 30-character limits.
 
 The current release candidate is **1.1.0 (17)**. It contains the practice and
-coffee redesign and fixes unreadable kana chart text in Dark Mode. It is available
-to the internal TestFlight group and selected for the App Store version.
+coffee redesign and fixes unreadable kana chart text in Dark Mode. TestFlight
+acceptance is complete. On September 27, 2026, the app and its first coffee
+purchase were submitted together and reached `WAITING_FOR_REVIEW`. The release
+setting is automatic release after approval.
+
+The store copy focuses on timed questions and the best correct-answer streak.
+It explains that ads appear only after an incorrect answer or a timeout. Coffee
+support is presented as an optional way to support the author.
 
 ## Screenshots
 
@@ -64,5 +72,10 @@ descriptions, promotional text, and release notes match `metadata.json`.
 The kana chart fix was checked on iPhone in Light and Dark Mode, and on iPad in
 Dark Mode. All three capture tests passed and produced complete result bundles.
 
-Before submitting, confirm purchases and restore on a physical device, complete
-the App Privacy labels, and include the first coffee purchase with the app version.
+App Privacy labels are published. The final descriptions, promotional text, and
+release notes were read back from App Store Connect and match `metadata.json`.
+The ten updated coffee images passed layout, dimension, and opacity checks.
+All 40 screenshots have the expected checksums and order and report `COMPLETE`.
+
+[App Review submission](https://appstoreconnect.apple.com/apps/1195345471/distribution/reviewsubmissions/details/85c4f677-85ad-4bfe-a944-ca6a7ec9a0f4)
+contains both version 1.1.0 (17) and `com.salmonapps.app.kana.coffee`.
