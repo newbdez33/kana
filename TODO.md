@@ -41,7 +41,7 @@
 - [x] `Info.plist`：`GADApplicationIdentifier`、50 个 `SKAdNetworkItems`、`NSUserTrackingUsageDescription`（9 个语言的 InfoPlist.strings）。
 - [x] API 改名：`BannerView` / `Request`；storyboard 里保留 `customClass="GADBannerView"`（ObjC 运行时名不变）；`showBanner()` 用 `currentOrientationAnchoredAdaptiveBanner` 并按实际高度改约束。
 - [x] UMP：`services/AdsManager.swift`（requestConsentInfoUpdate → loadAndPresentIfRequired → ATT → MobileAds.start，`isReady` 后才允许 showBanner；菜单里有「广告隐私设置」入口，仅在 Google 要求时显示）。
-- [x] AdMob Privacy & messaging：European / US 两条消息都已加入 Japanese kana（各 3 apps，仍为 Published），隐私 URL 填 https://kana.jacky.jp/privacy/en。⚠ 操作时误把同一 URL 填到了未发布的「Bricks!」App 上，后台不允许清空，主人有空可以在 AdMob > Apps 里改掉。
+- [x] AdMob Privacy & messaging：European / US 两条消息都已加入 Japanese kana（各 3 apps，仍为 Published），隐私 URL 填 https://kana.jacky.jp/privacy/en。（操作时误把同一 URL 填到了未发布的「Bricks!」App 上，2026-09-27 主人决定不处理。）
 - [ ] 决定 `answer-below` 广告单元的去留（代码里从未使用）。
 
 ## 3. 工程现代化
@@ -49,7 +49,7 @@
 - [x] Deployment target 15.0，arm64，Swift 5 语言模式，版本号改由 `MARKETING_VERSION` / `CURRENT_PROJECT_VERSION` 控制（1.1.0 / 11）。iOS 27 要求 Scene 生命周期，新增 `SceneDelegate.swift` + `UIApplicationSceneManifest`（没有它 App 启动即崩）。
 - [x] 删除 Fabric / Crashlytics。
 - [x] Firebase 12.19.2（SPM，只保留 FirebaseAnalytics），`FirebaseApp.configure()`。
-- [ ] Realm：realm-cocoa 2.3.0 二进制无法在新 Swift 下导入。线上 1.0.1 用它保存每道题的答题记录，并在练习页顶部显示「总答题数 / 平均秒数 / 最近 10 次平均」；2020-09 的 `366679f`（upgrade to swift 4 staging，未发布）把写入和显示都注释掉了，所以当前源码里 Realm 是死代码，但老用户手机上有数据。2026-09-27 完成：`models/StatStore.swift`（Application Support/stats.json，只存总数、总耗时、最近 10 次），练习页三个数字恢复显示。
+- [x] Realm：realm-cocoa 2.3.0 二进制无法在新 Swift 下导入。线上 1.0.1 用它保存每道题的答题记录，并在练习页顶部显示「总答题数 / 平均秒数 / 最近 10 次平均」；2020-09 的 `366679f`（upgrade to swift 4 staging，未发布）把写入和显示都注释掉了，所以当前源码里 Realm 是死代码，但老用户手机上有数据。2026-09-27 完成：`models/StatStore.swift`（Application Support/stats.json，只存总数、总耗时、最近 10 次），练习页三个数字恢复显示。
 - [x] 删除 Carthage 依赖（MonkeyKing、JZSpringRefresh、SwiftHEXColors、Realm）和 Cartfile。
 - [x] 删除 `kana.entitlements`（推送）和 FirebaseInstanceID。
 - [x] 模拟器（iPhone 18 Pro / iOS 27）编译、运行通过；`xcodebuild test`：单元测试 8 个（StatStore 4、StoreKit 4）+ UI 测试 3 个全部通过。测试广告在答错后正常显示。
