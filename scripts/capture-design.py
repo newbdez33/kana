@@ -12,6 +12,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--device', required=True, help='Simulator UDID')
     parser.add_argument('--language', default='en')
+    parser.add_argument('--store-listing', action='store_true', help='Capture display states without purchase transactions')
     parser.add_argument('--output', required=True, type=Path)
     args = parser.parse_args()
     output = args.output.resolve()
@@ -20,6 +21,8 @@ def main():
         parser.error('Use a new output directory for each run.')
     root = Path(__file__).resolve().parent.parent
     environment = dict(os.environ, TEST_RUNNER_KANA_SHOT_DIR=str(output))
+    if args.store_listing:
+        environment['TEST_RUNNER_KANA_STORE_LISTING'] = '1'
     command = [
         'xcodebuild', 'test', '-project', str(root / 'source/kana/kana.xcodeproj'),
         '-scheme', 'kana', '-destination', f'platform=iOS Simulator,id={args.device}',

@@ -68,8 +68,10 @@
 - [x] 截图：UI 测试在 iPhone 18 Pro Max（1320×2868）和 iPad Pro 13"（2064×2752）模拟器上按 en / ja / zh-Hans / zh-Hant / ko 各抓 3 张（题目、下拉菜单、五十音图），已上传到 1.1.0 的 APP_IPHONE_67 / APP_IPAD_PRO_3GEN_129，2017 年的 5.5" / 12.9" 旧图已删。
 - [x] 内购 `com.salmonapps.app.kana.coffee` 状态 READY_TO_SUBMIT（审核截图用的是菜单页）。
 - [x] Build：build 11 / 13 导出失败（缺 1024 图标，已补 `Icon-1024.png`）；build 14 上传后被 Apple 判为 Invalid（ITMS-90535：`de.lproj` / `ja.lproj` 里 2017 年遗留的 Info.plist 副本被当资源打进包），已删除并在 project.yml 排除 `**/Info.plist`；`UIRequiredDeviceCapabilities` 整个去掉（对已上架 App 不能新增 arm64 要求）。**build 15 已处理完成（VALID）并挂到 1.1.0**，`ITSAppUsesNonExemptEncryption=false` 在 Info.plist 里。
-- [ ] **App Privacy（数据收集标签）要主人在 App Store Connect 网页上填**（API 没有这个接口，Chrome 里也没登录 ASC）。建议答案：收集「Identifiers › Device ID」「Usage Data › Product Interaction」「Usage Data › Advertising Data」，用途 Third-Party Advertising + Analytics，不与用户身份关联（Not linked）、用于追踪（Used for tracking，因为 AdMob + ATT）；不收集其他类别。
-- [ ] 本次界面改动需要新的发布构建，并更新 App Store 与内购审核截图；当前已上传的 build 15 和截图仍为旧界面。
+- [ ] **App Privacy（数据收集标签）**：2026-09-27 网页确认仍未填写；Chrome 现已登录 ASC。需按当前 Google Mobile Ads 和 Firebase Analytics 的实际收集行为填写，包括用途、身份关联与追踪情况，不能仅凭应用没有登录账号就判断为不关联身份。
+- [x] **TestFlight 1.1.0 (16)**：新界面发布构建已上传，Apple 处理状态 VALID，内部测试状态 IN_BETA_TESTING，已挂到 1.1.0。已向现有内部测试账号 `newbdez33@gmail.com` 重发邀请，补齐中日英测试说明。
+- [x] 商店介绍与更新说明：en-US / ja / zh-Hans / zh-Hant / ko 已更新，对应文案保存在 `store/metadata.json`。内购审核截图已替换为新支持页面，审核说明已更新为菜单按钮 → 咖啡入口 → 购买 / 恢复。
+- [x] 新界面商店截图：5 种商店语言 × iPhone / iPad × 4 张，共 40 张，已全部上传并确认 COMPLETE；旧图已替换。新增 `--store-listing` 截图模式，10 组模拟器截图测试全部通过。
 - [ ] 主人用真机 + 沙盒账号测一次：广告、同意弹窗 / ATT、购买、恢复。
 - [ ] 提审：等主人一句话再 submit（App 与内购一起提交）。提审后在 AdMob 观察 eCPM 是否从 $0.09 回升。
 - 备注：App Review 联系电话还是 2017 年填的国内号码，如需更新请在 ASC 改。

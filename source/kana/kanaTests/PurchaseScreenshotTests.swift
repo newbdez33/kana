@@ -83,6 +83,16 @@ final class PurchaseScreenshotTests: XCTestCase {
         try await waitUntil { coffee.purchaseButton.isEnabled && coffee.purchaseButton.configuration?.title?.contains(Store.shared.coffeePrice ?? "missing") == true }
         try await snapshot("04-coffee")
 
+        if ProcessInfo.processInfo.environment["KANA_STORE_LISTING"] == "1" {
+            menu.dismiss(animated: false)
+            try await waitUntil { menu.presentedViewController == nil }
+            menu.chartAction(menu.chartButton)
+            try await waitUntil { menu.presentedViewController != nil }
+            try await snapshot("05-chart")
+            menu.dismiss(animated: false)
+            return
+        }
+
         coffee.purchaseAction()
         try await waitUntil { Store.shared.adsRemoved && coffee.purchaseButton.configuration?.title == .continuePractice }
         XCTAssertTrue(coffee.restoreButton.isHidden)

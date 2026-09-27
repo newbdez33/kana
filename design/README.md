@@ -62,11 +62,16 @@ populated practice screens, menu, coffee offer, thank-you, pending approval, and
 an empty restore result. The approval test also checks the live entitlement
 update and verifies that a purchased app does not show an ad banner.
 
+Add `--store-listing` to capture the practice, menu, coffee offer, and kana chart
+without running purchase transactions. Use this mode for localized store images.
+
 ## Verification
 
 - XCTest reported 20 unit tests and 4 UI tests passed on iPhone 18 Pro, iOS 27.
 - The seven-state capture test passed in English, Japanese, and Simplified Chinese
   on iPhone, and in English on iPad Pro 13-inch.
+- Store listing captures passed for all five store languages on iPhone 18 Pro Max
+  and iPad Pro 13-inch. All 40 listing screenshots are uploaded to version 1.1.0.
 - The local Xcode 27 run stalled while finalizing the full suite's result bundle
   after all tests passed. The test logs were saved before stopping the process.
   The separate capture runs completed and produced valid result bundles.
