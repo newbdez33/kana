@@ -40,7 +40,6 @@
 		ABB698CF82C7AFA443338FC6 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83434FD973ACDF6105E78620 /* MenuViewController.swift */; };
 		B0A1E0FD5A13CBFB95726A32 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A455A39CC7E4222EBAAAF73B /* AppConfig.swift */; };
 		B0B2B368BEA30709E1A8C3AB /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B936188F2791409D0561F03F /* MessageUI.framework */; };
-		B4662219AADE770E97C8A382 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1CBDE60E256351F8ADE3EAD9 /* Info.plist */; };
 		B9FED4E01CE5137AF3C54EEE /* KanaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02949F9F73A215C8F29204 /* KanaUITests.swift */; };
 		BA0B5371700CC86D49B1AEBF /* StoreScreenshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637CB105B414C641DB76A29C /* StoreScreenshotTests.swift */; };
 		CD43A75DF1FE1F6510B48EAE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F377374968FF116E20FFBE6 /* GoogleService-Info.plist */; };
@@ -52,7 +51,6 @@
 		F3F757A4BECBBF27113B8774 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 2DF2CED1C33D674C0B999956 /* GoogleMobileAds */; };
 		F4DDF6EB9648670205246D0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A399CE3860C472A6CF6F19B4 /* AppDelegate.swift */; };
 		F703375744466570246A162A /* AnswerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F988100CA169933B4AC9F05F /* AnswerCell.swift */; };
-		F78F06C3DF741379E777B9F0 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A8FD0F8D2D94176C0C88D665 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,7 +77,6 @@
 		13D79CA61AF7D26E97F9DA82 /* kana.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = kana.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		175AE19A9BD5671ED78FCEC5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1BAEE85C268D00F9228AB807 /* KanaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanaViewController.swift; sourceTree = "<group>"; };
-		1CBDE60E256351F8ADE3EAD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = de.lproj/Info.plist; sourceTree = "<group>"; };
 		260E2F0288A6CD7A9D469F6B /* QuestionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionController.swift; sourceTree = "<group>"; };
 		26372ABC5CCAEEAF89FB645A /* AnswerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AnswerCell.xib; sourceTree = "<group>"; };
 		27BC57696C80700181DD8E9A /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Kana.strings; sourceTree = "<group>"; };
@@ -122,7 +119,6 @@
 		A15A74665E1AA2675FF2DA8F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Question.strings"; sourceTree = "<group>"; };
 		A399CE3860C472A6CF6F19B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A455A39CC7E4222EBAAAF73B /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
-		A8FD0F8D2D94176C0C88D665 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = ja.lproj/Info.plist; sourceTree = "<group>"; };
 		A945C39FC4DA65C07EAAFDB3 /* KanaSectionColorReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanaSectionColorReusableView.swift; sourceTree = "<group>"; };
 		ACDFA032EE14D3BC1B9AA7FC /* StoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTests.swift; sourceTree = "<group>"; };
 		AEFE7F07707B5C8537AF9AD4 /* correct.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correct.wav; sourceTree = "<group>"; };
@@ -301,8 +297,6 @@
 				A399CE3860C472A6CF6F19B4 /* AppDelegate.swift */,
 				EE6A5C643C5DFF44CA4DA329 /* Assets.xcassets */,
 				8F377374968FF116E20FFBE6 /* GoogleService-Info.plist */,
-				1CBDE60E256351F8ADE3EAD9 /* Info.plist */,
-				A8FD0F8D2D94176C0C88D665 /* Info.plist */,
 				1BAEE85C268D00F9228AB807 /* KanaViewController.swift */,
 				260E2F0288A6CD7A9D469F6B /* QuestionController.swift */,
 				6CE8047557008CB1B26037CA /* SceneDelegate.swift */,
@@ -493,8 +487,6 @@
 				7D1A13DAE4B49690D322D707 /* Assets.xcassets in Resources */,
 				CD43A75DF1FE1F6510B48EAE /* GoogleService-Info.plist in Resources */,
 				6E658D44550DD7C16ED46CF7 /* Hosohuwafont.ttf in Resources */,
-				B4662219AADE770E97C8A382 /* Info.plist in Resources */,
-				F78F06C3DF741379E777B9F0 /* Info.plist in Resources */,
 				1816ADA672743E79D2AB173E /* InfoPlist.strings in Resources */,
 				19841A17E3BFB2477C274FF8 /* Kana.storyboard in Resources */,
 				124F4E482BB41BCCC0E4D12E /* KanaCell.xib in Resources */,
@@ -766,7 +758,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 72T2SXUWHC;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -828,7 +820,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 72T2SXUWHC;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
