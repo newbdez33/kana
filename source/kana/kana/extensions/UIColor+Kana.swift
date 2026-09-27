@@ -9,6 +9,9 @@
 import UIKit
 
 extension UIColor {
+    static let kanaAccentColor = UIColor(red: 0.788, green: 0.2, blue: 0.196, alpha: 1)
+    static let kanaSecondaryColor = UIColor(red: 0.43, green: 0.41, blue: 0.39, alpha: 1)
+    static let kanaPaperColor = UIColor(red: 0.99, green: 0.98, blue: 0.96, alpha: 1)
     
     class func kanaKeyRedColor() -> UIColor {
         //81.6, 0.8, 10.
@@ -27,4 +30,3 @@ extension UIColor {
         return UIColor(red: 0.94, green: 0.56, blue: 0.56, alpha: 1.00)
     }
 }
-

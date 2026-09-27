@@ -7,3 +7,5 @@
 */
 
 CFBundleDisplayName = "가나";
+
+"NSUserTrackingUsageDescription" = "허용하면 무료 연습을 지원하는 관련성 높은 광고를 표시할 수 있어요. 추적을 허용하지 않아도 연습할 수 있어요.";

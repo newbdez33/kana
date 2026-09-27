@@ -6,3 +6,5 @@
   Copyright © 2017年 Salmonapps. All rights reserved.
 */
 CFBundleDisplayName = "五十音";
+
+"NSUserTrackingUsageDescription" = "允許後可顯示更相關的廣告，支持免費練習。不允許追蹤也能繼續練習。";

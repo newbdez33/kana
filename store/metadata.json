@@ -1,0 +1,162 @@
+{
+  "en-US": {
+    "description": "Make Japanese kana second nature, one short practice at a time. Kana helps you recognize hiragana, katakana, and romaji with a simple four-choice quiz.\n\nEach question gives you five seconds to choose an answer. If you get it wrong or time runs out, the correct answer is shown so you can check it before you move on. Handwritten characters and a quiet layout keep the focus on reading.\n\nSee your practice at a glance: answer count, average answer time, the average for your last ten answers, and your best streak. Your practice statistics stay on your device.\n\nNeed a reminder? Open the kana chart from the menu and switch between hiragana and katakana. The question timer pauses while you use the menu, so you can take your time.\n\nNo account is required. Practice questions and the kana chart work offline, on both iPhone and iPad. The interface is available in English, Japanese, Simplified Chinese, Traditional Chinese, Korean, German, French, and Spanish.\n\nKana is free with ads. If it helps you learn, the optional “Buy me a coffee” purchase supports the author and permanently removes ads. It is a one-time purchase with no subscription. Check the local price on the purchase screen, or restore your purchase with the same Apple Account.\n\nPrivacy policy: https://kana.jacky.jp/privacy/en",
+    "whatsNew": "• A redesigned statistics bar with answer count, average time, recent average, and best streak.\n• A new “Buy me a coffee” screen for permanent ad removal and purchase restore.\n• A visible menu button and improved iPhone and iPad layouts.\n• Updated ad services and consent controls.\n• Fixed kana chart text that was hard to read in Dark Mode.\nRequires iOS 15 or later.",
+    "appName": "Kana · 五十音",
+    "promotionalText": "Make kana part of your daily routine. Quick four-choice practice, clear statistics, and a kana chart when you need a reminder.",
+    "shots": [
+      [
+        "Make kana\nsecond nature.",
+        "Hiragana, katakana, romaji.\nFour choices. Five seconds.",
+        "practice",
+        "02-practice.png"
+      ],
+      [
+        "Your practice,\nat a glance.",
+        "Answers, average time, and your\nbest streak in one quiet view.",
+        "statistics",
+        "03-menu.png"
+      ],
+      [
+        "A quick look.\nThen try again.",
+        "Switch between hiragana and\nkatakana in the built-in chart.",
+        "chart",
+        "05-chart.png"
+      ],
+      [
+        "A little coffee.\nA little more focus.",
+        "Optional one-time purchase.\nNo ads. No subscription.",
+        "coffee",
+        "04-coffee.png"
+      ]
+    ]
+  },
+  "ja": {
+    "description": "五十音を、少しずつ自然に読めるように。Kanaは、ひらがな・カタカナ・ローマ字を4択でくり返し練習する、小さな学習アプリです。\n\n1問の制限時間は5秒。間違えたときや時間切れのときは、正解を確認してから次へ進めます。手書きのかなとシンプルな画面で、文字を読む練習に集中できます。\n\n回答数、平均回答時間、直近10問の平均、最高連続正解数をひと目で確認。練習の統計は端末内に保存します。\n\n思い出せないときは、メニューから五十音表へ。ひらがなとカタカナを切り替えて確認できます。メニューを開いている間は回答のタイマーが止まるので、落ち着いて見直せます。\n\nアカウント登録は不要。練習と五十音表はオフラインでも使えます。iPhoneとiPadに対応し、画面は日本語、英語、簡体字中国語、繁体字中国語、韓国語、ドイツ語、フランス語、スペイン語で表示できます。\n\n広告付きで無料で使えます。学習の役に立ったら、任意の「作者にコーヒーをおごる」で応援できます。1回限りの購入で広告が非表示になり、サブスクリプションはありません。価格は購入画面で確認でき、同じApple Accountで購入を復元できます。\n\nプライバシーポリシー: https://kana.jacky.jp/privacy/",
+    "whatsNew": "・統計表示を刷新。回答数、平均回答時間、直近10問の平均、最高連続正解数を確認できます。\n・「作者にコーヒーをおごる」の専用画面を追加。広告の非表示と購入の復元に対応しています。\n・メニューボタンを追加し、iPhoneとiPadのレイアウトを改善しました。\n・広告サービスと同意設定を更新しました。\n・ダークモードで五十音表の文字が読みにくくなる問題を修正しました。\niOS 15以降が必要です。",
+    "appName": "Kana · 五十音",
+    "promotionalText": "毎日、少しずつ。ひらがな・カタカナ・ローマ字を4択で練習。回答の統計と五十音表で、覚えたかなを確かめましょう。",
+    "shots": [
+      [
+        "かなを、\n少しずつ自然に。",
+        "ひらがな・カタカナ・ローマ字。\n4つの選択肢から、5秒で回答。",
+        "practice",
+        "02-practice.png"
+      ],
+      [
+        "練習の記録を、\nひと目で。",
+        "回答数、回答時間、連続正解。\n自分の練習を確かめよう。",
+        "statistics",
+        "03-menu.png"
+      ],
+      [
+        "思い出せない？\n五十音表へ。",
+        "ひらがなとカタカナを\nいつでも切り替えて確認。",
+        "chart",
+        "05-chart.png"
+      ],
+      [
+        "コーヒー一杯で、\n練習をもっと快適に。",
+        "任意の買い切りで広告を非表示。\nサブスクリプションなし。",
+        "coffee",
+        "04-coffee.png"
+      ]
+    ]
+  },
+  "zh-Hans": {
+    "description": "把五十音，练成直觉。Kana 用短小、专注的四选一练习，帮你熟悉平假名、片假名和罗马音。\n\n每道题有5秒作答时间。答错或超时后会显示正确答案，确认后再继续。手写假名配上简洁的界面，让注意力回到文字本身。\n\n答题数、平均用时、最近10题平均用时和最高连对数，都在练习页一眼看清。练习统计保存在你的设备上。\n\n遇到想不起来的假名，从菜单打开五十音图，就能切换平假名和片假名进行对照。打开菜单时会暂停答题计时，查清楚再回来练。\n\n无需注册账号，练习和五十音图离线也能使用。支持iPhone和iPad，界面提供简体中文、繁体中文、日语、英语、韩语、德语、法语和西班牙语。\n\n应用可免费使用，包含广告。如果它帮到了你，可以通过可选的「请作者喝杯咖啡」支持作者，并永久去除广告。这是一次性购买，无订阅；本地价格显示在购买页，可使用同一Apple账户恢复购买。\n\n隐私政策：https://kana.jacky.jp/privacy/zh",
+    "whatsNew": "• 重新设计统计栏，清晰显示答题数、平均用时、近期平均和最高连对数。\n• 新增「请作者喝杯咖啡」专属页面，支持永久去广告和恢复购买。\n• 增加可见的菜单按钮，改善iPhone和iPad布局。\n• 更新广告服务与同意设置。\n• 修复深色模式下五十音图文字难以辨认的问题。\n需要iOS 15或更高版本。",
+    "appName": "Kana · 五十音",
+    "promotionalText": "每天练一点，让五十音更熟悉。平假名、片假名、罗马音四选一，随时查看练习统计和五十音图。",
+    "shots": [
+      [
+        "把五十音，\n练成直觉。",
+        "平假名、片假名、罗马音。\n四个选项，五秒一题。",
+        "practice",
+        "02-practice.png"
+      ],
+      [
+        "你的练习，\n一眼看清。",
+        "答题数、用时、最高连对。\n随时看看自己的练习表现。",
+        "statistics",
+        "03-menu.png"
+      ],
+      [
+        "想不起来？\n随手查一查。",
+        "平假名与片假名，\n一张表随时对照。",
+        "chart",
+        "05-chart.png"
+      ],
+      [
+        "一杯咖啡，\n更专心地练习。",
+        "可选的一次性支持，永久去广告。\n无订阅，也支持恢复购买。",
+        "coffee",
+        "04-coffee.png"
+      ]
+    ]
+  },
+  "zh-Hant": {
+    "description": "把五十音，練成直覺。Kana 用短小、專注的四選一練習，幫你熟悉平假名、片假名和羅馬拼音。\n\n每道題有5秒作答時間。答錯或超時後會顯示正確答案，確認後再繼續。手寫假名配上簡潔的介面，讓注意力回到文字本身。\n\n答題數、平均用時、最近10題平均用時和最高連續答對數，都在練習頁一眼看清。練習統計保存在你的裝置上。\n\n遇到想不起來的假名，從選單開啟五十音圖，就能切換平假名和片假名進行對照。開啟選單時會暫停答題計時，查清楚再回來練。\n\n無需註冊帳號，練習和五十音圖離線也能使用。支援iPhone和iPad，介面提供繁體中文、簡體中文、日語、英語、韓語、德語、法語和西班牙語。\n\n應用程式可免費使用，包含廣告。如果它幫到了你，可以透過可選的「請作者喝杯咖啡」支持作者，並永久移除廣告。這是一次性購買，無訂閱；當地價格顯示在購買頁，可使用同一Apple帳號回復購買。\n\n隱私政策：https://kana.jacky.jp/privacy/zh",
+    "whatsNew": "• 重新設計統計列，清晰顯示答題數、平均用時、近期平均和最高連續答對數。\n• 新增「請作者喝杯咖啡」專屬頁面，支援永久移除廣告和回復購買。\n• 增加可見的選單按鈕，改善iPhone和iPad版面配置。\n• 更新廣告服務與同意設定。\n• 修復深色模式下五十音圖文字難以辨認的問題。\n需要iOS 15或以上版本。",
+    "appName": "Kana · 五十音",
+    "promotionalText": "每天練一點，讓五十音更熟悉。平假名、片假名、羅馬拼音四選一，隨時查看練習統計和五十音圖。",
+    "shots": [
+      [
+        "把五十音，\n練成直覺。",
+        "平假名、片假名、羅馬拼音。\n四個選項，五秒一題。",
+        "practice",
+        "02-practice.png"
+      ],
+      [
+        "你的練習，\n一眼看清。",
+        "答題數、用時、最高連續答對。\n隨時查看自己的練習表現。",
+        "statistics",
+        "03-menu.png"
+      ],
+      [
+        "想不起來？\n隨手查一查。",
+        "平假名與片假名，\n一張表隨時對照。",
+        "chart",
+        "05-chart.png"
+      ],
+      [
+        "一杯咖啡，\n更專心地練習。",
+        "可選的一次性支持，永久移除廣告。\n無訂閱，也支援回復購買。",
+        "coffee",
+        "04-coffee.png"
+      ]
+    ]
+  },
+  "ko": {
+    "description": "짧은 연습을 반복하며 일본어 가나를 자연스럽게 읽어 보세요. Kana는 히라가나, 가타카나, 로마자를 네 가지 보기에서 고르며 익히는 작은 학습 앱입니다.\n\n문제마다 5초 안에 답을 고릅니다. 틀리거나 시간이 지나면 정답을 확인한 후 다음 문제로 넘어갈 수 있습니다. 손글씨 가나와 간결한 화면으로 글자를 읽는 데 집중하세요.\n\n답변 수, 평균 응답 시간, 최근 10문제의 평균, 최고 연속 정답 기록을 한눈에 볼 수 있습니다. 연습 통계는 기기에 저장됩니다.\n\n기억나지 않는 글자는 메뉴에서 오십음도를 열어 확인하세요. 히라가나와 가타카나를 전환할 수 있습니다. 메뉴를 열면 타이머가 멈추므로 여유 있게 확인한 뒤 연습으로 돌아올 수 있습니다.\n\n계정 등록이 필요 없으며 연습과 오십음도는 오프라인에서도 사용할 수 있습니다. iPhone과 iPad를 지원하며 한국어, 일본어, 영어, 중국어 간체, 중국어 번체, 독일어, 프랑스어, 스페인어로 화면을 표시할 수 있습니다.\n\n광고가 포함된 무료 앱입니다. 학습에 도움이 되었다면 선택 사항인 “개발자에게 커피 한 잔”으로 응원하고 광고를 영구적으로 제거할 수 있습니다. 구독이 아닌 일회성 구매입니다. 구매 화면에서 현지 가격을 확인하고 같은 Apple 계정으로 구매를 복원할 수 있습니다.\n\n개인정보 처리방침: https://kana.jacky.jp/privacy/en",
+    "whatsNew": "• 답변 수, 평균 응답 시간, 최근 평균, 최고 연속 정답 기록을 보여 주는 통계 화면을 새로 디자인했습니다.\n• “개발자에게 커피 한 잔” 전용 화면에서 광고를 영구적으로 제거하거나 구매를 복원할 수 있습니다.\n• 메뉴 버튼을 추가하고 iPhone 및 iPad 레이아웃을 개선했습니다.\n• 광고 서비스와 동의 설정을 업데이트했습니다.\n• 다크 모드에서 오십음도 글자가 잘 보이지 않던 문제를 수정했습니다.\niOS 15 이상이 필요합니다.",
+    "appName": "Kana · 五十音",
+    "promotionalText": "매일 조금씩, 가나를 더 익숙하게. 히라가나·가타카나·로마자를 사지선다로 연습하고, 통계와 오십음도를 확인하세요.",
+    "shots": [
+      [
+        "가나를 읽는 일이\n자연스러워지도록.",
+        "히라가나, 가타카나, 로마자.\n보기는 네 개, 시간은 5초.",
+        "practice",
+        "02-practice.png"
+      ],
+      [
+        "나의 연습을\n한눈에.",
+        "답변 수, 응답 시간, 연속 정답.\n연습 기록을 확인하세요.",
+        "statistics",
+        "03-menu.png"
+      ],
+      [
+        "기억이 안 나면\n바로 확인하세요.",
+        "오십음도에서 히라가나와\n가타카나를 전환해 보세요.",
+        "chart",
+        "05-chart.png"
+      ],
+      [
+        "커피 한 잔으로\n더 편안한 연습.",
+        "선택 사항인 일회성 구매로 광고 제거.\n구독 없이, 구매 복원도 지원합니다.",
+        "coffee",
+        "04-coffee.png"
+      ]
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+@charset "UTF-8";
+:root{color-scheme:light;--paper:#f7f6f3;--white:#fff;--ink:#171412;--muted:#6b6560;--red:#d0141b;--line:#e4e0d9}
+*{box-sizing:border-box}
+html{font-size:100%}
+body{margin:0;color:var(--ink);background:var(--paper);font:1rem/1.8 -apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;overflow-wrap:anywhere;-webkit-font-smoothing:antialiased}
+:lang(ja){font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic Medium","Yu Gothic","Noto Sans JP",sans-serif}
+:lang(zh-Hans){font-family:"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif}
+a{color:var(--red);text-underline-offset:.2em}
+a:hover{text-decoration-thickness:2px}
+a:focus-visible{outline:3px solid var(--red);outline-offset:5px;border-radius:3px}
+.shell{max-width:52rem;padding:0 1.25rem;margin:auto}
+.site-header{padding:2rem 0 1.5rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem}
+.brand{color:var(--ink);font:600 1.1rem/1.5 "Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;letter-spacing:.08em;text-decoration:none;display:inline-flex;align-items:center;gap:10px}
+.brand .mark{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;font-size:.95rem;line-height:1}
+.languages{display:flex;flex-wrap:wrap;gap:.5rem}
+.languages a{display:inline-flex;align-items:center;min-height:44px;padding:.35rem .85rem;border:1px solid var(--line);border-radius:999px;font-size:.875rem;text-decoration:none;color:var(--ink);background:var(--white)}
+.languages a[aria-current="page"]{background:var(--ink);border-color:var(--ink);color:#fff}
+main{padding:clamp(1.3rem,4vw,3rem);border:1px solid var(--line);border-top:5px solid var(--red);border-radius:1.5rem;background:var(--white)}
+h1{margin:.25rem 0 1rem;font-size:clamp(1.6rem,5vw,2.5rem);line-height:1.4;letter-spacing:-.02em}
+h2{margin:2rem 0 .5rem;font-size:1.2rem;line-height:1.6}
+p{margin:.7rem 0}
+ul{padding-left:1.3rem}
+li{margin:.45rem 0}
+.meta{color:var(--muted);font-size:.875rem}
+.note{padding:1rem 1.2rem;background:#f9e4e2;border-radius:1rem}
+footer{padding:1.5rem 0 2rem;color:var(--muted);font-size:.875rem}
+section{scroll-margin-top:1rem}
+@media print{body,main{background:#fff}main{border:0;padding:0}.languages{display:none}a{color:inherit}}

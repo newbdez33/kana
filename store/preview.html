@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Kana — Store preview</title>
+  <style>
+    :root { color: #231e1c; background: #faf7f1; font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { max-width: 1600px; margin: auto; padding: 48px clamp(20px, 4vw, 64px) 80px; }
+    header { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; margin-bottom: 36px; }
+    .eyebrow { margin: 0 0 12px; color: #a52b2b; font-size: 12px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+    h1 { font-size: clamp(32px, 4vw, 52px); letter-spacing: -.045em; line-height: 1.1; margin: 0 0 12px; }
+    .intro { color: #726961; margin: 0; }
+    .controls { display: flex; gap: 16px; flex-wrap: wrap; }
+    label { color: #726961; font-size: 12px; display: grid; gap: 5px; }
+    select { appearance: auto; font: inherit; font-size: 15px; color: #231e1c; background: white; padding: 10px 12px; border: 1px solid #ddd5cb; border-radius: 10px; min-width: 132px; }
+    :focus-visible { outline: 3px solid #c93332; outline-offset: 4px; }
+    .gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+    figure { margin: 0; min-width: 0; }
+    figure a { display: block; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 28px #231e1c12; transition: transform .2s; }
+    figure a:hover { transform: translateY(-4px); }
+    figure img { display: block; width: 100%; height: auto; }
+    figcaption { padding: 14px 0 0; color: #726961; font-size: 13px; }
+    .copy { border-top: 1px solid #ddd5cb; margin-top: 48px; padding-top: 36px; display: grid; grid-template-columns: 1fr 2fr; gap: 64px; }
+    h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: #726961; margin: 0 0 16px; }
+    #promotion { font-size: 24px; line-height: 1.55; letter-spacing: -.025em; margin: 0; }
+    #description, #release { white-space: pre-wrap; margin: 0; }
+    details { border-top: 1px solid #ddd5cb; margin-top: 32px; padding-top: 20px; }
+    summary { cursor: pointer; font-weight: 600; margin-bottom: 12px; }
+    footer { font-size: 12px; color: #726961; margin-top: 40px; }
+    #status { color: #a52b2b; }
+    @media (max-width: 950px) { header { align-items: flex-start; flex-direction: column; } .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } .copy { gap: 32px; grid-template-columns: 1fr; } }
+    @media (max-width: 480px) { main { padding-top: 28px; } .gallery { gap: 12px; } figcaption { font-size: 11px; } .controls { width: 100%; } label { flex: 1; } }
+    @media (prefers-reduced-motion: reduce) { figure a { transition: none; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <p class="eyebrow">Kana · 五十音</p>
+      <h1>A little practice, every day.</h1>
+      <p class="intro">App Store screenshots and copy · 1.1.0</p>
+    </div>
+    <div class="controls">
+      <label>Language
+        <select id="locale" aria-label="Language">
+          <option value="zh-Hans">简体中文</option>
+          <option value="ja">日本語</option>
+          <option value="en-US">English</option>
+          <option value="zh-Hant">繁體中文</option>
+          <option value="ko">한국어</option>
+        </select>
+      </label>
+      <label>Device
+        <select id="device" aria-label="Device">
+          <option value="iphone">iPhone</option>
+          <option value="ipad">iPad</option>
+        </select>
+      </label>
+    </div>
+  </header>
+  <p id="status" role="status">Loading preview…</p>
+  <section class="gallery" id="gallery" aria-label="Screenshots"></section>
+  <section class="copy" aria-label="Store copy">
+    <div>
+      <h2>Promotional text</h2>
+      <p id="promotion"></p>
+    </div>
+    <div>
+      <h2>Description</h2>
+      <p id="description"></p>
+      <details><summary>What’s new</summary><p id="release"></p></details>
+    </div>
+  </section>
+  <footer id="dimensions">Select a screenshot to view the full-size PNG.</footer>
+</main>
+<script type="module">
+  const locale = document.querySelector('#locale');
+  const device = document.querySelector('#device');
+  const status = document.querySelector('#status');
+  const params = new URLSearchParams(location.search);
+  for (const control of [locale, device]) {
+    const value = params.get(control.id);
+    if ([...control.options].some(option => option.value === value)) control.value = value;
+  }
+  try {
+    const response = await fetch('metadata.json');
+    if (!response.ok) throw new Error('Metadata could not be loaded.');
+    const metadata = await response.json();
+    function render() {
+      const copy = metadata[locale.value];
+      const figures = copy.shots.map(([title, caption, slug], index) => {
+        const number = String(index + 1).padStart(2, '0');
+        const figure = document.createElement('figure');
+        const link = document.createElement('a');
+        const image = document.createElement('img');
+        const label = document.createElement('figcaption');
+        link.href = `screenshots/${device.value}/${locale.value}/${number}-${slug}.png`;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        image.src = link.href;
+        image.alt = `${title.replaceAll('\n', ' ')} ${caption.replaceAll('\n', ' ')}`;
+        image.width = device.value === 'iphone' ? 1320 : 2064;
+        image.height = device.value === 'iphone' ? 2868 : 2752;
+        label.textContent = `${number} · ${title.replaceAll('\n', ' ')}`;
+        link.append(image);
+        figure.append(link, label);
+        return figure;
+      });
+      const gallery = document.querySelector('#gallery');
+      gallery.lang = locale.value;
+      gallery.replaceChildren(...figures);
+      for (const [id, value] of [['promotion', copy.promotionalText], ['description', copy.description], ['release', copy.whatsNew]]) {
+        const element = document.getElementById(id);
+        element.lang = locale.value;
+        element.textContent = value;
+      }
+      const dimensions = device.value === 'iphone' ? '1320 × 2868' : '2064 × 2752';
+      document.querySelector('#dimensions').textContent = `${dimensions} px · Select a screenshot to view the full-size PNG.`;
+      history.replaceState(null, '', `?locale=${locale.value}&device=${device.value}`);
+      status.hidden = true;
+    }
+    locale.addEventListener('change', render);
+    device.addEventListener('change', render);
+    render();
+  } catch (error) {
+    status.textContent = `${error.message} Serve the generated preview over HTTP.`;
+  }
+</script>
+</body>
+</html>

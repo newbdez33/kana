@@ -1,10 +1,46 @@
-/* 
+/*
   Localizable.strings
   kana
 
   Created by JackyZ on 2017/01/26.
   Copyright © 2017年 Salmonapps. All rights reserved.
 */
-"LastNAvg" = "%d 평균 최근:";
 "IntroText" = "일본어 음절 연습을위한 작고 가벼운 앱.\n근육 기억으로 바꾸자!";
 "Feedback" = "문제 의견";
+"Coffee" = "개발자에게 커피 한 잔";
+"CoffeeThanks" = "커피 잘 마실게요";
+"Restore" = "구매 복원";
+"AdPrivacy" = "광고 개인정보 설정";
+"ThanksTitle" = "감사합니다!";
+"ThanksMessage" = "여러분의 응원으로 이 작은 앱이 자랍니다.\n이제 광고 없이 연습을 즐겨 보세요.";
+"RestoreNoneTitle" = "복원할 구매가 없습니다";
+"RestoreNoneMessage" = "이 Apple 계정에서 이전 구매를 찾을 수 없습니다.";
+"PurchaseFailedTitle" = "구매가 완료되지 않았습니다";
+"OK" = "확인";
+"Chart" = "오십음도";
+"Practice" = "연습 기록";
+"StatAnswers" = "답변 수";
+"StatAverage" = "평균 시간";
+"StatRecent" = "최근 %d개";
+"StatBest" = "최고 연속 정답";
+"StatSeconds" = "%@초";
+"Menu" = "메뉴 열기";
+"CloseMenu" = "메뉴 닫기";
+"Close" = "닫기";
+"More" = "더 보기";
+"Share" = "Kana 공유";
+"Support" = "커피 한 잔";
+"CoffeeMessage" = "Kana가 학습에 도움이 되었다면,\n커피 한 잔으로 응원해 주세요.";
+"CoffeeBenefit" = "광고 없이 연습에 집중하세요";
+"CoffeeSupported" = "후원 완료 · 광고 제거됨";
+"CoffeePrice" = "커피 한 잔 · %@";
+"CoffeeTerms" = "일회성 구매 · 정기 결제 없음";
+"CoffeeLoading" = "가격을 불러오는 중";
+"CoffeeUnavailable" = "가격을 불러올 수 없습니다. 잠시 후 다시 시도해 주세요.";
+"CoffeePending" = "승인 대기 중";
+"CoffeePendingMessage" = "구매 승인을 기다리고 있습니다.\n승인되면 광고가 자동으로 제거됩니다.";
+"CoffeePurchasing" = "구매 확인 중";
+"CoffeeRestoring" = "구매 복원 중";
+"ContinuePractice" = "연습 계속하기";
+"Retry" = "다시 시도";
+"PurchaseUnverified" = "구매를 확인할 수 없습니다. 다시 시도해 주세요.";

@@ -1,10 +1,46 @@
-/* 
+/*
   Localizable.strings
   kana
 
   Created by JackyZ on 2017/01/26.
   Copyright © 2017年 Salmonapps. All rights reserved.
 */
-"LastNAvg" = "最近の%d:";
 "IntroText" = "最も簡単な五十音を練習のアプリ。\n筋肉の記憶に変えよう！";
 "Feedback" = "問題のフィードバック";
+"Coffee" = "コーヒーを一杯";
+"CoffeeThanks" = "応援ありがとう";
+"Restore" = "購入を復元";
+"AdPrivacy" = "広告のプライバシー設定";
+"ThanksTitle" = "ありがとうございます！";
+"ThanksMessage" = "小さなアプリを支えてくれて、ありがとう。\nこれからは広告なしで、練習を。";
+"RestoreNoneTitle" = "復元できる購入がありません";
+"RestoreNoneMessage" = "この Apple アカウントでの購入は見つかりませんでした。";
+"PurchaseFailedTitle" = "購入を完了できませんでした";
+"OK" = "OK";
+"Chart" = "五十音図";
+"Practice" = "練習の記録";
+"StatAnswers" = "回答数";
+"StatAverage" = "平均時間";
+"StatRecent" = "直近 %d 問";
+"StatBest" = "最高連続正解";
+"StatSeconds" = "%@秒";
+"Menu" = "メニューを開く";
+"CloseMenu" = "メニューを閉じる";
+"Close" = "閉じる";
+"More" = "その他";
+"Share" = "Kana を共有";
+"Support" = "コーヒーを一杯";
+"CoffeeMessage" = "Kana が学びの役に立ったら、\n一杯のコーヒーで応援しませんか。";
+"CoffeeBenefit" = "広告なしで、練習に集中";
+"CoffeeSupported" = "応援済み · 広告なし";
+"CoffeePrice" = "コーヒーを贈る · %@";
+"CoffeeTerms" = "一度きりの購入 · 定期課金なし";
+"CoffeeLoading" = "価格を読み込み中";
+"CoffeeUnavailable" = "価格を取得できませんでした。もう一度お試しください。";
+"CoffeePending" = "承認待ち";
+"CoffeePendingMessage" = "購入の承認待ちです。\n承認後、広告が非表示になります。";
+"CoffeePurchasing" = "購入を確認中";
+"CoffeeRestoring" = "購入を復元中";
+"ContinuePractice" = "練習を続ける";
+"Retry" = "もう一度読み込む";
+"PurchaseUnverified" = "購入を確認できませんでした。もう一度お試しください。";

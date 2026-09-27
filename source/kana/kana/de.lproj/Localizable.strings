@@ -1,10 +1,46 @@
-/* 
+/*
   Localizable.strings
   kana
 
   Created by JackyZ on 2017/01/26.
   Copyright © 2017年 Salmonapps. All rights reserved.
 */
-"LastNAvg" = "Last %d avg:";
 "IntroText" = "A tiny and light app for practicing Japanese syllabary.\nLet's turn it into muscle memory!";
 "Feedback" = "Feedback";
+"Coffee" = "Spendier mir einen Kaffee";
+"CoffeeThanks" = "Danke für den Kaffee";
+"Restore" = "Kauf wiederherstellen";
+"AdPrivacy" = "Datenschutzoptionen für Werbung";
+"ThanksTitle" = "Danke!";
+"ThanksMessage" = "Deine Unterstützung hilft dieser kleinen App.\nViel Spaß beim Üben, jetzt ohne Werbung.";
+"RestoreNoneTitle" = "Nichts wiederherzustellen";
+"RestoreNoneMessage" = "Für dieses Apple-Konto wurde kein früherer Kauf gefunden.";
+"PurchaseFailedTitle" = "Kauf nicht abgeschlossen";
+"OK" = "OK";
+"Chart" = "Kana-Tabelle";
+"Practice" = "Deine Übungen";
+"StatAnswers" = "Antworten";
+"StatAverage" = "Ø Zeit";
+"StatRecent" = "Letzte %d Ø";
+"StatBest" = "Beste Serie";
+"StatSeconds" = "%@ s";
+"Menu" = "Menü öffnen";
+"CloseMenu" = "Menü schließen";
+"Close" = "Schließen";
+"More" = "Mehr";
+"Share" = "Kana teilen";
+"Support" = "Kaffee spendieren";
+"CoffeeMessage" = "Wenn dir diese kleine App beim Lernen hilft,\nfreue ich mich über einen Kaffee.";
+"CoffeeBenefit" = "Ab jetzt ohne Werbung üben";
+"CoffeeSupported" = "Unterstützt · Werbung entfernt";
+"CoffeePrice" = "Kaffee spendieren · %@";
+"CoffeeTerms" = "Einmaliger Kauf · Kein Abo";
+"CoffeeLoading" = "Preis wird geladen";
+"CoffeeUnavailable" = "Der Preis ist gerade nicht verfügbar. Bitte versuche es erneut.";
+"CoffeePending" = "Genehmigung ausstehend";
+"CoffeePendingMessage" = "Dein Kauf wartet auf Genehmigung.\nDanach wird die Werbung entfernt.";
+"CoffeePurchasing" = "Kauf wird bestätigt";
+"CoffeeRestoring" = "Kauf wird wiederhergestellt";
+"ContinuePractice" = "Weiter üben";
+"Retry" = "Erneut versuchen";
+"PurchaseUnverified" = "Der Kauf konnte nicht bestätigt werden. Bitte versuche es erneut.";

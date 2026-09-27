@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Crashlytics
 
 protocol KanaHeaderDelegate {
     func hirakanaAction(_ sender:UIButton)

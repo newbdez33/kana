@@ -6,3 +6,5 @@
   Copyright © 2017年 Salmonapps. All rights reserved.
 */
 CFBundleDisplayName = "Kana";
+
+"NSUserTrackingUsageDescription" = "Your permission helps show relevant ads that support free practice. You can practise without allowing tracking.";
