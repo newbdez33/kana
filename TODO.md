@@ -52,7 +52,7 @@
 - [x] 删除 Carthage 依赖（MonkeyKing、JZSpringRefresh、SwiftHEXColors、Realm）和 Cartfile。
 - [x] 删除 `kana.entitlements`（推送）和 FirebaseInstanceID。
 - [x] 模拟器（iPhone 18 Pro / iOS 27）编译、运行通过；`xcodebuild test`：单元测试 8 个（StatStore 4、StoreKit 4）+ UI 测试 3 个全部通过。测试广告在答错后正常显示。
-- [ ] 真机装一次确认广告、音效、分享都正常（需要主人的手机）。
+- [x] 真机装一次确认广告、音效、分享都正常（需要主人的手机）。2026-09-27 主人真机测试通过。
 - 备注：`xcodebuild test` 在测试全部结束后不会自动退出（要 `pkill`），结果包因此不完整；UI 测试截图改为通过 `TEST_RUNNER_KANA_SHOT_DIR=/path` 直接落盘。本机 Xcode 27 没有 Simulator.app 图形界面，只能用 `simctl` + XCUITest。
 
 ## 4. 「请作者喝咖啡」去广告（内购）
@@ -63,7 +63,7 @@
 - [x] 展开菜单与支持面板时暂停答题计时；修正安全区布局，底部答案完整显示。设计预览和原生截图见 `design/README.md`，项目介绍与截图见 `README.md`。
 - [x] `showBanner()` 先检查 `adsRemoved` 和 `AdsManager.isReady`；已购买时不再走 UMP / ATT。
 - [x] 本地 StoreKit 配置（`source/kana/Configuration.storekit`）+ 单元测试覆盖购买 / 恢复 / 无购买恢复。
-- [ ] 沙盒账号在真机上测一次购买、恢复（需要主人的手机和沙盒账号）。
+- [x] 沙盒账号在真机上测一次购买、恢复（需要主人的手机和沙盒账号）。2026-09-27 主人真机测试通过。
 
 ## 5. 发版
 
@@ -77,7 +77,7 @@
 - [x] 商店介绍与更新说明：en-US / ja / zh-Hans / zh-Hant / ko 已更新，对应文案保存在 `store/metadata.json`。内购审核截图已替换为新支持页面，审核说明已更新为菜单按钮 → 咖啡入口 → 购买 / 恢复。
 - [x] 新界面商店截图：5 种商店语言 × iPhone / iPad × 4 张，共 40 张，已全部上传并确认 COMPLETE；旧图已替换。新增 `--store-listing` 截图模式，10 组模拟器截图测试全部通过。
 - [x] **参考 menkyo 更新商店素材**：大标题、简短卖点与原生截图组合，保留 Kana 暖纸色和朱红色；依次介绍练习、统计、五十音图与咖啡支持。五种语言的介绍、宣传文本、更新说明及 40 张图片已同步 ASC。宣传文案突出五秒答题与连对挑战，说明广告仅在答错或超时后触发；咖啡介绍为自愿支持作者。`scripts/render-store.swift` 可重复生成，HTML 预览与说明见 `store/README.md`。
-- [ ] 主人用真机 + 沙盒账号测一次：广告、同意弹窗 / ATT、购买、恢复。
+- [x] 主人用真机 + 沙盒账号测一次：广告、同意弹窗 / ATT、购买、恢复。2026-09-27 主人真机测试通过。
 - [x] **TestFlight 验收与提审**：用户已确认可以提审。1.1.0 (17) 与咖啡内购于 2026-09-27 21:31（日本时间）一起提交，两项均为 Waiting for Review，审核通过后自动发布。[审核记录](https://appstoreconnect.apple.com/apps/1195345471/distribution/reviewsubmissions/details/85c4f677-85ad-4bfe-a944-ca6a7ec9a0f4)。
 - [ ] 上线后确认商店版本、截图和链接，并在 AdMob 观察填充率与 eCPM。
 - 备注：App Review 联系电话还是 2017 年填的国内号码，如需更新请在 ASC 改。
