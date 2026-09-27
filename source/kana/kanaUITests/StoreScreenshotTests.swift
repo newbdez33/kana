@@ -1,20 +1,31 @@
 import XCTest
 
 /// Captures App Store screenshots. Runs only when TEST_RUNNER_KANA_SHOT_DIR is set:
-///   TEST_RUNNER_KANA_SHOT_DIR=/path xcodebuild test -only-testing:kanaUITests/StoreScreenshotTests ...
+///   TEST_RUNNER_KANA_SHOT_DIR=/path TEST_RUNNER_KANA_SHOT_LANG=ja \
+///     xcodebuild test -only-testing:kanaUITests/StoreScreenshotTests ...
+/// KANA_SHOT_LANG selects the app language (en, ja, zh-Hans, zh-Hant, ko); default en.
 final class StoreScreenshotTests: XCTestCase {
+
+    private static let chartTitles = [
+        "en": "Kana chart", "ja": "五十音図", "zh-Hans": "五十音图", "zh-Hant": "五十音圖", "ko": "오십음도",
+        "de": "Kana-Tabelle", "fr": "Tableau des kana", "es": "Tabla de kana",
+    ]
 
     private var app: XCUIApplication!
     private var directory: String!
+    private var language = "en"
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        guard let directory = ProcessInfo.processInfo.environment["KANA_SHOT_DIR"] else {
+        let environment = ProcessInfo.processInfo.environment
+        guard let directory = environment["KANA_SHOT_DIR"] else {
             throw XCTSkip("KANA_SHOT_DIR is not set")
         }
         self.directory = directory
+        language = environment["KANA_SHOT_LANG"] ?? "en"
         continueAfterFailure = false
         app = XCUIApplication()
+        app.launchArguments = ["-AppleLanguages", "(\(language))"]
         app.launch()
         let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
         let cancel = springboard.buttons["Cancel"]
@@ -46,7 +57,8 @@ final class StoreScreenshotTests: XCTestCase {
         sleep(1)
         save("02-menu")
 
-        let chartButton = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Kana chart")).firstMatch
+        let title = StoreScreenshotTests.chartTitles[language] ?? "Kana chart"
+        let chartButton = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", title)).firstMatch
         XCTAssertTrue(chartButton.waitForExistence(timeout: 5))
         chartButton.tap()
         XCTAssertTrue(app.otherElements["kanaChart"].waitForExistence(timeout: 5))
