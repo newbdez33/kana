@@ -7,31 +7,23 @@
 //
 
 import UIKit
-import Fabric
-import Crashlytics
-import Firebase
+import FirebaseCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        FIRApp.configure()
-        GADMobileAds.configure(withApplicationID: "ca-app-pub-1295607594822275~2834593518")
-        
-        //Realm.Configuration.defaultConfiguration = AppConfig.realmConfig()
-        Fabric.with([Crashlytics.self])
+
+        FirebaseApp.configure()
+        // Unit tests create their own StoreKit test session before touching StoreKit.
+        if NSClassFromString("XCTestCase") == nil {
+            Store.shared.start()
+        }
 
         return true
     }
-    
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-//        if MonkeyKing.handleOpenURL(url) {
-//            return true
-//        }
-        return false
+
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 }
-

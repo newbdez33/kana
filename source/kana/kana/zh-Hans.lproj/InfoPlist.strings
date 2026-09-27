@@ -6,3 +6,5 @@
   Copyright © 2017年 Salmonapps. All rights reserved.
 */
 CFBundleDisplayName = "五十音";
+
+"NSUserTrackingUsageDescription" = "允许追踪有助于展示更相关的广告，支持免费练习。不允许追踪也可以正常练习。";

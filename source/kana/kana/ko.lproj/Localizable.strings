@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   kana
 
@@ -8,3 +8,13 @@
 "LastNAvg" = "%d 평균 최근:";
 "IntroText" = "일본어 음절 연습을위한 작고 가벼운 앱.\n근육 기억으로 바꾸자!";
 "Feedback" = "문제 의견";
+"Coffee" = "☕ 개발자에게 커피 한 잔";
+"CoffeeThanks" = "☕ 감사합니다!";
+"Restore" = "구매 복원";
+"AdPrivacy" = "광고 개인정보 설정";
+"ThanksTitle" = "감사합니다!";
+"ThanksMessage" = "광고가 제거되었습니다. 즐겁게 연습하세요!";
+"RestoreNoneTitle" = "복원할 구매가 없습니다";
+"RestoreNoneMessage" = "이 Apple 계정에서 이전 구매를 찾을 수 없습니다.";
+"PurchaseFailedTitle" = "구매가 완료되지 않았습니다";
+"OK" = "확인";

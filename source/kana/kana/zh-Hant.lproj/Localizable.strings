@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   kana
 
@@ -8,3 +8,13 @@
 "LastNAvg" = "最後%d個:";
 "IntroText" = "極簡的日語假名50音學習、練習軟件。\n通過訓練達到對日語假名的肌肉記憶吧！";
 "Feedback" = "問題反饋";
+"Coffee" = "☕ 請作者喝杯咖啡";
+"CoffeeThanks" = "☕ 謝謝你！";
+"Restore" = "恢復購買";
+"AdPrivacy" = "廣告隱私設定";
+"ThanksTitle" = "謝謝！";
+"ThanksMessage" = "廣告已移除，練習愉快！";
+"RestoreNoneTitle" = "沒有可恢復的購買";
+"RestoreNoneMessage" = "這個 Apple 帳戶下沒有找到先前的購買記錄。";
+"PurchaseFailedTitle" = "購買未完成";
+"OK" = "好";

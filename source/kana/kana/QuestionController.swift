@@ -14,7 +14,7 @@ class QuestionViewController: UIViewController {
 
     @IBOutlet weak var statLabelWidth: NSLayoutConstraint!
     @IBOutlet weak var questionViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var bannerView: GADBannerView!
+    @IBOutlet weak var bannerView: BannerView!
     @IBOutlet weak var adView: UIView!
     @IBOutlet weak var adViewHeight: NSLayoutConstraint!
     @IBOutlet weak var questionLabel: UILabel!
@@ -42,20 +42,20 @@ class QuestionViewController: UIViewController {
         
         lastAvgTitleLabel.text = String.localizedStringWithFormat(.lastNAvg, AppConfig.statisticsLastCount)
         statLabelWidth.constant = lastAvgTitleLabel.intrinsicContentSize.width
-        
-//        let bottom = scrollView.addSpringRefresh(position: .bottom, actionHandlere: { (v:JZSpringRefresh) in
-//            let vc = UIStoryboard(name: "Kana", bundle: nil).instantiateInitialViewController()
-//            self.present(vc!, animated: true, completion: {
-//                //
-//            })
-//        })
-//        bottom.text = "五十音図"
-//        bottom.readyColor = UIColor.kanaKeyRedColor()
-        
+
+        bannerView.adUnitID = "ca-app-pub-1295607594822275/7264793113"
+        bannerView.rootViewController = self
+        NotificationCenter.default.addObserver(self, selector: #selector(adsRemovedDidChange), name: .adsRemovedDidChange, object: nil)
+
         collectionView.register(UINib(nibName: "AnswerCell", bundle: nil), forCellWithReuseIdentifier: "AnswerCell")
-        
+
         prepareSoundEffects()
         nextQuestion()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        AdsManager.shared.gatherConsent(from: self)
     }
 
     override func didReceiveMemoryWarning() {
@@ -137,20 +137,7 @@ class QuestionViewController: UIViewController {
         if cost > AppConfig.questionTimeLimit {
             cost = 0
         }
-        
-//        let stat = Stat(kana: questionLabel.text!,
-//                        kana_roma: currentQuestioKana[KanaType.roma.rawValue],
-//                        questions: currentAnswerLabels.joined(separator: ","),
-//                        answer: currentAnswerLabels[index],
-//                        answer_roma: currentAnswers[index][KanaType.roma.rawValue],
-//                        is_correct: is_correct,
-//                        cost: cost)
-//        guard let realm = try? Realm() else {
-//            return
-//        }
-//        let _ = try? realm.write {
-//            realm.add(stat)
-//        }
+        StatStore.shared.add(cost: cost, isCorrect: is_correct)
     }
     
     func updateBestCombo(is_correct:Bool) {
@@ -210,13 +197,13 @@ class QuestionViewController: UIViewController {
     }
     
     func updateStatisticsLabels() {
-        
-//        totalLabel.text = "\(Stat.totalCount())"
-//        avgLabel.text = "\(Stat.totalAvgTime().roundTo(places: 2))s"
-//        lastAvgLabel.text = "\(Stat.lastAvgTime().roundTo(places: 2))s"
-//        
-//        let best = UserDefaults.standard.integer(forKey: AppConfig.keyBestCombo)
-//        comboLabel.text = "\(best)"
+        let stats = StatStore.shared
+        totalLabel.text = "\(stats.totalCount)"
+        avgLabel.text = "\(stats.totalAvgTime.roundTo(places: 2))s"
+        lastAvgLabel.text = "\(stats.lastAvgTime.roundTo(places: 2))s"
+
+        let best = UserDefaults.standard.integer(forKey: AppConfig.keyBestCombo)
+        comboLabel.text = "\(best)"
     }
     
     func randomKana(excludeRoma:String = "") -> [String] {
@@ -248,11 +235,18 @@ class QuestionViewController: UIViewController {
     }
     
     func showBanner() {
-        bannerView.adUnitID = "ca-app-pub-1295607594822275/7264793113"
-        bannerView.rootViewController = self
-        bannerView.load(GADRequest())
-        adViewHeight.constant = 55
-        questionViewHeight.constant = -50
+        guard !Store.shared.adsRemoved, AdsManager.shared.isReady else { return }
+        bannerView.adSize = currentOrientationAnchoredAdaptiveBanner(width: view.frame.width)
+        bannerView.load(Request())
+        let height = bannerView.adSize.size.height
+        adViewHeight.constant = height + 5
+        questionViewHeight.constant = -height
+    }
+
+    @objc func adsRemovedDidChange() {
+        if Store.shared.adsRemoved {
+            hideBanner()
+        }
     }
 
 }

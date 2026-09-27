@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   kana
 
@@ -8,3 +8,13 @@
 "LastNAvg" = "最近の%d:";
 "IntroText" = "最も簡単な五十音を練習のアプリ。\n筋肉の記憶に変えよう！";
 "Feedback" = "問題のフィードバック";
+"Coffee" = "☕ 作者にコーヒーをおごる";
+"CoffeeThanks" = "☕ ありがとう！";
+"Restore" = "購入を復元";
+"AdPrivacy" = "広告のプライバシー設定";
+"ThanksTitle" = "ありがとうございます！";
+"ThanksMessage" = "広告が非表示になりました。練習を楽しんでください！";
+"RestoreNoneTitle" = "復元できる購入がありません";
+"RestoreNoneMessage" = "この Apple アカウントでの購入は見つかりませんでした。";
+"PurchaseFailedTitle" = "購入を完了できませんでした";
+"OK" = "OK";

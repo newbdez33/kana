@@ -1,0 +1,49 @@
+{
+  "identifier" : "9B4C2E1A-5D6F-4A8B-9C0D-1E2F3A4B5C6D",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "300",
+      "familyShareable" : false,
+      "internalID" : "6B2E7C1D-3F4A-4B5C-8D9E-0F1A2B3C4D5E",
+      "localizations" : [
+        {
+          "description" : "Removes ads from the app. Thank you!",
+          "displayName" : "Buy me a coffee",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "アプリの広告を非表示にします。ありがとうございます！",
+          "displayName" : "作者にコーヒーをおごる",
+          "locale" : "ja"
+        },
+        {
+          "description" : "去除应用内广告。谢谢！",
+          "displayName" : "请作者喝杯咖啡",
+          "locale" : "zh_CN"
+        }
+      ],
+      "productID" : "com.salmonapps.app.kana.coffee",
+      "referenceName" : "Coffee (remove ads)",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "1195345471",
+    "_developerTeamID" : "72T2SXUWHC",
+    "_locale" : "ja_JP",
+    "_storefront" : "JPN",
+    "_storeKitErrors" : [
+
+    ]
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

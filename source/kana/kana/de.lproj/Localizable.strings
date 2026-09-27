@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   kana
 
@@ -8,3 +8,13 @@
 "LastNAvg" = "Last %d avg:";
 "IntroText" = "A tiny and light app for practicing Japanese syllabary.\nLet's turn it into muscle memory!";
 "Feedback" = "Feedback";
+"Coffee" = "☕ Spendier mir einen Kaffee";
+"CoffeeThanks" = "☕ Danke!";
+"Restore" = "Kauf wiederherstellen";
+"AdPrivacy" = "Datenschutzoptionen für Werbung";
+"ThanksTitle" = "Danke!";
+"ThanksMessage" = "Die Werbung ist entfernt. Viel Spaß beim Üben!";
+"RestoreNoneTitle" = "Nichts wiederherzustellen";
+"RestoreNoneMessage" = "Für dieses Apple-Konto wurde kein früherer Kauf gefunden.";
+"PurchaseFailedTitle" = "Kauf nicht abgeschlossen";
+"OK" = "OK";
