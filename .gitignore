@@ -15,3 +15,13 @@ DerivedData
 *.ipa
 *.xcuserstate
 .DS_Store
+
+# Android
+source/android/.gradle/
+source/android/.kotlin/
+source/android/.idea/
+source/android/local.properties
+source/android/key.properties
+*.iml
+*.jks
+*.keystore
