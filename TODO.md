@@ -66,7 +66,7 @@
 - [x] App Store Connect 版本 1.1.0 已用 API 建好（id cf9a54ab-…），5 个语言的 What's New、Marketing / Support URL（kana.jacky.jp）、隐私政策 URL 都已填；年龄分级的新问卷（广告、健康、社交等新字段）已填。
 - [x] 截图：UI 测试在 iPhone 18 Pro Max（1320×2868）和 iPad Pro 13"（2064×2752）模拟器上按 en / ja / zh-Hans / zh-Hant / ko 各抓 3 张（题目、下拉菜单、五十音图），已上传到 1.1.0 的 APP_IPHONE_67 / APP_IPAD_PRO_3GEN_129，2017 年的 5.5" / 12.9" 旧图已删。
 - [x] 内购 `com.salmonapps.app.kana.coffee` 状态 READY_TO_SUBMIT（审核截图用的是菜单页）。
-- [ ] Build：build 11 / 13 导出失败（缺 1024 图标），已补 `Icon-1024.png` 后打 build 14 上传；处理完成后用 API 把 build 14 挂到 1.1.0 并声明不含加密（`ITSAppUsesNonExemptEncryption` 已写进 Info.plist，从 build 14 起生效）。
+- [ ] Build：build 11 / 13 导出失败（缺 1024 图标，已补 `Icon-1024.png`）；build 14 上传后被 Apple 判为 Invalid（ITMS-90535：`de.lproj` / `ja.lproj` 里 2017 年遗留的 Info.plist 副本被当资源打进包），已删除并在 project.yml 排除 `**/Info.plist`；`UIRequiredDeviceCapabilities` 整个去掉（对已上架 App 不能新增 arm64 要求）。build 15 上传中，处理完成后用 API 挂到 1.1.0（`ITSAppUsesNonExemptEncryption=false` 已在 Info.plist）。
 - [ ] **App Privacy（数据收集标签）要主人在 App Store Connect 网页上填**（API 没有这个接口，Chrome 里也没登录 ASC）。建议答案：收集「Identifiers › Device ID」「Usage Data › Product Interaction」「Usage Data › Advertising Data」，用途 Third-Party Advertising + Analytics，不与用户身份关联（Not linked）、用于追踪（Used for tracking，因为 AdMob + ATT）；不收集其他类别。
 - [ ] 主人用真机 + 沙盒账号测一次：广告、同意弹窗 / ATT、购买、恢复。
 - [ ] 提审：等主人一句话再 submit（App 与内购一起提交）。提审后在 AdMob 观察 eCPM 是否从 $0.09 回升。
