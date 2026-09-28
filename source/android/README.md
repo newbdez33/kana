@@ -2,6 +2,13 @@
 
 Kotlin + Jetpack Compose port of the iOS app. Design spec: `docs/specs/2026-09-27-android-app-design.md`.
 
+Version **1.0.0 (1)** is available on Google Play internal testing as of
+2026-09-28. [Join the test](https://play.google.com/apps/internaltest/4701215213082302872)
+with an account in `Kana internal testers`, then install from Play. The first
+release uses the temporary name `jp.jacky.kana (unreviewed)`.
+See the [release record](../../docs/releases/2026-09-28-android-internal.md)
+for artifacts, service setup, validation, and pending device acceptance.
+
 ## Environment
 
 - Android SDK at `~/Library/Android/sdk` (`local.properties` sets `sdk.dir`; the file is not committed).

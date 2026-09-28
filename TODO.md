@@ -4,7 +4,7 @@
 
 ## 现状摘要
 
-1.1.0 (17) 已通过 TestFlight 验收，并于 2026-09-27 21:31（日本时间）与咖啡内购一起提交审核；最后记录的状态均为 **Waiting for Review**，审核通过后自动发布。商店文案、40 张截图和隐私标签已更新。Android 已实现；2026-09-28 开始准备 Google Play 内部测试，账号可创建应用，尚未发布。
+1.1.0 (17) 已通过 TestFlight 验收，并于 2026-09-27 21:31（日本时间）与咖啡内购一起提交审核；最后记录的状态均为 **Waiting for Review**，审核通过后自动发布。商店文案、40 张截图和隐私标签已更新。Android **1.0.0 (1)** 已于 2026-09-28 15:11（日本时间）发布 Google Play 内部测试，状态 **Available to internal testers**；[加入测试](https://play.google.com/apps/internaltest/4701215213082302872)。咖啡商品已启用，真机安装与购买验收待完成。
 
 ### 初始审计基线（改造前）
 
@@ -87,7 +87,7 @@
 - [x] **实现 Android 版**：对齐 iOS 的五秒四选一练习、连对挑战、设备内统计、五十音图、离线使用和多语言界面。2026-09-27 完成：`source/android/`（Kotlin + Compose），设计见 `docs/specs/2026-09-27-android-app-design.md`。
 - [x] **接入广告与咖啡支持**：接入 Android AdMob、同意流程和 Google Play Billing；广告仅在答错或超时后触发，支持一次性咖啡购买与恢复。2026-09-27 完成代码；后台配置与发布验收见下方。
 
-本次目标：发布 `jp.jacky.kana` 的 Google Play **内部测试**版，交付测试加入链接。首包计划为 `1.0.0 (1)`；上传前核对 Play 中的版本号。正式上架另行验收。
+本次发布：`jp.jacky.kana` 的 Google Play **内部测试**版 `1.0.0 (1)` 已开放，测试名单为 `Kana internal testers`。使用名单内账号打开[加入链接](https://play.google.com/apps/internaltest/4701215213082302872)，接受邀请后从 Play 安装。正式上架另行验收；构建与配置记录见 [Android 发布记录](docs/releases/2026-09-28-android-internal.md)。
 
 ### 6.1 发布前置条件
 
@@ -102,24 +102,26 @@
 - [x] **配置同意消息**：2026-09-28 Android Kana 已加入现有 European / US 消息，两条均为 Published、各 4 个应用；隐私 URL 为 `https://kana.jacky.jp/privacy/en`。三语隐私页已补充 Android、Google Play、系统备份及平台统计差异，上线后读回与源码一致。同意表单期间暂停计时已有测试覆盖。
 - [x] **配置上传签名**：Kana 独立上传密钥保存在 `~/.local/share/kana/android-signing/`；密码文件、密钥和未跟踪的 `source/android/key.properties` 权限均为 `0600`。上传证书 SHA-256：`0E:06:97:1D:1C:36:74:5B:75:A3:2C:9A:14:3F:BC:6F:C0:55:09:01:40:A7:6D:CA:F5:0C:D3:7D:D2:F6:56:25`。
 - [ ] **独立备份上传密钥**：正式发布前，将密钥与密码保存到用户选定的安全备份位置；当前仅确认本机副本。
-- [ ] **核对 Play App Signing**：创建发布页已显示 `Releases are signed by Google Play`；首包上传后读回上传证书与 Play 应用签名证书，后续版本保持可更新。
-- [ ] **创建并启用咖啡商品**：一次性非消耗型商品 `jp.jacky.kana.coffee`，日本基准价 ¥300；配置名称、说明、购买选项及可售地区。商品 ID 固定在应用代码中，不填入广告配置。
+- [x] **核对 Play App Signing**：2026-09-28 Console 已确认由 Google Play 签名；上传证书与本机 SHA-256 一致，Play 提供的分发证书指纹已记入发布记录。后续版本沿用上传密钥并递增版本号。
+- [x] **创建并启用咖啡商品**：2026-09-28 `jp.jacky.kana.coffee` 已启用，购买选项 `coffee` 为 Buy、向后兼容，覆盖 173 个地区；日本 ¥300，其他地区由 Play 换算。en-US / ja-JP / zh-CN / zh-TW / ko-KR 名称与说明已填写。代码确认购买后只确认交易、不消耗商品，提供永久去广告。
 
 ### 6.3 构建与发布前验证
 
 - [x] **单元测试与静态检查**：2026-09-28 `:app:testDebugUnitTest`、`:app:lintDebug`（复用有效缓存）及 `:app:lintRelease` 通过；51 项单元测试零失败。
-- [ ] **模拟器回归**：运行 `:app:connectedDebugAndroidTest`；检查手机和平板上的练习、超时、统计、五十音图、咖啡面板、旋转及后台恢复。
-- [ ] **生成签名发布包**：运行 `:app:bundleRelease`、`:app:assembleRelease`；核对包名、版本、签名、正式广告配置、非调试标记及混淆后的启动行为，记录 AAB 的 SHA-256。
+- [x] **模拟器自动化回归**：2026-09-28 `:app:connectedDebugAndroidTest` 9 项通过，覆盖练习、菜单、五十音图、本地化与咖啡界面。购买、广告等服务使用替身，不替代真实服务验收。
+- [x] **发布包手机和平板启动检查**：从最终 AAB 生成的 APK 在 API 36 专用模拟器上通过手机与平板尺寸的冷启动、进程重启检查；每次观察 10 秒，无崩溃，截图文字可读、测试横幅可见。平板使用显示尺寸覆盖，不代表实体平板验收。
+- [ ] **补充设备回归**：核对横竖屏切换、后台恢复、手机和平板完整交互；与 6.4 的 Play 真机安装验收一起完成。
+- [x] **生成签名发布包**：`:app:bundleRelease`、`:app:assembleRelease` 通过；核对 `jp.jacky.kana`、`1.0.0 (1)`、minSdk 26、targetSdk 36、正式广告 ID、非调试标记与签名。bundletool、APK 签名及 16 KB 对齐检查通过；AAB SHA-256 为 `7eb65d73dc1a3ef11748e2d6f476126723c24a8b9a09c621787eb1119e1a6745`。
 - [x] **修复 Release 启动崩溃**：首个本地发布包因 R8 裁剪 WorkManager 的 Room 数据库构造器而崩溃，未上传。补充精确保留规则及 `scripts/check-android-release.py`，AAB 生成的 APK 验证旧包失败、修复包冷启动与进程重启各稳定 10 秒。
-- [ ] **归档发布信息**：保存 AAB、混淆映射、校验值、提交 SHA、构建命令及中日英测试说明；密钥与密码不进入 Git 或发布附件。
+- [x] **归档发布信息**：最终 AAB、混淆映射、校验值、构建日志、启动截图及中日英测试说明保存在本机 `build/android-internal-20260928/`；源码提交为 `da91138`。发布记录已注明最终文件名，密钥与密码未进入 Git 或附件。
 
 ### 6.4 发布内部测试并验收
 
-- [ ] **上传内部测试轨道**：上传已验证的 AAB，确认 Play 解析出的版本、权限、设备兼容性及签名，处理阻塞项后发布内部测试。
-- [ ] **交付测试链接**：读回轨道状态与版本号，确认测试名单已启用，记录加入链接与发布时间；上传成功不等于已向测试者开放。
+- [x] **上传内部测试轨道**：2026-09-28 15:11（日本时间）发布 `1.0.0 (1) - First Android test`，状态 **Available to internal testers**。Console 确认 SDK 26+、target 36、4 种 ABI；混淆映射已附带。仅有第三方原生库缺少调试符号的非阻塞警告。
+- [x] **交付测试链接**：轨道 Active、测试名单已启用；[加入测试](https://play.google.com/apps/internaltest/4701215213082302872)已实际打开并显示邀请。首次审核前名称为 `jp.jacky.kana (unreviewed)`，接受邀请和 Play 安装仍由测试者完成。
 - [ ] **Play 安装验收**：使用名单内账号加入测试并从 Play 安装；核对首次启动、手机和平板布局、音效、分享、离线练习及系统深色模式。
 - [ ] **真实服务验收**：用许可测试账号验证购买、取消、待批准、恢复、重启与断网恢复；确认购买后去广告。验证 UMP 和横幅时使用测试设备，不点击真实广告。
-- [ ] **更新发布记录**：把实际版本、状态、链接、已通过测试和剩余限制写回此文件与 Android README，并更新 PR。
+- [x] **更新发布记录**：实际版本、状态、链接、已通过测试和剩余限制已写入此文件、Android README 与发布记录；同步 [PR #6](https://github.com/newbdez33/kana/pull/6)。
 
 ### 6.5 正式上架前完成
 
