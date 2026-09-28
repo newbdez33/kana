@@ -4,7 +4,7 @@
 
 ## 现状摘要
 
-1.1.0 (17) 已通过 TestFlight 验收，并于 2026-09-27 21:31（日本时间）与咖啡内购一起提交审核；最后记录的状态均为 **Waiting for Review**，审核通过后自动发布。商店文案、40 张截图和隐私标签已更新。Android **1.0.0 (2)** 已于 2026-09-28 20:00（日本时间）更新 Google Play 内部测试，状态 **Available to internal testers**；[加入测试](https://play.google.com/apps/internaltest/4701215213082302872)。S22 Ultra 已完成 Play 安装／更新、签名与购买恢复核验；正式发布草稿和五语素材已保存，**尚未提交审核**，等待目标年龄及广告处理方案确定，详见第 6 节。
+1.1.0 (17) 已通过 TestFlight 验收，并于 2026-09-27 21:31（日本时间）与咖啡内购一起提交审核；最后记录的状态均为 **Waiting for Review**，审核通过后自动发布。商店文案、40 张截图和隐私标签已更新。Android **1.0.0 (2)** 已于 2026-09-28 20:00（日本时间）更新 Google Play 内部测试，状态 **Available to internal testers**；[加入测试](https://play.google.com/apps/internaltest/4701215213082302872)。S22 Ultra 已完成 Play 安装／更新、签名与购买恢复核验；正式版于 **2026-09-29 00:10（日本时间）**提交，受众 **13+**，提交记录 1 为 **In review**；记录时快速检查仍在运行，审核通过后自动全量发布，详见第 6 节。
 
 ### 初始审计基线（改造前）
 
@@ -87,7 +87,7 @@
 - [x] **实现 Android 版**：对齐 iOS 的五秒四选一练习、连对挑战、设备内统计、五十音图、离线使用和多语言界面。2026-09-27 完成：`source/android/`（Kotlin + Compose），设计见 `docs/specs/2026-09-27-android-app-design.md`。
 - [x] **接入广告与咖啡支持**：接入 Android AdMob、同意流程和 Google Play Billing；广告仅在答错或超时后触发，支持一次性咖啡购买与恢复。2026-09-27 完成代码；后台配置与发布验收见下方。
 
-本次发布：`jp.jacky.kana` 的 Google Play **内部测试**版 `1.0.0 (2)` 已开放，测试名单为 `Kana internal testers`。使用名单内账号打开[加入链接](https://play.google.com/apps/internaltest/4701215213082302872)，接受邀请后从 Play 安装。正式轨道候选已保存、尚未提审；见 [首个内部版本](docs/releases/2026-09-28-android-internal.md)与[正式版准备记录](docs/releases/2026-09-28-android-review.md)。
+本次发布：`jp.jacky.kana` 的 Google Play **内部测试**版 `1.0.0 (2)` 已开放，测试名单为 `Kana internal testers`。使用名单内账号打开[加入链接](https://play.google.com/apps/internaltest/4701215213082302872)，接受邀请后从 Play 安装。正式版已按 13+ 定位提交审核；见[首个内部版本](docs/releases/2026-09-28-android-internal.md)与[正式版审核记录](docs/releases/2026-09-28-android-review.md)。
 
 ### 6.1 发布前置条件
 
@@ -132,12 +132,12 @@
 - [x] **应用内隐私入口**：版本 2 的「更多」菜单永久提供隐私政策链接；购买后仍可见，八种界面语言已翻译，按日／中／英打开对应政策页。
 - [x] **商店素材**：五语名称、短说明、完整说明、512 × 512 图标、五张 1024 × 500 置顶大图与 40 张 Android 手机／平板截图已上传并保存。每种语言含四张手机、四张 7 英寸和四张 10 英寸截图；两种平板槽复用同组模拟器截图。[可复现流程](store/android/README.md)。
 - [x] **基础应用申报**：已保存隐私 URL、含广告、无登录限制、非政府应用、无金融／健康功能、Advertising ID 用途；分类为 Education，支持邮箱与 HTTPS 网站已配置。
-- [ ] **目标年龄**：等待主人确认实际面向的年龄范围；确认后核对广告与儿童政策适配，再保存 Target audience。
+- [x] **目标年龄**：2026-09-29 主人确定首发面向 13 岁以上；Target audience 已保存 13–15、16–17、18+，与现有隐私政策一致。
 - [x] **内容评级**：2026-09-29 主人授权接受 IARC 条款后，问卷与评级已完成并保存：北美 Everyone、欧洲 PEGI 3、德国／巴西全年龄、其他主要地区 3+，标注应用内购买。该内容评级不等于儿童目标受众声明。
-- [ ] **儿童支持方案（若选择面向儿童）**：增加中性年龄入口，隔离儿童／年龄未知用户的广告及标识符访问；推荐未成年与年龄未知用户不加载广告、成年人保留广告。需同步三语隐私政策与 Data safety，核对购买／外链入口，并发新版本完成启动、年龄分支、离线与购买回归。尚未选择方案，未修改广告行为。
-- [ ] **Data safety**：五类数据用途与处理方式已填入并保存草稿；草稿重开核验通过。目标年龄确定后完成最终声明。
+- [x] **Data safety**：2026-09-29 完成并保存最终声明；披露广告 SDK 的大致位置、应用互动、诊断、设备标识符，另披露可选购买记录；传输加密、无应用账号，五类数据及预览已核验。
 - [x] **正式轨道候选**：已保存 `1.0.0 (2) - First Android release`，复用内部测试的版本 2 AAB；五语更新说明、176 个国家／地区及 Rest of World 已配置，包验证仅有第三方原生调试符号警告。
-- [ ] **提交审核**：Publishing overview 中正式包与商店资料已准备；内容评级已完成；当前仍待目标受众与 Data safety。解决后提交并记录实际时间与状态。Managed publishing 关闭，审核通过后按全量发布配置生效。
+- [x] **提交审核**：2026-09-29 00:10（日本时间）发送正式版及 15 项变更；[提交记录 1](https://play.google.com/console/u/0/developers/4896965748454075126/app/4975495341700861726/publishing/submission-activity/1/details)显示 **In review**。记录时快速检查仍在运行，通过后自动进入后续审核。Managed publishing 关闭，审核通过后自动全量发布。
+- [ ] **跟进审核结果**：查看快速检查及正式审核结果；如有问题，按 Console 的具体反馈修正并重新提交。
 - [ ] **上线核验**：确认商店版本、截图、链接与内购，关联 AdMob 商店页面，验证 app-ads.txt，并观察崩溃、ANR、广告与购买状态。
 
 依据：[Google Play 内部测试说明](https://support.google.com/googleplay/android-developer/answer/9845334?hl=en)允许在应用设置尚未全部完成时开展内部测试；[许可测试说明](https://support.google.com/googleplay/android-developer/answer/6062777?hl=en)要求配置许可测试账号及启用待测商品。完整商店素材与公开发布申报列在 6.5，不作为内部测试的预设阻塞项；实际阻塞以 Console 为准。

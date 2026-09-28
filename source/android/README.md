@@ -14,8 +14,11 @@ Version 2 was installed and updated through Play on the S22; its Play signature,
 purchase retention, privacy link, and startup passed. Live EEA consent and test
 banner delivery passed on the emulator. The S22 consent endpoint remains blocked
 by its existing network path. See the
-[production preparation record](../../docs/releases/2026-09-28-android-review.md)
-for the 10-test regression result and the declarations still needed for review.
+[production review record](../../docs/releases/2026-09-28-android-review.md)
+for the 10-test regression result and the submitted declarations. Production
+version **1.0.0 (2)** was submitted on **2026-09-29 at 00:10 JST** for ages **13+**.
+Google Play submission 1 shows **In review**. Quick checks were still running
+when recorded; approval will publish the full rollout automatically.
 
 ## Environment
 

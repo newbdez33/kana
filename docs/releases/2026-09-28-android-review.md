@@ -1,18 +1,21 @@
-# Android production preparation: 1.0.0 (2)
+# Android production review: 1.0.0 (2)
 
-Status updated on 2026-09-29 JST: **production changes saved, not submitted**.
-The same candidate is available to internal testers. Google Play still requires
-the target audience and the final Data safety declaration. The IARC terms were
-accepted with the user's specific approval on 2026-09-29, and the content rating
-questionnaire was completed and saved. The target age decision remains pending.
+Submitted on **2026-09-29 at 00:10 JST**. Google Play submission **1** shows
+**In review** for Production, Store Listing, App Content, and Store settings.
+The 15 submitted changes include the version 2 bundle, five store languages,
+IARC ratings, the **13+** target audience, and the final Data safety declaration.
+Quick checks were still running when the submission was recorded. The same
+candidate remains available to internal testers.
+
+[Google Play submission](https://play.google.com/console/u/0/developers/4896965748454075126/app/4975495341700861726/publishing/submission-activity/1/details)
 
 ## Candidate and release state
 
 - Package: `jp.jacky.kana`; version `1.0.0`, version code `2`.
-- Internal release: `1.0.0 (2) - Review candidate`, published at **20:00 JST**;
+- Internal release: `1.0.0 (2) - Review candidate`, published on 2026-09-28 at **20:00 JST**;
   status **Available to internal testers**, full rollout.
-- Production release: `1.0.0 (2) - First Android release`, saved in Publishing
-  overview with the existing version 2 bundle and release notes in five languages.
+- Production release: `1.0.0 (2) - First Android release`, submitted with the
+  existing version 2 bundle and release notes in five languages.
 - Distribution: 176 listed countries/regions plus Rest of World, pending review.
 - Production bundle validation has no errors. The one warning concerns missing
   debug symbols for third-party native code. The R8 mapping is attached.
@@ -87,19 +90,19 @@ The category is Education. Support email is
 The privacy policy, ads, app access, government, financial, health, and
 advertising ID declarations are saved.
 
-The Data safety draft records the following Android SDK behavior:
+The submitted Data safety declaration records the following Android SDK behavior:
 
 | Type | Handling | Purpose |
 | --- | --- | --- |
 | Approximate location, app interactions, diagnostics, device or other IDs | Collected and shared; not ephemeral; required | Ads/marketing, analytics, fraud/security/compliance |
 | Purchase history | Collected; optional; not ephemeral | App functionality |
 
-The draft declares encryption in transit, no account creation or external login,
+The declaration states encryption in transit, no account creation or external login,
 and no app-controlled data deletion request mechanism. Practice statistics stay
 on the device. The disclosure was checked against the
 [AdMob Android disclosure guide](https://developers.google.com/admob/android/privacy/play-data-disclosure)
 and the [Play Data safety definitions](https://support.google.com/googleplay/android-developer/answer/10787469?hl=en).
-These are draft answers and have not been submitted.
+The five data types and the store preview were checked before the final save.
 
 ## Content rating update: 2026-09-29
 
@@ -113,33 +116,24 @@ uses other apps; it is not a native user-content service.
 The resulting ratings are ESRB Everyone, PEGI 3, ClassInd All ages, USK All ages,
 and IARC/Google Play 3+ for the remaining displayed regions. All include In-App
 Purchases. USK also lists Contents for Different Age Groups. The ratings are
-saved for the production review; the production release is not submitted.
+included in the production submission.
 
 Content ratings describe content suitability. Target audience declarations
-separately describe the users the app is designed for. The user is considering
-children under 13. No target audience selection or app behavior was changed.
-The current app has no age screen, sets UMP's under-age-of-consent flag to false,
-and has a privacy policy that says it is not designed for children under 13.
-
-If the user selects a child audience, the proposed approach is a neutral age
-screen with no ad SDK requests for minors or users of unknown age. Adults keep
-ads. This reduces ad revenue from minors but avoids child ad delivery. The change
-would require SDK startup isolation, updated privacy disclosures, review of
-purchase and external-link entry points, a new bundle, and age-branch regression
-checks. It is a proposal, not an implemented or approved behavior change. See the
-[Google Play Families requirements](https://support.google.com/googleplay/android-developer/answer/9893335?hl=en)
-and [target audience guidance](https://support.google.com/googleplay/android-developer/answer/9867159?hl=en).
+separately describe the users the app is designed for. The user chose a teen and
+adult audience on 2026-09-29. The saved age groups are **13–15, 16–17, and 18+**,
+consistent with the privacy policy. See the
+[target audience guidance](https://support.google.com/googleplay/android-developer/answer/9867159?hl=en).
+The age declaration does not guarantee higher ad revenue. Google's
+[teen ad protections](https://support.google.com/admob/answer/12171027?hl=en)
+still restrict personalization for eligible users under 18.
 
 ## Remaining work
 
-1. Confirm the actual target ages. Review the advertising configuration against
-   that decision before completing the target audience declaration.
-2. Complete Data safety, resolve any further Console findings, and submit the
-   saved production changes. Record the actual submission time and review state.
-3. Keep a separate secure backup of the upload key in the user's chosen location.
-4. Recheck live consent and banners on physical hardware where the UMP endpoint
+1. Monitor the submitted release and address any Google Play review findings.
+2. Keep a separate secure backup of the upload key in the user's chosen location.
+3. Recheck live consent and banners on physical hardware where the UMP endpoint
    is reachable. The S22's existing DNS path resolves it to loopback; settings
    were not changed. Audible sound and full physical tablet interaction remain
    separate checks.
-5. After publication, verify the listing, purchase availability, AdMob store
+4. After publication, verify the listing, purchase availability, AdMob store
    association, app-ads.txt, and production health.
