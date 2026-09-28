@@ -1,10 +1,10 @@
 # TODO — kana（五十音）复活计划
 
-更新日期：2026-09-27。逐项完成后在这里打勾；已确认的决策见文末「已定事项」。
+更新日期：2026-09-28。逐项完成后在这里打勾；已确认的决策见文末「已定事项」。
 
 ## 现状摘要
 
-1.1.0 (17) 已通过 TestFlight 验收，并于 2026-09-27 21:31（日本时间）与咖啡内购一起提交审核，两项均为 **Waiting for Review**。审核通过后自动发布。商店文案、40 张截图和隐私标签已更新；后续计划增加 Android 版并上架 Google Play。
+1.1.0 (17) 已通过 TestFlight 验收，并于 2026-09-27 21:31（日本时间）与咖啡内购一起提交审核；最后记录的状态均为 **Waiting for Review**，审核通过后自动发布。商店文案、40 张截图和隐私标签已更新。Android 已实现；2026-09-28 开始准备 Google Play 内部测试，账号可创建应用，尚未发布。
 
 ### 初始审计基线（改造前）
 
@@ -85,8 +85,50 @@
 ## 6. Android 版实现与上架
 
 - [x] **实现 Android 版**：对齐 iOS 的五秒四选一练习、连对挑战、设备内统计、五十音图、离线使用和多语言界面。2026-09-27 完成：`source/android/`（Kotlin + Compose），设计见 `docs/specs/2026-09-27-android-app-design.md`。
-- [x] **接入广告与咖啡支持**：接入 Android AdMob、同意流程和 Google Play Billing；广告仅在答错或超时后触发，支持一次性咖啡购买与恢复。2026-09-27 完成；正式广告 ID 与 Play 商品要等主人在 AdMob / Play Console 建好后填入 `source/android/gradle.properties`。
-- [ ] **测试并上架 Google Play**：完成手机与平板测试、广告及购买验证、隐私申报、多语言介绍与截图，提交审核并发布。
+- [x] **接入广告与咖啡支持**：接入 Android AdMob、同意流程和 Google Play Billing；广告仅在答错或超时后触发，支持一次性咖啡购买与恢复。2026-09-27 完成代码；后台配置与发布验收见下方。
+
+本次目标：发布 `jp.jacky.kana` 的 Google Play **内部测试**版，交付测试加入链接。首包计划为 `1.0.0 (1)`；上传前核对 Play 中的版本号。正式上架另行验收。
+
+### 6.1 发布前置条件
+
+- [x] **核对发布现状**：2026-09-28 已检查 Salmonapps 账号的应用列表，没有 Kana；GitHub 无 Release，当前仅有本地 Debug APK。Android 改动在 [PR #6](https://github.com/newbdez33/kana/pull/6)。
+- [x] **核对 Play 账号验证**：2026-09-28 已确认身份、邮箱和手机验证记录；Policy status 无账号问题，页面加载完成后 Create app 可用。加载期间的禁用提示不是实际阻塞。
+- [x] **创建 Kana 应用**：2026-09-28 创建 `Japanese kana - learning`，包名 `jp.jacky.kana`，默认 en-US，免费应用。主人已明确授权开发者政策和美国出口声明。[Play Console](https://play.google.com/console/u/0/developers/4896965748454075126/app/4975495341700861726/app-dashboard)。
+- [x] **准备测试账号**：2026-09-28 创建并启用 `Kana internal testers` 名单，仅含主人现有 Google 账号；该名单已加入 License testing，保留现有名单与 `RESPOND_NORMALLY` 设置。
+
+### 6.2 广告、购买与签名
+
+- [x] **创建 Android AdMob 应用和横幅单元**：2026-09-28 创建 `Japanese kana - learning`（Android，暂未关联商店）及 `answer-banner`；正式 ID 已填入 `source/android/gradle.properties`，Debug 继续使用 Google 测试 ID。商店关联后核对 `jp.jacky.kana`。
+- [x] **配置同意消息**：2026-09-28 Android Kana 已加入现有 European / US 消息，两条均为 Published、各 4 个应用；隐私 URL 为 `https://kana.jacky.jp/privacy/en`。三语隐私页已补充 Android、Google Play、系统备份及平台统计差异，上线后读回与源码一致。同意表单期间暂停计时已有测试覆盖。
+- [x] **配置上传签名**：Kana 独立上传密钥保存在 `~/.local/share/kana/android-signing/`；密码文件、密钥和未跟踪的 `source/android/key.properties` 权限均为 `0600`。上传证书 SHA-256：`0E:06:97:1D:1C:36:74:5B:75:A3:2C:9A:14:3F:BC:6F:C0:55:09:01:40:A7:6D:CA:F5:0C:D3:7D:D2:F6:56:25`。
+- [ ] **独立备份上传密钥**：正式发布前，将密钥与密码保存到用户选定的安全备份位置；当前仅确认本机副本。
+- [ ] **核对 Play App Signing**：创建发布页已显示 `Releases are signed by Google Play`；首包上传后读回上传证书与 Play 应用签名证书，后续版本保持可更新。
+- [ ] **创建并启用咖啡商品**：一次性非消耗型商品 `jp.jacky.kana.coffee`，日本基准价 ¥300；配置名称、说明、购买选项及可售地区。商品 ID 固定在应用代码中，不填入广告配置。
+
+### 6.3 构建与发布前验证
+
+- [x] **单元测试与静态检查**：2026-09-28 `:app:testDebugUnitTest`、`:app:lintDebug`（复用有效缓存）及 `:app:lintRelease` 通过；51 项单元测试零失败。
+- [ ] **模拟器回归**：运行 `:app:connectedDebugAndroidTest`；检查手机和平板上的练习、超时、统计、五十音图、咖啡面板、旋转及后台恢复。
+- [ ] **生成签名发布包**：运行 `:app:bundleRelease`、`:app:assembleRelease`；核对包名、版本、签名、正式广告配置、非调试标记及混淆后的启动行为，记录 AAB 的 SHA-256。
+- [x] **修复 Release 启动崩溃**：首个本地发布包因 R8 裁剪 WorkManager 的 Room 数据库构造器而崩溃，未上传。补充精确保留规则及 `scripts/check-android-release.py`，AAB 生成的 APK 验证旧包失败、修复包冷启动与进程重启各稳定 10 秒。
+- [ ] **归档发布信息**：保存 AAB、混淆映射、校验值、提交 SHA、构建命令及中日英测试说明；密钥与密码不进入 Git 或发布附件。
+
+### 6.4 发布内部测试并验收
+
+- [ ] **上传内部测试轨道**：上传已验证的 AAB，确认 Play 解析出的版本、权限、设备兼容性及签名，处理阻塞项后发布内部测试。
+- [ ] **交付测试链接**：读回轨道状态与版本号，确认测试名单已启用，记录加入链接与发布时间；上传成功不等于已向测试者开放。
+- [ ] **Play 安装验收**：使用名单内账号加入测试并从 Play 安装；核对首次启动、手机和平板布局、音效、分享、离线练习及系统深色模式。
+- [ ] **真实服务验收**：用许可测试账号验证购买、取消、待批准、恢复、重启与断网恢复；确认购买后去广告。验证 UMP 和横幅时使用测试设备，不点击真实广告。
+- [ ] **更新发布记录**：把实际版本、状态、链接、已通过测试和剩余限制写回此文件与 Android README，并更新 PR。
+
+### 6.5 正式上架前完成
+
+- [ ] **商店素材**：复用现有文案，制作 Android 手机和平板截图、512 × 512 图标与 1024 × 500 置顶大图；校对 en / ja / zh-Hans / zh-Hant / ko 五种商店语言。
+- [ ] **应用内容与隐私**：按 Android 实际 SDK 和数据流填写 Data safety、广告声明、内容分级、目标受众、应用访问权限及其他 Console 必填项；核对隐私政策包含 Google Play Billing 与 Android 广告行为。
+- [ ] **上架范围与审核**：核对免费定价、国家与地区、账号适用的测试要求、预发布报告及设备兼容性；内部测试验收后，再准备正式轨道发布。
+- [ ] **上线核验**：确认商店版本、截图、链接与内购，关联 AdMob 商店页面，验证 app-ads.txt，并观察崩溃、ANR、广告与购买状态。
+
+依据：[Google Play 内部测试说明](https://support.google.com/googleplay/android-developer/answer/9845334?hl=en)允许在应用设置尚未全部完成时开展内部测试；[许可测试说明](https://support.google.com/googleplay/android-developer/answer/6062777?hl=en)要求配置许可测试账号及启用待测商品。完整商店素材与公开发布申报列在 6.5，不作为内部测试的预设阻塞项；实际阻塞以 Console 为准。
 
 ## 已定事项（2026-09-27）
 

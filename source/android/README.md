@@ -25,9 +25,33 @@ export PATH="$JAVA_HOME/bin:$ANDROID_HOME/platform-tools:$PATH"
 ## Ads and billing IDs
 
 Debug builds use Google's test AdMob IDs. Release builds read `kana.admob.appId` and
-`kana.admob.bannerId` from `gradle.properties` and fail until both are set. The coffee
+`kana.admob.bannerId` from `gradle.properties` and reject missing or test IDs. The coffee
 product ID is `jp.jacky.kana.coffee`. Release signing reads `key.properties`
 (`keyAlias`, `keyPassword`, `storeFile`, `storePassword`), which is not committed.
+
+## Release checks
+
+Build the signed bundle and APK, then check an APK generated from the bundle on a
+dedicated emulator. The startup check installs Kana, stops its process, clears the
+emulator crash log, and checks both cold start and process restart. It does not
+clear app data. Use the JDK and Android SDK environment above.
+
+```sh
+./gradlew :app:testDebugUnitTest :app:lintDebug :app:lintRelease :app:bundleRelease :app:assembleRelease
+cd ../..
+python3 scripts/check-android-release.py PATH_TO_BUNDLE_APK \
+  --serial emulator-5560 --output build/android-release/startup
+```
+
+The release ProGuard rules retain the Room database constructor used by
+WorkManager, which AdMob brings in. Without this rule, the debug tests pass but
+the release app crashes before its first screen. Keep the release startup check
+when upgrading these dependencies.
+
+The upload key stays outside the repository at
+`~/.local/share/kana/android-signing/`. Keep a separate secure backup before using
+the key for production. Release status and remaining acceptance tasks are in
+[`TODO.md`](../../TODO.md#6-android-版实现与上架).
 
 ## Emulator
 
