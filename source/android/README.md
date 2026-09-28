@@ -7,7 +7,10 @@ Version **1.0.0 (1)** is available on Google Play internal testing as of
 with an account in `Kana internal testers`, then install from Play. The first
 release uses the temporary name `jp.jacky.kana (unreviewed)`.
 See the [release record](../../docs/releases/2026-09-28-android-internal.md)
-for artifacts, service setup, validation, and pending device acceptance.
+for artifacts and service setup. The
+[S22 Ultra test record](../../docs/releases/2026-09-28-android-s22.md) covers the
+9 passing instrumented tests, release interactions, and real Play test purchases.
+Play installation and live consent/banner delivery still need verification.
 
 ## Environment
 
@@ -26,7 +29,7 @@ export PATH="$JAVA_HOME/bin:$ANDROID_HOME/platform-tools:$PATH"
 ./gradlew :app:testDebugUnitTest
 ./gradlew :app:lintDebug
 ./gradlew :app:assembleDebug
-./gradlew :app:connectedDebugAndroidTest   # needs a running emulator, see below
+./gradlew :app:connectedDebugAndroidTest   # needs a dedicated emulator or test device
 ```
 
 ## Ads and billing IDs

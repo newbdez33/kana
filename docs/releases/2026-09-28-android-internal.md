@@ -23,7 +23,7 @@ Local archive: `build/android-internal-20260928/` (not committed).
 | --- | --- |
 | `kana-1.0.0-1.aab` | Exact bundle uploaded to Play; 11,138,362 bytes |
 | `kana-1.0.0-1-final.apks` | APK set generated from the uploaded bundle |
-| `kana-1.0.0-1-final.apk` | Universal APK used for the final emulator checks |
+| `kana-1.0.0-1-final.apk` | Universal APK used for the final emulator and S22 checks |
 | `mapping.txt` | R8 mapping; also included in the bundle |
 | `artifact-verification.json` | Source commit, checksum, and validation results |
 | `manifest.xml` | Manifest extracted from the bundle |
@@ -82,6 +82,12 @@ The private upload key and password stay in
 - Debug lint reused valid results; release lint passed.
 - All 9 instrumented tests passed on API 36. These tests use service fakes for
   billing, ads, sound, and sharing.
+- All 9 tests also passed on the S22 Ultra over USB ADB. The release APK passed
+  practice, stored statistics, rotation, background/menu timer pauses, dark and
+  light system modes, chart, offline, and native share chooser checks. Real Play
+  test cards passed cancellation, decline, pending approval, successful purchase,
+  offline entitlement, and automatic restore after app data was cleared. See the
+  [physical-device record](2026-09-28-android-s22.md) for evidence and limits.
 - Signed release bundle and APK builds passed. The bundle has minSdk 26,
   targetSdk 36, version code 1, production ad IDs, and no debug flag.
 - Bundle validation, APK signature validation, and 16 KB ZIP alignment passed.
@@ -100,12 +106,14 @@ The private upload key and password stay in
 
 ## Remaining acceptance
 
-- Accept the invite and install through Play on a physical device.
-- Check rotation, background return, phone and tablet layouts, sound, sharing,
-  offline practice, and dark mode.
-- Use the license tester account to check purchase, cancellation, pending
-  payment, restore, restart, offline entitlement, and permanent ad removal.
-- Check UMP and banner behavior on a registered test device.
+- Install through Play on a physical device. The S22 accepted the invitation,
+  but its store page still reported `Item not found` after test billing began
+  working. The completed device checks used the ADB-installed release APK.
+- Check audible sound output and full interactions on a physical tablet.
+- Check UMP and banner behavior before and after purchase on a registered test
+  device. The S22 currently resolves the consent endpoint to loopback, which
+  prevents the consent request. Purchased state and skipped consent requests
+  passed, but actual banner delivery and removal remain unverified.
 - Complete the production listing, app content declarations, key backup, AdMob
   store association, and app-ads.txt verification before public release.
 
