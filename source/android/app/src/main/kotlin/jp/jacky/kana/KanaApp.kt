@@ -28,6 +28,7 @@ fun KanaApp(container: AppContainer, viewModel: PracticeViewModel) {
         onOpenCoffee = viewModel::openCoffee,
         onShare = { activity?.let(container.shareActions::share) },
         onFeedback = { activity?.let(container.shareActions::sendFeedback) },
+        onPrivacyPolicy = { activity?.let(container.shareActions::openPrivacyPolicy) },
         onPrivacyOptions = { activity?.let(container.adsManager::showPrivacyOptions) },
         onBannerFailed = viewModel::bannerFailed,
     )

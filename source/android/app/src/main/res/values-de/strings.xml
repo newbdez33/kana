@@ -40,4 +40,5 @@
     <string name="continue_practice">Weiter üben</string>
     <string name="retry">Erneut versuchen</string>
     <string name="purchase_unverified">Der Kauf konnte nicht bestätigt werden. Bitte versuche es erneut.</string>
+    <string name="privacy_policy">Datenschutzerklärung</string>
 </resources>

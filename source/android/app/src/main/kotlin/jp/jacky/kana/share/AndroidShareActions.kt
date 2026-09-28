@@ -20,6 +20,17 @@ class AndroidShareActions(private val context: Context) : ShareActions {
         runCatching { activity.startActivity(feedbackIntent()) }
     }
 
+    override fun openPrivacyPolicy(activity: Activity) {
+        val language = context.resources.configuration.locales[0].language
+        val suffix = when (language) {
+            "ja" -> ""
+            "zh" -> "zh"
+            else -> "en"
+        }
+        val intent = Intent(Intent.ACTION_VIEW, "https://kana.jacky.jp/privacy/$suffix".toUri())
+        runCatching { activity.startActivity(intent) }
+    }
+
     private fun feedbackIntent(): Intent = Intent(Intent.ACTION_SENDTO, "mailto:$FEEDBACK_EMAIL".toUri())
         .putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.feedback))
 

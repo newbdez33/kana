@@ -41,4 +41,5 @@
     <string name="continue_practice">Back to practice</string>
     <string name="retry">Try again</string>
     <string name="purchase_unverified">The purchase could not be verified. Please try again.</string>
+    <string name="privacy_policy">Privacy policy</string>
 </resources>

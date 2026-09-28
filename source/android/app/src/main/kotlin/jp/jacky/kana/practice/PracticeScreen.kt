@@ -85,6 +85,7 @@ fun PracticeScreen(
     onOpenCoffee: () -> Unit,
     onShare: () -> Unit,
     onFeedback: () -> Unit,
+    onPrivacyPolicy: () -> Unit,
     onPrivacyOptions: () -> Unit,
     onBannerFailed: () -> Unit,
 ) {
@@ -103,6 +104,7 @@ fun PracticeScreen(
                 onOpenCoffee = onOpenCoffee,
                 onShare = onShare,
                 onFeedback = onFeedback,
+                onPrivacyPolicy = onPrivacyPolicy,
                 onPrivacyOptions = onPrivacyOptions,
             )
         }
@@ -131,6 +133,7 @@ private fun MenuRow(
     onOpenCoffee: () -> Unit,
     onShare: () -> Unit,
     onFeedback: () -> Unit,
+    onPrivacyPolicy: () -> Unit,
     onPrivacyOptions: () -> Unit,
 ) {
     Box(Modifier.fillMaxWidth().height(80.dp), contentAlignment = Alignment.BottomCenter) {
@@ -179,6 +182,12 @@ private fun MenuRow(
                             onClick = { expanded = false; onPrivacyOptions() },
                         )
                     }
+                    DropdownMenuItem(
+                        text = { Text(stringResource(R.string.privacy_policy)) },
+                        leadingIcon = { Icon(Icons.Outlined.PrivacyTip, contentDescription = null) },
+                        onClick = { expanded = false; onPrivacyPolicy() },
+                        modifier = Modifier.testTag("privacyPolicyMenu"),
+                    )
                 }
             }
         }

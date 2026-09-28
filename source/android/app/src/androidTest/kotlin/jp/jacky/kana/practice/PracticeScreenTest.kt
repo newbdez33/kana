@@ -10,9 +10,11 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import jp.jacky.kana.FakeAppContainer
 import jp.jacky.kana.MainActivity
 import jp.jacky.kana.TestKanaApplication
 import org.junit.After
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -26,10 +28,11 @@ class PracticeScreenTest {
 
     private lateinit var scenario: ActivityScenario<MainActivity>
     private lateinit var expected: QuestionEngine
+    private lateinit var container: FakeAppContainer
 
     @Before
     fun launch() {
-        TestKanaApplication.get().resetContainer()
+        container = TestKanaApplication.get().resetContainer()
         expected = QuestionEngine(Random(42))
         scenario = ActivityScenario.launch(MainActivity::class.java)
     }
@@ -68,5 +71,14 @@ class PracticeScreenTest {
         compose.onNodeWithTag("moreMenu").assertIsDisplayed()
         compose.onNodeWithTag("menuToggle").performClick()
         compose.onNodeWithTag("chartMenu").assertDoesNotExist()
+    }
+
+    @Test
+    fun privacyPolicyRemainsAvailableAfterPurchase() {
+        compose.runOnIdle { container.coffeeStore.adsRemoved.value = true }
+        compose.onNodeWithTag("menuToggle").performClick()
+        compose.onNodeWithTag("moreMenu").performClick()
+        compose.onNodeWithTag("privacyPolicyMenu").assertIsDisplayed().performClick()
+        compose.runOnIdle { assertEquals(1, container.shareActions.privacyPolicyCalls) }
     }
 }

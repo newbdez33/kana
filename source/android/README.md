@@ -2,15 +2,20 @@
 
 Kotlin + Jetpack Compose port of the iOS app. Design spec: `docs/specs/2026-09-27-android-app-design.md`.
 
-Version **1.0.0 (1)** is available on Google Play internal testing as of
-2026-09-28. [Join the test](https://play.google.com/apps/internaltest/4701215213082302872)
+Version **1.0.0 (2)** is available on Google Play internal testing as of
+2026-09-28 at 20:00 JST. [Join the test](https://play.google.com/apps/internaltest/4701215213082302872)
 with an account in `Kana internal testers`, then install from Play. The first
 release uses the temporary name `jp.jacky.kana (unreviewed)`.
 See the [release record](../../docs/releases/2026-09-28-android-internal.md)
 for artifacts and service setup. The
 [S22 Ultra test record](../../docs/releases/2026-09-28-android-s22.md) covers the
 9 passing instrumented tests, release interactions, and real Play test purchases.
-Play installation and live consent/banner delivery still need verification.
+Version 2 was installed and updated through Play on the S22; its Play signature,
+purchase retention, privacy link, and startup passed. Live EEA consent and test
+banner delivery passed on the emulator. The S22 consent endpoint remains blocked
+by its existing network path. See the
+[production preparation record](../../docs/releases/2026-09-28-android-review.md)
+for the 10-test regression result and the declarations still needed for review.
 
 ## Environment
 
@@ -83,7 +88,13 @@ build by hand afterwards.
 `scripts/ios-strings-to-android.py` regenerates every `strings.xml` from the iOS
 `Localizable.strings` files; edit the iOS files (or the script's overrides) and rerun it.
 
+For reproducible phone and tablet store screenshots, see
+[`store/android/README.md`](../../store/android/README.md). Captures use the real
+Compose UI with deterministic data and fake services on a dedicated emulator.
+
 ## Consent form testing
 
-Set `kana.ads.debugGeography=eea` in `gradle.properties` and rebuild the debug app to force the
-EEA consent form on the emulator.
+Build with `-Pkana.ads.debugGeography=eea` to force EEA geography on the emulator.
+To test this app's published consent message, the debug manifest must also use
+the real AdMob application ID. Keep Google's test banner ID and use a temporary
+build configuration; do not change the default debug or release settings.

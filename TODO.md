@@ -4,7 +4,7 @@
 
 ## 现状摘要
 
-1.1.0 (17) 已通过 TestFlight 验收，并于 2026-09-27 21:31（日本时间）与咖啡内购一起提交审核；最后记录的状态均为 **Waiting for Review**，审核通过后自动发布。商店文案、40 张截图和隐私标签已更新。Android **1.0.0 (1)** 已于 2026-09-28 15:11（日本时间）发布 Google Play 内部测试，状态 **Available to internal testers**；[加入测试](https://play.google.com/apps/internaltest/4701215213082302872)。S22 Ultra 已通过 9 项自动化用例、Release 核心交互和 Play 测试购买／恢复；Play 商店安装与真实广告仍待复测，详见第 6 节。
+1.1.0 (17) 已通过 TestFlight 验收，并于 2026-09-27 21:31（日本时间）与咖啡内购一起提交审核；最后记录的状态均为 **Waiting for Review**，审核通过后自动发布。商店文案、40 张截图和隐私标签已更新。Android **1.0.0 (2)** 已于 2026-09-28 20:00（日本时间）更新 Google Play 内部测试，状态 **Available to internal testers**；[加入测试](https://play.google.com/apps/internaltest/4701215213082302872)。S22 Ultra 已完成 Play 安装／更新、签名与购买恢复核验；正式发布草稿和五语素材已保存，**尚未提交审核**，等待目标年龄与 IARC 条款授权，详见第 6 节。
 
 ### 初始审计基线（改造前）
 
@@ -87,7 +87,7 @@
 - [x] **实现 Android 版**：对齐 iOS 的五秒四选一练习、连对挑战、设备内统计、五十音图、离线使用和多语言界面。2026-09-27 完成：`source/android/`（Kotlin + Compose），设计见 `docs/specs/2026-09-27-android-app-design.md`。
 - [x] **接入广告与咖啡支持**：接入 Android AdMob、同意流程和 Google Play Billing；广告仅在答错或超时后触发，支持一次性咖啡购买与恢复。2026-09-27 完成代码；后台配置与发布验收见下方。
 
-本次发布：`jp.jacky.kana` 的 Google Play **内部测试**版 `1.0.0 (1)` 已开放，测试名单为 `Kana internal testers`。使用名单内账号打开[加入链接](https://play.google.com/apps/internaltest/4701215213082302872)，接受邀请后从 Play 安装。正式上架另行验收；构建与配置记录见 [Android 发布记录](docs/releases/2026-09-28-android-internal.md)。
+本次发布：`jp.jacky.kana` 的 Google Play **内部测试**版 `1.0.0 (2)` 已开放，测试名单为 `Kana internal testers`。使用名单内账号打开[加入链接](https://play.google.com/apps/internaltest/4701215213082302872)，接受邀请后从 Play 安装。正式轨道候选已保存、尚未提审；见 [首个内部版本](docs/releases/2026-09-28-android-internal.md)与[正式版准备记录](docs/releases/2026-09-28-android-review.md)。
 
 ### 6.1 发布前置条件
 
@@ -108,28 +108,35 @@
 ### 6.3 构建与发布前验证
 
 - [x] **单元测试与静态检查**：2026-09-28 `:app:testDebugUnitTest`、`:app:lintDebug`（复用有效缓存）及 `:app:lintRelease` 通过；51 项单元测试零失败。
-- [x] **模拟器自动化回归**：2026-09-28 `:app:connectedDebugAndroidTest` 9 项通过，覆盖练习、菜单、五十音图、本地化与咖啡界面。购买、广告等服务使用替身，不替代真实服务验收。
+- [x] **模拟器自动化回归**：2026-09-28 版本 2 的 10 项 instrumented UI 用例通过，新增购买后隐私入口可见／可点击的回归测试；覆盖练习、菜单、五十音图、本地化与咖啡界面。购买、广告等服务使用替身，不替代真实服务验收。
 - [x] **发布包手机和平板启动检查**：从最终 AAB 生成的 APK 在 API 36 专用模拟器上通过手机与平板尺寸的冷启动、进程重启检查；每次观察 10 秒，无崩溃，截图文字可读、测试横幅可见。平板使用显示尺寸覆盖，不代表实体平板验收。
 - [x] **S22 Ultra 真机回归**：2026-09-28 通过 `jx` 的 USB ADB，在 SM-S9080／Android 16 上完成 9 项自动化用例；最终 AAB 生成的 Release APK 已侧载验收。答题、错题提示、统计持久化、后台／菜单暂停计时、横竖屏、系统深浅色、五十音图、离线冷启动和分享面板通过。未发现崩溃或 ANR。[真机记录](docs/releases/2026-09-28-android-s22.md)。
 - [ ] **补充平板与音效验收**：实体平板完整交互仍待验证；S22 音效尚未人工聆听确认。现有平板验证仅覆盖模拟器显示尺寸。
-- [x] **生成签名发布包**：`:app:bundleRelease`、`:app:assembleRelease` 通过；核对 `jp.jacky.kana`、`1.0.0 (1)`、minSdk 26、targetSdk 36、正式广告 ID、非调试标记与签名。bundletool、APK 签名及 16 KB 对齐检查通过；AAB SHA-256 为 `7eb65d73dc1a3ef11748e2d6f476126723c24a8b9a09c621787eb1119e1a6745`。
+- [x] **生成签名发布包**：`:app:bundleRelease`、`:app:assembleRelease` 通过；核对 `jp.jacky.kana`、`1.0.0 (2)`、minSdk 26、targetSdk 36、正式广告 ID、非调试标记与签名。bundletool、APK 签名及 16 KB 对齐检查通过；版本 2 AAB SHA-256 为 `9aa084343352072b897a5189ddbc4358b8a7a55d4ab2d6063afc2b1902828c56`。
 - [x] **修复 Release 启动崩溃**：首个本地发布包因 R8 裁剪 WorkManager 的 Room 数据库构造器而崩溃，未上传。补充精确保留规则及 `scripts/check-android-release.py`，AAB 生成的 APK 验证旧包失败、修复包冷启动与进程重启各稳定 10 秒。
-- [x] **归档发布信息**：最终 AAB、混淆映射、校验值、构建日志、启动截图及中日英测试说明保存在本机 `build/android-internal-20260928/`；源码提交为 `da91138`。发布记录已注明最终文件名，密钥与密码未进入 Git 或附件。
+- [x] **归档发布信息**：最终 AAB、混淆映射、校验值、构建日志、启动截图及中日英测试说明保存在本机 `build/android-internal-20260928/`；首版源码提交为 `da91138`。版本 2 包、日志和验收证据另存 `build/android-production-20260928/`；密钥与密码未进入 Git 或附件。
 
 ### 6.4 发布内部测试并验收
 
 - [x] **上传内部测试轨道**：2026-09-28 15:11（日本时间）发布 `1.0.0 (1) - First Android test`，状态 **Available to internal testers**。Console 确认 SDK 26+、target 36、4 种 ABI；混淆映射已附带。仅有第三方原生库缺少调试符号的非阻塞警告。
 - [x] **交付测试链接并加入测试**：轨道 Active、测试名单已启用；[加入测试](https://play.google.com/apps/internaltest/4701215213082302872)已在 S22 上接受，账号与内部测试／许可测试名单一致。首次审核前名称为 `jp.jacky.kana (unreviewed)`。
-- [ ] **Play 安装验收**：2026-09-28 S22 已加入测试，但多次刷新安装页仍显示 `Item not found`；待商店页面可用后，从 Play 安装并复核版本、签名和启动。当前真机验收使用 ADB 侧载的最终 Release APK，不计作 Play 安装通过。
+- [x] **发布版本 2 候选**：2026-09-28 20:00（日本时间）发布 `1.0.0 (2) - Review candidate`，状态 **Available to internal testers**；新增永久隐私政策入口。
+- [x] **Play 安装验收**：2026-09-28 晚间商店安装恢复可用，S22 已从 Play 安装版本 1，再通过 Play 更新为版本 2。核对安装器 `com.android.vending`、版本号、Play 签名证书，冷启动 222 ms；购买权益保留，隐私链接打开正常，未发现 Kana 崩溃。
 - [x] **真实购买服务验收**：2026-09-28 在 S22 使用 Play 测试卡验证 ¥300 价格、空记录恢复、取消、拒付、待批准转成功；全程显示测试订单、不收费。购买状态在离线冷启动后保留；清除本次测试数据后，Play 自动恢复权益，联网重启仍有效。界面显示已去广告，已购冷启动没有 UMP 请求；真实横幅验证见下一项。
-- [ ] **真实广告服务验收**：S22 当前将 `fundingchoicesmessages.google.com` 解析到 `127.0.0.1`，UMP 请求失败，横幅未能验证。需在该域名可访问的网络下，使用注册的测试设备验证同意流程与购买前后的横幅行为；不点击真实广告。
+- [x] **模拟器真实广告／同意服务验收**：正式 AAB 生成的 APK 已显示标有 Test Ad 的横幅。另用正式 AdMob app ID、测试横幅和 EEA 调试地区验证实际 UMP 表单、拒绝后继续练习、重开隐私选项与接受；未点击广告，默认 Debug 配置已恢复。
+- [ ] **真机广告服务复测**：S22 仍将 `fundingchoicesmessages.google.com` 解析到 `127.0.0.1`；在可访问该域名的测试设备／网络下补验同意流程及购买前后的横幅。未修改用户网络过滤配置。
 - [x] **更新发布记录**：实际版本、状态、链接、已通过测试和剩余限制已写入此文件、Android README 与发布记录；同步 [PR #6](https://github.com/newbdez33/kana/pull/6)。
 
 ### 6.5 正式上架前完成
 
-- [ ] **商店素材**：复用现有文案，制作 Android 手机和平板截图、512 × 512 图标与 1024 × 500 置顶大图；校对 en / ja / zh-Hans / zh-Hant / ko 五种商店语言。
-- [ ] **应用内容与隐私**：按 Android 实际 SDK 和数据流填写 Data safety、广告声明、内容分级、目标受众、应用访问权限及其他 Console 必填项；核对隐私政策包含 Google Play Billing 与 Android 广告行为。
-- [ ] **上架范围与审核**：核对免费定价、国家与地区、账号适用的测试要求、预发布报告及设备兼容性；内部测试验收后，再准备正式轨道发布。
+- [x] **应用内隐私入口**：版本 2 的「更多」菜单永久提供隐私政策链接；购买后仍可见，八种界面语言已翻译，按日／中／英打开对应政策页。
+- [x] **商店素材**：五语名称、短说明、完整说明、512 × 512 图标、五张 1024 × 500 置顶大图与 40 张 Android 手机／平板截图已上传并保存。每种语言含四张手机、四张 7 英寸和四张 10 英寸截图；两种平板槽复用同组模拟器截图。[可复现流程](store/android/README.md)。
+- [x] **基础应用申报**：已保存隐私 URL、含广告、无登录限制、非政府应用、无金融／健康功能、Advertising ID 用途；分类为 Education，支持邮箱与 HTTPS 网站已配置。
+- [ ] **目标年龄**：等待主人确认实际面向的年龄范围；确认后核对广告与儿童政策适配，再保存 Target audience。
+- [ ] **内容评级**：IARC 首步已准备；新的使用条款需主人单独授权，授权后完成问卷并生成评级。
+- [ ] **Data safety**：五类数据用途与处理方式已填入并保存草稿；草稿重开核验通过。目标年龄确定后完成最终声明。
+- [x] **正式轨道候选**：已保存 `1.0.0 (2) - First Android release`，复用内部测试的版本 2 AAB；五语更新说明、176 个国家／地区及 Rest of World 已配置，包验证仅有第三方原生调试符号警告。
+- [ ] **提交审核**：Publishing overview 中正式包与商店资料已准备；当前阻塞为内容评级、目标受众、Data safety。解决后提交并记录实际时间与状态。Managed publishing 关闭，审核通过后按全量发布配置生效。
 - [ ] **上线核验**：确认商店版本、截图、链接与内购，关联 AdMob 商店页面，验证 app-ads.txt，并观察崩溃、ANR、广告与购买状态。
 
 依据：[Google Play 内部测试说明](https://support.google.com/googleplay/android-developer/answer/9845334?hl=en)允许在应用设置尚未全部完成时开展内部测试；[许可测试说明](https://support.google.com/googleplay/android-developer/answer/6062777?hl=en)要求配置许可测试账号及启用待测商品。完整商店素材与公开发布申报列在 6.5，不作为内部测试的预设阻塞项；实际阻塞以 Console 为准。

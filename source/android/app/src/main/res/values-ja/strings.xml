@@ -40,4 +40,5 @@
     <string name="continue_practice">練習を続ける</string>
     <string name="retry">もう一度読み込む</string>
     <string name="purchase_unverified">購入を確認できませんでした。もう一度お試しください。</string>
+    <string name="privacy_policy">プライバシーポリシー</string>
 </resources>

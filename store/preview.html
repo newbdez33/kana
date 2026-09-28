@@ -91,6 +91,14 @@
     const response = await fetch('metadata.json');
     if (!response.ok) throw new Error('Metadata could not be loaded.');
     const metadata = await response.json();
+    const android = Boolean(metadata['en-US'].shortDescription);
+    if (android) {
+      document.querySelector('.intro').textContent = 'Google Play screenshots and copy · 1.0.0';
+      document.querySelector('.copy h2').textContent = 'Short description';
+      document.querySelector('details').hidden = true;
+      device.replaceChildren(...[['phone', 'Phone'], ['tablet', 'Tablet']].map(([value, label]) => new Option(label, value)));
+      if (['phone', 'tablet'].includes(params.get('device'))) device.value = params.get('device');
+    }
     function render() {
       const copy = metadata[locale.value];
       const figures = copy.shots.map(([title, caption, slug], index) => {
@@ -104,8 +112,8 @@
         link.rel = 'noopener';
         image.src = link.href;
         image.alt = `${title.replaceAll('\n', ' ')} ${caption.replaceAll('\n', ' ')}`;
-        image.width = device.value === 'iphone' ? 1320 : 2064;
-        image.height = device.value === 'iphone' ? 2868 : 2752;
+        image.width = android ? 1080 : (device.value === 'iphone' ? 1320 : 2064);
+        image.height = android ? 1920 : (device.value === 'iphone' ? 2868 : 2752);
         label.textContent = `${number} · ${title.replaceAll('\n', ' ')}`;
         link.append(image);
         figure.append(link, label);
@@ -114,12 +122,12 @@
       const gallery = document.querySelector('#gallery');
       gallery.lang = locale.value;
       gallery.replaceChildren(...figures);
-      for (const [id, value] of [['promotion', copy.promotionalText], ['description', copy.description], ['release', copy.whatsNew]]) {
+      for (const [id, value] of [['promotion', copy.shortDescription ?? copy.promotionalText], ['description', copy.description], ['release', copy.whatsNew ?? '']]) {
         const element = document.getElementById(id);
         element.lang = locale.value;
         element.textContent = value;
       }
-      const dimensions = device.value === 'iphone' ? '1320 × 2868' : '2064 × 2752';
+      const dimensions = android ? '1080 × 1920' : (device.value === 'iphone' ? '1320 × 2868' : '2064 × 2752');
       document.querySelector('#dimensions').textContent = `${dimensions} px · Select a screenshot to view the full-size PNG.`;
       history.replaceState(null, '', `?locale=${locale.value}&device=${device.value}`);
       status.hidden = true;

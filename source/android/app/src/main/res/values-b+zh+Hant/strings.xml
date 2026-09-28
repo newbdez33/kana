@@ -40,4 +40,5 @@
     <string name="continue_practice">繼續練習</string>
     <string name="retry">重新載入</string>
     <string name="purchase_unverified">無法驗證此購買，請重試。</string>
+    <string name="privacy_policy">隱私權政策</string>
 </resources>

@@ -35,6 +35,19 @@ OVERRIDES = {
     },
 }
 
+ADDITIONAL_STRINGS = {
+    "privacy_policy": {
+        "en": "Privacy policy",
+        "ja": "プライバシーポリシー",
+        "zh-Hans": "隐私政策",
+        "zh-Hant": "隱私權政策",
+        "ko": "개인정보처리방침",
+        "de": "Datenschutzerklärung",
+        "fr": "Politique de confidentialité",
+        "es": "Política de privacidad",
+    },
+}
+
 ENTRY = re.compile(r'^"([^"]+)"\s*=\s*"((?:[^"\\]|\\.)*)"\s*;')
 
 
@@ -72,6 +85,8 @@ def render(language: str, entries: list[tuple[str, str]]) -> str:
         text = OVERRIDES.get(name, {}).get(language)
         text = to_android(text) if text is not None else to_android(value)
         lines.append(f'    <string name="{name}">{text}</string>')
+    for name, translations in ADDITIONAL_STRINGS.items():
+        lines.append(f'    <string name="{name}">{to_android(translations[language])}</string>')
     lines.append("</resources>")
     return "\n".join(lines) + "\n"
 
@@ -84,7 +99,7 @@ def main() -> None:
         target = RES_DIR / folder / "strings.xml"
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(render(language, entries), encoding="utf-8")
-        print(f"wrote {target.relative_to(ROOT)} ({len(entries)} strings)")
+        print(f"wrote {target.relative_to(ROOT)} ({len(entries) + len(ADDITIONAL_STRINGS)} strings)")
 
 
 if __name__ == "__main__":

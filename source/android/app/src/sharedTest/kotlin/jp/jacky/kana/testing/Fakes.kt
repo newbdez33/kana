@@ -66,9 +66,11 @@ class FakeAdsManager : AdsManager {
 class FakeShareActions(private val feedbackAvailable: Boolean = true) : ShareActions {
     var shareCalls = 0
     var feedbackCalls = 0
+    var privacyPolicyCalls = 0
     override fun share(activity: Activity) { shareCalls++ }
     override fun canSendFeedback(): Boolean = feedbackAvailable
     override fun sendFeedback(activity: Activity) { feedbackCalls++ }
+    override fun openPrivacyPolicy(activity: Activity) { privacyPolicyCalls++ }
 }
 
 class InMemoryAdsRemovedStorage(private var value: Boolean = false) : AdsRemovedStorage {

@@ -40,4 +40,5 @@
     <string name="continue_practice">Seguir practicando</string>
     <string name="retry">Reintentar</string>
     <string name="purchase_unverified">No se pudo verificar la compra. Inténtalo de nuevo.</string>
+    <string name="privacy_policy">Política de privacidad</string>
 </resources>
