@@ -1,9 +1,10 @@
 # Android production preparation: 1.0.0 (2)
 
-Status recorded on 2026-09-28 JST: **production changes saved, not submitted**.
+Status updated on 2026-09-29 JST: **production changes saved, not submitted**.
 The same candidate is available to internal testers. Google Play still requires
-content ratings, the target audience, and the final Data safety declaration.
-The target age decision and permission to accept the IARC terms are pending.
+the target audience and the final Data safety declaration. The IARC terms were
+accepted with the user's specific approval on 2026-09-29, and the content rating
+questionnaire was completed and saved. The target age decision remains pending.
 
 ## Candidate and release state
 
@@ -100,18 +101,45 @@ on the device. The disclosure was checked against the
 and the [Play Data safety definitions](https://support.google.com/googleplay/android-developer/answer/10787469?hl=en).
 These are draft answers and have not been submitted.
 
+## Content rating update: 2026-09-29
+
+The user authorized acceptance of the IARC terms. The saved questionnaire treats
+Kana as an educational app with a fixed digital purchase. It declares no mature
+content in the app package, native user-to-user content sharing, remote content
+catalog, age-restricted sales, precise location sharing, randomized purchases,
+cash or crypto rewards, or browser/search functionality. The system share sheet
+uses other apps; it is not a native user-content service.
+
+The resulting ratings are ESRB Everyone, PEGI 3, ClassInd All ages, USK All ages,
+and IARC/Google Play 3+ for the remaining displayed regions. All include In-App
+Purchases. USK also lists Contents for Different Age Groups. The ratings are
+saved for the production review; the production release is not submitted.
+
+Content ratings describe content suitability. Target audience declarations
+separately describe the users the app is designed for. The user is considering
+children under 13. No target audience selection or app behavior was changed.
+The current app has no age screen, sets UMP's under-age-of-consent flag to false,
+and has a privacy policy that says it is not designed for children under 13.
+
+If the user selects a child audience, the proposed approach is a neutral age
+screen with no ad SDK requests for minors or users of unknown age. Adults keep
+ads. This reduces ad revenue from minors but avoids child ad delivery. The change
+would require SDK startup isolation, updated privacy disclosures, review of
+purchase and external-link entry points, a new bundle, and age-branch regression
+checks. It is a proposal, not an implemented or approved behavior change. See the
+[Google Play Families requirements](https://support.google.com/googleplay/android-developer/answer/9893335?hl=en)
+and [target audience guidance](https://support.google.com/googleplay/android-developer/answer/9867159?hl=en).
+
 ## Remaining work
 
 1. Confirm the actual target ages. Review the advertising configuration against
    that decision before completing the target audience declaration.
-2. Accept the IARC terms only after the user's specific approval, then complete
-   the content rating questionnaire.
-3. Complete Data safety, resolve any further Console findings, and submit the
+2. Complete Data safety, resolve any further Console findings, and submit the
    saved production changes. Record the actual submission time and review state.
-4. Keep a separate secure backup of the upload key in the user's chosen location.
-5. Recheck live consent and banners on physical hardware where the UMP endpoint
+3. Keep a separate secure backup of the upload key in the user's chosen location.
+4. Recheck live consent and banners on physical hardware where the UMP endpoint
    is reachable. The S22's existing DNS path resolves it to loopback; settings
    were not changed. Audible sound and full physical tablet interaction remain
    separate checks.
-6. After publication, verify the listing, purchase availability, AdMob store
+5. After publication, verify the listing, purchase availability, AdMob store
    association, app-ads.txt, and production health.
