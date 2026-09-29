@@ -2,23 +2,25 @@
 
 Kotlin + Jetpack Compose port of the iOS app. Design spec: `docs/specs/2026-09-27-android-app-design.md`.
 
-Version **1.0.0 (2)** is available on Google Play internal testing as of
-2026-09-28 at 20:00 JST. [Join the test](https://play.google.com/apps/internaltest/4701215213082302872)
-with an account in `Kana internal testers`, then install from Play. The first
-release uses the temporary name `jp.jacky.kana (unreviewed)`.
-See the [release record](../../docs/releases/2026-09-28-android-internal.md)
-for artifacts and service setup. The
-[S22 Ultra test record](../../docs/releases/2026-09-28-android-s22.md) covers the
-9 passing instrumented tests, release interactions, and real Play test purchases.
-Version 2 was installed and updated through Play on the S22; its Play signature,
-purchase retention, privacy link, and startup passed. Live EEA consent and test
-banner delivery passed on the emulator. The S22 consent endpoint remains blocked
-by its existing network path. See the
-[production review record](../../docs/releases/2026-09-28-android-review.md)
-for the 10-test regression result and the submitted declarations. Production
-version **1.0.0 (2)** was submitted on **2026-09-29 at 00:10 JST** for ages **13+**.
-Google Play submission 1 shows **In review**. Quick checks were still running
-when recorded; approval will publish the full rollout automatically.
+Version **1.0.0 (2)** passed Google Play review, as confirmed by the owner on
+**2026-09-29**. The target audience is **13+**. Automatic full rollout was
+configured at submission. The public listing is
+[Google Play](https://play.google.com/store/apps/details?id=jp.jacky.kana);
+its availability remains to be verified.
+
+The same bundle was published to internal testing on 2026-09-28 at 20:00 JST.
+[Join the test](https://play.google.com/apps/internaltest/4701215213082302872)
+with an account in `Kana internal testers`. The
+[initial release record](../../docs/releases/2026-09-28-android-internal.md)
+covers signing and service setup. The
+[production release record](../../docs/releases/2026-09-28-android-review.md)
+covers the 51 unit tests, 10 UI tests, store declarations, and release artifacts.
+
+The [S22 Ultra test record](../../docs/releases/2026-09-28-android-s22.md) covers
+physical-device automation and real Play test purchases. Play installation,
+update, signature, retained purchase, privacy link, and startup passed on the S22.
+Live EEA consent and test banner delivery passed on the emulator. The S22 consent
+endpoint remains blocked by its existing network path.
 
 ## Environment
 
@@ -67,8 +69,10 @@ the release app crashes before its first screen. Keep the release startup check
 when upgrading these dependencies.
 
 The upload key stays outside the repository at
-`~/.local/share/kana/android-signing/`. Keep a separate secure backup before using
-the key for production. Release status and remaining acceptance tasks are in
+`~/.local/share/kana/android-signing/`. A separate secure backup remains pending.
+Deleting a worktree does not delete this directory. Recreate the ignored
+`key.properties` and `local.properties` files for each new checkout; do not commit
+credentials. Release status and remaining acceptance tasks are in
 [`TODO.md`](../../TODO.md#6-android-版实现与上架).
 
 ## Emulator

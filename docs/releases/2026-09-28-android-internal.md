@@ -3,6 +3,10 @@
 Published on 2026-09-28 at 15:11 JST. Play Console reports **Available to internal
 testers** on the active internal testing track. This is not a production release.
 
+This record preserves the version 1 session. Version **1.0.0 (2)** later passed
+Play installation checks and production review. See the
+[current release record](2026-09-28-android-review.md) for status and remaining work.
+
 - Package: `jp.jacky.kana`
 - Release name: `1.0.0 (1) - First Android test`
 - Source commit: `da9113824fe0be1230c7238adf89f2410c3ec09b`
@@ -104,7 +108,7 @@ The private upload key and password stay in
 - Play accepted the bundle with one non-blocking warning about missing native
   debug symbols for a third-party library. The R8 mapping is attached.
 
-## Remaining acceptance
+## Remaining acceptance at the end of the version 1 session
 
 - Install through Play on a physical device. The S22 accepted the invitation,
   but its store page still reported `Item not found` after test billing began

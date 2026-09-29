@@ -1,26 +1,29 @@
-# Android production review: 1.0.0 (2)
+# Android production release: 1.0.0 (2)
 
-Submitted on **2026-09-29 at 00:10 JST**. Google Play submission **1** shows
-**In review** for Production, Store Listing, App Content, and Store settings.
-The 15 submitted changes include the version 2 bundle, five store languages,
-IARC ratings, the **13+** target audience, and the final Data safety declaration.
-Quick checks were still running when the submission was recorded. The same
-candidate remains available to internal testers.
+**Review approved**, as confirmed by the owner on **2026-09-29**. The exact
+approval time and current public availability were not checked in the cleanup
+session. Automatic full rollout was configured at submission.
+
+Submitted on **2026-09-29 at 00:10 JST** as submission **1**. The 15 changes
+included the version 2 bundle, five store languages, IARC ratings, the **13+**
+target audience, and the final Data safety declaration. Console showed
+**In review** at submission, with quick checks running. The same bundle was
+already available to internal testers.
 
 [Google Play submission](https://play.google.com/console/u/0/developers/4896965748454075126/app/4975495341700861726/publishing/submission-activity/1/details)
+· [Public listing](https://play.google.com/store/apps/details?id=jp.jacky.kana)
 
-## Candidate and release state
+## Release details
 
 - Package: `jp.jacky.kana`; version `1.0.0`, version code `2`.
 - Internal release: `1.0.0 (2) - Review candidate`, published on 2026-09-28 at **20:00 JST**;
   status **Available to internal testers**, full rollout.
 - Production release: `1.0.0 (2) - First Android release`, submitted with the
   existing version 2 bundle and release notes in five languages.
-- Distribution: 176 listed countries/regions plus Rest of World, pending review.
+- Distribution configured for 176 listed countries/regions plus Rest of World.
 - Production bundle validation has no errors. The one warning concerns missing
   debug symbols for third-party native code. The R8 mapping is attached.
-- Managed publishing is off. After review approval, the saved full rollout is
-  configured to publish automatically.
+- Managed publishing was off at submission, with automatic full rollout.
 
 [Internal test invitation](https://play.google.com/apps/internaltest/4701215213082302872)
 requires an account in `Kana internal testers`.
@@ -34,6 +37,18 @@ based on the app locale. The existing conditional ad privacy options remain.
 The local archive is `build/android-production-20260928/` and is not committed.
 It contains the bundle, bundletool APK set, universal APK, mapping, build logs,
 signature checks, test results, and screenshots. Credentials are not included.
+
+The worktree handoff archive is stored outside the checkout at
+`~/.local/share/kana/releases/android-1.0.0-2-20260929/`. It includes the internal
+version 1 archive, version 2 artifacts, S22 evidence, a Git bundle, and SHA-256
+manifests. Its README describes recovery and the preview server. Raw evidence
+stays private; only the `preview/` directory is served.
+
+The screenshot gallery at `http://100.64.0.70:8798/` and its `/store/` preview now
+run from that external directory. Both were checked over HTTP after migration.
+They no longer depend on this worktree, but the local server must remain running.
+The upload key stays at `~/.local/share/kana/android-signing/` and is not included
+in the release archive.
 
 | File | Bytes | SHA-256 |
 | --- | ---: | --- |
@@ -129,11 +144,12 @@ still restrict personalization for eligible users under 18.
 
 ## Remaining work
 
-1. Monitor the submitted release and address any Google Play review findings.
+1. Check the public listing, version, screenshots, support links, and purchase
+   availability after the approved release has propagated.
 2. Keep a separate secure backup of the upload key in the user's chosen location.
 3. Recheck live consent and banners on physical hardware where the UMP endpoint
    is reachable. The S22's existing DNS path resolves it to loopback; settings
    were not changed. Audible sound and full physical tablet interaction remain
    separate checks.
-4. After publication, verify the listing, purchase availability, AdMob store
-   association, app-ads.txt, and production health.
+4. Link the Android store listing in AdMob, verify app-ads.txt, and monitor
+   production crashes, ANRs, ads, and purchases.

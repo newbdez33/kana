@@ -1,10 +1,12 @@
 # TODO — kana（五十音）复活计划
 
-更新日期：2026-09-28。逐项完成后在这里打勾；已确认的决策见文末「已定事项」。
+更新日期：2026-09-29。逐项完成后在这里打勾；已确认的决策见文末「已定事项」。
 
 ## 现状摘要
 
-1.1.0 (17) 已通过 TestFlight 验收，并于 2026-09-27 21:31（日本时间）与咖啡内购一起提交审核；最后记录的状态均为 **Waiting for Review**，审核通过后自动发布。商店文案、40 张截图和隐私标签已更新。Android **1.0.0 (2)** 已于 2026-09-28 20:00（日本时间）更新 Google Play 内部测试，状态 **Available to internal testers**；[加入测试](https://play.google.com/apps/internaltest/4701215213082302872)。S22 Ultra 已完成 Play 安装／更新、签名与购买恢复核验；正式版于 **2026-09-29 00:10（日本时间）**提交，受众 **13+**，提交记录 1 为 **In review**；记录时快速检查仍在运行，审核通过后自动全量发布，详见第 6 节。
+iOS **1.1.0 (17)** 已通过 TestFlight 验收，并于 2026-09-27 21:31（日本时间）与咖啡内购一起提交审核；最后记录的状态均为 **Waiting for Review**，审核通过后自动发布。商店文案、40 张截图和隐私标签已更新；本轮未重新核验 iOS 状态。
+
+Android **1.0.0 (2)** 已过审，主人于 **2026-09-29**确认，目标受众 **13+**。提交时已配置审核通过后自动全量发布；公开商店可用性仍待核验。[Google Play](https://play.google.com/store/apps/details?id=jp.jacky.kana) · [内部测试](https://play.google.com/apps/internaltest/4701215213082302872)。S22 Ultra 已完成 Play 安装／更新、签名与购买恢复核验；正式版记录和剩余事项见第 6 节。
 
 ### 初始审计基线（改造前）
 
@@ -87,7 +89,7 @@
 - [x] **实现 Android 版**：对齐 iOS 的五秒四选一练习、连对挑战、设备内统计、五十音图、离线使用和多语言界面。2026-09-27 完成：`source/android/`（Kotlin + Compose），设计见 `docs/specs/2026-09-27-android-app-design.md`。
 - [x] **接入广告与咖啡支持**：接入 Android AdMob、同意流程和 Google Play Billing；广告仅在答错或超时后触发，支持一次性咖啡购买与恢复。2026-09-27 完成代码；后台配置与发布验收见下方。
 
-本次发布：`jp.jacky.kana` 的 Google Play **内部测试**版 `1.0.0 (2)` 已开放，测试名单为 `Kana internal testers`。使用名单内账号打开[加入链接](https://play.google.com/apps/internaltest/4701215213082302872)，接受邀请后从 Play 安装。正式版已按 13+ 定位提交审核；见[首个内部版本](docs/releases/2026-09-28-android-internal.md)与[正式版审核记录](docs/releases/2026-09-28-android-review.md)。
+本次发布：`jp.jacky.kana` 的正式版 **1.0.0 (2)** 已按 **13+** 定位通过审核，提交时已配置自动全量发布。内部测试继续使用 `Kana internal testers` 名单及原[加入链接](https://play.google.com/apps/internaltest/4701215213082302872)。见[首个内部版本](docs/releases/2026-09-28-android-internal.md)与[正式版发布记录](docs/releases/2026-09-28-android-review.md)。
 
 ### 6.1 发布前置条件
 
@@ -101,7 +103,7 @@
 - [x] **创建 Android AdMob 应用和横幅单元**：2026-09-28 创建 `Japanese kana - learning`（Android，暂未关联商店）及 `answer-banner`；正式 ID 已填入 `source/android/gradle.properties`，Debug 继续使用 Google 测试 ID。商店关联后核对 `jp.jacky.kana`。
 - [x] **配置同意消息**：2026-09-28 Android Kana 已加入现有 European / US 消息，两条均为 Published、各 4 个应用；隐私 URL 为 `https://kana.jacky.jp/privacy/en`。三语隐私页已补充 Android、Google Play、系统备份及平台统计差异，上线后读回与源码一致。同意表单期间暂停计时已有测试覆盖。
 - [x] **配置上传签名**：Kana 独立上传密钥保存在 `~/.local/share/kana/android-signing/`；密码文件、密钥和未跟踪的 `source/android/key.properties` 权限均为 `0600`。上传证书 SHA-256：`0E:06:97:1D:1C:36:74:5B:75:A3:2C:9A:14:3F:BC:6F:C0:55:09:01:40:A7:6D:CA:F5:0C:D3:7D:D2:F6:56:25`。
-- [ ] **独立备份上传密钥**：正式发布前，将密钥与密码保存到用户选定的安全备份位置；当前仅确认本机副本。
+- [ ] **独立备份上传密钥**：将密钥与密码保存到用户选定的安全备份位置；当前仅确认本机 `~/.local/share/kana/android-signing/` 副本。该目录在 worktree 外，删除 worktree 不会删除它。
 - [x] **核对 Play App Signing**：2026-09-28 Console 已确认由 Google Play 签名；上传证书与本机 SHA-256 一致，Play 提供的分发证书指纹已记入发布记录。后续版本沿用上传密钥并递增版本号。
 - [x] **创建并启用咖啡商品**：2026-09-28 `jp.jacky.kana.coffee` 已启用，购买选项 `coffee` 为 Buy、向后兼容，覆盖 173 个地区；日本 ¥300，其他地区由 Play 换算。en-US / ja-JP / zh-CN / zh-TW / ko-KR 名称与说明已填写。代码确认购买后只确认交易、不消耗商品，提供永久去广告。
 
@@ -127,7 +129,7 @@
 - [ ] **真机广告服务复测**：S22 仍将 `fundingchoicesmessages.google.com` 解析到 `127.0.0.1`；在可访问该域名的测试设备／网络下补验同意流程及购买前后的横幅。未修改用户网络过滤配置。
 - [x] **更新发布记录**：实际版本、状态、链接、已通过测试和剩余限制已写入此文件、Android README 与发布记录；同步 [PR #6](https://github.com/newbdez33/kana/pull/6)。
 
-### 6.5 正式上架前完成
+### 6.5 正式发布与后续核验
 
 - [x] **应用内隐私入口**：版本 2 的「更多」菜单永久提供隐私政策链接；购买后仍可见，八种界面语言已翻译，按日／中／英打开对应政策页。
 - [x] **商店素材**：五语名称、短说明、完整说明、512 × 512 图标、五张 1024 × 500 置顶大图与 40 张 Android 手机／平板截图已上传并保存。每种语言含四张手机、四张 7 英寸和四张 10 英寸截图；两种平板槽复用同组模拟器截图。[可复现流程](store/android/README.md)。
@@ -136,9 +138,18 @@
 - [x] **内容评级**：2026-09-29 主人授权接受 IARC 条款后，问卷与评级已完成并保存：北美 Everyone、欧洲 PEGI 3、德国／巴西全年龄、其他主要地区 3+，标注应用内购买。该内容评级不等于儿童目标受众声明。
 - [x] **Data safety**：2026-09-29 完成并保存最终声明；披露广告 SDK 的大致位置、应用互动、诊断、设备标识符，另披露可选购买记录；传输加密、无应用账号，五类数据及预览已核验。
 - [x] **正式轨道候选**：已保存 `1.0.0 (2) - First Android release`，复用内部测试的版本 2 AAB；五语更新说明、176 个国家／地区及 Rest of World 已配置，包验证仅有第三方原生调试符号警告。
-- [x] **提交审核**：2026-09-29 00:10（日本时间）发送正式版及 15 项变更；[提交记录 1](https://play.google.com/console/u/0/developers/4896965748454075126/app/4975495341700861726/publishing/submission-activity/1/details)显示 **In review**。记录时快速检查仍在运行，通过后自动进入后续审核。Managed publishing 关闭，审核通过后自动全量发布。
-- [ ] **跟进审核结果**：查看快速检查及正式审核结果；如有问题，按 Console 的具体反馈修正并重新提交。
-- [ ] **上线核验**：确认商店版本、截图、链接与内购，关联 AdMob 商店页面，验证 app-ads.txt，并观察崩溃、ANR、广告与购买状态。
+- [x] **提交审核**：2026-09-29 00:10（日本时间）发送正式版及 15 项变更；[提交记录 1](https://play.google.com/console/u/0/developers/4896965748454075126/app/4975495341700861726/publishing/submission-activity/1/details)在提交时显示 **In review**。Managed publishing 关闭，审核通过后自动全量发布。
+- [x] **审核通过**：2026-09-29 主人确认过审；未记录精确批准时间，公开商店可用性单独核验。
+- [ ] **公开商店核验**：确认 Google Play 可安装版本为 `1.0.0 (2)`，五语截图、支持／隐私链接及咖啡内购正常。
+- [ ] **AdMob 商店关联**：关联 Android 的 `jp.jacky.kana` 商店页面，核对应用投放状态与 app-ads.txt 抓取验证结果。
+- [ ] **上线监测**：观察 Android vitals 的崩溃／ANR，以及广告填充、购买和恢复状态。
+
+### 6.6 工作区交接
+
+- 上传密钥与密码在 worktree 外；`key.properties`、`local.properties` 是可重建的本地配置，不提交到 Git。
+- `build/android-internal-20260928/`、`build/android-production-20260928/`、`build/android-s22-20260928/` 的发布包与验收证据已归档到 `~/.local/share/kana/releases/android-1.0.0-2-20260929/`，含校验清单与 Git bundle；原始日志仅保存在本地。
+- Tailscale 截图预览 `http://100.64.0.70:8798/` 已改由归档中的 `preview/` 提供，服务目录在 worktree 外；首页、图库数据和商店预览的 HTTP 内容已核验。删除工作区不会删除预览文件，服务重启方式见归档说明。
+- 本轮文档通过 [PR #6](https://github.com/newbdez33/kana/pull/6)交接。删除 worktree 时保留远端分支和 PR；Gradle 缓存、构建中间文件可重新生成。
 
 依据：[Google Play 内部测试说明](https://support.google.com/googleplay/android-developer/answer/9845334?hl=en)允许在应用设置尚未全部完成时开展内部测试；[许可测试说明](https://support.google.com/googleplay/android-developer/answer/6062777?hl=en)要求配置许可测试账号及启用待测商品。完整商店素材与公开发布申报列在 6.5，不作为内部测试的预设阻塞项；实际阻塞以 Console 为准。
 

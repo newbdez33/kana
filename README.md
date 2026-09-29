@@ -2,10 +2,10 @@
 
 Four choices. Five seconds. How long can you keep your streak?
 
-Kana is a small iPhone and iPad app for reading basic Japanese kana. Match
+Kana is a small iOS and Android app for reading basic Japanese kana. Match
 hiragana, katakana, and romaji, and try to beat your record.
 
-[App Store](https://apps.apple.com/app/id1195345471) · [Website](https://kana.jacky.jp/)
+[App Store](https://apps.apple.com/app/id1195345471) · [Google Play](https://play.google.com/store/apps/details?id=jp.jacky.kana) · [Website](https://kana.jacky.jp/)
 
 - Four answers and five seconds per question. Incorrect answers and timeouts reveal the correct answer.
 - Practice statistics: answer count, average time, the average for the last ten answers, and best streak.
@@ -23,12 +23,20 @@ hiragana, katakana, and romaji, and try to beat your record.
 
 Store artwork uses native simulator captures with sample statistics and a local
 StoreKit price. See [the store materials](store/README.md) for five languages,
-iPhone and iPad layouts, and the HTML preview. [The design notes](design/README.md)
-cover native UI states and capture instructions.
+iPhone and iPad layouts, and the HTML preview. The
+[Android store materials](store/android/README.md) use native Compose captures
+for phones and tablets. [The design notes](design/README.md) cover native UI
+states and capture instructions.
 
 ## Release status
 
-Version **1.1.0 (17)** and the coffee purchase were submitted to App Review on
+Android **1.0.0 (2)** passed Google Play review, as confirmed by the owner on
+September 29, 2026. The target audience is **13+**. Automatic full rollout was
+configured at submission. Public availability remains to be verified.
+See the [release record](docs/releases/2026-09-28-android-review.md)
+for validation and remaining checks.
+
+iOS **1.1.0 (17)** and the coffee purchase were submitted to App Review on
 September 27, 2026. Both are **Waiting for Review** as of that date. The app will
 release automatically after approval. The release includes the statistics and
 coffee redesign, updated ad consent controls, and the kana chart text fix for
@@ -65,5 +73,5 @@ The public website lives in [site/](site/README.md).
 
 ## Roadmap
 
-The Android app is implemented and awaits its Google Play release. See [TODO.md](TODO.md)
-for the store submission tasks.
+See [TODO.md](TODO.md) for store availability checks, AdMob store association,
+app-ads.txt verification, and the remaining device checks.
