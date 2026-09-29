@@ -1,10 +1,10 @@
 # TODO — kana（五十音）复活计划
 
-更新日期：2026-09-29。逐项完成后在这里打勾；已确认的决策见文末「已定事项」。
+更新日期：2026-09-30。逐项完成后在这里打勾；已确认的决策见文末「已定事项」。
 
 ## 现状摘要
 
-iOS **1.1.0 (17)** 已通过 TestFlight 验收，并于 2026-09-27 21:31（日本时间）与咖啡内购一起提交审核；最后记录的状态均为 **Waiting for Review**，审核通过后自动发布。商店文案、40 张截图和隐私标签已更新；本轮未重新核验 iOS 状态。
+iOS **1.1.0 (17)** 已通过 TestFlight 验收，并于 2026-09-27 21:31（日本时间）与咖啡内购一起提交审核；2026-09-30 用 API 核验：版本状态 **In Review**，审核提交仍显示 Waiting for Review，审核通过后自动发布。商店文案、40 张截图和隐私标签已更新；App Store 线上仍是 1.0.1。
 
 Android **1.0.0 (2)** 已过审，主人于 **2026-09-29**确认，目标受众 **13+**。提交时已配置审核通过后自动全量发布；公开商店可用性仍待核验。[Google Play](https://play.google.com/store/apps/details?id=jp.jacky.kana) · [内部测试](https://play.google.com/apps/internaltest/4701215213082302872)。S22 Ultra 已完成 Play 安装／更新、签名与购买恢复核验；正式版记录和剩余事项见第 6 节。
 
@@ -25,7 +25,7 @@ Android **1.0.0 (2)** 已过审，主人于 **2026-09-29**确认，目标受众 
 ## 0. 不用改代码就能做的
 
 - [x] ~~**AdMob 付款门槛**~~：余额 $1,463.81 卡在 $1,500 自定义门槛下，Verification 标签页 Address Verification 为 Completed。2026-09-27 主人决定：门槛不动，不处理。
-- [x] **App Store Connect Marketing URL**：1.1.0 的 Marketing / Support URL 与隐私政策 URL 已配置，随版本上线生效。线上 1.0.1 不支持直接编辑这些字段；AdMob 抓取验证仍见第 1 节。
+- [x] **App Store Connect Marketing URL**：1.1.0 的 Marketing / Support URL 与隐私政策 URL 已配置，随版本上线生效。线上 1.0.1 不支持直接编辑这些字段；AdMob 抓取验证仍见第 1 节。2026-09-30 复核：iTunes lookup 里 1.0.1 的 `sellerUrl` 仍为空，Google 没有域名可爬，所以 AdMob app-ads.txt 页的 iOS 行在 1.1.0 上线前不会变绿；1.1.0 五个语言的 Marketing URL 都指向 kana.jacky.jp，不需要另外填 jacky.jp 或单独提交元数据更新，等 1.1.0 过审即可。
 
 ## 1. 主页 + app-ads.txt（https://kana.jacky.jp/）
 
@@ -35,7 +35,7 @@ Android **1.0.0 (2)** 已过审，主人于 **2026-09-29**确认，目标受众 
 - [x] `site/public/app-ads.txt`：`google.com, pub-1295607594822275, DIRECT, f08c47fec0942fa0`。
 - [x] `site/wrangler.json` + `wrangler deploy`（2026-09-27 上线，Worker `kana-site`，自定义域名 kana.jacky.jp 已自动建 DNS）。部署用 wrangler profile `kana-site`（已绑定到 `site/` 目录；这个 profile 有 zone / routes 权限，menkyo 的 profile 没有）。
 - [x] 验证：`https://kana.jacky.jp/app-ads.txt` 返回 200 `text/plain`，Google-adstxt UA 也正常。
-- [ ] 1.1.0 上线并带上 Marketing URL 后，在 AdMob Apps > app-ads.txt 等 crawler（最多 7 天），状态变为 verified。
+- [ ] 1.1.0 上线并带上 Marketing URL 后，在 AdMob Apps > app-ads.txt 等 crawler（最多 7 天），状态变为 verified。2026-09-30：`https://kana.jacky.jp/app-ads.txt` 与 `https://jacky.jp/app-ads.txt` 均返回 200、同一条 publisher 行；AdMob 页写明 App Store 域名变更最多 7 天才被爬取，到期后可点「Check for updates」。同账号的 Meow simulator（iOS 2.1，2026-09-29 上架，Marketing URL meow.jacky.jp）也在等首次爬取，预计 2026-10-06 前后变绿，不用处理。
 
 ## 2. 升级 AdMob SDK 到 13.x + UMP 同意流程
 
