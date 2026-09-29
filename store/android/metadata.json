@@ -1,0 +1,157 @@
+{
+  "en-US": {
+    "appName": "Japanese kana - learning",
+    "shortDescription": "Practice hiragana, katakana and romaji. Four choices. Five seconds.",
+    "description": "Four choices, five seconds, and a new chance to beat your best streak. Kana helps you recognize basic hiragana and katakana and connect them with their romaji readings through short practice sessions.\n\nChoose the matching character or reading from four answers. If you answer incorrectly or time runs out, the correct answer is highlighted. Check it, then tap it to continue.\n\nSee your answer count, average answer time, average time for your last 10 answers, and best streak of correct answers at a glance. Your practice statistics are saved on your device.\n\nUse the built-in kana chart to look up a character and its romaji reading. Switch between hiragana and katakana whenever you need a reminder. The question timer pauses while the menu or chart is open.\n\nPractice and the kana chart work offline, with no account required. Kana supports Android phones and tablets. The interface is available in English, Japanese, Simplified Chinese, Traditional Chinese, Korean, German, French, and Spanish.\n\nKana is free to use. Ads appear only after an incorrect answer or a timeout. Correct answers keep the questions moving, so see how long you can keep your streak. If you enjoy the app, the optional “Buy me a coffee” purchase lets you support the author and remove ads. It is a one-time purchase with no subscription.\n\nPrivacy policy: https://kana.jacky.jp/privacy/en",
+    "shots": [
+      [
+        "Make kana\nsecond nature.",
+        "Hiragana, katakana, romaji.\nFour choices. Five seconds.",
+        "practice",
+        "02-practice.png"
+      ],
+      [
+        "Your practice,\nat a glance.",
+        "Answers, average time, and your\nbest streak in one quiet view.",
+        "statistics",
+        "03-menu.png"
+      ],
+      [
+        "A quick look.\nThen try again.",
+        "Switch between hiragana and\nkatakana in the built-in chart.",
+        "chart",
+        "05-chart.png"
+      ],
+      [
+        "Enjoy practicing?\nBuy me a coffee.",
+        "An optional way to support the author.\nOne-time purchase. No subscription.",
+        "coffee",
+        "04-coffee.png"
+      ]
+    ]
+  },
+  "ja": {
+    "appName": "Kana · 五十音",
+    "shortDescription": "ひらがな・カタカナを5秒の4択で練習。五十音表と統計で、毎日少しずつ。",
+    "description": "1問5秒の4択で、連続正解に挑戦。Kanaは、基本のひらがな・カタカナとローマ字の対応を練習するアプリです。すきま時間に少しずつ練習して、自分の最高記録を目指しましょう。\n\n1問の制限時間は5秒。表示された文字に対応するかなやローマ字を選びます。間違えたときや時間切れのときは、正解がハイライトされます。正解を確認してタップすると、次の問題に進みます。\n\n回答数、平均回答時間、直近10回の回答の平均時間、最高連続正解数をひと目で確認できます。練習の統計は端末内に保存されます。\n\n思い出せない文字は、メニューから五十音表を開いて確認。ひらがなとカタカナを切り替え、ローマ字と見比べられます。メニューや五十音表を開いている間はタイマーが止まるので、落ち着いて確認できます。\n\nアカウント登録は不要。練習と五十音表はオフラインでも使えます。Androidのスマートフォンとタブレットに対応し、画面は日本語、英語、簡体字中国語、繁体字中国語、韓国語、ドイツ語、フランス語、スペイン語で表示できます。\n\n無料で使えます。広告が表示されるのは、間違えたときや時間切れのときだけ。正解すると次の問題へ進むので、どこまで連続正解できるか挑戦してみましょう。アプリを気に入ったら、任意のアプリ内購入「作者にコーヒーをおごる」で作者を応援し、広告を削除できます。買い切りで、サブスクリプションはありません。\n\nプライバシーポリシー: https://kana.jacky.jp/privacy/",
+    "shots": [
+      [
+        "かなを、\n少しずつ自然に。",
+        "ひらがな・カタカナ・ローマ字。\n4つの選択肢から、5秒で回答。",
+        "practice",
+        "02-practice.png"
+      ],
+      [
+        "練習の記録を、\nひと目で。",
+        "回答数、回答時間、連続正解。\n自分の練習を確かめよう。",
+        "statistics",
+        "03-menu.png"
+      ],
+      [
+        "思い出せない？\n五十音表へ。",
+        "ひらがなとカタカナを\nいつでも切り替えて確認。",
+        "chart",
+        "05-chart.png"
+      ],
+      [
+        "気に入ったら、\n作者に一杯。",
+        "コーヒー一杯で、作者を応援。\n任意の買い切り。定期購入なし。",
+        "coffee",
+        "04-coffee.png"
+      ]
+    ]
+  },
+  "zh-Hans": {
+    "appName": "Kana · 五十音",
+    "shortDescription": "四个选项，五秒一题。练习平假名、片假名与罗马音，随时查看五十音图。",
+    "description": "四个选项，五秒作答，看看自己能连续答对多少题。Kana 帮你练习辨认基础平假名、片假名和罗马音，在一次次短练习中挑战自己的最高纪录。\n\n每题有 5 秒作答时间，从四个选项中选出对应的假名或罗马音。答错或超时后，正确答案会高亮显示；看清后点击它，即可继续下一题。\n\n答题数、平均用时、最近 10 次作答的平均用时和最高连对数，都能在练习页一眼看清。练习统计保存在你的设备上。\n\n遇到想不起来的字，从菜单打开五十音图，就能切换平假名与片假名，对照罗马音查看。菜单和五十音图打开期间，答题计时会暂停，可以安心查阅。\n\n无需注册账号，练习和五十音图离线也能使用。支持 Android 手机和平板，界面提供简体中文、繁体中文、日语、英语、韩语、德语、法语和西班牙语。\n\n应用可免费使用，广告仅在答错或超时后显示。连续答对就能接着挑战下一题，看看自己能坚持多久。喜欢这款应用，也可以通过可选的「请作者喝杯咖啡」内购支持作者并移除广告。一次性购买，无订阅。\n\n隐私政策：https://kana.jacky.jp/privacy/zh",
+    "shots": [
+      [
+        "把五十音，\n练成直觉。",
+        "平假名、片假名、罗马音。\n四个选项，五秒一题。",
+        "practice",
+        "02-practice.png"
+      ],
+      [
+        "你的练习，\n一眼看清。",
+        "答题数、用时、最高连对。\n随时看看自己的练习表现。",
+        "statistics",
+        "03-menu.png"
+      ],
+      [
+        "想不起来？\n随手查一查。",
+        "平假名与片假名，\n一张表随时对照。",
+        "chart",
+        "05-chart.png"
+      ],
+      [
+        "喜欢这款小应用？\n请作者喝杯咖啡。",
+        "用一杯咖啡，表达你的支持。\n一次购买，无订阅。",
+        "coffee",
+        "04-coffee.png"
+      ]
+    ]
+  },
+  "zh-Hant": {
+    "appName": "Kana · 五十音",
+    "shortDescription": "四個選項，五秒一題。練習平假名、片假名與羅馬拼音，隨時查看五十音圖。",
+    "description": "四個選項，五秒作答，看看自己能連續答對幾題。Kana 幫你練習辨認基礎平假名、片假名和羅馬拼音，在一次次短練習中挑戰自己的最高紀錄。\n\n每題有 5 秒作答時間，從四個選項中選出對應的假名或羅馬拼音。答錯或超時後，正確答案會以醒目方式顯示；確認後點選它，即可繼續下一題。\n\n答題數、平均作答時間、最近 10 次作答的平均時間和最高連續答對次數，都能在練習頁一眼看清。練習統計儲存在你的裝置上。\n\n遇到想不起來的字，從選單開啟五十音圖，就能切換平假名與片假名，對照羅馬拼音查看。選單和五十音圖開啟期間，答題計時會暫停，可以安心查閱。\n\n不必註冊帳號，練習和五十音圖離線也能使用。支援 Android 手機和平板，介面提供繁體中文、簡體中文、日語、英語、韓語、德語、法語和西班牙語。\n\nApp 可免費使用，廣告只會在答錯或超時後顯示。連續答對就能接著挑戰下一題，看看自己能堅持多久。喜歡這款 App，也可以選擇透過「請作者喝杯咖啡」App 內購買支持作者並移除廣告。一次性購買，無訂閱。\n\n隱私政策：https://kana.jacky.jp/privacy/zh",
+    "shots": [
+      [
+        "把五十音，\n練成直覺。",
+        "平假名、片假名、羅馬拼音。\n四個選項，五秒一題。",
+        "practice",
+        "02-practice.png"
+      ],
+      [
+        "你的練習，\n一眼看清。",
+        "答題數、用時、最高連續答對。\n隨時查看自己的練習表現。",
+        "statistics",
+        "03-menu.png"
+      ],
+      [
+        "想不起來？\n隨手查一查。",
+        "平假名與片假名，\n一張表隨時對照。",
+        "chart",
+        "05-chart.png"
+      ],
+      [
+        "喜歡這款小 App？\n請作者喝杯咖啡。",
+        "用一杯咖啡，向作者表達支持。\n一次購買，無訂閱。",
+        "coffee",
+        "04-coffee.png"
+      ]
+    ]
+  },
+  "ko": {
+    "appName": "Kana · 五十音",
+    "shortDescription": "히라가나와 가타카나를 5초 사지선다로 연습하세요. 오십음도와 학습 통계도 함께.",
+    "description": "보기는 네 개, 시간은 5초. 몇 문제나 연속으로 맞힐 수 있을까요? Kana는 기본 히라가나·가타카나와 로마자의 대응을 익히는 앱입니다. 짧게 연습하며 나의 최고 기록에 도전해 보세요.\n\n한 문제의 제한 시간은 5초입니다. 화면에 나온 글자에 맞는 가나나 로마자를 고르세요. 틀리거나 시간이 지나면 정답이 강조되어 표시됩니다. 정답을 확인하고 누르면 다음 문제로 넘어갑니다.\n\n답변 수, 평균 응답 시간, 최근 10회 응답의 평균 시간, 최고 연속 정답 기록을 한눈에 확인할 수 있습니다. 연습 통계는 기기에 저장됩니다.\n\n기억나지 않는 글자는 메뉴에서 가나표를 열어 확인하세요. 히라가나와 가타카나를 전환하며 로마자와 비교할 수 있습니다. 메뉴나 가나표가 열려 있는 동안에는 타이머가 멈추므로 여유 있게 확인할 수 있습니다.\n\n계정 가입이 필요 없으며 연습과 가나표는 오프라인에서도 사용할 수 있습니다. Android 휴대전화와 태블릿을 지원하며 한국어, 일본어, 영어, 중국어 간체, 중국어 번체, 독일어, 프랑스어, 스페인어로 화면을 표시할 수 있습니다.\n\n무료로 사용할 수 있으며, 광고는 틀리거나 제한 시간이 지났을 때만 표시됩니다. 맞히면 바로 다음 문제로 이어지니, 얼마나 연속으로 맞힐 수 있는지 도전해 보세요. 앱이 마음에 든다면 선택 사항인 “개발자에게 커피 한 잔” 앱 내 구입으로 개발자를 응원하고 광고를 제거할 수 있습니다. 구독이 아닌 일회성 구매입니다.\n\n개인정보 처리방침: https://kana.jacky.jp/privacy/en",
+    "shots": [
+      [
+        "가나를 읽는 일이\n자연스러워지도록.",
+        "히라가나, 가타카나, 로마자.\n보기는 네 개, 시간은 5초.",
+        "practice",
+        "02-practice.png"
+      ],
+      [
+        "나의 연습을\n한눈에.",
+        "답변 수, 응답 시간, 연속 정답.\n연습 기록을 확인하세요.",
+        "statistics",
+        "03-menu.png"
+      ],
+      [
+        "기억이 안 나면\n바로 확인하세요.",
+        "오십음도에서 히라가나와\n가타카나를 전환해 보세요.",
+        "chart",
+        "05-chart.png"
+      ],
+      [
+        "연습이 즐거웠다면\n커피 한 잔으로 응원해요.",
+        "커피 한 잔으로 개발자를 응원하세요.\n일회성 구매이며 구독은 없습니다.",
+        "coffee",
+        "04-coffee.png"
+      ]
+    ]
+  }
+}
