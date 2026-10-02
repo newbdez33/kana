@@ -98,6 +98,11 @@ dependencies {
     implementation(libs.user.messaging.platform)
     implementation(libs.billing.ktx)
 
+    constraints {
+        // Play Console flags the fragment 1.1.0 that play-services-basement pulls in as outdated.
+        implementation(libs.androidx.fragment)
+    }
+
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.org.json)

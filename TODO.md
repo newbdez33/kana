@@ -1,6 +1,6 @@
 # TODO — kana（五十音）复活计划
 
-更新日期：2026-09-30。逐项完成后在这里打勾；已确认的决策见文末「已定事项」。
+更新日期：2026-10-02。逐项完成后在这里打勾；已确认的决策见文末「已定事项」。
 
 ## 现状摘要
 
@@ -143,6 +143,7 @@ Android **1.0.0 (2)** 已过审，主人于 **2026-09-29**确认，目标受众 
 - [ ] **公开商店核验**：确认 Google Play 可安装版本为 `1.0.0 (2)`，五语截图、支持／隐私链接及咖啡内购正常。
 - [ ] **AdMob 商店关联**：关联 Android 的 `jp.jacky.kana` 商店页面，核对应用投放状态与 app-ads.txt 抓取验证结果。
 - [ ] **上线监测**：观察 Android vitals 的崩溃／ANR，以及广告填充、购买和恢复状态。
+- [ ] **Play SDK 过期提示**：2026-10-02 Play Console 对 1.0.0 (2) 提示 `androidx.fragment:fragment:1.1.0` 已过期（非阻塞）。它不是直接依赖，是 `play-services-basement` 经 AdMob / UMP / Billing 传递进来的；已在 `app/build.gradle.kts` 用依赖约束钉到 1.9.1，`dependencyInsight` 与 AAB 的 `dependencies.pb` 均确认，51 项单元测试与 `bundleRelease` 通过。提示要等下一个版本（versionCode 3）上架后才会消失。
 
 ### 6.6 工作区交接
 
