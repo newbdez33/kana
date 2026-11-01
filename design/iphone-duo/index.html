@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kana · iPhone Duo</title>
+<style>
+@font-face { font-family: KanaHand; src: url(kana-hand.woff2) format('woff2'); font-display: swap; }
+:root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #242424; background: #f7f7f5; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+button, input { font: inherit; }
+button { cursor: pointer; color: inherit; }
+button:focus-visible, input:focus-visible { outline: 3px solid #d14c35; outline-offset: 3px; }
+header { max-width: 1440px; margin: auto; padding: 28px 40px; display: flex; justify-content: space-between; gap: 16px; align-items: center; border-bottom: 1px solid #e3e3df; }
+.wordmark { font-size: 19px; font-weight: 650; letter-spacing: -.6px; }
+.wordmark span { font-family: KanaHand, sans-serif; color: #c6513d; margin-right: 12px; font-size: 28px; }
+.badge { font-size: 12px; padding: 8px 12px; border: 1px solid #deded8; border-radius: 20px; color: #686863; }
+main { max-width: 1440px; margin: auto; display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 48px; padding: 44px 40px; }
+.eyebrow { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: #8a8a81; font-weight: 600; }
+h1 { font-size: 34px; line-height: 1.15; letter-spacing: -1.5px; font-weight: 550; margin: 14px 0 18px; }
+p { color: #75756d; font-size: 14px; line-height: 1.6; margin: 0 0 28px; }
+nav { display: grid; gap: 6px; margin: 0 0 28px; }
+nav button { text-align: left; background: transparent; border: 1px solid transparent; border-radius: 10px; padding: 12px 14px; font-size: 14px; }
+nav button[aria-pressed=true] { background: #fff; border-color: #deded8; box-shadow: 0 2px 4px #24242404; }
+nav button[aria-pressed=true]::after { content: '↗'; float: right; color: #c6513d; }
+.option { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #686863; }
+.option input { accent-color: #c6513d; }
+.hint { margin-top: 20px; font-size: 12px; }
+.stage { min-width: 0; }
+.stage-header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 28px; }
+h2 { font-size: 16px; font-weight: 550; margin: 0; }
+#dimensions { font: 11px ui-monospace, monospace; color: #8a8a81; }
+.canvas { display: flex; justify-content: center; padding: 10px 0 30px; }
+#device-wrap { position: relative; flex: none; }
+#device { position: absolute; top: 0; left: 0; transform-origin: top left; border: 10px solid #292a28; border-radius: 42px; box-shadow: 0 22px 55px #25272016, 0 3px 6px #25272020; overflow: hidden; background: #f4f4f4; }
+#screen { position: relative; overflow: hidden; background: #f4f4f4; }
+#question, #answers, .region, .inset { position: absolute; }
+#question { overflow-y: auto; scrollbar-width: none; }
+#question::-webkit-scrollbar { display: none; }
+#prompt { min-height: 100%; display: flex; flex-direction: column; }
+#menu { display: flex; height: 80px; flex: none; align-items: center; justify-content: space-evenly; font-size: 16px; border-bottom: 1px solid #e1e1df; color: #777; }
+#menu[hidden] { display: none; }
+.stats { width: calc(100% - 40px); max-width: 560px; margin: 12px auto 0; border-bottom: 1px solid #dededc; padding-bottom: 20px; flex: none; }
+.stats-heading { height: 44px; display: flex; align-items: center; justify-content: space-between; }
+.stats-heading span { font-size: 11px; font-weight: 600; color: #898984; letter-spacing: .5px; }
+#menu-toggle { width: 44px; height: 44px; border: 0; background: transparent; font-size: 22px; padding: 0; }
+.metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; padding-top: 8px; }
+.metric strong { font: 500 25px ui-monospace, monospace; letter-spacing: -1px; }
+.metric small { display: block; font-size: 11px; color: #898984; margin-top: 5px; }
+.metric em { font: normal 12px sans-serif; color: #898984; }
+.metric:last-child strong { color: #cf513b; }
+#glyph-area { min-height: 100px; flex: 1; display: grid; place-items: center; }
+#glyph { font-family: KanaHand, sans-serif; line-height: 1; font-weight: 400; }
+#answers { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; background: white; }
+#answers button { font-family: KanaHand, sans-serif; font-size: 45px; border: 0; background: transparent; border-right: .5px solid #e9e9e7; border-bottom: .5px solid #e9e9e7; padding: 0; }
+#answers button:hover { background: #f5f5f2; }
+.region, .inset { pointer-events: none; display: none; }
+.guides .region { display: block; background: repeating-linear-gradient(135deg, #c6513d10 0 4px, #c6513d24 4px 5px); border: 1px solid #c6513d30; }
+.guides .inset { display: block; background: #27282308; }
+.caption { border-top: 1px solid #e3e3df; padding-top: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.caption p { font-size: 12px; margin: 6px 0 0; }
+.caption b { font-size: 12px; font-weight: 550; }
+#status { color: #c6513d; }
+footer { max-width: 1440px; padding: 0 40px 28px; margin: auto; font-size: 11px; line-height: 1.6; color: #92928b; }
+@media(max-width: 900px) { main { grid-template-columns: 1fr; gap: 24px; padding: 28px 22px; } header { padding: 20px 22px; } h1 { font-size: 30px; } nav { grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 18px; } nav button { padding: 12px 9px; font-size: 12px; } nav button[aria-pressed=true]::after { display: none; } aside p { margin-bottom: 18px; } .hint { display: none; } footer { padding: 0 22px 24px; } }
+@media(max-width: 480px) { .badge { max-width: 160px; text-align: center; font-size: 10px; } .caption { grid-template-columns: 1fr; gap: 12px; } .stage-header { align-items: flex-start; } }
+</style>
+<header>
+  <div class="wordmark"><span>あ</span>kana <span style="font: 13px sans-serif; color: #92928b; margin-left: 10px">/ iPhone Duo</span></div>
+  <div class="badge">Interactive layout study</div>
+</header>
+<main>
+  <aside>
+    <div class="eyebrow">A little practice, anywhere</div>
+    <h1>One question.<br>Every shape.</h1>
+    <p>The same calm practice screen, with room for the way you hold it.</p>
+    <nav aria-label="Device pose" id="poses"></nav>
+    <label class="option"><input type="checkbox" id="guides" checked> Show safe areas and fold</label>
+    <p class="hint">Switch poses during practice. Your question and progress stay in place.</p>
+  </aside>
+  <section class="stage" aria-label="Practice preview">
+    <div class="stage-header"><h2 id="pose-name">Loading preview…</h2><span id="dimensions"></span></div>
+    <div class="canvas" id="canvas">
+      <div id="device-wrap"><div id="device"><div id="screen" class="guides">
+        <div id="question"><div id="prompt">
+          <div id="menu" hidden><span>Kana chart</span><span>Support</span><span>•••</span></div>
+          <div class="stats">
+            <div class="stats-heading"><span>PRACTICE</span><button id="menu-toggle" aria-label="Toggle practice menu" aria-expanded="false">≡</button></div>
+            <div class="metrics">
+              <div class="metric"><strong id="total">128</strong><small>Answers</small></div>
+              <div class="metric"><strong>1.24</strong><em> s</em><small>Average</small></div>
+              <div class="metric"><strong>0.98</strong><em> s</em><small>Recent 10</small></div>
+              <div class="metric"><strong>24</strong><small>Best streak</small></div>
+            </div>
+          </div>
+          <div id="glyph-area"><span id="glyph" lang="ja">あ</span></div>
+        </div></div>
+        <div id="answers" aria-label="Sample answers"></div>
+        <div id="overlays"></div>
+      </div></div></div>
+    </div>
+    <div class="caption">
+      <div><b id="behavior"></b><p id="detail"></p></div>
+      <div><b id="status" aria-live="polite">Question 01 · sample practice</b><p>Tap an answer to try the demo. Open the menu to preview its paused state.</p></div>
+    </div>
+  </section>
+</main>
+<footer>Layout study, not a simulator capture. Pane frames come from the app’s Swift layout code. Fold bands and safe insets are illustrative fixtures; the native app reads them from UIKit. Menu sheets, ad delivery, and timer behavior require native testing.</footer>
+<script type="module">
+const $ = id => document.getElementById(id);
+const descriptions = {
+  closed: ['Familiar vertical practice', 'The question stays above four large answer targets.'],
+  open: ['Space for the whole question', 'Question on the leading side, answers on the trailing side.'],
+  book: ['A clear fold between tasks', 'Both panes stop at the reserved region, including its margins.'],
+  tabletop: ['Look above. Answer below.', 'The question stays above the horizontal fold; all answers stay below it.'],
+  'split-left': ['A complete task in a small window', 'The narrow fold remnant is excluded. Both panes use the remaining space.'],
+  'split-right': ['The same task on either side', 'Each safe-area edge is handled independently.']
+};
+const samples = [
+  { question: 'あ', answers: ['ア', 'カ', 'サ', 'タ'] },
+  { question: 'か', answers: ['タ', 'サ', 'カ', 'ア'] },
+  { question: 'さ', answers: ['カ', 'サ', 'ア', 'タ'] }
+];
+let layouts, selected, count = 0, expanded = false;
+function frame(element, rect) {
+  ['left', 'top', 'width', 'height'].forEach((key, i) => element.style[key] = `${rect[i]}px`);
+}
+function resize() {
+  if (!selected) return;
+  const [width, height] = selected.size;
+  const scale = Math.min(1, $('canvas').clientWidth / (width + 20), 690 / (height + 20));
+  $('device-wrap').style.width = `${(width + 20) * scale}px`;
+  $('device-wrap').style.height = `${(height + 20) * scale}px`;
+  $('device').style.transform = `scale(${scale})`;
+  const promptHeight = Math.max(selected.question[3], (expanded ? 80 : 0) + 140 + 100);
+  $('prompt').style.height = `${promptHeight}px`;
+  $('glyph').style.fontSize = `${Math.min(155, selected.question[2] * .35, (promptHeight - (expanded ? 80 : 0) - 140) * .85)}px`;
+}
+function updateSample() {
+  const sample = samples[count % samples.length];
+  $('glyph').textContent = sample.question;
+  $('total').textContent = 128 + count;
+  $('status').textContent = `Question ${String(count + 1).padStart(2, '0')} · ${expanded ? 'menu open · paused' : 'sample practice'}`;
+  $('answers').replaceChildren(...sample.answers.map(text => {
+    const button = document.createElement('button');
+    button.textContent = text;
+    button.lang = 'ja';
+    button.addEventListener('click', () => { count++; expanded = false; updateMenu(); updateSample(); });
+    return button;
+  }));
+}
+function updateMenu() {
+  $('menu').hidden = !expanded;
+  $('menu-toggle').setAttribute('aria-expanded', expanded);
+  $('menu-toggle').textContent = expanded ? '⌃' : '≡';
+  resize();
+}
+function select(layout) {
+  selected = layout;
+  $('pose-name').textContent = layout.name;
+  $('dimensions').textContent = `${layout.size[0]} × ${layout.size[1]} pt`;
+  $('screen').style.width = `${layout.size[0]}px`;
+  $('screen').style.height = `${layout.size[1]}px`;
+  frame($('question'), layout.question);
+  frame($('answers'), layout.answers);
+  $('behavior').textContent = descriptions[layout.id][0];
+  $('detail').textContent = descriptions[layout.id][1];
+  $('poses').querySelectorAll('button').forEach(button => button.setAttribute('aria-pressed', button.dataset.pose === layout.id));
+  const [width, height] = layout.size, [top, left, bottom, right] = layout.insets;
+  const overlays = layout.divisions.map(rect => ({rect, className: 'region'}));
+  [[0, 0, width, top], [0, 0, left, height], [0, height - bottom, width, bottom], [width - right, 0, right, height]]
+    .filter(rect => rect[2] && rect[3]).forEach(rect => overlays.push({rect, className: 'inset'}));
+  $('overlays').replaceChildren(...overlays.map(({rect, className}) => {
+    const element = document.createElement('div');
+    element.className = className;
+    frame(element, rect);
+    return element;
+  }));
+  resize();
+}
+$('guides').addEventListener('change', event => $('screen').classList.toggle('guides', event.target.checked));
+$('menu-toggle').addEventListener('click', () => { expanded = !expanded; updateMenu(); updateSample(); });
+new ResizeObserver(resize).observe($('canvas'));
+try {
+  const response = await fetch('layouts.json');
+  if (!response.ok) throw new Error('Could not load layout fixtures');
+  layouts = await response.json();
+  layouts.forEach(layout => {
+    const button = document.createElement('button');
+    button.textContent = layout.name;
+    button.dataset.pose = layout.id;
+    button.addEventListener('click', () => select(layout));
+    $('poses').append(button);
+  });
+  updateSample();
+  select(layouts.find(layout => layout.id === 'book'));
+} catch (error) {
+  $('pose-name').textContent = 'Serve this folder with an HTTP server to load the preview.';
+  console.error(error);
+}
+</script>
+</html>

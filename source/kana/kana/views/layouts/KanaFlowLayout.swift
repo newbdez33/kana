@@ -93,4 +93,8 @@ class KanaFlowLayout: UICollectionViewFlowLayout {
         })
         return attrs // 3、返回
     }
+
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        super.shouldInvalidateLayout(forBoundsChange: newBounds) || collectionView?.bounds.size != newBounds.size
+    }
 }

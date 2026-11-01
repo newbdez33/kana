@@ -12,17 +12,15 @@ import AVFoundation
 
 class QuestionViewController: UIViewController {
 
-    @IBOutlet weak var statisticsView: StatisticsView!
-    @IBOutlet weak var contentHeight: NSLayoutConstraint!
-    @IBOutlet weak var questionCenterY: NSLayoutConstraint!
-    @IBOutlet weak var questionViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var bannerView: BannerView!
-    @IBOutlet weak var adView: UIView!
-    @IBOutlet weak var adViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var questionLabel: UILabel!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var constraintQuestionTop: NSLayoutConstraint!
+    private var practiceView: PracticeView { view as! PracticeView }
+    var statisticsView: StatisticsView { practiceView.statisticsView }
+    var bannerView: BannerView { practiceView.bannerView }
+    var adViewHeight: NSLayoutConstraint { practiceView.bannerHeight }
+    var questionLabel: UILabel { practiceView.questionLabel }
+    var scrollView: UIScrollView { practiceView.scrollView }
+    var collectionView: UICollectionView { practiceView.collectionView }
+    private var bannerRequested = false
+    private var requestedBannerSize: CGSize?
     
     var correctSoundEffect: AVAudioPlayer?
     var incorrectSoundEffect: AVAudioPlayer?
@@ -34,6 +32,10 @@ class QuestionViewController: UIViewController {
     var timer:Timer?
     var currentQuestionStartTime:TimeInterval = 0
     private var questionPausedAt: TimeInterval?
+
+    override func loadView() {
+        view = PracticeView()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +43,20 @@ class QuestionViewController: UIViewController {
         view.backgroundColor = .kanaKeyGrayColor()
         
         statisticsView.menuButton.addTarget(self, action: #selector(toggleMenu), for: .touchUpInside)
-        configureQuestionLayout()
+        let menu = MenuViewController()
+        addChild(menu)
+        menu.view.translatesAutoresizingMaskIntoConstraints = false
+        practiceView.menuContainer.addSubview(menu.view)
+        NSLayoutConstraint.activate([
+            menu.view.topAnchor.constraint(equalTo: practiceView.menuContainer.topAnchor),
+            menu.view.bottomAnchor.constraint(equalTo: practiceView.menuContainer.bottomAnchor),
+            menu.view.leadingAnchor.constraint(equalTo: practiceView.menuContainer.leadingAnchor),
+            menu.view.trailingAnchor.constraint(equalTo: practiceView.menuContainer.trailingAnchor)
+        ])
+        menu.didMove(toParent: self)
+        scrollView.delegate = self
+        collectionView.delegate = self
+        collectionView.dataSource = self
 
         bannerView.adUnitID = "ca-app-pub-1295607594822275/7264793113"
         bannerView.rootViewController = self
@@ -61,29 +76,9 @@ class QuestionViewController: UIViewController {
         AdsManager.shared.gatherConsent(from: self)
     }
 
-    override func viewSafeAreaInsetsDidChange() {
-        super.viewSafeAreaInsetsDidChange()
-        updateContentHeight()
-    }
-
-    private func configureQuestionLayout() {
-        let area = UILayoutGuide()
-        let questionView = questionLabel.superview!
-        questionView.addLayoutGuide(area)
-        questionCenterY.isActive = false
-        NSLayoutConstraint.activate([
-            area.topAnchor.constraint(equalTo: statisticsView.bottomAnchor),
-            area.bottomAnchor.constraint(equalTo: questionView.bottomAnchor),
-            questionLabel.centerYAnchor.constraint(equalTo: area.centerYAnchor),
-            questionLabel.heightAnchor.constraint(lessThanOrEqualTo: area.heightAnchor, multiplier: 0.85),
-            questionLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 240)
-        ])
-    }
-
-    private func updateContentHeight() {
-        guard isViewLoaded, let contentHeight else { return }
-        contentHeight.constant = -view.safeAreaInsets.top - view.safeAreaInsets.bottom - constraintQuestionTop.constant
-        collectionView.collectionViewLayout.invalidateLayout()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateBannerSize()
     }
 
     override func didReceiveMemoryWarning() {
@@ -106,7 +101,7 @@ class QuestionViewController: UIViewController {
         
     }
     func answerAction(index:Int) {
-        if constraintQuestionTop.constant > 0 { setMenuExpanded(false) }
+        if practiceView.isMenuExpanded { setMenuExpanded(false) }
         
         if timer != nil {
             timer!.invalidate()
@@ -218,7 +213,7 @@ class QuestionViewController: UIViewController {
         collectionView.reloadData()
         
         currentQuestionStartTime = Date().timeIntervalSince1970 //timestamp
-        questionPausedAt = constraintQuestionTop.constant > 0 ? currentQuestionStartTime : nil
+        questionPausedAt = practiceView.isMenuExpanded ? currentQuestionStartTime : nil
         startQuestionTimer()
         
         updateStatisticsLabels()
@@ -273,12 +268,12 @@ class QuestionViewController: UIViewController {
     }
 
     @objc private func toggleMenu() {
-        setMenuExpanded(constraintQuestionTop.constant == 0)
+        setMenuExpanded(!practiceView.isMenuExpanded)
     }
 
     func setMenuExpanded(_ expanded: Bool) {
-        guard expanded != (constraintQuestionTop.constant > 0) else { return }
-        constraintQuestionTop.constant = expanded ? 80 : 0
+        guard expanded != practiceView.isMenuExpanded else { return }
+        practiceView.isMenuExpanded = expanded
         if expanded {
             timer?.invalidate()
             timer = nil
@@ -289,7 +284,6 @@ class QuestionViewController: UIViewController {
             questionPausedAt = nil
             startQuestionTimer()
         }
-        updateContentHeight()
         menuController?.setExpanded(expanded)
         statisticsView.menuButton.setImage(UIImage(systemName: expanded ? "chevron.up" : "line.3.horizontal"), for: .normal)
         statisticsView.menuButton.accessibilityLabel = expanded ? .closeMenu : .menu
@@ -299,17 +293,28 @@ class QuestionViewController: UIViewController {
     }
 
     func hideBanner() {
+        bannerRequested = false
+        requestedBannerSize = nil
         adViewHeight.constant = 0
-        questionViewHeight.constant = 0
+        bannerView.isHidden = true
     }
     
     func showBanner() {
         guard !Store.shared.adsRemoved, AdsManager.shared.isReady else { return }
-        bannerView.adSize = currentOrientationAnchoredAdaptiveBanner(width: view.frame.width)
+        bannerRequested = true
+        view.layoutIfNeeded()
+        updateBannerSize()
+    }
+
+    private func updateBannerSize() {
+        guard bannerRequested, bannerView.bounds.width > 0 else { return }
+        let size = currentOrientationAnchoredAdaptiveBanner(width: bannerView.bounds.width)
+        guard size.size != requestedBannerSize else { return }
+        requestedBannerSize = size.size
+        bannerView.adSize = size
+        bannerView.isHidden = false
+        adViewHeight.constant = size.size.height
         bannerView.load(Request())
-        let height = bannerView.adSize.size.height
-        adViewHeight.constant = height + 5
-        questionViewHeight.constant = -height
     }
 
     @objc func adsRemovedDidChange() {
@@ -323,7 +328,8 @@ class QuestionViewController: UIViewController {
 extension QuestionViewController : UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if constraintQuestionTop.constant == 0 {
+        guard scrollView.isDragging || scrollView.isDecelerating else { return }
+        if !practiceView.isMenuExpanded {
             if scrollView.contentOffset.y + scrollView.adjustedContentInset.top < -60 {
                 setMenuExpanded(true)
             }
