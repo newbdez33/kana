@@ -59,8 +59,16 @@ final class PracticeResizeTests: XCTestCase {
         XCTAssertTrue(controller.timer?.isValid == true)
     }
 
-    func testPracticeRespectsEachSafeAreaEdge() throws {
-        let scene = try XCTUnwrap(UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.first)
+    func testPracticeRespectsEachSafeAreaEdge() async throws {
+        func activeScene() -> UIWindowScene? {
+            UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
+                .first { $0.activationState == .foregroundActive }
+        }
+        for _ in 0..<100 {
+            if activeScene() != nil { break }
+            try await Task.sleep(nanoseconds: 50_000_000)
+        }
+        let scene = try XCTUnwrap(activeScene())
         let window = UIWindow(windowScene: scene)
         let controller = UIViewController()
         let practice = PracticeView()
@@ -75,7 +83,14 @@ final class PracticeResizeTests: XCTestCase {
         XCTAssertGreaterThanOrEqual(practice.safeAreaInsets.right, 84)
         let prompt = practice.scrollView.convert(practice.scrollView.bounds, to: practice)
         let answers = practice.collectionView.convert(practice.collectionView.bounds, to: practice)
-        XCTAssertEqual(prompt.union(answers), controller.view.safeAreaLayoutGuide.layoutFrame)
+        let content = prompt.union(answers)
+        let safeArea = practice.safeAreaLayoutGuide.layoutFrame
+        // UIKit rounds child view bounds to device pixels.
+        let pixel = 1 / max(practice.traitCollection.displayScale, 1)
+        XCTAssertEqual(content.minX, safeArea.minX, accuracy: pixel)
+        XCTAssertEqual(content.minY, safeArea.minY, accuracy: pixel)
+        XCTAssertEqual(content.maxX, safeArea.maxX, accuracy: pixel)
+        XCTAssertEqual(content.maxY, safeArea.maxY, accuracy: pixel)
     }
 
     func testChartUsesItsContainerWidth() throws {

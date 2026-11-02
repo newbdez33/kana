@@ -12,10 +12,11 @@ final class PracticeLayoutTests: XCTestCase {
         XCTAssertEqual(layout.answers.width, bounds.width)
     }
 
-    func testWideWindowUsesTwoColumns() {
+    func testWideWindowPlacesAnswersBeforeQuestion() {
         let bounds = CGRect(x: 0, y: 0, width: 867, height: 669)
         let layout = PracticeLayout(bounds: bounds, prefersColumns: true)
-        XCTAssertEqual(layout.question.maxX, layout.answers.minX)
+        XCTAssertEqual(layout.answers.minX, bounds.minX)
+        XCTAssertEqual(layout.answers.maxX, layout.question.minX)
         XCTAssertEqual(layout.question.width, layout.answers.width)
         XCTAssertEqual(layout.question.height, bounds.height)
     }
@@ -24,9 +25,9 @@ final class PracticeLayoutTests: XCTestCase {
         let bounds = CGRect(x: 0, y: 0, width: 867, height: 669)
         let fold = CGRect(x: 459, y: -20, width: 33, height: 720)
         let layout = PracticeLayout(bounds: bounds, prefersColumns: true, divisions: [fold])
-        XCTAssertEqual(layout.question.maxX, fold.minX)
-        XCTAssertEqual(layout.answers.minX, fold.maxX)
-        XCTAssertEqual(layout.answers.maxX, bounds.maxX)
+        XCTAssertEqual(layout.answers.maxX, fold.minX)
+        XCTAssertEqual(layout.question.minX, fold.maxX)
+        XCTAssertEqual(layout.question.maxX, bounds.maxX)
         XCTAssertFalse(layout.question.intersects(fold))
         XCTAssertFalse(layout.answers.intersects(fold))
     }
@@ -35,8 +36,8 @@ final class PracticeLayoutTests: XCTestCase {
         let fold = CGRect(x: 475.5, y: 0, width: 0, height: 669)
         let layout = PracticeLayout(bounds: CGRect(x: 0, y: 0, width: 867, height: 669),
                                     prefersColumns: true, divisions: [fold])
-        XCTAssertEqual(layout.question.maxX, 475.5)
-        XCTAssertEqual(layout.answers.minX, 475.5)
+        XCTAssertEqual(layout.answers.maxX, 475.5)
+        XCTAssertEqual(layout.question.minX, 475.5)
     }
 
     func testTabletopKeepsAnswersBelowTheFold() {
@@ -61,8 +62,8 @@ final class PracticeLayoutTests: XCTestCase {
         let fold = CGRect(x: 459, y: 0, width: 33, height: 669)
         let layout = PracticeLayout(bounds: CGRect(x: 0, y: 0, width: 867, height: 669),
                                     prefersColumns: true, divisions: [fold], rightToLeft: true)
-        XCTAssertEqual(layout.question.minX, fold.maxX)
-        XCTAssertEqual(layout.answers.maxX, fold.minX)
+        XCTAssertEqual(layout.question.maxX, fold.minX)
+        XCTAssertEqual(layout.answers.minX, fold.maxX)
     }
 
     func testNonzeroOriginAndOutOfBoundsRegion() {

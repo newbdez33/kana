@@ -31,8 +31,8 @@ struct PracticeLayout {
             // A narrow remnant beside the fold cannot hold the statistics or answer grid.
             let minimumLength: CGFloat = vertical ? 240 : 176
             if leadingLength >= minimumLength, trailingLength >= minimumLength {
-                question = vertical && rightToLeft ? trailing : leading
-                answers = vertical && rightToLeft ? leading : trailing
+                question = vertical && !rightToLeft ? trailing : leading
+                answers = vertical && !rightToLeft ? leading : trailing
                 return
             }
             available = leadingLength >= trailingLength ? leading : trailing
@@ -43,8 +43,8 @@ struct PracticeLayout {
             let leading = CGRect(x: available.minX, y: available.minY,
                                  width: available.width / 2, height: available.height)
             let trailing = leading.offsetBy(dx: leading.width, dy: 0)
-            question = rightToLeft ? trailing : leading
-            answers = rightToLeft ? leading : trailing
+            question = rightToLeft ? leading : trailing
+            answers = rightToLeft ? trailing : leading
         } else {
             question = CGRect(x: available.minX, y: available.minY,
                               width: available.width, height: available.height * 0.6)

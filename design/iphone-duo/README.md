@@ -2,8 +2,9 @@
 
 Kana keeps one question, the same statistics, and all four answers through a
 resize. Compact portrait stacks the question above the answers. A wide window
-uses two columns. A horizontal fold puts the question above the fold and the
-answers below it.
+places the four answers on the leading side and the kana question on the trailing
+side: answers on the left and the question on the right in left-to-right layouts.
+A horizontal fold puts the question above the fold and the answers below it.
 
 The implementation follows the readiness, adaptive layout, dual-pane patterns,
 and design review skills from
@@ -73,16 +74,16 @@ Checked on 2026-11-02:
 - Browser review: all six poses retained sample question, answer count, progress,
   and menu state. The preview also fit a 390-point browser viewport without
   horizontal overflow. No browser warnings or errors were observed.
-- Native test execution was attempted but did not start: Xcode disabled Simulator
-  support because installed CoreSimulator 1171.7.0 is older than its required
-  1174.21.0. `test-without-building` exited 70 with no matching destination.
+- Native regression tests passed on iPhone 18 Pro, iOS 27.0: 10 geometry tests,
+  five UIKit resize tests, and the menu pause/resume test. The safe-area test
+  waits for the host scene and allows one device pixel for UIKit rounding.
 
 Native validation remains open before release: all Duo poses and rotations,
 live folding during a question, both Split View sides, PiP height changes,
-VoiceOver, localized statistics, and chart/support/ad presentation. The browser
-preview and host geometry tests do not validate UIKit layout or real fold events.
+VoiceOver, localized statistics, and chart/support/ad presentation. The iOS 27.0
+run covers the fallback layout; it does not validate iOS 27.1 division events.
 
-After a matching runtime is available:
+Run the regression suite or repeat it on a Duo runtime:
 
 ```sh
 xcodebuild test -project source/kana/kana.xcodeproj -scheme kana \
