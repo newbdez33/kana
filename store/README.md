@@ -7,15 +7,43 @@ The `appName` field is the label on the artwork; it does not rename the app.
 The English store name is `Japanese kana - learning`, with the subtitle
 `Challenge yourself`. Both fit the current 30-character limits.
 
-The current release candidate is **1.1.0 (17)**. It contains the practice and
-coffee redesign and fixes unreadable kana chart text in Dark Mode. TestFlight
-acceptance is complete. On September 27, 2026, the app and its first coffee
-purchase were submitted together and reached `WAITING_FOR_REVIEW`. The release
-setting is automatic release after approval.
+The public App Store version is **1.1.0 (17)**, released on October 6, 2026.
+It contains the practice and coffee redesign and fixes unreadable kana chart
+text in Dark Mode. The app and its first coffee purchase were submitted
+together on September 27, 2026, with automatic release after approval.
 
 The store copy focuses on timed questions and the best correct-answer streak.
 It explains that ads appear only after an incorrect answer or a timeout. Coffee
 support is presented as an optional way to support the author.
+
+## TestFlight 1.1.1 (18)
+
+Uploaded on November 2, 2026. App Store Connect reports `VALID` and
+`IN_BETA_TESTING` for build `e1c0369f-38dd-4e03-9981-c5f413149888`. The existing
+internal group has access to all builds. English, Japanese, and Simplified
+Chinese test notes were saved and read back. This build adds the adaptive
+iPhone Duo layout, with answers on the left and the kana question on the right
+in wide left-to-right layouts.
+
+The build passed Apple validation and all 16 native regression tests on
+iPhone 18 Pro with iOS 27.0. Actual Duo division events and device behavior
+still need testing on an iOS 27.1 or later Duo runtime. See the
+[Duo validation notes](../design/iphone-duo/README.md).
+
+The signed archive is stored outside the worktree at
+`~/Library/Developer/Xcode/Archives/2026-11-02/Kana 1.1.1 (18) - Duo.xcarchive`.
+The IPA, export options, upload logs, and status records are in
+`~/Library/Developer/Kana/releases/2026-11-02-1.1.1-18/`.
+The machine-local `release-settings.json` references the shared App Store
+Connect API credential used by Meow.
+
+Use `xcodebuild archive` with signing enabled, then `xcodebuild -exportArchive`
+with method `app-store-connect`, destination `upload`, automatic signing, and
+`uploadSymbols = true`. Supply the API key path, key ID, and issuer from the
+local settings file to both commands. An unsigned archive preserved an invalid
+GoogleMobileAds signature identifier and failed Apple validation; the signed
+archive passed. Apple reported missing vendor SDK dSYMs during upload, but
+accepted the build. The app's own dSYM matches its executable.
 
 ## Screenshots
 
