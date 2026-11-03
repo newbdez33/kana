@@ -4,7 +4,7 @@ import jp.jacky.kana.stats.StatStore
 import jp.jacky.kana.testing.FakeAdsManager
 import jp.jacky.kana.testing.FakeClock
 import jp.jacky.kana.testing.FakeCoffeeStore
-import jp.jacky.kana.testing.FakeSoundPlayer
+import jp.jacky.kana.testing.FakeFeedbackPlayer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -33,7 +33,7 @@ class PracticeViewModelTest {
     val tmp = TemporaryFolder()
 
     private val dispatcher = StandardTestDispatcher()
-    private val sound = FakeSoundPlayer()
+    private val sound = FakeFeedbackPlayer()
     private val coffee = FakeCoffeeStore()
     private val ads = FakeAdsManager().apply { isReady.value = true }
     private lateinit var statStore: StatStore
@@ -50,13 +50,74 @@ class PracticeViewModelTest {
     private fun TestScope.viewModel() = PracticeViewModel(
         engine = QuestionEngine(Random(1)),
         statStore = statStore,
-        sound = sound,
+        feedbackPlayer = sound,
         clock = FakeClock(testScheduler),
         coffeeStore = coffee,
         adsManager = ads,
     ).also { runCurrent() }
 
     private fun PracticeUiState.wrongIndex() = (0..3).first { it != question.correctIndex }
+
+    @Test
+    fun `tap at deadline before timer callback cannot extend streak`() = runTest(dispatcher) {
+        val vm = viewModel()
+        advanceTimeBy(5000)
+        vm.answer(vm.state.value.question.correctIndex)
+        runCurrent()
+        assertTrue(vm.state.value.revealCorrect)
+        assertEquals(0, vm.state.value.stats.currentStreak)
+    }
+
+    @Test
+    fun `answers are ignored while a sheet or background pauses practice`() = runTest(dispatcher) {
+        val vm = viewModel()
+        val question = vm.state.value.question
+        vm.openChart()
+        vm.answer(question.correctIndex)
+        vm.closeSheet()
+        vm.setInBackground(true)
+        vm.answer(question.correctIndex)
+        runCurrent()
+        assertEquals(question, vm.state.value.question)
+        assertEquals(0, vm.state.value.stats.currentStreak)
+    }
+
+    @Test
+    fun `rhythm stops during pauses and sound settings apply on resume`() = runTest(dispatcher) {
+        val vm = viewModel()
+        repeat(10) {
+            advanceTimeBy(100)
+            vm.answer(vm.state.value.question.correctIndex)
+            runCurrent()
+        }
+        advanceTimeBy(800)
+        runCurrent()
+        assertTrue(sound.beatCount > 0)
+        vm.toggleMenu()
+        val beats = sound.beatCount
+        advanceTimeBy(10_000)
+        runCurrent()
+        assertEquals(beats, sound.beatCount)
+        assertNull(vm.state.value.feedback)
+        vm.setFeedbackSettings(FeedbackSettings(sound = false))
+        vm.toggleMenu()
+        advanceTimeBy(800)
+        runCurrent()
+        assertEquals(beats, sound.beatCount)
+        assertFalse(vm.state.value.revealCorrect)
+    }
+
+    @Test
+    fun `correcting a timeout has no haptic and no new record`() = runTest(dispatcher) {
+        val vm = viewModel()
+        advanceTimeBy(5001)
+        runCurrent()
+        vm.answer(vm.state.value.question.correctIndex)
+        runCurrent()
+        assertEquals(FeedbackKind.CORRECTION, sound.events.last().kind)
+        assertNull(sound.events.last().strength)
+        assertEquals(0, vm.state.value.stats.currentStreak)
+    }
 
     @Test
     fun `correct answer records the cost, extends the streak, and moves on`() = runTest(dispatcher) {
@@ -72,7 +133,7 @@ class PracticeViewModelTest {
         assertEquals(1.5, state.stats.recentSeconds!!, 1e-9)
         assertEquals(1, state.stats.currentStreak)
         assertEquals(1, state.stats.bestStreak)
-        assertEquals(1, sound.correctCount)
+        assertEquals(FeedbackKind.HIT, sound.events.last().kind)
     }
 
     @Test
@@ -93,7 +154,7 @@ class PracticeViewModelTest {
         assertEquals(2, state.stats.totalCount)
         assertEquals(0, state.stats.currentStreak)
         assertEquals(1, state.stats.bestStreak)
-        assertEquals(1, sound.incorrectCount)
+        assertEquals(FeedbackKind.BROKEN, sound.events.last().kind)
     }
 
     @Test
@@ -105,7 +166,7 @@ class PracticeViewModelTest {
         assertTrue(state.revealCorrect)
         assertTrue(state.bannerRequested)
         assertEquals(0, state.stats.totalCount)
-        assertEquals(1, sound.incorrectCount)
+        assertEquals(FeedbackKind.BROKEN, sound.events.last().kind)
     }
 
     @Test
@@ -140,7 +201,7 @@ class PracticeViewModelTest {
         assertFalse(state.bannerRequested)
         assertEquals(1, state.stats.totalCount)
         assertEquals(0, state.stats.currentStreak)
-        assertEquals(1, sound.correctCount)
+        assertEquals(FeedbackKind.CORRECTION, sound.events.last().kind)
     }
 
     @Test
@@ -155,7 +216,7 @@ class PracticeViewModelTest {
         assertTrue(state.revealCorrect)
         assertEquals(1, state.stats.totalCount)
         assertEquals(0, state.stats.currentStreak)
-        assertEquals(2, sound.incorrectCount)
+        assertEquals(listOf(FeedbackKind.BROKEN, FeedbackKind.CORRECTION), sound.events.map { it.kind })
     }
 
     @Test

@@ -94,8 +94,8 @@ def render(language: str, entries: list[tuple[str, str]]) -> str:
 def main() -> None:
     for language, folder in LANGUAGES.items():
         entries = parse(IOS_DIR / f"{language}.lproj" / "Localizable.strings")
-        if len(entries) != 39:
-            raise SystemExit(f"{language}: expected 39 strings, found {len(entries)}")
+        if len(entries) != 52:
+            raise SystemExit(f"{language}: expected 52 strings, found {len(entries)}")
         target = RES_DIR / folder / "strings.xml"
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(render(language, entries), encoding="utf-8")

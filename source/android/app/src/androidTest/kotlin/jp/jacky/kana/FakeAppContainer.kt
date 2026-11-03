@@ -8,7 +8,7 @@ import jp.jacky.kana.stats.StatStore
 import jp.jacky.kana.testing.FakeAdsManager
 import jp.jacky.kana.testing.FakeCoffeeStore
 import jp.jacky.kana.testing.FakeShareActions
-import jp.jacky.kana.testing.FakeSoundPlayer
+import jp.jacky.kana.testing.FakeFeedbackPlayer
 import java.io.File
 import kotlin.random.Random
 
@@ -19,6 +19,6 @@ class FakeAppContainer(app: Application, seed: Int = 42) : AppContainer {
     override val statStore = StatStore(File(app.cacheDir, "test-stats-${System.nanoTime()}.json"), timeLimitSeconds = 60.0)
     override val coffeeStore = FakeCoffeeStore()
     override val adsManager = FakeAdsManager()
-    override val soundPlayer = FakeSoundPlayer()
+    override val feedbackPlayer = FakeFeedbackPlayer()
     override val shareActions = FakeShareActions()
 }

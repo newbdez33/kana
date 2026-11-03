@@ -40,5 +40,18 @@
     <string name="continue_practice">練習を続ける</string>
     <string name="retry">もう一度読み込む</string>
     <string name="purchase_unverified">購入を確認できませんでした。もう一度お試しください。</string>
+    <string name="feedback_stage0">ウォームアップ</string>
+    <string name="feedback_stage1">リズムに乗る</string>
+    <string name="feedback_stage2">集中</string>
+    <string name="feedback_stage3">絶好調</string>
+    <string name="feedback_stage4">無我夢中</string>
+    <string name="feedback_combo">%1$d 問連続正解</string>
+    <string name="feedback_record">新記録</string>
+    <string name="feedback_try_again">もう一度</string>
+    <string name="feedback_correction">続けよう</string>
+    <string name="feedback_sound">効果音</string>
+    <string name="feedback_rhythm">リズム</string>
+    <string name="feedback_haptics">振動</string>
+    <string name="feedback_reduced_motion">動きを減らす</string>
     <string name="privacy_policy">プライバシーポリシー</string>
 </resources>

@@ -4,7 +4,7 @@ import android.app.Activity
 import jp.jacky.kana.ads.AdsManager
 import jp.jacky.kana.practice.Clock
 import jp.jacky.kana.share.ShareActions
-import jp.jacky.kana.sound.SoundPlayer
+import jp.jacky.kana.feedback.FeedbackPlayer
 import jp.jacky.kana.store.AdsRemovedStorage
 import jp.jacky.kana.store.BillingGateway
 import jp.jacky.kana.store.CoffeeProduct
@@ -17,11 +17,13 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.test.TestCoroutineScheduler
 
-class FakeSoundPlayer : SoundPlayer {
-    var correctCount = 0
-    var incorrectCount = 0
-    override fun playCorrect() { correctCount++ }
-    override fun playIncorrect() { incorrectCount++ }
+class FakeFeedbackPlayer : FeedbackPlayer {
+    val events = mutableListOf<jp.jacky.kana.practice.FeedbackEvent>()
+    var beatCount = 0
+    var stopCount = 0
+    override fun play(event: jp.jacky.kana.practice.FeedbackEvent, settings: jp.jacky.kana.practice.FeedbackSettings) { events += event }
+    override fun beat() { beatCount++ }
+    override fun stop() { stopCount++ }
 }
 
 class FakeClock(private val scheduler: TestCoroutineScheduler) : Clock {

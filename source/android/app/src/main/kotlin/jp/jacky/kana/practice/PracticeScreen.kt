@@ -36,6 +36,7 @@ import androidx.compose.material.icons.outlined.MoreHoriz
 import androidx.compose.material.icons.outlined.PrivacyTip
 import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -88,6 +89,7 @@ fun PracticeScreen(
     onPrivacyPolicy: () -> Unit,
     onPrivacyOptions: () -> Unit,
     onBannerFailed: () -> Unit,
+    onFeedbackSettings: (FeedbackSettings) -> Unit = {},
 ) {
     Column(
         Modifier
@@ -106,11 +108,13 @@ fun PracticeScreen(
                 onFeedback = onFeedback,
                 onPrivacyPolicy = onPrivacyPolicy,
                 onPrivacyOptions = onPrivacyOptions,
+                settings = state.feedbackSettings,
+                onFeedbackSettings = onFeedbackSettings,
             )
         }
         StatisticsBar(stats = state.stats, menuExpanded = state.menuExpanded, onToggleMenu = onToggleMenu)
         Column(Modifier.weight(1f).fillMaxWidth()) {
-            QuestionArea(prompt = state.question.prompt, modifier = Modifier.weight(1f))
+            QuestionArea(state = state, modifier = Modifier.weight(1f))
             if (state.showBanner) {
                 BannerAd(adUnitId = bannerAdUnitId, onFailed = onBannerFailed, modifier = Modifier.padding(bottom = 5.dp))
             }
@@ -135,6 +139,8 @@ private fun MenuRow(
     onFeedback: () -> Unit,
     onPrivacyPolicy: () -> Unit,
     onPrivacyOptions: () -> Unit,
+    settings: FeedbackSettings,
+    onFeedbackSettings: (FeedbackSettings) -> Unit,
 ) {
     Box(Modifier.fillMaxWidth().height(80.dp), contentAlignment = Alignment.BottomCenter) {
         Row(
@@ -163,6 +169,17 @@ private fun MenuRow(
                     Icon(Icons.Outlined.MoreHoriz, contentDescription = stringResource(R.string.more), tint = KanaColors.secondary)
                 }
                 DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+                    val options = listOf(
+                        Triple(R.string.feedback_sound, settings.sound) { onFeedbackSettings(settings.copy(sound = !settings.sound)) },
+                        Triple(R.string.feedback_rhythm, settings.rhythm) { onFeedbackSettings(settings.copy(rhythm = !settings.rhythm)) },
+                        Triple(R.string.feedback_haptics, settings.haptics) { onFeedbackSettings(settings.copy(haptics = !settings.haptics)) },
+                        Triple(R.string.feedback_reduced_motion, settings.reducedMotion) { onFeedbackSettings(settings.copy(reducedMotion = !settings.reducedMotion)) },
+                    )
+                    options.forEach { (label, checked, toggle) ->
+                        DropdownMenuItem(text = { Text(stringResource(label)) },
+                            trailingIcon = { Checkbox(checked = checked, onCheckedChange = null) }, onClick = toggle)
+                    }
+                    HorizontalDivider()
                     DropdownMenuItem(
                         text = { Text(stringResource(R.string.share)) },
                         leadingIcon = { Icon(Icons.Outlined.Share, contentDescription = null) },
@@ -285,12 +302,13 @@ private fun Metric(value: AnnotatedString, caption: String, tag: String, modifie
 }
 
 @Composable
-private fun QuestionArea(prompt: String, modifier: Modifier = Modifier) {
+private fun QuestionArea(state: PracticeUiState, modifier: Modifier = Modifier) {
     BoxWithConstraints(modifier.fillMaxWidth().background(KanaColors.keyGray), contentAlignment = Alignment.Center) {
         val maxFont = with(LocalDensity.current) { 155.dp.toSp() }
+        PracticeFeedbackOverlay(state)
         BasicText(
-            text = prompt,
-            modifier = Modifier.widthIn(max = 240.dp).heightIn(max = maxHeight * 0.85f).testTag("questionLabel"),
+            text = state.question.prompt,
+            modifier = Modifier.widthIn(max = 240.dp).heightIn(max = (maxHeight - 80.dp).coerceAtLeast(40.dp)).testTag("questionLabel"),
             style = TextStyle(fontFamily = KanaFonts.hosohuwa, color = KanaColors.ink, textAlign = TextAlign.Center),
             maxLines = 1,
             autoSize = TextAutoSize.StepBased(minFontSize = 40.sp, maxFontSize = maxFont, stepSize = 4.sp),

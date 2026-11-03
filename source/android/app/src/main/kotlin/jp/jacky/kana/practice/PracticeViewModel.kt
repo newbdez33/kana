@@ -7,7 +7,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import jp.jacky.kana.ads.AdsManager
 import jp.jacky.kana.di.AppContainer
-import jp.jacky.kana.sound.SoundPlayer
+import jp.jacky.kana.feedback.FeedbackPlayer
 import jp.jacky.kana.stats.StatStore
 import jp.jacky.kana.stats.StatSummary
 import jp.jacky.kana.store.CoffeeStore
@@ -32,6 +32,12 @@ data class PracticeUiState(
     val bannerAllowed: Boolean = false,
     val adsRemoved: Boolean = false,
     val privacyOptionsAvailable: Boolean = false,
+    val feedbackSettings: FeedbackSettings = FeedbackSettings(),
+    val feedback: FeedbackEvent? = null,
+    val feedbackSequence: Long = 0,
+    val beatSequence: Long = 0,
+    val remainingFraction: Float = 1f,
+    val paused: Boolean = false,
 ) {
     val showBanner: Boolean get() = bannerRequested && bannerAllowed
 }
@@ -43,7 +49,7 @@ data class PracticeUiState(
 class PracticeViewModel(
     private val engine: QuestionEngine,
     private val statStore: StatStore,
-    private val sound: SoundPlayer,
+    private val feedbackPlayer: FeedbackPlayer,
     private val clock: Clock,
     coffeeStore: CoffeeStore,
     adsManager: AdsManager,
@@ -58,6 +64,9 @@ class PracticeViewModel(
     private var inBackground = false
     private var consentFormVisible = false
     private var timerJob: Job? = null
+    private val feedbackRun = PracticeFeedback(statStore.summary.value.bestStreak)
+    private var hasInteracted = false
+    private var lastBeat = clock.nowMillis()
 
     init {
         viewModelScope.launch {
@@ -88,16 +97,18 @@ class PracticeViewModel(
 
     fun answer(index: Int) {
         val current = _state.value
+        if (inBackground || consentFormVisible || current.sheet != null) return
         val chosen = current.question.answers.getOrNull(index) ?: return
         if (current.menuExpanded) setMenuExpanded(false)
+        hasInteracted = true
         val isCorrect = chosen.kana == current.question.kana
         if (current.revealCorrect) {
-            if (isCorrect) {
-                sound.playCorrect()
-                nextQuestion()
-            } else {
-                sound.playIncorrect()
-            }
+            emitFeedback(FeedbackEvent(FeedbackKind.CORRECTION))
+            if (isCorrect) nextQuestion()
+            return
+        }
+        if (clock.nowMillis() - questionStartedAt >= timeLimitMillis) {
+            onTimeout()
             return
         }
         cancelTimer()
@@ -105,12 +116,23 @@ class PracticeViewModel(
         statStore.recordStreak(isCorrect)
         statStore.recordAnswer(costSeconds)
         if (isCorrect) {
-            sound.playCorrect()
             nextQuestion()
+            emitFeedback(feedbackRun.correct(statStore.summary.value.currentStreak))
         } else {
-            sound.playIncorrect()
             reveal()
+            emitFeedback(feedbackRun.broken(statStore.summary.value.bestStreak))
         }
+    }
+
+    fun setFeedbackSettings(settings: FeedbackSettings) {
+        feedbackPlayer.stop()
+        lastBeat = clock.nowMillis()
+        _state.update { it.copy(feedbackSettings = settings, feedback = null) }
+    }
+
+    private fun emitFeedback(event: FeedbackEvent) {
+        _state.update { it.copy(feedback = event, feedbackSequence = it.feedbackSequence + 1) }
+        feedbackPlayer.play(event, _state.value.feedbackSettings)
     }
 
     fun toggleMenu() = setMenuExpanded(!_state.value.menuExpanded)
@@ -131,17 +153,20 @@ class PracticeViewModel(
     }
 
     private fun onTimeout() {
+        if (isPaused() || _state.value.revealCorrect) return
+        cancelTimer()
         statStore.recordStreak(false)
-        sound.playIncorrect()
         reveal()
+        emitFeedback(feedbackRun.broken(statStore.summary.value.bestStreak))
     }
 
     private fun reveal() {
-        _state.update { it.copy(revealCorrect = true, bannerRequested = true) }
+        feedbackPlayer.stop()
+        _state.update { it.copy(revealCorrect = true, bannerRequested = true, remainingFraction = 0f) }
     }
 
     private fun nextQuestion() {
-        _state.update { it.copy(question = engine.next(), revealCorrect = false, bannerRequested = false) }
+        _state.update { it.copy(question = engine.next(), revealCorrect = false, bannerRequested = false, remainingFraction = 1f) }
         questionStartedAt = clock.nowMillis()
         pausedAt = if (isPaused()) questionStartedAt else null
         startTimer()
@@ -163,13 +188,16 @@ class PracticeViewModel(
     private fun refreshPause() {
         val paused = isPaused()
         val now = clock.nowMillis()
+        _state.update { it.copy(paused = paused, feedback = if (paused) null else it.feedback) }
         val pauseStart = pausedAt
         if (paused && pauseStart == null) {
             pausedAt = now
             cancelTimer()
+            feedbackPlayer.stop()
         } else if (!paused && pauseStart != null) {
             questionStartedAt += now - pauseStart
             pausedAt = null
+            lastBeat = now
             startTimer()
         }
     }
@@ -177,11 +205,26 @@ class PracticeViewModel(
     private fun startTimer() {
         cancelTimer()
         if (pausedAt != null || _state.value.revealCorrect) return
-        val remaining = timeLimitMillis - (clock.nowMillis() - questionStartedAt)
         timerJob = viewModelScope.launch {
-            delay(remaining.coerceAtLeast(1))
-            onTimeout()
+            while (true) {
+                val now = clock.nowMillis()
+                val remaining = timeLimitMillis - (now - questionStartedAt)
+                if (remaining <= 0) { onTimeout(); break }
+                _state.update { it.copy(remainingFraction = (remaining.toFloat() / timeLimitMillis).coerceIn(0f, 1f)) }
+                val bpm = PracticeFeedback.bpm(PracticeFeedback.stage(statStore.summary.value.currentStreak))
+                val settings = _state.value.feedbackSettings
+                if (hasInteracted && settings.sound && settings.rhythm && bpm > 0 && now - lastBeat >= 60_000L / bpm) {
+                    lastBeat = now
+                    feedbackPlayer.beat()
+                    _state.update { it.copy(beatSequence = it.beatSequence + 1) }
+                }
+                delay(minOf(50, remaining))
+            }
         }
+    }
+
+    override fun onCleared() {
+        feedbackPlayer.stop()
     }
 
     private fun cancelTimer() {
@@ -195,7 +238,7 @@ class PracticeViewModel(
                 PracticeViewModel(
                     engine = QuestionEngine(container.random),
                     statStore = container.statStore,
-                    sound = container.soundPlayer,
+                    feedbackPlayer = container.feedbackPlayer,
                     clock = container.clock,
                     coffeeStore = container.coffeeStore,
                     adsManager = container.adsManager,

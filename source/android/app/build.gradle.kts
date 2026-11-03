@@ -74,6 +74,7 @@ android {
     }
 
     sourceSets {
+        getByName("main") { res.srcDir("../../shared/feedback") }
         getByName("test") { kotlin.directories += "src/sharedTest/kotlin" }
         getByName("androidTest") { kotlin.directories += "src/sharedTest/kotlin" }
     }

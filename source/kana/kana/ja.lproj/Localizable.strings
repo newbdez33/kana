@@ -44,3 +44,17 @@
 "ContinuePractice" = "練習を続ける";
 "Retry" = "もう一度読み込む";
 "PurchaseUnverified" = "購入を確認できませんでした。もう一度お試しください。";
+
+"FeedbackStage0" = "ウォームアップ";
+"FeedbackStage1" = "リズムに乗る";
+"FeedbackStage2" = "集中";
+"FeedbackStage3" = "絶好調";
+"FeedbackStage4" = "無我夢中";
+"FeedbackCombo" = "%d 問連続正解";
+"FeedbackRecord" = "新記録";
+"FeedbackTryAgain" = "もう一度";
+"FeedbackCorrection" = "続けよう";
+"FeedbackSound" = "効果音";
+"FeedbackRhythm" = "リズム";
+"FeedbackHaptics" = "振動";
+"FeedbackReducedMotion" = "動きを減らす";

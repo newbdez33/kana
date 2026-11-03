@@ -40,5 +40,18 @@
     <string name="continue_practice">Weiter üben</string>
     <string name="retry">Erneut versuchen</string>
     <string name="purchase_unverified">Der Kauf konnte nicht bestätigt werden. Bitte versuche es erneut.</string>
+    <string name="feedback_stage0">Aufwärmen</string>
+    <string name="feedback_stage1">Im Rhythmus</string>
+    <string name="feedback_stage2">Fokus</string>
+    <string name="feedback_stage3">In Höchstform</string>
+    <string name="feedback_stage4">Im Flow</string>
+    <string name="feedback_combo">%1$d in Folge</string>
+    <string name="feedback_record">Neuer Rekord</string>
+    <string name="feedback_try_again">Noch einmal</string>
+    <string name="feedback_correction">Weiter üben</string>
+    <string name="feedback_sound">Toneffekte</string>
+    <string name="feedback_rhythm">Rhythmus</string>
+    <string name="feedback_haptics">Haptik</string>
+    <string name="feedback_reduced_motion">Bewegung reduzieren</string>
     <string name="privacy_policy">Datenschutzerklärung</string>
 </resources>

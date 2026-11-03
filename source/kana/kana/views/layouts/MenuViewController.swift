@@ -99,6 +99,20 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
                 AdsManager.shared.presentPrivacyOptions(from: self)
             })
         }
+        if let practice = parent as? QuestionViewController {
+            let options: [(String, WritableKeyPath<FeedbackSettings, Bool>)] = [
+                ("FeedbackSound", \.sound), ("FeedbackRhythm", \.rhythm),
+                ("FeedbackHaptics", \.haptics), ("FeedbackReducedMotion", \.reducedMotion)
+            ]
+            let settings = options.map { key, path in
+                UIAction(title: NSLocalizedString(key, comment: ""),
+                         state: practice.feedbackSettings[keyPath: path] ? .on : .off) { [weak self, weak practice] _ in
+                    practice?.feedbackSettings[keyPath: path].toggle()
+                    self?.updatePurchaseButtons()
+                }
+            }
+            actions.append(contentsOf: settings)
+        }
         moreButton.menu = UIMenu(children: actions)
     }
 

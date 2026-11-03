@@ -3,7 +3,7 @@ package jp.jacky.kana.di
 import jp.jacky.kana.ads.AdsManager
 import jp.jacky.kana.practice.Clock
 import jp.jacky.kana.share.ShareActions
-import jp.jacky.kana.sound.SoundPlayer
+import jp.jacky.kana.feedback.FeedbackPlayer
 import jp.jacky.kana.stats.StatStore
 import jp.jacky.kana.store.CoffeeStore
 import kotlin.random.Random
@@ -16,6 +16,6 @@ interface AppContainer {
     val statStore: StatStore
     val coffeeStore: CoffeeStore
     val adsManager: AdsManager
-    val soundPlayer: SoundPlayer
+    val feedbackPlayer: FeedbackPlayer
     val shareActions: ShareActions
 }
