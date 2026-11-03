@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>五十音 · 手感实验室</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./data.js"></script>
+  <script defer src="./core.js"></script>
+  <script defer src="./platform.js"></script>
+  <script defer src="./feedback.js"></script>
+  <script defer src="./model.js"></script>
+  <script defer src="./haptics.js"></script>
+  <!-- browser-adapter -->
+  <script defer src="./sound.js"></script>
+  <script defer src="./preview.js"></script>
+</head>
+<body>
+  <header class="page-header">
+    <div class="brand-mark" aria-hidden="true">あ</div>
+    <div><h1>五十音 <span>手感实验室</span></h1><p>答对有回响，连对有心跳。</p></div>
+    <span class="preview-tag">试玩版</span>
+  </header>
+  <main class="lab">
+    <section id="arena" class="arena" data-stage="0" aria-label="手感试玩">
+      <div class="mode-switch" role="group" aria-label="试玩方式">
+        <button id="mode-demo" type="button" aria-pressed="true">自由试手感</button>
+        <button id="mode-practice" type="button" aria-pressed="false">五秒一题</button>
+      </div>
+      <div class="arena-heading"><span id="combo-label">试演连击</span><span id="stage-name" class="stage-badge">起步</span></div>
+      <div class="combo-line"><strong id="combo">0</strong><span>连对</span><div class="best-note">本次最佳<strong id="best">—</strong></div></div>
+      <div class="timer-heading"><span id="timer-label">随时点击，感受落点</span><span id="time-left">5.0s</span></div>
+      <div id="timer" class="timer"><div id="timer-fill"></div></div>
+      <div id="question-space" class="question-space">
+        <div class="ink-orbit" aria-hidden="true"></div>
+        <div id="question" class="glyph">あ</div>
+        <div id="stamp" class="stamp" aria-hidden="true">入拍</div>
+        <p id="feedback" class="feedback" role="status">先点一下，听见第一声。</p>
+      </div>
+      <div id="demo-actions" class="demo-actions">
+        <button id="demo-hit" class="hit-button" type="button"><span>命中一次</span><small>点击，或按空格</small></button>
+        <div class="event-actions">
+          <button id="demo-up" type="button">升阶</button>
+          <button id="demo-record" type="button">破纪录</button>
+          <button id="demo-break" type="button">断连</button>
+          <button id="demo-time" type="button">倒计时</button>
+        </div>
+      </div>
+      <div id="practice-area" hidden>
+        <div id="answers" class="answers" role="group" aria-label="选择对应的假名或罗马音">
+          <button type="button" data-answer="0">—</button><button type="button" data-answer="1">—</button>
+          <button type="button" data-answer="2">—</button><button type="button" data-answer="3">—</button>
+        </div>
+        <button id="practice-toggle" class="practice-toggle" type="button">开始练习</button>
+      </div>
+      <p id="arena-footnote" class="arena-footnote">自由试演 · 随时跳档，试演数字不计入成绩</p>
+    </section>
+
+    <aside class="controls">
+      <section class="control-card haptic-card" aria-labelledby="haptic-title">
+        <div class="card-heading"><h2 id="haptic-title">先试一下震动</h2><span class="small-tag">纯触感</span></div>
+        <p class="description">点击任一档，会暂停声画和练习，只测试震动。</p>
+        <div class="haptic-buttons">
+          <button type="button" data-haptic="light" disabled><span class="tap-dots one" aria-hidden="true">·</span>轻</button>
+          <button type="button" data-haptic="medium" disabled><span class="tap-dots two" aria-hidden="true">··</span>中</button>
+          <button type="button" data-haptic="heavy" disabled><span class="tap-dots three" aria-hidden="true">···</span>重</button>
+        </div>
+        <p id="haptic-provider" class="provider">正在检测震动能力…</p>
+        <p id="haptic-result" class="haptic-result" role="status">用手感判断差异，接口返回不能确认设备真的震动。</p>
+        <div id="system-switch-test" class="system-switch-test" hidden>
+          <label for="system-switch"><span>iPhone 系统开关触感<small>直接拨动，只体验系统单次触感。</small></span><input id="system-switch" type="checkbox" switch></label>
+        </div>
+      </section>
+
+      <section class="control-card" aria-labelledby="stage-title">
+        <div class="card-heading"><h2 id="stage-title">跳到你想试的阶段</h2><span id="tempo" class="small-tag">无节拍</span></div>
+        <div class="stages" role="group" aria-label="试演阶段">
+          <button type="button" data-stage="0" aria-pressed="true"><b>0</b><span>起步</span></button>
+          <button type="button" data-stage="1" aria-pressed="false"><b>5</b><span>入拍</span></button>
+          <button type="button" data-stage="2" aria-pressed="false"><b>10</b><span>升温</span></button>
+          <button type="button" data-stage="3" aria-pressed="false"><b>20</b><span>冲刺</span></button>
+          <button type="button" data-stage="4" aria-pressed="false"><b>30+</b><span>高燃</span></button>
+        </div>
+        <p id="stage-description" class="description">轻快落点，找到自己的节奏。</p>
+        <p id="strength-description" class="detail">普通命中轻振；升阶中振。</p>
+      </section>
+
+      <section class="control-card settings" aria-labelledby="settings-title">
+        <div class="card-heading"><h2 id="settings-title">调到舒服的手感</h2></div>
+        <label><span>命中音效<small>短促落点与上行音阶</small></span><input id="sound-enabled" type="checkbox" checked></label>
+        <label><span>紧张节拍<small>10 连对起，逐步加快</small></span><input id="rhythm-enabled" type="checkbox" checked></label>
+        <label><span>答题震动<small>普通命中轻／中；里程碑中／重</small></span><input id="haptic-enabled" type="checkbox" checked></label>
+        <label><span>减少动效<small>保留反馈文字与颜色</small></span><input id="reduce-motion" type="checkbox"></label>
+      </section>
+      <p class="preview-note">五秒一题仅统计首次答对。试玩记录仅本次有效，正式版练习记录不受影响。</p>
+    </aside>
+  </main>
+  <noscript>请启用 JavaScript 后打开预览。</noscript>
+</body>
+</html>
