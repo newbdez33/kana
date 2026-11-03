@@ -71,6 +71,21 @@ cd source/android
 
 The public website lives in [site/](site/README.md).
 
+### Xiaohongshu mini-tool
+
+The web port of the iOS practice screen lives in
+[source/minitool](source/minitool/README.md). It reuses the iOS kana table,
+translations, and font. Run its local preview with:
+
+```sh
+cd source/minitool
+npm run build
+npm run preview
+```
+
+The upload package passed the official mini-tool Skill 1.8.0 checks. See the
+mini-tool README for the release status and remaining container checks.
+
 ## Roadmap
 
 See [TODO.md](TODO.md) for store availability checks, AdMob store association,

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>Kana · 五十音</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="./data.js"></script>
+  <script defer src="./copy.js"></script>
+  <script defer src="./core.js"></script>
+  <script defer src="./platform.js"></script>
+  <script defer src="./audio.js"></script>
+  <script defer src="./haptics.js"></script>
+  <script defer src="./feedback.js"></script>
+  <script defer src="./share.js"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <main id="app" class="app" aria-busy="true">
+    <nav id="menu" class="menu" hidden>
+      <div class="menu-inner">
+        <button id="chart-open" class="menu-item" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h4v4H3zM10 3h4v4h-4zM17 3h4v4h-4zM3 10h4v4H3zM10 10h4v4h-4zM17 10h4v4h-4zM3 17h4v4H3zM10 17h4v4h-4zM17 17h4v4h-4z"/></svg>
+          <span data-text="Chart">五十音图</span>
+        </button>
+        <div id="follow-menu" class="more-wrapper" hidden>
+          <button id="more-toggle" class="icon-button" type="button" aria-label="更多" aria-expanded="false" aria-controls="more-menu">
+            <svg viewBox="0 0 24 24" class="dots" aria-hidden="true"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>
+          </button>
+          <div id="more-menu" class="more-menu" hidden>
+            <button id="follow-author" class="menu-item" type="button">
+              <span id="follow-label" data-text="FollowAuthor">关注作者</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 13a4 4 0 1 0 0-8 4 4 0 0 0 0 8M2 22v-2a7 7 0 0 1 14 0v2M20 6v8M16 10h8"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <fieldset class="feedback-settings">
+        <legend class="sr-only" data-text="FeedbackSettings">本次练习反馈</legend>
+        <label><input id="sound-setting" type="checkbox" checked><span data-text="FeedbackSound">音效</span></label>
+        <label><input id="rhythm-setting" type="checkbox" checked><span data-text="FeedbackRhythm">紧张节拍</span></label>
+        <label id="haptic-option"><input id="haptic-setting" type="checkbox" checked disabled><span data-text="FeedbackHaptic">震动</span></label>
+        <label><input id="motion-setting" type="checkbox"><span data-text="FeedbackMotion">减少动效</span></label>
+      </fieldset>
+    </nav>
+    <section class="workspace" aria-label="五十音练习" id="workspace">
+      <div id="question-pane" class="question-pane">
+        <section class="statistics" aria-labelledby="practice-title">
+          <div class="statistics-header">
+            <h1 id="practice-title" data-text="Practice">练习记录</h1>
+            <div class="statistics-actions">
+              <button id="share-open" class="share-entry" type="button" disabled>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l4-4 4 4M12 1v14M6 9H3v13h18V9h-3"/></svg>
+                <span data-text="Share">分享成绩</span>
+              </button>
+              <button id="menu-toggle" class="icon-button" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="menu" disabled>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path id="menu-icon" d="M3 6h18M3 12h18M3 18h18"/></svg>
+              </button>
+            </div>
+          </div>
+          <dl class="metrics">
+            <div class="metric"><dt data-text="StatAnswers">累计答题</dt><dd id="total-value">0</dd></div>
+            <div class="metric"><dt data-text="StatAverage">平均用时</dt><dd id="average-value">—</dd></div>
+            <div class="metric"><dt data-text="StatRecent">最近 10 题</dt><dd id="recent-value">—</dd></div>
+            <div class="metric accented"><dt data-text="StatBest">最长连对</dt><dd id="best-value">0</dd></div>
+          </dl>
+          <div class="divider"></div>
+        </section>
+        <div class="feedback-bar">
+          <div class="streak"><strong id="streak-count">0</strong><span data-text="FeedbackStreak">连对</span></div>
+          <span id="stage-name" class="stage-name">起步</span>
+        </div>
+        <div class="time-track" aria-hidden="true"><div id="time-fill"></div></div>
+        <div class="question-space">
+          <div class="feedback-orbit" aria-hidden="true"></div>
+          <div id="question" class="glyph" aria-live="polite" aria-atomic="true">あ</div>
+          <div id="feedback-stamp" class="feedback-stamp" aria-hidden="true"></div>
+          <p id="feedback-message" class="feedback-message" data-text="FeedbackReady">认准，再点。</p>
+        </div>
+      </div>
+      <div id="answers" class="answers" role="group" aria-label="选择对应的假名或罗马音">
+        <button class="answer" type="button" data-answer="0" disabled>—</button>
+        <button class="answer" type="button" data-answer="1" disabled>—</button>
+        <button class="answer" type="button" data-answer="2" disabled>—</button>
+        <button class="answer" type="button" data-answer="3" disabled>—</button>
+      </div>
+    </section>
+  </main>
+  <div id="chart-modal" class="modal" hidden>
+    <section class="sheet chart-sheet" role="dialog" aria-modal="true" aria-labelledby="chart-title" tabindex="-1">
+      <div class="grabber" aria-hidden="true"></div>
+      <h2 id="chart-title" class="sr-only" data-text="Chart">五十音图</h2>
+      <button id="chart-close" class="icon-button close-button" type="button" aria-label="关闭">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <div id="chart-scroll" class="chart-scroll">
+        <div class="chart-switch" role="group" aria-label="假名">
+          <button id="hiragana" class="script-button selected" type="button" aria-pressed="true" aria-label="平假名">あ</button>
+          <button id="katakana" class="script-button" type="button" aria-pressed="false" aria-label="片假名">ア</button>
+        </div>
+        <div id="kana-chart" class="kana-chart"></div>
+      </div>
+    </section>
+  </div>
+  <div id="share-modal" class="modal" hidden>
+    <section class="sheet share-sheet" role="dialog" aria-modal="true" aria-labelledby="share-title" tabindex="-1">
+      <div class="grabber" aria-hidden="true"></div>
+      <button id="share-close" class="icon-button close-button" type="button" aria-label="关闭">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <h2 id="share-title" data-text="Share">分享成绩</h2>
+      <img id="share-image" class="share-image" alt="练习记录">
+      <p id="share-help" class="share-help"></p>
+      <div class="share-actions">
+        <button id="save-image" class="secondary-button" type="button" data-text="SaveImage">保存图片</button>
+        <button id="post-note" class="primary-button" type="button" data-text="PublishNote">发小红书</button>
+      </div>
+    </section>
+  </div>
+  <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
+  <p id="notice" class="notice" role="status" hidden></p>
+  <noscript><p class="notice">Kana requires JavaScript.</p></noscript>
+</body>
+</html>

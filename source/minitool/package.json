@@ -1,0 +1,13 @@
+{
+  "name": "kana-minitool",
+  "version": "1.0.3",
+  "private": true,
+  "description": "Kana for the Xiaohongshu mini-tool container",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.cjs",
+    "check": "node scripts/check.mjs",
+    "preview": "python3 scripts/preview.py"
+  },
+  "engines": { "node": ">=20" }
+}
