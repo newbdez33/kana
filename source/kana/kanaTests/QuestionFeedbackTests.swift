@@ -3,6 +3,26 @@ import XCTest
 
 @MainActor
 final class QuestionFeedbackTests: XCTestCase {
+    func testWrongAnswerAndTimeoutKeepTheBannerTrigger() {
+        let controller = BannerTrackingQuestionController()
+        var time: TimeInterval = 100
+        controller.now = { time }
+        controller.loadViewIfNeeded()
+        controller.feedbackSettings = FeedbackSettings(sound: false, rhythm: false, haptics: false)
+        defer { controller.timer?.invalidate() }
+        time += 1
+        controller.answerAction(index: controller.findCorrectAnswerIndex())
+        XCTAssertEqual(controller.bannerRequests, 0)
+        let correct = controller.findCorrectAnswerIndex()
+        controller.answerAction(index: (correct + 1) % 4)
+        XCTAssertEqual(controller.bannerRequests, 1)
+        controller.answerAction(index: correct)
+        XCTAssertEqual(controller.bannerRequests, 1)
+        time += AppConfig.questionTimeLimit
+        controller.answerAction(index: controller.findCorrectAnswerIndex())
+        XCTAssertEqual(controller.bannerRequests, 2)
+    }
+
     func testFortyCorrectAnswersKeepTheDeadlineAndFourChoices() {
         let defaults = UserDefaults.standard
         let previousStreak = defaults.integer(forKey: AppConfig.keyCurrentCombo)
@@ -83,4 +103,9 @@ final class QuestionFeedbackTests: XCTestCase {
         XCTAssertTrue(controller.isShowingCorrectAnswer)
         XCTAssertEqual(UserDefaults.standard.integer(forKey: AppConfig.keyCurrentCombo), 0)
     }
+}
+
+private final class BannerTrackingQuestionController: QuestionViewController {
+    var bannerRequests = 0
+    override func showBanner() { bannerRequests += 1 }
 }

@@ -11,6 +11,8 @@ final class PracticeFeedbackPlayer {
     private let heavy = UIImpactFeedbackGenerator(style: .heavy)
 
     init() {
+        // Preparing a player activates the session, so configure mixing first.
+        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers])
         for name in Self.soundNames {
             if let url = Bundle.main.url(forResource: name, withExtension: "wav"),
                let player = try? AVAudioPlayer(contentsOf: url) {

@@ -1,4 +1,5 @@
 import XCTest
+import AVFoundation
 @testable import kana
 
 final class PracticeFeedbackTests: XCTestCase {
@@ -36,6 +37,16 @@ final class PracticeFeedbackTests: XCTestCase {
         XCTAssertEqual(run.correct(streak: 20).strength, .heavy)
         XCTAssertEqual(run.correct(streak: 40).strength, .heavy)
         XCTAssertNil(FeedbackEvent(kind: .correction, streak: 0, stage: 0).strength)
+    }
+
+    @MainActor
+    func testPreparingSoundsPreservesMixingWithOtherAudio() throws {
+        let session = AVAudioSession.sharedInstance()
+        try session.setCategory(.soloAmbient)
+        let player = PracticeFeedbackPlayer()
+        defer { player.stop() }
+        XCTAssertEqual(session.category, .playback)
+        XCTAssertTrue(session.categoryOptions.contains(.mixWithOthers))
     }
 
     @MainActor
