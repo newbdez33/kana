@@ -53,6 +53,7 @@
 		988CDF4E3C8359274B7FB932 /* StatStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7AD24D402DD2823B92CA11 /* StatStoreTests.swift */; };
 		99A765C447D0B8066C91D5E5 /* feedback_hit_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = CF5EB4886C3A77138D922D78 /* feedback_hit_1.wav */; };
 		9BC102232370A89BF55E2AFE /* QuestionMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943ED04BDCAC77993CA01084 /* QuestionMenuTests.swift */; };
+		9BEB2675E0A170E4F4A26F61 /* QuestionAlignmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9523ED347C8873568E6888 /* QuestionAlignmentTests.swift */; };
 		9D304E425B659F297CF98D8F /* KanaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAEE85C268D00F9228AB807 /* KanaViewController.swift */; };
 		A12AE7F98812E3EE33A126AF /* PracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E82C97CB853910B9DC8A341 /* PracticeView.swift */; };
 		A15D24796DA675079FA69874 /* QuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260E2F0288A6CD7A9D469F6B /* QuestionController.swift */; };
@@ -61,6 +62,7 @@
 		A72FAB4CA686251A8A4EB8E8 /* PracticeFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950ABD2A8E0E8DF3AAA50274 /* PracticeFeedback.swift */; };
 		A8F3BA794026CF6839266084 /* feedback_correction.wav in Resources */ = {isa = PBXBuildFile; fileRef = 1061F1BCD9EC1731CC912AD3 /* feedback_correction.wav */; };
 		ABB698CF82C7AFA443338FC6 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83434FD973ACDF6105E78620 /* MenuViewController.swift */; };
+		AF0FDAC23E2F5C1FCC163541 /* QuestionGlyphLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F406E572BD29352CEE434F56 /* QuestionGlyphLabel.swift */; };
 		B0A1E0FD5A13CBFB95726A32 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A455A39CC7E4222EBAAAF73B /* AppConfig.swift */; };
 		B0B2B368BEA30709E1A8C3AB /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B936188F2791409D0561F03F /* MessageUI.framework */; };
 		B9FED4E01CE5137AF3C54EEE /* KanaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02949F9F73A215C8F29204 /* KanaUITests.swift */; };
@@ -159,6 +161,7 @@
 		74C6BC34BDF7625B130E4E48 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		7865DBF886B4DCA14CAA9FA7 /* feedback_milestone_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = feedback_milestone_2.wav; sourceTree = "<group>"; };
 		7A71B0F406839931DCEF6401 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		7A9523ED347C8873568E6888 /* QuestionAlignmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAlignmentTests.swift; sourceTree = "<group>"; };
 		7ABBFF22AD617C6D012E2B58 /* feedback_milestone_4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = feedback_milestone_4.wav; sourceTree = "<group>"; };
 		7D02949F9F73A215C8F29204 /* KanaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanaUITests.swift; sourceTree = "<group>"; };
 		7F9E2D7743360024017D93A2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -214,6 +217,7 @@
 		ED21A7EA3416862C526251AB /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Kana.strings"; sourceTree = "<group>"; };
 		EE6A5C643C5DFF44CA4DA329 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F303FFD094B7736156CD8DEE /* feedback_hit_4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = feedback_hit_4.wav; sourceTree = "<group>"; };
+		F406E572BD29352CEE434F56 /* QuestionGlyphLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionGlyphLabel.swift; sourceTree = "<group>"; };
 		F88F1CF9856F89565FB2EA94 /* incorrect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = incorrect.wav; sourceTree = "<group>"; };
 		F94076779D8E87C3E8499642 /* PracticeLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeLayout.swift; sourceTree = "<group>"; };
 		F988100CA169933B4AC9F05F /* AnswerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCell.swift; sourceTree = "<group>"; };
@@ -252,6 +256,7 @@
 				082AD078C609D5833D80DBA6 /* CoffeeViewController.swift */,
 				14E624AEA98E2399977541BB /* PracticeFeedbackView.swift */,
 				0E82C97CB853910B9DC8A341 /* PracticeView.swift */,
+				F406E572BD29352CEE434F56 /* QuestionGlyphLabel.swift */,
 				9B2E8F8C95120788EE8CE259 /* StatisticsView.swift */,
 				466112654934D7F3EA8CD9A5 /* cells */,
 				583B4086D7876AE2D63B381A /* layouts */,
@@ -421,6 +426,7 @@
 				B5287F6D4637CB233740F4BC /* PracticeLayoutTests.swift */,
 				69FEB34F17EB8F11526F39CD /* PracticeResizeTests.swift */,
 				A28277C713174393A149A2B6 /* PurchaseScreenshotTests.swift */,
+				7A9523ED347C8873568E6888 /* QuestionAlignmentTests.swift */,
 				9C778EDD8B96314A2C6195DF /* QuestionFeedbackTests.swift */,
 				943ED04BDCAC77993CA01084 /* QuestionMenuTests.swift */,
 				50B5FA360938EFCE416FBB3E /* StatisticsViewTests.swift */,
@@ -675,6 +681,7 @@
 				F2471336C1DD6E67B26E9393 /* PracticeLayout.swift in Sources */,
 				A12AE7F98812E3EE33A126AF /* PracticeView.swift in Sources */,
 				A15D24796DA675079FA69874 /* QuestionController.swift in Sources */,
+				AF0FDAC23E2F5C1FCC163541 /* QuestionGlyphLabel.swift in Sources */,
 				948C4B7893C85419D7B714AB /* SceneDelegate.swift in Sources */,
 				E9CE0D9EE6137A3C98CABF14 /* StatStore.swift in Sources */,
 				F81E7262FB8229C1D4254DC9 /* StatisticsView.swift in Sources */,
@@ -702,6 +709,7 @@
 				3B7F0E98463AE02615C148F9 /* PracticeLayoutTests.swift in Sources */,
 				BD92FD5DD43A755088FEE66F /* PracticeResizeTests.swift in Sources */,
 				F21C8F9A62CA729268EDE513 /* PurchaseScreenshotTests.swift in Sources */,
+				9BEB2675E0A170E4F4A26F61 /* QuestionAlignmentTests.swift in Sources */,
 				F25450B32F998437CAFCDB44 /* QuestionFeedbackTests.swift in Sources */,
 				9BC102232370A89BF55E2AFE /* QuestionMenuTests.swift in Sources */,
 				988CDF4E3C8359274B7FB932 /* StatStoreTests.swift in Sources */,
@@ -926,7 +934,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 72T2SXUWHC;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -988,7 +996,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 72T2SXUWHC;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

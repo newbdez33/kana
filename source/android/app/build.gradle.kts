@@ -27,7 +27,7 @@ android {
         applicationId = "jp.jacky.kana"
         minSdk = 26
         targetSdk = 36
-        versionCode = 3
+        versionCode = 4
         versionName = "1.2.0"
         testInstrumentationRunner = "jp.jacky.kana.KanaTestRunner"
         buildConfigField("String", "COFFEE_PRODUCT_ID", "\"jp.jacky.kana.coffee\"")

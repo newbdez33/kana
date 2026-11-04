@@ -4,7 +4,7 @@ import GoogleMobileAds
 final class PracticeView: UIView {
     let scrollView = UIScrollView()
     let statisticsView = StatisticsView()
-    let questionLabel = UILabel()
+    let questionLabel = QuestionGlyphLabel()
     let feedbackView = PracticeFeedbackView()
     let menuContainer = UIView()
     let bannerView = BannerView()

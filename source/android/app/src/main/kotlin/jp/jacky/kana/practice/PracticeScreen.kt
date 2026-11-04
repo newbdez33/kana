@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -302,17 +301,10 @@ private fun Metric(value: AnnotatedString, caption: String, tag: String, modifie
 }
 
 @Composable
-private fun QuestionArea(state: PracticeUiState, modifier: Modifier = Modifier) {
-    BoxWithConstraints(modifier.fillMaxWidth().background(KanaColors.keyGray), contentAlignment = Alignment.Center) {
-        val maxFont = with(LocalDensity.current) { 155.dp.toSp() }
+internal fun QuestionArea(state: PracticeUiState, modifier: Modifier = Modifier) {
+    Box(modifier.fillMaxWidth().background(KanaColors.keyGray), contentAlignment = Alignment.Center) {
         PracticeFeedbackOverlay(state)
-        BasicText(
-            text = state.question.prompt,
-            modifier = Modifier.widthIn(max = 240.dp).heightIn(max = (maxHeight - 80.dp).coerceAtLeast(40.dp)).testTag("questionLabel"),
-            style = TextStyle(fontFamily = KanaFonts.hosohuwa, color = KanaColors.ink, textAlign = TextAlign.Center),
-            maxLines = 1,
-            autoSize = TextAutoSize.StepBased(minFontSize = 40.sp, maxFontSize = maxFont, stepSize = 4.sp),
-        )
+        QuestionGlyph(state.question.prompt)
     }
 }
 
