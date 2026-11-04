@@ -55,5 +55,8 @@ and pause overlap. A UI test returns from Home twice and checks that answers
 still update the saved count. Pixel tests on both platforms check that the
 visible kana and romaji glyphs are centered.
 
-Simulator tests verify events and layout. Physical haptic strength still needs a
-device check because the result depends on the device hardware and settings.
+Simulator tests verify events and layout. On 2026-11-04, the Galaxy S22 Ultra
+executed light, medium, and heavy native vibration patterns. System vibration
+history confirms successful effects. Disabling haptics stopped new app vibration
+events. This verifies device execution, not subjective strength or audible volume.
+Final release checks are recorded in `docs/releases/2026-11-04-android-s22.md`.
