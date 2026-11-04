@@ -57,4 +57,9 @@ final class PracticeFeedbackPlayer {
     func stop() {
         sounds.values.forEach { $0.stop() }
     }
+
+    func deactivate() {
+        stop()
+        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+    }
 }

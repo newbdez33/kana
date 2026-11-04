@@ -26,6 +26,9 @@ be changed in the practice menu for the current session. System motion settings
 and Android touch-feedback settings are also respected. Menus, sheets, consent
 forms, audio interruptions on iOS, and background activity pause the applicable
 practice timer and stop feedback. No missed rhythm beats are replayed.
+On iOS, returning to the foreground or tapping a visible answer clears a stale
+audio interruption. Delayed suspension notices do not block answers. The audio
+session is released in the background; menu and consent pauses remain in force.
 
 ## Audio assets
 
@@ -47,6 +50,10 @@ haptic strength, and pulse throttling. Practice tests cover corrections, the
 deadline race, pause overlap, and rhythm cancellation. Android UI tests advance
 through all stages and check the settings menu. iOS tests cover forty successive
 answers, four stable choices, layout changes, and the shared audio bundle.
+Audio interruption tests cover delayed suspension notices, missing end notices,
+and pause overlap. A UI test returns from Home twice and checks that answers
+still update the saved count. Pixel tests on both platforms check that the
+visible kana and romaji glyphs are centered.
 
 Simulator tests verify events and layout. Physical haptic strength still needs a
 device check because the result depends on the device hardware and settings.

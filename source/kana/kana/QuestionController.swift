@@ -78,6 +78,7 @@ class QuestionViewController: UIViewController {
         collectionView.register(UINib(nibName: "AnswerCell", bundle: nil), forCellWithReuseIdentifier: "AnswerCell")
 
         NotificationCenter.default.addObserver(self, selector: #selector(backgroundEntered), name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(releaseAudioSession), name: UIApplication.didEnterBackgroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(foregroundEntered), name: UIApplication.didBecomeActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(audioSessionChanged), name: AVAudioSession.interruptionNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshPause), name: .adConsentVisibilityDidChange, object: nil)
@@ -112,7 +113,12 @@ class QuestionViewController: UIViewController {
 
     func answerAction(index: Int) {
         guard currentAnswers.indices.contains(index), !inBackground, !viewHidden,
-              !audioInterrupted, !AdsManager.shared.isConsentVisible, presentedViewController == nil else { return }
+              !AdsManager.shared.isConsentVisible, presentedViewController == nil else { return }
+        // An interruption may have no end notification. A visible answer tap can resume play.
+        if audioInterrupted {
+            audioInterrupted = false
+            refreshPause()
+        }
         if practiceView.isMenuExpanded { setMenuExpanded(false) }
         guard questionPausedAt == nil else { return }
         hasInteracted = true
@@ -176,12 +182,19 @@ class QuestionViewController: UIViewController {
     }
 
     @objc private func backgroundEntered() { inBackground = true; refreshPause() }
-    @objc private func foregroundEntered() { inBackground = false; refreshPause() }
+    @objc private func releaseAudioSession() { feedbackPlayer.deactivate() }
+    @objc private func foregroundEntered() {
+        inBackground = false
+        audioInterrupted = false
+        refreshPause()
+    }
     @objc private func motionChanged() { stopFeedback(); updateFeedback() }
     @objc private func audioSessionChanged(_ notification: Notification) {
         guard let value = notification.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt,
               let type = AVAudioSession.InterruptionType(rawValue: value) else { return }
-        audioInterrupted = type == .began
+        // iOS can deliver a suspension interruption after the app is active again.
+        let wasSuspended = notification.userInfo?[AVAudioSessionInterruptionWasSuspendedKey] as? Bool ?? false
+        audioInterrupted = type == .began && !wasSuspended
         refreshPause()
     }
 

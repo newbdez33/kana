@@ -1,8 +1,78 @@
 import XCTest
+import AVFoundation
 @testable import kana
 
 @MainActor
 final class QuestionFeedbackTests: XCTestCase {
+    func testSuspendedAudioNotificationDoesNotBlockForegroundAnswers() {
+        for deliveredAfterResume in [false, true] {
+            let controller = QuestionViewController()
+            var time: TimeInterval = 100
+            controller.now = { time }
+            controller.loadViewIfNeeded()
+            controller.feedbackSettings = FeedbackSettings(sound: false, rhythm: false, haptics: false)
+            defer { controller.timer?.invalidate() }
+            time += 1
+            NotificationCenter.default.post(name: UIApplication.willResignActiveNotification, object: nil)
+            time += 10
+            if deliveredAfterResume {
+                NotificationCenter.default.post(name: UIApplication.didBecomeActiveNotification, object: nil)
+            }
+            NotificationCenter.default.post(name: AVAudioSession.interruptionNotification, object: nil, userInfo: [
+                AVAudioSessionInterruptionTypeKey: AVAudioSession.InterruptionType.began.rawValue,
+                AVAudioSessionInterruptionWasSuspendedKey: true,
+            ])
+            if !deliveredAfterResume {
+                NotificationCenter.default.post(name: UIApplication.didBecomeActiveNotification, object: nil)
+            }
+            XCTAssertTrue(controller.timer?.isValid == true)
+            let count = StatStore.shared.totalCount
+            time += 0.1
+            controller.answerAction(index: controller.findCorrectAnswerIndex())
+            XCTAssertEqual(StatStore.shared.totalCount, count + 1)
+        }
+    }
+
+    func testForegroundRecoversWithoutAnAudioInterruptionEnd() {
+        let controller = QuestionViewController()
+        var time: TimeInterval = 100
+        controller.now = { time }
+        controller.loadViewIfNeeded()
+        controller.feedbackSettings = FeedbackSettings(sound: false, rhythm: false, haptics: false)
+        defer { controller.timer?.invalidate() }
+        time += 1
+        NotificationCenter.default.post(name: AVAudioSession.interruptionNotification, object: nil, userInfo: [
+            AVAudioSessionInterruptionTypeKey: AVAudioSession.InterruptionType.began.rawValue,
+        ])
+        NotificationCenter.default.post(name: UIApplication.willResignActiveNotification, object: nil)
+        time += 10
+        NotificationCenter.default.post(name: UIApplication.didBecomeActiveNotification, object: nil)
+        XCTAssertTrue(controller.timer?.isValid == true)
+        XCTAssertEqual(time - controller.currentQuestionStartTime, 1)
+        let count = StatStore.shared.totalCount
+        controller.answerAction(index: controller.findCorrectAnswerIndex())
+        XCTAssertEqual(StatStore.shared.totalCount, count + 1)
+    }
+
+    func testAnswerResumesAnAudioPauseWhileTheViewIsActive() {
+        let controller = QuestionViewController()
+        var time: TimeInterval = 100
+        controller.now = { time }
+        controller.loadViewIfNeeded()
+        controller.feedbackSettings = FeedbackSettings(sound: false, rhythm: false, haptics: false)
+        defer { controller.timer?.invalidate() }
+        time += 1
+        NotificationCenter.default.post(name: AVAudioSession.interruptionNotification, object: nil, userInfo: [
+            AVAudioSessionInterruptionTypeKey: AVAudioSession.InterruptionType.began.rawValue,
+        ])
+        XCTAssertNil(controller.timer)
+        time += 10
+        let count = StatStore.shared.totalCount
+        controller.answerAction(index: controller.findCorrectAnswerIndex())
+        XCTAssertEqual(StatStore.shared.totalCount, count + 1)
+        XCTAssertTrue(controller.timer?.isValid == true)
+    }
+
     func testWrongAnswerAndTimeoutKeepTheBannerTrigger() {
         let controller = BannerTrackingQuestionController()
         var time: TimeInterval = 100
@@ -73,10 +143,31 @@ final class QuestionFeedbackTests: XCTestCase {
         time += 10
         controller.setMenuExpanded(false)
         XCTAssertNil(controller.timer)
+        NotificationCenter.default.post(name: AVAudioSession.interruptionNotification, object: nil, userInfo: [
+            AVAudioSessionInterruptionTypeKey: AVAudioSession.InterruptionType.ended.rawValue,
+        ])
+        XCTAssertNil(controller.timer)
         let question = controller.currentQuestioKana
         controller.answerAction(index: controller.findCorrectAnswerIndex())
         XCTAssertEqual(controller.currentQuestioKana, question)
         NotificationCenter.default.post(name: UIApplication.didBecomeActiveNotification, object: nil)
+        XCTAssertTrue(controller.timer?.isValid == true)
+        XCTAssertEqual(time - controller.currentQuestionStartTime, 1)
+    }
+
+    func testForegroundDoesNotResumeAnOpenMenu() {
+        let controller = QuestionViewController()
+        var time: TimeInterval = 100
+        controller.now = { time }
+        controller.loadViewIfNeeded()
+        defer { controller.timer?.invalidate() }
+        time += 1
+        controller.setMenuExpanded(true)
+        NotificationCenter.default.post(name: UIApplication.willResignActiveNotification, object: nil)
+        time += 10
+        NotificationCenter.default.post(name: UIApplication.didBecomeActiveNotification, object: nil)
+        XCTAssertNil(controller.timer)
+        controller.setMenuExpanded(false)
         XCTAssertTrue(controller.timer?.isValid == true)
         XCTAssertEqual(time - controller.currentQuestionStartTime, 1)
     }
