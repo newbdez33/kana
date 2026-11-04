@@ -80,8 +80,9 @@ extension KanaViewController : UICollectionViewDelegate, UICollectionViewDataSou
     // Layout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let numberOfCells:CGFloat = 5.0
-        let margin:CGFloat = 10.0
-        let width = self.view.bounds.size.width / numberOfCells - margin - margin/2
+        let inset = collectionView.adjustedContentInset
+        let usableWidth = collectionView.bounds.width - inset.left - inset.right
+        let width = max(0, (usableWidth - 20 - 10 * (numberOfCells - 1)) / numberOfCells)
         let retval = CGSize(width: width, height: 60)
         return retval
     }
@@ -103,7 +104,8 @@ extension KanaViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if section == 0 {
-            let size = CGSize(width: UIScreen.main.bounds.width, height: 140)
+            let inset = collectionView.adjustedContentInset
+            let size = CGSize(width: max(0, collectionView.bounds.width - inset.left - inset.right), height: 140)
             return size
         }
         return CGSize.zero

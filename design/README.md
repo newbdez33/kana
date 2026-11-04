@@ -1,5 +1,9 @@
 # Practice statistics and coffee support
 
+The [iPhone Duo layout study](iphone-duo/README.md) adds adaptive practice panes,
+fold avoidance, and a six-state review preview. Its native validation status is
+documented separately from the captures below.
+
 The practice screen keeps its handwritten kana, open space, and four-answer grid.
 Statistics now share one row, with tabular numbers, smaller units, and a red best
 streak. Empty averages show an em dash. Each metric exposes its label and value

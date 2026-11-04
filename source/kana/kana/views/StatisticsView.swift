@@ -60,7 +60,7 @@ final class StatisticsView: UIView {
             preferredWidth,
             menuButton.widthAnchor.constraint(equalToConstant: 44),
             menuButton.heightAnchor.constraint(equalToConstant: 44),
-            divider.heightAnchor.constraint(equalToConstant: 1 / UIScreen.main.scale)
+            divider.heightAnchor.constraint(equalToConstant: 1 / max(traitCollection.displayScale, 1))
         ])
     }
 

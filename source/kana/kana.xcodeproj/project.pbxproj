@@ -16,6 +16,7 @@
 		2096FBAD7D4D29C71FDE9B6B /* String+Kana.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4349CE46B777242EF71177 /* String+Kana.swift */; };
 		2325C411BE31B613E2B84EDA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A71B0F406839931DCEF6401 /* AVFoundation.framework */; };
 		26072040E25E8FB20136D77A /* KanaSectionColorReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A945C39FC4DA65C07EAAFDB3 /* KanaSectionColorReusableView.swift */; };
+		3B7F0E98463AE02615C148F9 /* PracticeLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5287F6D4637CB233740F4BC /* PracticeLayoutTests.swift */; };
 		3D6629A6DC940DEDF2F84D50 /* CoffeeViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62412338F8A63C4686E98468 /* CoffeeViewTests.swift */; };
 		3FCAC5B1CC0A6EEB0E4D8C69 /* correct.wav in Resources */ = {isa = PBXBuildFile; fileRef = AEFE7F07707B5C8537AF9AD4 /* correct.wav */; };
 		4F5B29E3AB82D73F15F91735 /* UIColor+Kana.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F38343061359A3A798BF576 /* UIColor+Kana.swift */; };
@@ -38,6 +39,7 @@
 		988CDF4E3C8359274B7FB932 /* StatStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7AD24D402DD2823B92CA11 /* StatStoreTests.swift */; };
 		9BC102232370A89BF55E2AFE /* QuestionMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943ED04BDCAC77993CA01084 /* QuestionMenuTests.swift */; };
 		9D304E425B659F297CF98D8F /* KanaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAEE85C268D00F9228AB807 /* KanaViewController.swift */; };
+		A12AE7F98812E3EE33A126AF /* PracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E82C97CB853910B9DC8A341 /* PracticeView.swift */; };
 		A15D24796DA675079FA69874 /* QuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260E2F0288A6CD7A9D469F6B /* QuestionController.swift */; };
 		A17E2B9D2DBA4C264D9EE176 /* GoogleUserMessagingPlatform in Frameworks */ = {isa = PBXBuildFile; productRef = F98A5A1CA64AFF5560A2EAB3 /* GoogleUserMessagingPlatform */; };
 		A39E3458ECAEA71924FFFE92 /* KanaHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C173E449FA729C6419415DAE /* KanaHeaderView.xib */; };
@@ -46,6 +48,7 @@
 		B0B2B368BEA30709E1A8C3AB /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B936188F2791409D0561F03F /* MessageUI.framework */; };
 		B9FED4E01CE5137AF3C54EEE /* KanaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02949F9F73A215C8F29204 /* KanaUITests.swift */; };
 		BA0B5371700CC86D49B1AEBF /* StoreScreenshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637CB105B414C641DB76A29C /* StoreScreenshotTests.swift */; };
+		BD92FD5DD43A755088FEE66F /* PracticeResizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FEB34F17EB8F11526F39CD /* PracticeResizeTests.swift */; };
 		CD43A75DF1FE1F6510B48EAE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F377374968FF116E20FFBE6 /* GoogleService-Info.plist */; };
 		D1D4FA713BEFDF5DC1B3DD5C /* AnswerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26372ABC5CCAEEAF89FB645A /* AnswerCell.xib */; };
 		D6F03D2F9CBFBA278ECD1081 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CFB585B6AD5F2A889634779 /* StoreKit.framework */; };
@@ -53,6 +56,7 @@
 		E9CE0D9EE6137A3C98CABF14 /* StatStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D1128D355D4266BD9E378 /* StatStore.swift */; };
 		EB8E6A24DCCB5B84204170E5 /* StoreKitTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83C4E59BDB7725C69A6BF03 /* StoreKitTest.framework */; };
 		F21C8F9A62CA729268EDE513 /* PurchaseScreenshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28277C713174393A149A2B6 /* PurchaseScreenshotTests.swift */; };
+		F2471336C1DD6E67B26E9393 /* PracticeLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94076779D8E87C3E8499642 /* PracticeLayout.swift */; };
 		F3F757A4BECBBF27113B8774 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 2DF2CED1C33D674C0B999956 /* GoogleMobileAds */; };
 		F4DDF6EB9648670205246D0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A399CE3860C472A6CF6F19B4 /* AppDelegate.swift */; };
 		F703375744466570246A162A /* AnswerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F988100CA169933B4AC9F05F /* AnswerCell.swift */; };
@@ -81,6 +85,7 @@
 		05A1F90E415E7907102F6557 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		082AD078C609D5833D80DBA6 /* CoffeeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeViewController.swift; sourceTree = "<group>"; };
 		0CFB585B6AD5F2A889634779 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		0E82C97CB853910B9DC8A341 /* PracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeView.swift; sourceTree = "<group>"; };
 		13D79CA61AF7D26E97F9DA82 /* kana.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = kana.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		175AE19A9BD5671ED78FCEC5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1BAEE85C268D00F9228AB807 /* KanaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanaViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +116,7 @@
 		66680FCCE35D48154B04AD37 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Kana.strings; sourceTree = "<group>"; };
 		682CA4CC88228BA029469EF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Kana.storyboard; sourceTree = "<group>"; };
 		696AB297BB0B39D5B97D757C /* KanaFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanaFlowLayout.swift; sourceTree = "<group>"; };
+		69FEB34F17EB8F11526F39CD /* PracticeResizeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeResizeTests.swift; sourceTree = "<group>"; };
 		6C244E06EAFE42C801C0AC75 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6CE8047557008CB1B26037CA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		6D6A2FFEAE642F7D1CF91B3B /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -137,6 +143,7 @@
 		AF74362A7A8E8D23067BDD99 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B06060469EF601B2E0364AB3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		B27311349464FB6CA86570AF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Kana.strings"; sourceTree = "<group>"; };
+		B5287F6D4637CB233740F4BC /* PracticeLayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeLayoutTests.swift; sourceTree = "<group>"; };
 		B8FAFA8294F899E4DA296A13 /* KanaHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanaHeaderView.swift; sourceTree = "<group>"; };
 		B936188F2791409D0561F03F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		BA77C958492AAFCB03EDEEDE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -162,6 +169,7 @@
 		ED21A7EA3416862C526251AB /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Kana.strings"; sourceTree = "<group>"; };
 		EE6A5C643C5DFF44CA4DA329 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F88F1CF9856F89565FB2EA94 /* incorrect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = incorrect.wav; sourceTree = "<group>"; };
+		F94076779D8E87C3E8499642 /* PracticeLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeLayout.swift; sourceTree = "<group>"; };
 		F988100CA169933B4AC9F05F /* AnswerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCell.swift; sourceTree = "<group>"; };
 		FA2CDEA7F12EE4D37ED034BB /* KanaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanaCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -196,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				082AD078C609D5833D80DBA6 /* CoffeeViewController.swift */,
+				0E82C97CB853910B9DC8A341 /* PracticeView.swift */,
 				9B2E8F8C95120788EE8CE259 /* StatisticsView.swift */,
 				466112654934D7F3EA8CD9A5 /* cells */,
 				583B4086D7876AE2D63B381A /* layouts */,
@@ -269,6 +278,7 @@
 				34CA63CCAD16C895783ACC11 /* KanaLayoutAttributes.swift */,
 				A945C39FC4DA65C07EAAFDB3 /* KanaSectionColorReusableView.swift */,
 				83434FD973ACDF6105E78620 /* MenuViewController.swift */,
+				F94076779D8E87C3E8499642 /* PracticeLayout.swift */,
 			);
 			path = layouts;
 			sourceTree = "<group>";
@@ -333,6 +343,8 @@
 			isa = PBXGroup;
 			children = (
 				62412338F8A63C4686E98468 /* CoffeeViewTests.swift */,
+				B5287F6D4637CB233740F4BC /* PracticeLayoutTests.swift */,
+				69FEB34F17EB8F11526F39CD /* PracticeResizeTests.swift */,
 				A28277C713174393A149A2B6 /* PurchaseScreenshotTests.swift */,
 				943ED04BDCAC77993CA01084 /* QuestionMenuTests.swift */,
 				50B5FA360938EFCE416FBB3E /* StatisticsViewTests.swift */,
@@ -438,7 +450,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 2700;
+				LastUpgradeCheck = 2720;
 				TargetAttributes = {
 					0030962E6E8C7F477182DF57 = {
 						DevelopmentTeam = 72T2SXUWHC;
@@ -537,6 +549,8 @@
 				26072040E25E8FB20136D77A /* KanaSectionColorReusableView.swift in Sources */,
 				9D304E425B659F297CF98D8F /* KanaViewController.swift in Sources */,
 				ABB698CF82C7AFA443338FC6 /* MenuViewController.swift in Sources */,
+				F2471336C1DD6E67B26E9393 /* PracticeLayout.swift in Sources */,
+				A12AE7F98812E3EE33A126AF /* PracticeView.swift in Sources */,
 				A15D24796DA675079FA69874 /* QuestionController.swift in Sources */,
 				948C4B7893C85419D7B714AB /* SceneDelegate.swift in Sources */,
 				E9CE0D9EE6137A3C98CABF14 /* StatStore.swift in Sources */,
@@ -561,6 +575,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D6629A6DC940DEDF2F84D50 /* CoffeeViewTests.swift in Sources */,
+				3B7F0E98463AE02615C148F9 /* PracticeLayoutTests.swift in Sources */,
+				BD92FD5DD43A755088FEE66F /* PracticeResizeTests.swift in Sources */,
 				F21C8F9A62CA729268EDE513 /* PurchaseScreenshotTests.swift in Sources */,
 				9BC102232370A89BF55E2AFE /* QuestionMenuTests.swift in Sources */,
 				988CDF4E3C8359274B7FB932 /* StatStoreTests.swift in Sources */,
@@ -785,7 +801,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 72T2SXUWHC;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -799,7 +815,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = "-ObjC";
@@ -847,7 +863,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 72T2SXUWHC;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -867,7 +883,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;

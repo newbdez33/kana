@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZEf-8o-VXD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZEf-8o-VXD">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -37,12 +37,13 @@
                                 </connections>
                             </collectionView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="kan-safe-area"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Ucx-pp-fxW" firstAttribute="top" secondItem="Jb9-Gm-k4g" secondAttribute="bottom" id="SCl-h6-MgM"/>
-                            <constraint firstAttribute="trailing" secondItem="Ucx-pp-fxW" secondAttribute="trailing" id="Svi-Jg-bdq"/>
-                            <constraint firstItem="Ucx-pp-fxW" firstAttribute="leading" secondItem="pfr-jI-mds" secondAttribute="leading" id="Xoa-I4-1dG"/>
-                            <constraint firstItem="uKg-sn-cOK" firstAttribute="top" secondItem="Ucx-pp-fxW" secondAttribute="bottom" id="bh4-oy-Tn3"/>
+                            <constraint firstItem="Ucx-pp-fxW" firstAttribute="top" secondItem="kan-safe-area" secondAttribute="top" id="SCl-h6-MgM"/>
+                            <constraint firstItem="kan-safe-area" firstAttribute="trailing" secondItem="Ucx-pp-fxW" secondAttribute="trailing" id="Svi-Jg-bdq"/>
+                            <constraint firstItem="Ucx-pp-fxW" firstAttribute="leading" secondItem="kan-safe-area" secondAttribute="leading" id="Xoa-I4-1dG"/>
+                            <constraint firstItem="kan-safe-area" firstAttribute="bottom" secondItem="Ucx-pp-fxW" secondAttribute="bottom" id="bh4-oy-Tn3"/>
                         </constraints>
                     </view>
                     <connections>

@@ -173,7 +173,7 @@ final class CoffeeViewController: UIViewController {
     private func divider() -> UIView {
         let view = UIView()
         view.backgroundColor = UIColor.kanaBlackColor().withAlphaComponent(0.1)
-        view.heightAnchor.constraint(equalToConstant: 1 / UIScreen.main.scale).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 1 / max(traitCollection.displayScale, 1)).isActive = true
         return view
     }
 
