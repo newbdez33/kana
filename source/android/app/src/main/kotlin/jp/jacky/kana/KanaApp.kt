@@ -31,6 +31,7 @@ fun KanaApp(container: AppContainer, viewModel: PracticeViewModel) {
         onPrivacyPolicy = { activity?.let(container.shareActions::openPrivacyPolicy) },
         onPrivacyOptions = { activity?.let(container.adsManager::showPrivacyOptions) },
         onBannerFailed = viewModel::bannerFailed,
+        onFeedbackSettings = viewModel::setFeedbackSettings,
     )
 
     when (state.sheet) {

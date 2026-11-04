@@ -4,7 +4,8 @@ import GoogleMobileAds
 final class PracticeView: UIView {
     let scrollView = UIScrollView()
     let statisticsView = StatisticsView()
-    let questionLabel = UILabel()
+    let questionLabel = QuestionGlyphLabel()
+    let feedbackView = PracticeFeedbackView()
     let menuContainer = UIView()
     let bannerView = BannerView()
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: AnswerGridLayout())
@@ -12,10 +13,15 @@ final class PracticeView: UIView {
     private let prompt = UIView()
     private(set) var bannerHeight: NSLayoutConstraint!
     private var menuHeight: NSLayoutConstraint!
+    private var promptMinimumHeight: NSLayoutConstraint!
+    private var glyphMaximumHeight: NSLayoutConstraint!
 
     var isMenuExpanded = false {
         didSet {
             menuHeight.constant = isMenuExpanded ? 80 : 0
+            promptMinimumHeight.constant = isMenuExpanded ? 100 : 160
+            glyphMaximumHeight.constant = isMenuExpanded ? -16 : -80
+            feedbackView.isHidden = isMenuExpanded
         }
     }
 
@@ -39,6 +45,7 @@ final class PracticeView: UIView {
         scrollView.addSubview(prompt)
         prompt.addSubview(menuContainer)
         prompt.addSubview(statisticsView)
+        prompt.addSubview(feedbackView)
         prompt.addSubview(questionLabel)
         prompt.addSubview(bannerView)
         content.answers.addSubview(collectionView)
@@ -55,13 +62,15 @@ final class PracticeView: UIView {
         menuContainer.clipsToBounds = true
         bannerView.clipsToBounds = true
 
-        for child in [scrollView, content, prompt, menuContainer, statisticsView, questionLabel, bannerView, collectionView] {
+        for child in [scrollView, content, prompt, menuContainer, statisticsView, questionLabel, bannerView, collectionView, feedbackView] {
             child.translatesAutoresizingMaskIntoConstraints = false
         }
         let labelArea = UILayoutGuide()
         prompt.addLayoutGuide(labelArea)
         menuHeight = menuContainer.heightAnchor.constraint(equalToConstant: 0)
         bannerHeight = bannerView.heightAnchor.constraint(equalToConstant: 0)
+        promptMinimumHeight = labelArea.heightAnchor.constraint(greaterThanOrEqualToConstant: 160)
+        glyphMaximumHeight = questionLabel.heightAnchor.constraint(lessThanOrEqualTo: labelArea.heightAnchor, constant: -80)
         let viewportHeight = prompt.heightAnchor.constraint(equalTo: scrollView.frameLayoutGuide.heightAnchor)
         viewportHeight.priority = .defaultHigh
         let labelWidth = questionLabel.widthAnchor.constraint(equalTo: prompt.widthAnchor, multiplier: 0.35)
@@ -94,11 +103,15 @@ final class PracticeView: UIView {
             bannerHeight,
             labelArea.topAnchor.constraint(equalTo: statisticsView.bottomAnchor),
             labelArea.bottomAnchor.constraint(equalTo: bannerView.topAnchor),
-            labelArea.heightAnchor.constraint(greaterThanOrEqualToConstant: 100),
+            promptMinimumHeight,
+            feedbackView.topAnchor.constraint(equalTo: labelArea.topAnchor),
+            feedbackView.bottomAnchor.constraint(equalTo: labelArea.bottomAnchor),
+            feedbackView.leadingAnchor.constraint(equalTo: prompt.leadingAnchor),
+            feedbackView.trailingAnchor.constraint(equalTo: prompt.trailingAnchor),
             questionLabel.centerXAnchor.constraint(equalTo: prompt.centerXAnchor),
             questionLabel.centerYAnchor.constraint(equalTo: labelArea.centerYAnchor),
             questionLabel.widthAnchor.constraint(equalTo: questionLabel.heightAnchor),
-            questionLabel.heightAnchor.constraint(lessThanOrEqualTo: labelArea.heightAnchor, multiplier: 0.85),
+            glyphMaximumHeight,
             questionLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 240),
             labelWidth,
             collectionView.topAnchor.constraint(equalTo: content.answers.topAnchor),

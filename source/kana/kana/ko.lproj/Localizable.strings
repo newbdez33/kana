@@ -44,3 +44,17 @@
 "ContinuePractice" = "연습 계속하기";
 "Retry" = "다시 시도";
 "PurchaseUnverified" = "구매를 확인할 수 없습니다. 다시 시도해 주세요.";
+
+"FeedbackStage0" = "준비";
+"FeedbackStage1" = "리듬 타기";
+"FeedbackStage2" = "집중";
+"FeedbackStage3" = "최고조";
+"FeedbackStage4" = "몰입";
+"FeedbackCombo" = "%d 연속 정답";
+"FeedbackRecord" = "새 기록";
+"FeedbackTryAgain" = "다시 도전";
+"FeedbackCorrection" = "계속해요";
+"FeedbackSound" = "효과음";
+"FeedbackRhythm" = "리듬";
+"FeedbackHaptics" = "진동";
+"FeedbackReducedMotion" = "동작 줄이기";

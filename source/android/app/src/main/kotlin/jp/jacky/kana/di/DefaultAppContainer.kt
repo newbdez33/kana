@@ -8,8 +8,8 @@ import jp.jacky.kana.ads.GoogleAdsManager
 import jp.jacky.kana.practice.Clock
 import jp.jacky.kana.share.AndroidShareActions
 import jp.jacky.kana.share.ShareActions
-import jp.jacky.kana.sound.SoundPlayer
-import jp.jacky.kana.sound.SoundPoolPlayer
+import jp.jacky.kana.feedback.FeedbackPlayer
+import jp.jacky.kana.feedback.NativeFeedbackPlayer
 import jp.jacky.kana.stats.StatStore
 import jp.jacky.kana.store.CoffeeStore
 import jp.jacky.kana.store.PlayBillingGateway
@@ -34,6 +34,6 @@ class DefaultAppContainer(app: Application) : AppContainer {
         scope = scope,
     ).also { it.start() }
     override val adsManager: AdsManager = GoogleAdsManager(app, scope, BuildConfig.ADS_DEBUG_GEOGRAPHY_EEA)
-    override val soundPlayer: SoundPlayer = SoundPoolPlayer(app)
+    override val feedbackPlayer: FeedbackPlayer = NativeFeedbackPlayer(app)
     override val shareActions: ShareActions = AndroidShareActions(app)
 }

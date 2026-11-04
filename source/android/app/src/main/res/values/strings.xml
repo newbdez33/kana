@@ -41,5 +41,18 @@
     <string name="continue_practice">Back to practice</string>
     <string name="retry">Try again</string>
     <string name="purchase_unverified">The purchase could not be verified. Please try again.</string>
+    <string name="feedback_stage0">Warm up</string>
+    <string name="feedback_stage1">In rhythm</string>
+    <string name="feedback_stage2">Focused</string>
+    <string name="feedback_stage3">On fire</string>
+    <string name="feedback_stage4">Full flow</string>
+    <string name="feedback_combo">%1$d in a row</string>
+    <string name="feedback_record">New record</string>
+    <string name="feedback_try_again">Try again</string>
+    <string name="feedback_correction">Keep going</string>
+    <string name="feedback_sound">Sound effects</string>
+    <string name="feedback_rhythm">Rhythm</string>
+    <string name="feedback_haptics">Haptics</string>
+    <string name="feedback_reduced_motion">Reduce motion</string>
     <string name="privacy_policy">Privacy policy</string>
 </resources>

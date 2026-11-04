@@ -61,8 +61,9 @@ final class PracticeResizeTests: XCTestCase {
 
     func testPracticeRespectsEachSafeAreaEdge() async throws {
         func activeScene() -> UIWindowScene? {
-            UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
-                .first { $0.activationState == .foregroundActive }
+            let scenes = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
+            // Layout checks do not need input focus, which other test windows can take.
+            return scenes.first { $0.activationState == .foregroundActive } ?? scenes.first
         }
         for _ in 0..<100 {
             if activeScene() != nil { break }

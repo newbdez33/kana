@@ -22,8 +22,17 @@ class QuestionViewController: UIViewController {
     private var bannerRequested = false
     private var requestedBannerSize: CGSize?
     
-    var correctSoundEffect: AVAudioPlayer?
-    var incorrectSoundEffect: AVAudioPlayer?
+    private let feedbackPlayer = PracticeFeedbackPlayer()
+    private var feedbackRun = PracticeFeedback(bestStreak: 0)
+    var feedbackSettings = FeedbackSettings() {
+        didSet { stopFeedback(); updateFeedback() }
+    }
+    private var inBackground = false
+    private var viewHidden = false
+    private var audioInterrupted = false
+    private var hasInteracted = false
+    private var lastBeat: TimeInterval = 0
+    var now: () -> TimeInterval = { ProcessInfo.processInfo.systemUptime }
     
     var currentQuestioKana:[String] = []
     var currentAnswers:[[String]] = []
@@ -41,6 +50,7 @@ class QuestionViewController: UIViewController {
         super.viewDidLoad()
         overrideUserInterfaceStyle = .light
         view.backgroundColor = .kanaKeyGrayColor()
+        feedbackRun = PracticeFeedback(bestStreak: bestStreak)
         
         statisticsView.menuButton.addTarget(self, action: #selector(toggleMenu), for: .touchUpInside)
         let menu = MenuViewController()
@@ -67,12 +77,19 @@ class QuestionViewController: UIViewController {
 
         collectionView.register(UINib(nibName: "AnswerCell", bundle: nil), forCellWithReuseIdentifier: "AnswerCell")
 
-        prepareSoundEffects()
+        NotificationCenter.default.addObserver(self, selector: #selector(backgroundEntered), name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(releaseAudioSession), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(foregroundEntered), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(audioSessionChanged), name: AVAudioSession.interruptionNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshPause), name: .adConsentVisibilityDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(motionChanged), name: UIAccessibility.reduceMotionStatusDidChangeNotification, object: nil)
         nextQuestion()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        viewHidden = false
+        refreshPause()
         AdsManager.shared.gatherConsent(from: self)
     }
 
@@ -86,52 +103,117 @@ class QuestionViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - 
-    func prepareSoundEffects() {
-        let audioSession = AVAudioSession.sharedInstance()
-        try! audioSession.setCategory(.playback, mode: .default, options: [.mixWithOthers]) //Causes audio from other sessions to be ducked (reduced in volume) while audio from this session plays
-        do {
-            correctSoundEffect = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "correct.wav", ofType:nil)!))
-            correctSoundEffect?.prepareToPlay()
-            incorrectSoundEffect = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "incorrect.wav", ofType:nil)!))
-            incorrectSoundEffect?.prepareToPlay()
-        } catch {
-            // couldn't load file :(
-        }
-        
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewHidden = true
+        refreshPause()
     }
-    func answerAction(index:Int) {
+
+    deinit { timer?.invalidate() }
+
+    func answerAction(index: Int) {
+        guard currentAnswers.indices.contains(index), !inBackground, !viewHidden,
+              !AdsManager.shared.isConsentVisible, presentedViewController == nil else { return }
+        // An interruption may have no end notification. A visible answer tap can resume play.
+        if audioInterrupted {
+            audioInterrupted = false
+            refreshPause()
+        }
         if practiceView.isMenuExpanded { setMenuExpanded(false) }
-        
-        if timer != nil {
-            timer!.invalidate()
-            timer = nil
+        guard questionPausedAt == nil else { return }
+        hasInteracted = true
+        let isCorrect = currentAnswers[index][KanaType.roma.rawValue] == currentQuestioKana[KanaType.roma.rawValue]
+        if isShowingCorrectAnswer {
+            emitFeedback(FeedbackEvent(kind: .correction, streak: currentStreak, stage: PracticeFeedback.stage(for: currentStreak)))
+            if isCorrect { nextQuestion() }
+            return
         }
-
-        let cost = Date().timeIntervalSince1970 - currentQuestionStartTime
-        
-        let kana = currentAnswers[index]
-        
-        if isShowingCorrectAnswer == true { //case of user incorrect answer
-            isShowingCorrectAnswer = false
-        }
-
-        if kana[KanaType.roma.rawValue] == currentQuestioKana[KanaType.roma.rawValue] {
-            //correct
-            correctSoundEffect?.play()
-            updateBestCombo(is_correct: true)
-            addStat(index: index, is_correct: true, cost: cost)
+        let cost = now() - currentQuestionStartTime
+        guard cost < AppConfig.questionTimeLimit else { timeout(); return }
+        timer?.invalidate()
+        timer = nil
+        updateBestCombo(is_correct: isCorrect)
+        addStat(index: index, is_correct: isCorrect, cost: cost)
+        if isCorrect {
+            let event = feedbackRun.correct(streak: currentStreak)
             nextQuestion()
-        }else {
-            //incorrect
-            incorrectSoundEffect?.play()
-            updateBestCombo(is_correct: false)
-            addStat(index: index, is_correct: false, cost: cost)
+            emitFeedback(event)
+        } else {
             incorrect()
+            emitFeedback(feedbackRun.broken(bestStreak: bestStreak))
         }
-        
     }
-    
+
+    private var currentStreak: Int { UserDefaults.standard.integer(forKey: AppConfig.keyCurrentCombo) }
+    private var bestStreak: Int { UserDefaults.standard.integer(forKey: AppConfig.keyBestCombo) }
+    private var reducedMotion: Bool { feedbackSettings.reducedMotion || UIAccessibility.isReduceMotionEnabled }
+
+    private func emitFeedback(_ event: FeedbackEvent) {
+        feedbackPlayer.play(event, settings: feedbackSettings)
+        practiceView.feedbackView.show(event, reducedMotion: reducedMotion)
+    }
+
+    private func timeout() {
+        guard !isShowingCorrectAnswer, questionPausedAt == nil else { return }
+        timer?.invalidate()
+        timer = nil
+        updateBestCombo(is_correct: false)
+        incorrect()
+        emitFeedback(feedbackRun.broken(bestStreak: bestStreak))
+    }
+
+    private func stopFeedback() {
+        feedbackPlayer.stop()
+        practiceView.feedbackView.stop()
+        lastBeat = now()
+    }
+
+    private func updateFeedback() {
+        let active = questionPausedAt == nil && !isShowingCorrectAnswer
+        let remaining = isShowingCorrectAnswer ? 0 : AppConfig.questionTimeLimit - ((questionPausedAt ?? now()) - currentQuestionStartTime)
+        practiceView.feedbackView.update(streak: currentStreak, remaining: remaining, active: active)
+        let bpm = PracticeFeedback.bpm(for: PracticeFeedback.stage(for: currentStreak))
+        if active && hasInteracted && feedbackSettings.sound && feedbackSettings.rhythm && bpm > 0,
+           now() - lastBeat >= 60 / Double(bpm) {
+            lastBeat = now()
+            feedbackPlayer.beat()
+            practiceView.feedbackView.beat(reducedMotion: reducedMotion)
+        }
+    }
+
+    @objc private func backgroundEntered() { inBackground = true; refreshPause() }
+    @objc private func releaseAudioSession() { feedbackPlayer.deactivate() }
+    @objc private func foregroundEntered() {
+        inBackground = false
+        audioInterrupted = false
+        refreshPause()
+    }
+    @objc private func motionChanged() { stopFeedback(); updateFeedback() }
+    @objc private func audioSessionChanged(_ notification: Notification) {
+        guard let value = notification.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt,
+              let type = AVAudioSession.InterruptionType(rawValue: value) else { return }
+        // iOS can deliver a suspension interruption after the app is active again.
+        let wasSuspended = notification.userInfo?[AVAudioSessionInterruptionWasSuspendedKey] as? Bool ?? false
+        audioInterrupted = type == .began && !wasSuspended
+        refreshPause()
+    }
+
+    @objc func refreshPause() {
+        let paused = practiceView.isMenuExpanded || inBackground || viewHidden || audioInterrupted || AdsManager.shared.isConsentVisible
+        if paused && questionPausedAt == nil {
+            questionPausedAt = now()
+            timer?.invalidate()
+            timer = nil
+            stopFeedback()
+        } else if !paused, let started = questionPausedAt {
+            currentQuestionStartTime += now() - started
+            questionPausedAt = nil
+            lastBeat = now()
+            startQuestionTimer()
+        }
+        updateFeedback()
+    }
+
     func incorrect() {
         updateStatisticsLabels()
         
@@ -140,6 +222,8 @@ class QuestionViewController: UIViewController {
         let correct_idx = findCorrectAnswerIndex()
         
         isShowingCorrectAnswer = true
+        stopFeedback()
+        updateFeedback()
         //show correct answer with red background
         if correct_idx >= 0 {
             let indexPath = IndexPath(item: correct_idx, section: 0)
@@ -198,7 +282,7 @@ class QuestionViewController: UIViewController {
         currentAnswers.removeAll()
         currentAnswerLabels.removeAll()
         let randomCorrectAnswerIndex = Int(arc4random_uniform(UInt32(AppConfig.answersCount)))
-        for i in 0...AppConfig.answersCount {
+        for i in 0..<AppConfig.answersCount {
             if i == randomCorrectAnswerIndex {
                 currentAnswers.append(currentQuestioKana)
                 currentAnswerLabels.append(randomType(ofKana: currentQuestioKana, exclude: questionKanaText))
@@ -212,8 +296,8 @@ class QuestionViewController: UIViewController {
         questionLabel.text = questionKanaText
         collectionView.reloadData()
         
-        currentQuestionStartTime = Date().timeIntervalSince1970 //timestamp
-        questionPausedAt = practiceView.isMenuExpanded ? currentQuestionStartTime : nil
+        currentQuestionStartTime = now()
+        questionPausedAt = (practiceView.isMenuExpanded || inBackground || viewHidden || audioInterrupted || AdsManager.shared.isConsentVisible) ? currentQuestionStartTime : nil
         startQuestionTimer()
         
         updateStatisticsLabels()
@@ -223,12 +307,14 @@ class QuestionViewController: UIViewController {
         timer?.invalidate()
         timer = nil
         guard questionPausedAt == nil, !isShowingCorrectAnswer else { return }
-        let remaining = AppConfig.questionTimeLimit - (Date().timeIntervalSince1970 - currentQuestionStartTime)
-        timer = Timer.scheduledTimer(withTimeInterval: max(remaining, 0.01), repeats: false) { [weak self] _ in
+        updateFeedback()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self] _ in
             guard let self else { return }
-            self.updateBestCombo(is_correct: false)
-            self.addStat(index: 0, is_correct: false, cost: 0)
-            self.incorrect()
+            if self.now() - self.currentQuestionStartTime >= AppConfig.questionTimeLimit {
+                self.timeout()
+            } else {
+                self.updateFeedback()
+            }
         }
     }
     
@@ -274,16 +360,7 @@ class QuestionViewController: UIViewController {
     func setMenuExpanded(_ expanded: Bool) {
         guard expanded != practiceView.isMenuExpanded else { return }
         practiceView.isMenuExpanded = expanded
-        if expanded {
-            timer?.invalidate()
-            timer = nil
-            questionPausedAt = Date().timeIntervalSince1970
-        } else if let pausedAt = questionPausedAt {
-            // Time spent in the menu or support sheet is not answer time.
-            currentQuestionStartTime += Date().timeIntervalSince1970 - pausedAt
-            questionPausedAt = nil
-            startQuestionTimer()
-        }
+        refreshPause()
         menuController?.setExpanded(expanded)
         statisticsView.menuButton.setImage(UIImage(systemName: expanded ? "chevron.up" : "line.3.horizontal"), for: .normal)
         statisticsView.menuButton.accessibilityLabel = expanded ? .closeMenu : .menu
@@ -378,10 +455,4 @@ extension QuestionViewController : UICollectionViewDelegate, UICollectionViewDat
         return CGSize(width: collectionView.bounds.width/2, height: collectionView.bounds.height/2)
     }
     
-}
-
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
-	return input.rawValue
 }

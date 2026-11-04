@@ -14,6 +14,7 @@ import UserMessagingPlatform
 
 extension Notification.Name {
     static let adsReadyDidChange = Notification.Name("kana.adsReadyDidChange")
+    static let adConsentVisibilityDidChange = Notification.Name("kana.adConsentVisibilityDidChange")
 }
 
 @MainActor
@@ -22,6 +23,9 @@ final class AdsManager {
     static let shared = AdsManager()
 
     private(set) var isReady = false
+    private(set) var isConsentVisible = false {
+        didSet { NotificationCenter.default.post(name: .adConsentVisibilityDidChange, object: nil) }
+    }
     private var isStarting = false
     private var hasGatheredConsent = false
 
@@ -46,7 +50,9 @@ final class AdsManager {
         parameters.isTaggedForUnderAgeOfConsent = false
 
         ConsentInformation.shared.requestConsentInfoUpdate(with: parameters) { [weak self] _ in
+            self?.isConsentVisible = true
             ConsentForm.loadAndPresentIfRequired(from: viewController) { [weak self] _ in
+                self?.isConsentVisible = false
                 self?.requestTrackingAuthorizationIfNeeded {
                     self?.startMobileAdsIfAllowed()
                 }
@@ -59,7 +65,10 @@ final class AdsManager {
     }
 
     func presentPrivacyOptions(from viewController: UIViewController) {
-        ConsentForm.presentPrivacyOptionsForm(from: viewController) { _ in }
+        isConsentVisible = true
+        ConsentForm.presentPrivacyOptionsForm(from: viewController) { [weak self] _ in
+            self?.isConsentVisible = false
+        }
     }
 
     private func startMobileAdsIfAllowed() {

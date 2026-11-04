@@ -27,8 +27,8 @@ android {
         applicationId = "jp.jacky.kana"
         minSdk = 26
         targetSdk = 36
-        versionCode = 2
-        versionName = "1.0.0"
+        versionCode = 5
+        versionName = "1.2.0"
         testInstrumentationRunner = "jp.jacky.kana.KanaTestRunner"
         buildConfigField("String", "COFFEE_PRODUCT_ID", "\"jp.jacky.kana.coffee\"")
     }
@@ -74,6 +74,7 @@ android {
     }
 
     sourceSets {
+        getByName("main") { res.srcDir("../../shared/feedback") }
         getByName("test") { kotlin.directories += "src/sharedTest/kotlin" }
         getByName("androidTest") { kotlin.directories += "src/sharedTest/kotlin" }
     }

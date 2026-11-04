@@ -44,3 +44,17 @@
 "ContinuePractice" = "Reprendre la pratique";
 "Retry" = "Réessayer";
 "PurchaseUnverified" = "L’achat n’a pas pu être vérifié. Veuillez réessayer.";
+
+"FeedbackStage0" = "Échauffement";
+"FeedbackStage1" = "En rythme";
+"FeedbackStage2" = "Concentration";
+"FeedbackStage3" = "En pleine forme";
+"FeedbackStage4" = "Immersion";
+"FeedbackCombo" = "%d de suite";
+"FeedbackRecord" = "Nouveau record";
+"FeedbackTryAgain" = "Réessayer";
+"FeedbackCorrection" = "Continuer";
+"FeedbackSound" = "Effets sonores";
+"FeedbackRhythm" = "Rythme";
+"FeedbackHaptics" = "Vibrations";
+"FeedbackReducedMotion" = "Réduire les animations";

@@ -44,3 +44,17 @@
 "ContinuePractice" = "繼續練習";
 "Retry" = "重新載入";
 "PurchaseUnverified" = "無法驗證此購買，請重試。";
+
+"FeedbackStage0" = "熱身";
+"FeedbackStage1" = "起勢";
+"FeedbackStage2" = "專注";
+"FeedbackStage3" = "燃起來";
+"FeedbackStage4" = "心流";
+"FeedbackCombo" = "連對 %d 題";
+"FeedbackRecord" = "新紀錄";
+"FeedbackTryAgain" = "再來一次";
+"FeedbackCorrection" = "繼續練習";
+"FeedbackSound" = "音效";
+"FeedbackRhythm" = "節奏";
+"FeedbackHaptics" = "震動";
+"FeedbackReducedMotion" = "減少動態效果";

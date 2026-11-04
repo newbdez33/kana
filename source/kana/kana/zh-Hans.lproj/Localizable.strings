@@ -44,3 +44,17 @@
 "ContinuePractice" = "继续练习";
 "Retry" = "重新加载";
 "PurchaseUnverified" = "无法验证此购买，请重试。";
+
+"FeedbackStage0" = "热身";
+"FeedbackStage1" = "起势";
+"FeedbackStage2" = "专注";
+"FeedbackStage3" = "燃起来";
+"FeedbackStage4" = "心流";
+"FeedbackCombo" = "连对 %d 题";
+"FeedbackRecord" = "新纪录";
+"FeedbackTryAgain" = "再来一次";
+"FeedbackCorrection" = "继续练习";
+"FeedbackSound" = "音效";
+"FeedbackRhythm" = "节奏";
+"FeedbackHaptics" = "震动";
+"FeedbackReducedMotion" = "减少动态效果";

@@ -1,7 +1,7 @@
 {
   "en-US": {
     "description": "Four choices, five seconds, and a new chance to beat your best streak. Kana helps you recognize basic hiragana and katakana and connect them with their romaji readings through short practice sessions.\n\nChoose the matching character or reading from four answers. If you answer incorrectly or time runs out, the correct answer is highlighted. Check it, then tap it to continue.\n\nSee your answer count, average answer time, average time for your last 10 answers, and best streak of correct answers at a glance. Your practice statistics are saved on your device.\n\nUse the built-in kana chart to look up a character and its romaji reading. Switch between hiragana and katakana whenever you need a reminder. The question timer pauses while the menu or chart is open.\n\nPractice and the kana chart work offline, with no account required. Kana supports iPhone and iPad. The interface is available in English, Japanese, Simplified Chinese, Traditional Chinese, Korean, German, French, and Spanish.\n\nKana is free to use. Ads appear only after an incorrect answer or a timeout. Correct answers keep the questions moving, so see how long you can keep your streak. If you enjoy the app, the optional “Buy me a coffee” purchase lets you support the author. It is a one-time purchase with no subscription.\n\nPrivacy policy: https://kana.jacky.jp/privacy/en",
-    "whatsNew": "• A redesigned statistics bar with answer count, average time, recent average, and best streak.\n• A new “Buy me a coffee” screen to support the author.\n• A visible menu button and improved iPhone and iPad layouts.\n• Updated ad services and consent controls.\n• Fixed kana chart text that was hard to read in Dark Mode.\nRequires iOS 15 or later.",
+    "whatsNew": "• New answer sounds, haptics, and streak milestones.\n• The rhythm builds as your streak grows. Each question still gives you five seconds.\n• Control sound, rhythm, haptics, and reduced motion from the practice menu.\n• Improved layouts and more reliable timer pauses.\n• Correcting a missed answer no longer counts toward your streak.\n• Centered the visible kana and romaji more accurately.\n• Fixed answers becoming unresponsive after returning from the Home screen.",
     "appName": "Kana · 五十音",
     "promotionalText": "Four choices. Five seconds. How long can you keep your streak? Match hiragana, katakana, and romaji, and try to beat your record.",
     "shots": [
@@ -33,7 +33,7 @@
   },
   "ja": {
     "description": "1問5秒の4択で、連続正解に挑戦。Kanaは、基本のひらがな・カタカナとローマ字の対応を練習するアプリです。すきま時間に少しずつ練習して、自分の最高記録を目指しましょう。\n\n1問の制限時間は5秒。表示された文字に対応するかなやローマ字を選びます。間違えたときや時間切れのときは、正解がハイライトされます。正解を確認してタップすると、次の問題に進みます。\n\n回答数、平均回答時間、直近10回の回答の平均時間、最高連続正解数をひと目で確認できます。練習の統計は端末内に保存されます。\n\n思い出せない文字は、メニューから五十音表を開いて確認。ひらがなとカタカナを切り替え、ローマ字と見比べられます。メニューや五十音表を開いている間はタイマーが止まるので、落ち着いて確認できます。\n\nアカウント登録は不要。練習と五十音表はオフラインでも使えます。iPhoneとiPadに対応し、画面は日本語、英語、簡体字中国語、繁体字中国語、韓国語、ドイツ語、フランス語、スペイン語で表示できます。\n\n無料で使えます。広告が表示されるのは、間違えたときや時間切れのときだけ。正解すると次の問題へ進むので、どこまで連続正解できるか挑戦してみましょう。アプリを気に入ったら、任意のアプリ内購入「作者にコーヒーをおごる」で作者を応援できます。買い切りで、サブスクリプションはありません。\n\nプライバシーポリシー: https://kana.jacky.jp/privacy/",
-    "whatsNew": "・統計表示を刷新。回答数、平均回答時間、直近10問の平均、最高連続正解数を確認できます。\n・作者を応援できる「作者にコーヒーをおごる」の専用画面を追加しました。\n・メニューボタンを追加し、iPhoneとiPadのレイアウトを改善しました。\n・広告サービスと同意設定を更新しました。\n・ダークモードで五十音表の文字が読みにくくなる問題を修正しました。\niOS 15以降が必要です。",
+    "whatsNew": "・回答音、触覚フィードバック、連続正解の演出を追加しました。\n・連続正解に合わせてリズムが変化します。1問の制限時間は5秒のままです。\n・練習メニューで効果音、リズム、振動、動きを減らす設定を切り替えられます。\n・画面レイアウトとタイマーの一時停止を改善しました。\n・間違えた後の正解確認を連続正解に含めないよう修正しました。\n・かなとローマ字の見た目の中央位置を調整しました。\n・ホーム画面から戻った後、回答をタップできなくなる問題を修正しました。",
     "appName": "Kana · 五十音",
     "promotionalText": "4択、制限時間は5秒。ひらがな・カタカナとローマ字を見分けて、連続正解に挑戦。五十音表で確認しながら、自分の最高記録を目指しましょう。",
     "shots": [
@@ -65,7 +65,7 @@
   },
   "zh-Hans": {
     "description": "四个选项，五秒作答，看看自己能连续答对多少题。Kana 帮你练习辨认基础平假名、片假名和罗马音，在一次次短练习中挑战自己的最高纪录。\n\n每题有 5 秒作答时间，从四个选项中选出对应的假名或罗马音。答错或超时后，正确答案会高亮显示；看清后点击它，即可继续下一题。\n\n答题数、平均用时、最近 10 次作答的平均用时和最高连对数，都能在练习页一眼看清。练习统计保存在你的设备上。\n\n遇到想不起来的字，从菜单打开五十音图，就能切换平假名与片假名，对照罗马音查看。菜单和五十音图打开期间，答题计时会暂停，可以安心查阅。\n\n无需注册账号，练习和五十音图离线也能使用。支持 iPhone 和 iPad，界面提供简体中文、繁体中文、日语、英语、韩语、德语、法语和西班牙语。\n\n应用可免费使用，广告仅在答错或超时后显示。连续答对就能接着挑战下一题，看看自己能坚持多久。喜欢这款应用，也可以通过可选的「请作者喝杯咖啡」内购支持作者。一次性购买，无订阅。\n\n隐私政策：https://kana.jacky.jp/privacy/zh",
-    "whatsNew": "• 重新设计统计栏，清晰显示答题数、平均用时、近期平均和最高连对数。\n• 新增「请作者喝杯咖啡」专属页面，可以自愿支持作者。\n• 增加可见的菜单按钮，改善iPhone和iPad布局。\n• 更新广告服务与同意设置。\n• 修复深色模式下五十音图文字难以辨认的问题。\n需要iOS 15或更高版本。",
+    "whatsNew": "• 新增答题音效、震动反馈和连对里程碑。\n• 连对越多，节奏越紧张；每题仍有完整的 5 秒作答时间。\n• 可在练习菜单中调整音效、节奏、震动和减少动态效果。\n• 优化界面布局与计时暂停。\n• 修复答错后补选正确答案会计入连对的问题。\n• 修正假名和罗马字的视觉居中。\n• 修复回到主屏幕再打开应用后无法点击答案的问题。",
     "appName": "Kana · 五十音",
     "promotionalText": "四个选项，五秒作答。平假名、片假名与罗马音，你能连续答对多少题？随时查看五十音图，在一次次练习中挑战自己的最高纪录。",
     "shots": [
@@ -97,7 +97,7 @@
   },
   "zh-Hant": {
     "description": "四個選項，五秒作答，看看自己能連續答對幾題。Kana 幫你練習辨認基礎平假名、片假名和羅馬拼音，在一次次短練習中挑戰自己的最高紀錄。\n\n每題有 5 秒作答時間，從四個選項中選出對應的假名或羅馬拼音。答錯或超時後，正確答案會以醒目方式顯示；確認後點選它，即可繼續下一題。\n\n答題數、平均作答時間、最近 10 次作答的平均時間和最高連續答對次數，都能在練習頁一眼看清。練習統計儲存在你的裝置上。\n\n遇到想不起來的字，從選單開啟五十音圖，就能切換平假名與片假名，對照羅馬拼音查看。選單和五十音圖開啟期間，答題計時會暫停，可以安心查閱。\n\n不必註冊帳號，練習和五十音圖離線也能使用。支援 iPhone 和 iPad，介面提供繁體中文、簡體中文、日語、英語、韓語、德語、法語和西班牙語。\n\nApp 可免費使用，廣告只會在答錯或超時後顯示。連續答對就能接著挑戰下一題，看看自己能堅持多久。喜歡這款 App，也可以選擇透過「請作者喝杯咖啡」App 內購買支持作者。一次性購買，無訂閱。\n\n隱私政策：https://kana.jacky.jp/privacy/zh",
-    "whatsNew": "• 重新設計統計列，清晰顯示答題數、平均用時、近期平均和最高連續答對數。\n• 新增「請作者喝杯咖啡」專屬頁面，可以自願支持作者。\n• 增加可見的選單按鈕，改善iPhone和iPad版面配置。\n• 更新廣告服務與同意設定。\n• 修復深色模式下五十音圖文字難以辨認的問題。\n需要iOS 15或以上版本。",
+    "whatsNew": "• 新增答題音效、震動回饋和連對里程碑。\n• 連對越多，節奏越緊張；每題仍有完整的 5 秒作答時間。\n• 可在練習選單中調整音效、節奏、震動和減少動態效果。\n• 優化介面配置與計時暫停。\n• 修正答錯後補選正確答案會計入連對的問題。\n• 修正假名和羅馬字的視覺置中。\n• 修正回到主畫面再開啟 App 後無法點選答案的問題。",
     "appName": "Kana · 五十音",
     "promotionalText": "四個選項，五秒作答。平假名、片假名與羅馬拼音，你能連續答對幾題？隨時查看五十音圖，在一次次練習中挑戰自己的最高紀錄。",
     "shots": [
@@ -129,7 +129,7 @@
   },
   "ko": {
     "description": "보기는 네 개, 시간은 5초. 몇 문제나 연속으로 맞힐 수 있을까요? Kana는 기본 히라가나·가타카나와 로마자의 대응을 익히는 앱입니다. 짧게 연습하며 나의 최고 기록에 도전해 보세요.\n\n한 문제의 제한 시간은 5초입니다. 화면에 나온 글자에 맞는 가나나 로마자를 고르세요. 틀리거나 시간이 지나면 정답이 강조되어 표시됩니다. 정답을 확인하고 누르면 다음 문제로 넘어갑니다.\n\n답변 수, 평균 응답 시간, 최근 10회 응답의 평균 시간, 최고 연속 정답 기록을 한눈에 확인할 수 있습니다. 연습 통계는 기기에 저장됩니다.\n\n기억나지 않는 글자는 메뉴에서 가나표를 열어 확인하세요. 히라가나와 가타카나를 전환하며 로마자와 비교할 수 있습니다. 메뉴나 가나표가 열려 있는 동안에는 타이머가 멈추므로 여유 있게 확인할 수 있습니다.\n\n계정 가입이 필요 없으며 연습과 가나표는 오프라인에서도 사용할 수 있습니다. iPhone과 iPad를 지원하며 한국어, 일본어, 영어, 중국어 간체, 중국어 번체, 독일어, 프랑스어, 스페인어로 화면을 표시할 수 있습니다.\n\n무료로 사용할 수 있으며, 광고는 틀리거나 제한 시간이 지났을 때만 표시됩니다. 맞히면 바로 다음 문제로 이어지니, 얼마나 연속으로 맞힐 수 있는지 도전해 보세요. 앱이 마음에 든다면 선택 사항인 “개발자에게 커피 한 잔” 앱 내 구입으로 개발자를 응원할 수 있습니다. 구독이 아닌 일회성 구매입니다.\n\n개인정보 처리방침: https://kana.jacky.jp/privacy/en",
-    "whatsNew": "• 답변 수, 평균 응답 시간, 최근 평균, 최고 연속 정답 기록을 보여 주는 통계 화면을 새로 디자인했습니다.\n• 개발자를 응원할 수 있는 “개발자에게 커피 한 잔” 전용 화면을 추가했습니다.\n• 메뉴 버튼을 추가하고 iPhone 및 iPad 레이아웃을 개선했습니다.\n• 광고 서비스와 동의 설정을 업데이트했습니다.\n• 다크 모드에서 오십음도 글자가 잘 보이지 않던 문제를 수정했습니다.\niOS 15 이상이 필요합니다.",
+    "whatsNew": "• 답변 효과음, 진동 피드백, 연속 정답 달성 효과를 추가했습니다.\n• 연속 정답이 늘어나면 리듬이 빨라집니다. 문제당 제한 시간은 그대로 5초입니다.\n• 연습 메뉴에서 효과음, 리듬, 진동, 동작 줄이기를 설정할 수 있습니다.\n• 화면 구성과 타이머 일시 정지를 개선했습니다.\n• 오답 후 정답을 확인하는 동작이 연속 정답에 포함되던 문제를 수정했습니다.\n• 가나와 로마자가 시각적으로 가운데에 오도록 조정했습니다.\n• 홈 화면에서 앱으로 돌아온 뒤 답변을 누를 수 없던 문제를 수정했습니다.",
     "appName": "Kana · 五十音",
     "promotionalText": "보기는 네 개, 시간은 5초. 히라가나·가타카나와 로마자를 연결하며 연속 정답 기록에 도전하세요. 가나표로 확인하고 나의 최고 기록을 넘어 보세요.",
     "shots": [

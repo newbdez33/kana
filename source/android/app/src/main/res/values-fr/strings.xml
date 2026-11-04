@@ -40,5 +40,18 @@
     <string name="continue_practice">Reprendre la pratique</string>
     <string name="retry">Réessayer</string>
     <string name="purchase_unverified">L’achat n’a pas pu être vérifié. Veuillez réessayer.</string>
+    <string name="feedback_stage0">Échauffement</string>
+    <string name="feedback_stage1">En rythme</string>
+    <string name="feedback_stage2">Concentration</string>
+    <string name="feedback_stage3">En pleine forme</string>
+    <string name="feedback_stage4">Immersion</string>
+    <string name="feedback_combo">%1$d de suite</string>
+    <string name="feedback_record">Nouveau record</string>
+    <string name="feedback_try_again">Réessayer</string>
+    <string name="feedback_correction">Continuer</string>
+    <string name="feedback_sound">Effets sonores</string>
+    <string name="feedback_rhythm">Rythme</string>
+    <string name="feedback_haptics">Vibrations</string>
+    <string name="feedback_reduced_motion">Réduire les animations</string>
     <string name="privacy_policy">Politique de confidentialité</string>
 </resources>

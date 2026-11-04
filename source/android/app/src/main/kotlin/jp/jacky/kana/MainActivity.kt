@@ -28,12 +28,16 @@ class MainActivity : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
-        practiceViewModel.setInBackground(false)
         if (!container.coffeeStore.adsRemoved.value) container.adsManager.gatherConsent(this)
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onResume() {
+        super.onResume()
+        practiceViewModel.setInBackground(false)
+    }
+
+    override fun onPause() {
         practiceViewModel.setInBackground(true)
+        super.onPause()
     }
 }

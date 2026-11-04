@@ -46,6 +46,27 @@ final class KanaUITests: XCTestCase {
         attach("question")
     }
 
+    func testHomeReturnAllowsAnswers() {
+        let answers = app.collectionViews.firstMatch.cells
+        XCTAssertTrue(answers.firstMatch.waitForExistence(timeout: 10))
+        let total = app.otherElements["statTotal"]
+        for cycle in 0..<2 {
+            XCUIDevice.shared.press(.home)
+            sleep(8)
+            XCTAssertNotEqual(app.state, .notRunning)
+            app.activate()
+            XCTAssertTrue(answers.firstMatch.waitForExistence(timeout: 5))
+            XCTAssertEqual(answers.count, 4)
+            let before = total.value as? String
+            // A timeout may need a correction first; any accepted answer must change the count.
+            for index in 0..<8 where total.value as? String == before {
+                answers.element(boundBy: index % 4).tap()
+            }
+            XCTAssertNotEqual(total.value as? String, before)
+            attach("home-return-\(cycle)")
+        }
+    }
+
     func testTimeoutRevealsAnswerAndBanner() {
         let answers = app.collectionViews.firstMatch.cells
         XCTAssertTrue(answers.firstMatch.waitForExistence(timeout: 10))

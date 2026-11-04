@@ -40,5 +40,18 @@
     <string name="continue_practice">继续练习</string>
     <string name="retry">重新加载</string>
     <string name="purchase_unverified">无法验证此购买，请重试。</string>
+    <string name="feedback_stage0">热身</string>
+    <string name="feedback_stage1">起势</string>
+    <string name="feedback_stage2">专注</string>
+    <string name="feedback_stage3">燃起来</string>
+    <string name="feedback_stage4">心流</string>
+    <string name="feedback_combo">连对 %1$d 题</string>
+    <string name="feedback_record">新纪录</string>
+    <string name="feedback_try_again">再来一次</string>
+    <string name="feedback_correction">继续练习</string>
+    <string name="feedback_sound">音效</string>
+    <string name="feedback_rhythm">节奏</string>
+    <string name="feedback_haptics">震动</string>
+    <string name="feedback_reduced_motion">减少动态效果</string>
     <string name="privacy_policy">隐私政策</string>
 </resources>
