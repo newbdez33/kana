@@ -1,5 +1,6 @@
 package jp.jacky.kana.practice
 
+import android.view.accessibility.AccessibilityNodeInfo
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextEquals
@@ -11,6 +12,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.onNodeWithText
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import jp.jacky.kana.FakeAppContainer
 import jp.jacky.kana.MainActivity
 import jp.jacky.kana.TestKanaApplication
@@ -64,6 +66,26 @@ class PracticeScreenTest {
         compose.onNodeWithTag("moreMenu").performClick()
         compose.onNodeWithText(context.getString(R.string.feedback_haptics)).assertIsDisplayed().performClick()
         compose.onNodeWithText(context.getString(R.string.feedback_reduced_motion)).assertIsDisplayed()
+    }
+
+    @Test
+    fun questionAndFeedbackRemainInTheAndroidAccessibilityTree() {
+        val first = expected.next()
+        compose.onNodeWithTag("menuToggle").performClick()
+        val context = TestKanaApplication.get()
+        val labels = listOf(first.prompt, context.getString(R.string.feedback_combo, 0),
+            context.getString(R.string.feedback_stage0))
+        val automation = InstrumentationRegistry.getInstrumentation().uiAutomation
+        fun labelsIn(node: AccessibilityNodeInfo): List<String> = buildList {
+            node.text?.let { add(it.toString()) }
+            for (index in 0 until node.childCount) {
+                node.getChild(index)?.let { addAll(labelsIn(it)) }
+            }
+        }
+        compose.waitUntil(timeoutMillis = 5_000) {
+            val root = automation.rootInActiveWindow
+            root != null && labelsIn(root).containsAll(labels)
+        }
     }
 
     @Test

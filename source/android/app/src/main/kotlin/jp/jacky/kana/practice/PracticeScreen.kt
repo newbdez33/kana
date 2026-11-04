@@ -303,8 +303,9 @@ private fun Metric(value: AnnotatedString, caption: String, tag: String, modifie
 @Composable
 internal fun QuestionArea(state: PracticeUiState, modifier: Modifier = Modifier) {
     Box(modifier.fillMaxWidth().background(KanaColors.keyGray), contentAlignment = Alignment.Center) {
-        PracticeFeedbackOverlay(state)
         QuestionGlyph(state.question.prompt)
+        // Keep feedback semantics above the full-size glyph surface.
+        PracticeFeedbackOverlay(state)
     }
 }
 
