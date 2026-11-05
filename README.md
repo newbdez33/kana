@@ -86,6 +86,20 @@ npm run preview
 The upload package passed the official mini-tool Skill 1.8.0 checks. See the
 mini-tool README for the release status and remaining container checks.
 
+### TapTap H5 game
+
+The mobile browser game lives in [source/h5](source/h5/README.md). It reuses the
+native kana table and font, keeps practice statistics in one row, and supports
+touch, mouse, and keyboard input. Build it and run its local tests with:
+
+```sh
+cd source/h5
+npm test
+```
+
+The H5 README describes the local preview and TapTap ZIP format. Track the
+information-page review and public release in [issue #10](https://github.com/newbdez33/kana/issues/10).
+
 ## Roadmap
 
 See [TODO.md](TODO.md) for store availability checks, AdMob store association,
