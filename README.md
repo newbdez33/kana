@@ -30,6 +30,11 @@ states and capture instructions.
 
 ## Release status
 
+The [TapTap H5 information page](https://www.taptap.cn/app/1031166) was approved
+and published on November 6, 2026. It is a coming-soon page; public play is not
+enabled. See the [release record](docs/releases/2026-11-06-taptap-information-page.md)
+for the verified status and remaining checks.
+
 Android **1.0.0 (2)** passed Google Play review, as confirmed by the owner on
 September 29, 2026. The target audience is **13+**. Automatic full rollout was
 configured at submission. Public availability remains to be verified.
@@ -97,8 +102,9 @@ cd source/h5
 npm test
 ```
 
-The H5 README describes the local preview and TapTap ZIP format. Track the
-information-page review and public release in [issue #10](https://github.com/newbdez33/kana/issues/10).
+The H5 README describes the local preview and TapTap ZIP format. Follow the game
+on [TapTap](https://www.taptap.cn/app/1031166). Track the remaining checks before
+public play in [issue #10](https://github.com/newbdez33/kana/issues/10).
 
 ## Roadmap
 

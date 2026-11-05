@@ -56,6 +56,8 @@ npm run build
 The native Android and iOS packages are separate products of this repository.
 Use captures of this web game for its listing.
 
-The initial release plan is an information page. A public playable release also
-needs the platform's H5 package validation, device checks, and applicable game
-qualifications. Do not treat developer identity approval as game approval.
+The [TapTap information page](https://www.taptap.cn/app/1031166) was approved and
+published on November 6, 2026. It remains a coming-soon page on both clients;
+public play is not enabled. A playable release still needs hosted-runtime and
+physical-device checks, plus the applicable game qualifications. See the
+[release record](../../docs/releases/2026-11-06-taptap-information-page.md).
