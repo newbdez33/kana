@@ -31,8 +31,9 @@ states and capture instructions.
 ## Release status
 
 The [TapTap H5 information page](https://www.taptap.cn/app/1031166) was approved
-and published on November 6, 2026. It is a coming-soon page; public play is not
-enabled. See the [release record](docs/releases/2026-11-06-taptap-information-page.md)
+and published on November 6, 2026. The playable update `V-20261106` is under
+review; public play is not yet enabled. See the
+[release record](docs/releases/2026-11-06-taptap-information-page.md)
 for the verified status and remaining checks.
 
 Android **1.0.0 (2)** passed Google Play review, as confirmed by the owner on
