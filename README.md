@@ -33,9 +33,8 @@ states and capture instructions.
 The [TapTap H5 game](https://www.taptap.cn/app/1031166) was approved and published
 on November 6, 2026, at 16:30. Version `V-20261106` uses H5 version `440518`;
 both Android and iOS listings now offer play through the TapTap app. The phone UI
-follows iOS and passed physical S22 developer-test checks, including the TapTap
-safe area. The public S22 entry requires player real-name verification before
-gameplay can be checked. See the
+follows iOS. Public S22 checks passed for touch answers, statistics, corrections,
+pause, kana charts, and records after a cold restart. See the
 [release record](docs/releases/2026-11-06-taptap-information-page.md)
 for the verified status and remaining checks.
 
@@ -109,8 +108,8 @@ npm test
 ```
 
 The H5 README describes the local preview and TapTap ZIP format. Follow the game
-on [TapTap](https://www.taptap.cn/app/1031166). Track the remaining checks before
-public play in [issue #10](https://github.com/newbdez33/kana/issues/10).
+on [TapTap](https://www.taptap.cn/app/1031166). Track advertising and platform
+follow-ups in [issue #10](https://github.com/newbdez33/kana/issues/10).
 
 ## Roadmap
 

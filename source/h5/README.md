@@ -74,6 +74,7 @@ the TapTap app. The published update `V-20261106` uses H5 version `440518`,
 package `160144`, resubmitted at 14:12 with updated screenshots and gameplay
 video. Its required qualifications are approved. The iOS phone layout,
 TapTap safe area, and rapid-answer correction message passed Galaxy S22 Ultra
-developer-test checks. The public S22 entry requires player real-name
-verification before gameplay can be checked. See the
+developer-test checks. Public S22 checks also passed for all four answer
+positions, corrections, timeout, menu and chart pauses, and stored records
+after a cold restart. See the
 [release record](../../docs/releases/2026-11-06-taptap-information-page.md).

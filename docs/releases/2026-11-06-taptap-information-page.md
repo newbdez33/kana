@@ -18,9 +18,10 @@ at 14:12 on the same date: **2 hours and 18 minutes** before approval.
 ## Verification and remaining work
 
 On November 6, both public client tabs showed the play action in a signed-in
-browser. The published version details confirmed H5 version `440518`. The
-public QR link opened TapTap on the S22 and reached player real-name
-verification. Public gameplay remains unverified until that step is complete.
+browser. The published version details confirmed H5 version `440518`. After
+the required player verification, the public QR link opened the game in TapTap
+on the S22. Public gameplay and retained-record checks passed. The startup age
+label differs from the approved declaration, as recorded below.
 
 The local game passed nine unit tests and browser checks for keyboard controls,
 retained records, and four phone or landscape viewports. Physical TapTap checks
@@ -173,13 +174,40 @@ H5 `440518` and `kana-h5-1.0.0-mobile-fix.zip`. Both public client tabs show
 
 The public page's QR payload was decoded locally. Its native TapTap link uses
 miniapp ID `tapmcsmheyaq3i9ijt` and app ID `1031166`, without a developer-test
-type or pinned version. A cold TapTap launch through that link on the S22
-reached the platform's player real-name verification form. The developer
-account verification did not satisfy this player check. Public gameplay has
-not yet been verified. No identity data is included in these release records.
+type or pinned version. The first launch reached the platform's player
+real-name verification form. After this step was completed with the owner's
+authorization, the same public entry opened the game. No identity data is
+included in these release records.
+
+Public S22 checks used actual screen captures and device touch input:
+
+- The initial public launch retained 55 answers and a best streak of 12.
+- Six consecutive correct answers covered all four answer positions and
+  advanced immediately. The total reached 61, with a current streak of 6.
+- One wrong answer raised the total to 62, reset the current streak, and
+  highlighted the correct answer in pink. The correction remained visible.
+- Waiting 5.5 seconds on the next question showed timeout feedback without
+  increasing the answer count.
+- Opening the menu paused the timer. Both kana charts opened, the katakana
+  chart scrolled to the final kana, and closing it preserved the manual pause.
+  Resume worked, and controls remained clear of the native TapTap menu.
+- A cold app restart through the public entry retained 62 answers, best
+  streak 12, average time 0.36 seconds, and recent-ten time 0.35 seconds.
+
+The phone is left in the public game, paused. Public test screenshots and
+results are under `build/taptap-live-s22-20261106/` and are not committed.
 
 Publication screenshots and the public-entry check are under
 `build/taptap-live-20261106/` and are not committed.
+
+## Startup age label follow-up
+
+The public TapTap loading screen shows **16+**. The developer center still
+shows **8+** selected in the approved age-classification declaration. This
+display mismatch needs a platform follow-up; its cause is not yet confirmed.
+No declaration was changed during the check. Evidence is in
+`cold-relaunch.png` and `approved-age.png` under the public device-test folder.
+Track this with advertising in [issue #10](https://github.com/newbdez33/kana/issues/10).
 
 ## Advertising follow-up
 
