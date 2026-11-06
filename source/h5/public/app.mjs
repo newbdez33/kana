@@ -1,5 +1,7 @@
 import { Game, QUESTION_MS } from './engine.mjs';
 import { entries, rows } from './kana-data.mjs';
+import { PracticeBanner } from './ads.mjs';
+import { bannerAdUnitId } from './ad-config.mjs';
 
 const byId = id => document.getElementById(id);
 
@@ -35,6 +37,34 @@ let feedbackTimeout = null;
 let chartType = 1;
 let lastProgressSecond = null;
 let lastTimerText = null;
+const banner = new PracticeBanner({
+  host: globalThis.tap,
+  adUnitId: bannerAdUnitId,
+  placement: bannerPlacement,
+  render(position) {
+    const slot = byId('banner-slot');
+    slot.hidden = !position;
+    slot.style.height = position ? `${position.height + 52}px` : '';
+  }
+});
+banner.setActive(!document.hidden);
+
+function bannerPlacement(size) {
+  if (game.phase !== 'feedback' || game.pauses.size || chart.open || document.hidden) return null;
+  const panel = byId('question-panel').getBoundingClientRect();
+  const available = Math.min(panel.width, innerWidth) - 16;
+  const width = size.width || available;
+  const height = size.height;
+  const statisticsBottom = byId('answer-count').closest('.statistics').getBoundingClientRect().bottom;
+  if (width < 300 || width > available || height > innerHeight * 0.1 ||
+      panel.bottom - height - 52 - statisticsBottom < 80) return null;
+  return { left: panel.left + (panel.width - width) / 2, top: panel.bottom - height - 12, width, height };
+}
+
+window.addEventListener('resize', () => banner.reposition());
+window.addEventListener('pagehide', () => banner.setActive(false));
+window.addEventListener('pageshow', () => banner.setActive(!document.hidden));
+byId('banner-close').addEventListener('click', () => banner.hide());
 
 function save() {
   try { localStorage.setItem(storageKey, JSON.stringify(game.savedStatistics())); }
@@ -93,6 +123,7 @@ function renderQuestion() {
 }
 
 function startQuestion() {
+  banner.hide();
   clearTimeout(feedbackTimeout);
   game.start(performance.now());
   renderQuestion();
@@ -127,7 +158,10 @@ function finishQuestion() {
     byId('feedback').className = 'success';
     byId('feedback').textContent = `连对 ${game.streak} 题`;
     feedbackTimeout = setTimeout(() => { byId('feedback').textContent = ''; }, 650);
-  } else renderResult();
+  } else {
+    renderResult();
+    if (game.pauses.size === 0) banner.show();
+  }
 }
 
 function choose(index) {
@@ -140,6 +174,7 @@ function choose(index) {
 }
 
 function pause(reason) {
+  banner.hide();
   const phase = game.phase;
   game.pause(reason, performance.now());
   if (phase === 'playing' && game.phase === 'feedback') finishQuestion();
@@ -214,7 +249,10 @@ byId('chart-close').addEventListener('click', () => chart.close());
 chart.addEventListener('close', () => resume('chart'));
 byId('hiragana').addEventListener('click', () => { chartType = 1; renderChart(); });
 byId('katakana').addEventListener('click', () => { chartType = 2; renderChart(); });
-document.addEventListener('visibilitychange', () => document.hidden ? pause('visibility') : resume('visibility'));
+document.addEventListener('visibilitychange', () => {
+  banner.setActive(!document.hidden);
+  document.hidden ? pause('visibility') : resume('visibility');
+});
 document.addEventListener('keydown', event => {
   if (event.altKey || event.ctrlKey || event.metaKey || event.isComposing || chart.open ||
       event.target.closest('input, textarea, select, [contenteditable]')) return;

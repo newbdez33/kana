@@ -211,7 +211,43 @@ Track this with advertising in [issue #10](https://github.com/newbdez33/kana/iss
 
 ## Advertising follow-up
 
-Add TapTap H5 advertising after the first playable release. The current package
-has no advertising integration. The follow-up needs platform activation, ad
-code, testing, and an updated privacy declaration before publication. Use the
+The published package `440518` has no ads. The next implementation follows the
+iOS correction flow: wrong answers and timeouts can show a TapTap banner at the
+bottom of the question area; the next question removes it. Correct answers do
+not request ads. All four answers and the statistics remain visible. A close
+action, menu, chart, pause, or background entry removes the native component.
+Request failures and late callbacks do not interrupt practice.
+
+TapTap requires an initial ad-free period and limits banner size and total
+display time. The implementation excludes the first 60 foreground seconds,
+limits display to 20 percent of foreground session time, and removes banners
+taller than 10 percent of the viewport or without enough room for game controls.
+See the [ad review rules](https://developer.taptap.cn/minigameapidoc/tap-operation/operation-standards/minigame-ad-policy/)
+and [behavior rules](https://developer.taptap.cn/minigameapidoc/tap-operation/operation-standards/behavior-standards/).
+
+The developer center's advertising page was checked on November 6. It shows
+**Pending agreement**, with activation disabled and three items incomplete:
+
+1. Payment details.
+2. The incentive-plan agreement.
+3. Mini-game filing, still pending submission. The filing dialog states that
+   mini-game filing and the game's ICP filing have separate reviews.
+
+Developer verification is complete. No payment details were entered, no new
+agreement was signed, and no filing was submitted during this check. The build
+keeps ads disabled until `TAPTAP_BANNER_AD_UNIT_ID` is set. There is no live
+banner unit configured and no new ad-enabled package has been uploaded.
+
+Local validation passed 20 tests, application syntax checks, and diff checks.
+Chrome checks used a local TapTap host mock at 390 by 844, 390 by 667,
+320 by 568, 844 by 390, and 1280 by 800 pixels. They verified no ad requests on
+correct answers, wrong-answer and timeout display, close and next-question cleanup,
+menu/chart and manual pauses, and layout bounds. Small or short viewports omit
+the banner when it cannot fit. These checks found and fixed a browser timer
+receiver error, which now has a regression test. No live advertisement was
+requested or tested. Local screenshots and results are under
+`build/taptap-ads-20261106/` and are not committed.
+
+Complete activation, update the privacy declaration, and verify the configured
+package inside TapTap on the S22 before submitting a new version. Use the
 [H5 advertising guide](https://developer.taptap.cn/minigameapidoc/quick-start/mcp-guide/ad-integration-guide/).

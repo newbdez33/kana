@@ -6,7 +6,8 @@ native `AppConfig.swift` table and copies the existing kana font.
 
 The first version has a Simplified Chinese interface, a kana chart, pause and
 resume, and local practice statistics. It has no external runtime dependencies.
-It does not include the native apps' billing or advertising integrations.
+It uses the TapTap host for optional banner ads. Native billing and ad-removal
+purchases are not shared with this H5 version.
 
 The phone layout follows the native iOS practice screen. The light gray question
 area uses 60 percent of the available height; four white answer cells fill the
@@ -49,11 +50,56 @@ python3 -m http.server 8798 --directory ../../build/h5
 ```
 
 Tests cover answer equivalence, the timer deadline, concurrent pause reasons,
-duplicate input, statistics, and stored data validation. Browser checks must
+duplicate input, statistics, stored data validation, and the banner lifecycle.
+Banner tests cover the initial delay, display-time limit, background entry,
+layout changes, load failures, and late callbacks after a question change.
+Browser checks must
 also cover automatic phone start, immediate correct-answer progression, menu and
 chart navigation, portrait and landscape layouts, keyboard input, visibility
 changes, and storage restrictions. Repeat touch and safe-area checks in TapTap
 when the phone layout changes.
+
+## TapTap banner ads
+
+The display flow follows iOS: a wrong answer or timeout can show a banner at
+the bottom of the question area. The next question removes it immediately.
+Correct answers never show an ad. The four answer cells and all statistics
+remain visible. Closing the ad, opening the menu or chart, pausing, or leaving
+the foreground removes the native banner. A failed request leaves no empty slot
+and does not interrupt practice.
+
+The TapTap rules add these limits to the iOS flow:
+
+- No ads during the first 60 seconds in the foreground.
+- Total display time cannot exceed 20 percent of foreground session time.
+- Banner height cannot exceed 10 percent of the viewport. A banner that does
+  not fit beside the game controls is removed. No automatic refresh is used.
+- The banner has an ad label, a close button, and space between it and controls.
+
+See the [ad review rules](https://developer.taptap.cn/minigameapidoc/tap-operation/operation-standards/minigame-ad-policy/)
+and [behavior rules](https://developer.taptap.cn/minigameapidoc/tap-operation/operation-standards/behavior-standards/).
+The integration uses the host's
+[`tap.createBannerAd`](https://developer.taptap.cn/minigameapidoc/dev/api/ad/tap.createBannerAd/)
+API, with no external advertising script.
+
+Ads are disabled by default. After platform activation, set the banner unit
+from the developer center at build time:
+
+```sh
+TAPTAP_BANNER_AD_UNIT_ID='<banner-unit-id>' npm run build
+```
+
+The build writes this public identifier to `ad-config.mjs`. An empty identifier
+or a browser without the TapTap ad API keeps the game ad-free. Local mocks can
+verify the display flow, but a configured package must pass a physical TapTap
+test before publication. Verify ad loading, its actual dimensions, the close
+button, next-question cleanup, background return, and unchanged records.
+
+As of November 6, ad activation is pending: payment details, the incentive-plan
+agreement, and mini-game filing are incomplete in the developer center. No live
+banner unit is configured. Complete those steps and the required privacy
+declaration before submitting an ad-enabled package. The published package
+`440518` has no ads.
 
 ## TapTap release
 

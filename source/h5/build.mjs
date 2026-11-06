@@ -18,4 +18,6 @@ await mkdir(path.join(output, 'assets'), { recursive: true });
 await cp(path.join(source, 'public'), output, { recursive: true });
 await cp(path.join(root, 'source/kana/kana/resources/fonts/Hosohuwafont.ttf'), path.join(output, 'assets/kana.ttf'));
 await writeFile(path.join(output, 'kana-data.mjs'), `export const rows = ${JSON.stringify(rows)};\nexport const entries = rows.flat().filter(entry => entry[0]);\n`);
+const bannerAdUnitId = process.env.TAPTAP_BANNER_AD_UNIT_ID?.trim() ?? '';
+await writeFile(path.join(output, 'ad-config.mjs'), `export const bannerAdUnitId = ${JSON.stringify(bannerAdUnitId)};\n`);
 console.log(`Built ${output} from the native 46-kana table.`);
