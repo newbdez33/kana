@@ -68,11 +68,12 @@ npm run build
 The native Android and iOS packages are separate products of this repository.
 Use captures of this web game for its listing.
 
-The [TapTap information page](https://www.taptap.cn/app/1031166) was approved and
-published on November 6, 2026. The playable update `V-20261106` is under review,
-with automatic publication after approval. Its required qualifications are
-approved. The iOS phone layout and TapTap safe-area handling passed Galaxy S22
-Ultra checks on November 6. The final package also passed a rapid-answer
-correction-message regression check. H5 version `440518`, package `160144`,
-was resubmitted at 14:12 with updated screenshots and gameplay video. See the
+The [TapTap H5 game](https://www.taptap.cn/app/1031166) was approved and published
+on November 6, 2026, at 16:30. Both Android and iOS listings offer play through
+the TapTap app. The published update `V-20261106` uses H5 version `440518`,
+package `160144`, resubmitted at 14:12 with updated screenshots and gameplay
+video. Its required qualifications are approved. The iOS phone layout,
+TapTap safe area, and rapid-answer correction message passed Galaxy S22 Ultra
+developer-test checks. The public S22 entry requires player real-name
+verification before gameplay can be checked. See the
 [release record](../../docs/releases/2026-11-06-taptap-information-page.md).

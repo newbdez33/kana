@@ -30,11 +30,12 @@ states and capture instructions.
 
 ## Release status
 
-The [TapTap H5 information page](https://www.taptap.cn/app/1031166) was approved
-and published on November 6, 2026. The playable update `V-20261106` was
-resubmitted at 14:12 with H5 version `440518` and is under review. The phone UI
-follows iOS and passed physical S22 checks, including the TapTap safe area.
-It will publish automatically after approval; public play remains unverified. See the
+The [TapTap H5 game](https://www.taptap.cn/app/1031166) was approved and published
+on November 6, 2026, at 16:30. Version `V-20261106` uses H5 version `440518`;
+both Android and iOS listings now offer play through the TapTap app. The phone UI
+follows iOS and passed physical S22 developer-test checks, including the TapTap
+safe area. The public S22 entry requires player real-name verification before
+gameplay can be checked. See the
 [release record](docs/releases/2026-11-06-taptap-information-page.md)
 for the verified status and remaining checks.
 

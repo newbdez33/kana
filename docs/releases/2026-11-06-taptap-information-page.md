@@ -1,28 +1,38 @@
 # TapTap H5 release
 
-The [Kana information page](https://www.taptap.cn/app/1031166) is public.
-The developer center records approval and publication of `V-20261105` at
-**2026-11-06 04:15**, as displayed in its version history. The review submission
-is recorded at 00:47 on the same date: **3 hours and 28 minutes** before approval.
+The [Kana H5 game](https://www.taptap.cn/app/1031166) is published. The developer
+center records approval and publication of `V-20261106` at **2026-11-06 16:30**,
+as displayed in its version history. The final review submission is recorded
+at 14:12 on the same date: **2 hours and 18 minutes** before approval.
 
 ## Published scope
 
 - App ID: `1031166`; developer: `Jacky工作室`.
-- Both Android and iOS client listings remain **Coming soon**. The public page
-  offers Follow; it does not provide a play or download action.
+- Both Android and iOS client listings offer **Open the app to play**. The
+  public title is **Kana五十音 测试**, with a release date of November 6, 2026.
 - The description and three screenshots show the Simplified Chinese H5 game.
   The native App Store association and native screenshot overrides are removed.
-- Bound H5 version: `438689`; package: `159109`; portrait orientation;
+- Bound H5 version: `440518`; package: `160144`; portrait orientation;
   minimum base library: `2.4.0`.
 
 ## Verification and remaining work
 
-On November 6, the public page loaded while logged out on both client tabs.
-The developer center showed the information-page version as published.
+On November 6, both public client tabs showed the play action in a signed-in
+browser. The published version details confirmed H5 version `440518`. The
+public QR link opened TapTap on the S22 and reached player real-name
+verification. Public gameplay remains unverified until that step is complete.
 
 The local game passed nine unit tests and browser checks for keyboard controls,
 retained records, and four phone or landscape viewports. Physical TapTap checks
 on a Galaxy S22 Ultra also passed, as recorded below.
+
+## Initial information page
+
+The developer center records approval and publication of `V-20261105` at
+**2026-11-06 04:15**. Submission was at 00:47 on the same date: **3 hours and
+28 minutes** before approval. Both client listings were Coming soon and
+offered Follow. The public page was checked while logged out. That version
+bound H5 `438689`, package `159109`, with no public play action.
 
 ## Initial playable submission
 
@@ -146,13 +156,30 @@ shows ten correct answers, correction, pause/resume, and both kana charts. It is
 not a physical-device recording. The existing banners and cover remain in use.
 
 Version `V-20261106` was resubmitted on **2026-11-06 at 14:12**, as displayed
-in the version history. The release page and version history both show
-**Under review**. The final preview confirmed H5 `440518`, Android and iOS play
+in the version history. At resubmission, the release page and version history
+both showed **Under review**. The final preview confirmed H5 `440518`, Android and iOS play
 availability, portrait orientation, all required materials, and immediate
-publication after approval. Public play remains unverified.
+publication after approval.
 
 Artifacts and device check results are in `build/taptap-mobile-20261106/` and
 are not committed.
+
+## Public launch check
+
+The developer center shows `V-20261106` as **Live**, with approval and
+publication at **16:30** on November 6. The published version details confirm
+H5 `440518` and `kana-h5-1.0.0-mobile-fix.zip`. Both public client tabs show
+**Open the app to play**.
+
+The public page's QR payload was decoded locally. Its native TapTap link uses
+miniapp ID `tapmcsmheyaq3i9ijt` and app ID `1031166`, without a developer-test
+type or pinned version. A cold TapTap launch through that link on the S22
+reached the platform's player real-name verification form. The developer
+account verification did not satisfy this player check. Public gameplay has
+not yet been verified. No identity data is included in these release records.
+
+Publication screenshots and the public-entry check are under
+`build/taptap-live-20261106/` and are not committed.
 
 ## Advertising follow-up
 
