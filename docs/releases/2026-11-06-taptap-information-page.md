@@ -234,7 +234,7 @@ The developer center's advertising page was checked on November 6. It shows
    mini-game filing and the game's ICP filing have separate reviews.
 
 Developer verification is complete. No payment details were entered, no new
-agreement was signed, and no filing was submitted during this check. The build
+agreement was signed, and no filing was submitted during that initial check. The build
 keeps ads disabled until `TAPTAP_BANNER_AD_UNIT_ID` is set. There is no live
 banner unit configured and no new ad-enabled package has been uploaded.
 
@@ -251,3 +251,30 @@ requested or tested. Local screenshots and results are under
 Complete activation, update the privacy declaration, and verify the configured
 package inside TapTap on the S22 before submitting a new version. Use the
 [H5 advertising guide](https://developer.taptap.cn/minigameapidoc/quick-start/mcp-guide/ad-integration-guide/).
+
+## Advertising activation status — 2026-11-07 (JST)
+
+The owner supplied the requested payment information and approved its submission
+to TapTap. The finance page now shows a configured personal entity with status
+**Under review**. No payment details or identity documents are included in the
+commit or its GitHub records.
+
+With explicit owner approval, signed the TapTap Game Developer Incentive
+Agreement dated August 14, 2026. The incentive page confirms effective agreement
+version **10685** for November 2026, and the advertising page marks this
+requirement complete.
+
+Submitted mini-game filing with the already published H5 version **440518**.
+The filing dialog confirms **Under review** and makes the materials read-only
+during review. It states that the platform generates the game introduction and
+filing form from the game information. This review is separate from ICP filing.
+
+At 00:04 JST, payment verification and mini-game filing were still under review.
+The advertising page shows two incomplete requirements and a disabled activation
+button. No ad unit can be configured through this entry yet. No ad-enabled
+package has been uploaded, and the public game remains ad-free.
+
+After both reviews pass, enable advertising, create the banner unit, complete
+the privacy declaration, build with the real unit identifier, and verify loading,
+layout, cleanup, background return, and records on S22 before publication.
+Status screenshots are in `build/taptap-ad-setup-20261106/` and are not committed.

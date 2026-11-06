@@ -95,11 +95,12 @@ verify the display flow, but a configured package must pass a physical TapTap
 test before publication. Verify ad loading, its actual dimensions, the close
 button, next-question cleanup, background return, and unchanged records.
 
-As of November 6, ad activation is pending: payment details, the incentive-plan
-agreement, and mini-game filing are incomplete in the developer center. No live
-banner unit is configured. Complete those steps and the required privacy
-declaration before submitting an ad-enabled package. The published package
-`440518` has no ads.
+As checked on November 7, 2026 (JST), the incentive agreement is effective for
+November. Personal payment details and mini-game filing for H5 `440518` are
+both under review. The ad activation button remains disabled until both reviews
+pass. No live banner unit is configured. After approval, enable ads, create the
+banner unit, complete the required privacy declaration, and test the configured
+package in TapTap before publication. The published package `440518` has no ads.
 
 ## TapTap release
 
