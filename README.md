@@ -30,6 +30,14 @@ states and capture instructions.
 
 ## Release status
 
+The [TapTap H5 game](https://www.taptap.cn/app/1031166) was approved and published
+on November 6, 2026, at 16:30. Version `V-20261106` uses H5 version `440518`;
+both Android and iOS listings now offer play through the TapTap app. The phone UI
+follows iOS. Public S22 checks passed for touch answers, statistics, corrections,
+pause, kana charts, and records after a cold restart. See the
+[release record](docs/releases/2026-11-06-taptap-information-page.md)
+for the verified status and remaining checks.
+
 Android **1.0.0 (2)** passed Google Play review, as confirmed by the owner on
 September 29, 2026. The target audience is **13+**. Automatic full rollout was
 configured at submission. Public availability remains to be verified.
@@ -85,6 +93,23 @@ npm run preview
 
 The upload package passed the official mini-tool Skill 1.8.0 checks. See the
 mini-tool README for the release status and remaining container checks.
+
+### TapTap H5 game
+
+The mobile browser game lives in [source/h5](source/h5/README.md). Its phone
+layout and immediate answer progression follow the iOS practice screen. It
+reuses the native kana table and font, keeps statistics and the current streak
+in one row, and supports touch, mouse, and keyboard input. Build it and run its
+local tests with:
+
+```sh
+cd source/h5
+npm test
+```
+
+The H5 README describes the local preview and TapTap ZIP format. Follow the game
+on [TapTap](https://www.taptap.cn/app/1031166). Track advertising and platform
+follow-ups in [issue #10](https://github.com/newbdez33/kana/issues/10).
 
 ## Roadmap
 
