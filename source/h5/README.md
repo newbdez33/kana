@@ -8,12 +8,20 @@ The first version has a Simplified Chinese interface, a kana chart, pause and
 resume, and local practice statistics. It has no external runtime dependencies.
 It does not include the native apps' billing or advertising integrations.
 
-The phone layout keeps the question and all four answers within one viewport.
-A single row above the question shows the current streak, best streak, answer
-count, average answer time, and the average for the last ten answers. Short
-landscape viewports place answers beside the question.
+The phone layout follows the native iOS practice screen. The light gray question
+area uses 60 percent of the available height; four white answer cells fill the
+remaining 40 percent. The menu and statistics sit above the question. A single
+row shows the answer count, average time, last-ten average, best streak, and
+current streak. Landscape viewports place the answers left of the question.
 Inside TapTap, the layout uses the host's safe area and menu bounds to keep
-the header controls and kana chart clear of the platform menu.
+the menu button and kana chart clear of the platform menu.
+
+Phones start practice when the font is ready. Correct answers advance immediately,
+as in iOS. Wrong answers and timeouts highlight the correct answer for review.
+The menu pauses the timer and provides the chart and pause controls. Opening the
+chart during a manual pause does not resume practice when the chart closes.
+Desktop browsers keep the start action and keyboard hints. Phone layouts hide
+keyboard hints without disabling keyboard input.
 
 ## Keyboard controls
 
@@ -42,8 +50,10 @@ python3 -m http.server 8798 --directory ../../build/h5
 
 Tests cover answer equivalence, the timer deadline, concurrent pause reasons,
 duplicate input, statistics, and stored data validation. Browser checks must
-also cover portrait and landscape layouts, chart navigation, keyboard input,
-visibility changes, and storage restrictions.
+also cover automatic phone start, immediate correct-answer progression, menu and
+chart navigation, portrait and landscape layouts, keyboard input, visibility
+changes, and storage restrictions. Repeat touch and safe-area checks in TapTap
+when the phone layout changes.
 
 ## TapTap release
 
@@ -61,8 +71,8 @@ Use captures of this web game for its listing.
 The [TapTap information page](https://www.taptap.cn/app/1031166) was approved and
 published on November 6, 2026. The playable update `V-20261106` is under review,
 with automatic publication after approval. Its required qualifications are
-approved. The hosted game passed Galaxy S22 Ultra checks on November 6. The
-tested safe-area fix is uploaded as H5 version `440368`, package `160052`.
-The review submission still uses `438689`; replacing it requires withdrawing
-and resubmitting that review. See the
+approved. The iOS phone layout and TapTap safe-area handling passed Galaxy S22
+Ultra checks on November 6. The final package also passed a rapid-answer
+correction-message regression check. H5 version `440518`, package `160144`,
+was resubmitted at 14:12 with updated screenshots and gameplay video. See the
 [release record](../../docs/releases/2026-11-06-taptap-information-page.md).

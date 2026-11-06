@@ -31,10 +31,10 @@ states and capture instructions.
 ## Release status
 
 The [TapTap H5 information page](https://www.taptap.cn/app/1031166) was approved
-and published on November 6, 2026. The playable update `V-20261106` is under
-review; public play is not yet enabled. Physical S22 checks passed. A fix for
-the TapTap menu overlap is tested and uploaded, pending replacement of the
-package under review. See the
+and published on November 6, 2026. The playable update `V-20261106` was
+resubmitted at 14:12 with H5 version `440518` and is under review. The phone UI
+follows iOS and passed physical S22 checks, including the TapTap safe area.
+It will publish automatically after approval; public play remains unverified. See the
 [release record](docs/releases/2026-11-06-taptap-information-page.md)
 for the verified status and remaining checks.
 
@@ -96,9 +96,11 @@ mini-tool README for the release status and remaining container checks.
 
 ### TapTap H5 game
 
-The mobile browser game lives in [source/h5](source/h5/README.md). It reuses the
-native kana table and font, keeps practice statistics in one row, and supports
-touch, mouse, and keyboard input. Build it and run its local tests with:
+The mobile browser game lives in [source/h5](source/h5/README.md). Its phone
+layout and immediate answer progression follow the iOS practice screen. It
+reuses the native kana table and font, keeps statistics and the current streak
+in one row, and supports touch, mouse, and keyboard input. Build it and run its
+local tests with:
 
 ```sh
 cd source/h5

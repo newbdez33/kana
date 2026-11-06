@@ -24,10 +24,10 @@ The local game passed nine unit tests and browser checks for keyboard controls,
 retained records, and four phone or landscape viewports. Physical TapTap checks
 on a Galaxy S22 Ultra also passed, as recorded below.
 
-## Playable version under review
+## Initial playable submission
 
 Version `V-20261106` was submitted on **2026-11-06 at 12:32**, as displayed in the
-version history. Both the release page and version history show **Under review**.
+version history. At that time, the release page and version history showed **Under review**.
 It provides play on Android and iOS through the same H5 package and is set to
 publish automatically after approval. All required store materials are complete.
 
@@ -98,9 +98,61 @@ Nine local unit tests passed after the fix. Device screenshots and check results
 are under `build/taptap-s22-20261106/` and are not committed. The phone is left
 with the corrected test game paused.
 
-The active review still uses `438689`. The corrected package is **not** part of
-that submission. Replacing it requires withdrawing the current review, selecting
-`440368`, and resubmitting. This would restart the review queue.
+The initial review used `438689`. Version `440368` was uploaded for self-test,
+but was superseded by the iOS layout update below before review resubmission.
+
+## iOS phone layout alignment
+
+The initial review was withdrawn on November 6 at **13:48**, with the owner's approval. The
+phone UI now follows the native iOS practice screen: a light gray question area
+above a white four-cell answer grid, with a 60/40 vertical split. A single
+row retains all five statistics, including the current streak. The menu opens
+above the statistics and pauses the timer. The native TapTap menu remains clear
+of game controls.
+
+Phone layouts start after the kana font loads and hide keyboard hints. Correct
+answers advance immediately. Wrong answers and timeouts highlight the correct
+answer in pink, as in iOS. Desktop browsers retain the start action, Q/W/A/S,
+arrow focus, and Enter/Space confirmation. The same UI and game engine serve
+both layouts; TapTap distribution remains Android and iOS.
+
+Local validation passed nine unit tests, syntax checks, phone and desktop
+viewport checks, menu/chart pause checks, keyboard controls, and stored-record
+recovery. A rapid correct-then-wrong sequence exposed a stale success-message
+timer. Clearing that timer before each result keeps the correction message
+visible; the browser regression check passed after 800 milliseconds.
+
+The layout package `440458` (`160110`) passed physical S22 checks for all four
+answer positions, immediate progression, menu and nested chart pauses, correction,
+and timeout. It retained the previous 23 answers and best streak of 12 on its
+first cold launch. The full device run ended with 49 answers and best streak 12.
+The final package adds the correction-message timer fix without a layout change:
+
+- H5 version `440518`; package `160144`; portrait; base library `2.4.0`.
+- File `kana-h5-1.0.0-mobile-fix.zip`; 3,406,067 bytes.
+- SHA-256: `095dd6807340318c9a836c22bebc3ad99f85d9db456da2a023c23fa03cbe9780`.
+
+The final package passed a cold-launch check with all 49 earlier answers intact.
+A correct-then-wrong touch sequence completed in 468 ms; the correction text
+remained visible after another 900 ms. Four further correct answers advanced
+immediately. The final record is 55 answers with a best streak of 12. The menu
+button starts at CSS y=87, below the native menu's y=67 bottom. The hosted
+`app.mjs` matches the local source byte for byte. The phone is left paused.
+
+Replaced the listing screenshots with three 1170 by 2532 captures of the actual
+phone web UI (assets `767805`, `767806`, `767807`). Replaced the gameplay video
+with `6062300`: 26.03 seconds, 780 by 1688 pixels, H.264. The uncut browser recording
+shows ten correct answers, correction, pause/resume, and both kana charts. It is
+not a physical-device recording. The existing banners and cover remain in use.
+
+Version `V-20261106` was resubmitted on **2026-11-06 at 14:12**, as displayed
+in the version history. The release page and version history both show
+**Under review**. The final preview confirmed H5 `440518`, Android and iOS play
+availability, portrait orientation, all required materials, and immediate
+publication after approval. Public play remains unverified.
+
+Artifacts and device check results are in `build/taptap-mobile-20261106/` and
+are not committed.
 
 ## Advertising follow-up
 

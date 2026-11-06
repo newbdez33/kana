@@ -30,7 +30,8 @@ const game = new Game(entries, saved);
 const answerButtons = [...byId('answers').querySelectorAll('button')];
 const answerKeys = answerButtons.map(button => button.querySelector('.answer-key').textContent.toLowerCase());
 const chart = byId('chart');
-let automaticNext = null;
+const phoneLayout = matchMedia('(max-width:700px), (pointer:coarse)');
+let feedbackTimeout = null;
 let chartType = 1;
 let lastProgressSecond = null;
 let lastTimerText = null;
@@ -45,8 +46,18 @@ function renderStatistics() {
   byId('best-streak').textContent = stats.bestStreak;
   byId('streak').textContent = game.streak;
   byId('answer-count').textContent = stats.count;
-  byId('average-time').textContent = stats.count ? `${(stats.totalMs / stats.count / 1000).toFixed(2)} 秒` : '—';
-  byId('recent-time').textContent = stats.recentMs.length ? `${(stats.recentMs.reduce((a, b) => a + b, 0) / stats.recentMs.length / 1000).toFixed(2)} 秒` : '—';
+  renderAverage('average-time', stats.count ? stats.totalMs / stats.count : null);
+  renderAverage('recent-time', stats.recentMs.length ? stats.recentMs.reduce((a, b) => a + b, 0) / stats.recentMs.length : null);
+}
+
+function renderAverage(id, milliseconds) {
+  const value = byId(id);
+  value.textContent = milliseconds === null ? '—' : (milliseconds / 1000).toFixed(2);
+  if (milliseconds === null) return;
+  const unit = document.createElement('span');
+  unit.className = 'stat-unit';
+  unit.textContent = '秒';
+  value.append(unit);
 }
 
 function renderTime(now) {
@@ -73,17 +84,16 @@ function renderQuestion() {
     button.disabled = game.pauses.size > 0;
     button.querySelector('.answer-label').textContent = game.question.choices[index];
     button.querySelector('.answer-mark').textContent = '';
-    button.setAttribute('aria-label', `${answerKeys[index].toUpperCase()}：${game.question.choices[index]}`);
+    button.setAttribute('aria-label', game.question.choices[index]);
   });
   byId('feedback').className = '';
-  byId('feedback').textContent = '选出对应的假名或罗马音。';
+  byId('feedback').textContent = '';
   byId('next').hidden = true;
   renderTime(performance.now());
 }
 
 function startQuestion() {
-  clearTimeout(automaticNext);
-  automaticNext = null;
+  clearTimeout(feedbackTimeout);
   game.start(performance.now());
   renderQuestion();
 }
@@ -109,14 +119,15 @@ function renderResult() {
 }
 
 function finishQuestion() {
+  clearTimeout(feedbackTimeout);
   save();
-  renderResult();
   if (game.result.kind === 'correct') {
-    automaticNext = setTimeout(() => {
-      automaticNext = null;
-      if (game.phase === 'feedback' && game.pauses.size === 0) startQuestion();
-    }, 500);
-  }
+    renderStatistics();
+    startQuestion();
+    byId('feedback').className = 'success';
+    byId('feedback').textContent = `连对 ${game.streak} 题`;
+    feedbackTimeout = setTimeout(() => { byId('feedback').textContent = ''; }, 650);
+  } else renderResult();
 }
 
 function choose(index) {
@@ -137,8 +148,15 @@ function pause(reason) {
 
 function resume(reason) {
   game.resume(reason, performance.now());
-  if (!game.pauses.size && game.phase === 'feedback' && game.result.kind === 'correct' && automaticNext === null) startQuestion();
   syncPause();
+}
+
+function setMenuOpen(open) {
+  byId('practice-menu').hidden = !open;
+  byId('menu-toggle').setAttribute('aria-expanded', open);
+  byId('menu-toggle').setAttribute('aria-label', open ? '关闭菜单' : '菜单');
+  if (open) pause('menu');
+  else resume('menu');
 }
 
 function syncPause() {
@@ -175,17 +193,23 @@ answerButtons.forEach((button, index) => {
   button.setAttribute('aria-keyshortcuts', answerKeys[index].toUpperCase());
   button.addEventListener('click', () => choose(index));
 });
-byId('start').addEventListener('click', () => {
+function startPractice() {
   byId('start-panel').hidden = true;
-  byId('question-panel').removeAttribute('aria-hidden');
+  byId('question-content').removeAttribute('aria-hidden');
   byId('answers-panel').removeAttribute('aria-hidden');
   byId('pause').disabled = false;
   startQuestion();
+}
+byId('start').addEventListener('click', startPractice);
+byId('menu-toggle').addEventListener('click', () => setMenuOpen(byId('practice-menu').hidden));
+byId('pause').addEventListener('click', () => {
+  if (game.pauses.has('manual')) resume('manual');
+  else pause('manual');
+  setMenuOpen(false);
 });
-byId('pause').addEventListener('click', () => game.pauses.has('manual') ? resume('manual') : pause('manual'));
 byId('resume').addEventListener('click', () => resume('manual'));
 byId('next').addEventListener('click', () => { if (game.phase === 'feedback' && !game.pauses.size) startQuestion(); });
-byId('chart-open').addEventListener('click', () => { pause('chart'); renderChart(); chart.showModal(); });
+byId('chart-open').addEventListener('click', () => { pause('chart'); setMenuOpen(false); renderChart(); chart.showModal(); });
 byId('chart-close').addEventListener('click', () => chart.close());
 chart.addEventListener('close', () => resume('chart'));
 byId('hiragana').addEventListener('click', () => { chartType = 1; renderChart(); });
@@ -196,7 +220,10 @@ document.addEventListener('keydown', event => {
       event.target.closest('input, textarea, select, [contenteditable]')) return;
   if (event.key === 'Escape' && game.phase !== 'ready') {
     event.preventDefault();
-    if (!event.repeat) game.pauses.has('manual') ? resume('manual') : pause('manual');
+    if (!event.repeat) {
+      if (!byId('practice-menu').hidden) setMenuOpen(false);
+      else game.pauses.has('manual') ? resume('manual') : pause('manual');
+    }
     return;
   }
   if (game.phase === 'ready' || game.pauses.size) return;
@@ -237,6 +264,12 @@ document.addEventListener('keydown', event => {
 });
 if (document.hidden) pause('visibility');
 renderStatistics();
+async function startPhonePractice() {
+  await document.fonts.ready;
+  if (phoneLayout.matches && game.phase === 'ready') startPractice();
+}
+phoneLayout.addEventListener('change', startPhonePractice);
+startPhonePractice();
 requestAnimationFrame(function frame(now) {
   if (game.tick(now)) finishQuestion();
   if (game.phase === 'playing' && game.pauses.size === 0) renderTime(now);
