@@ -12,6 +12,8 @@ The phone layout keeps the question and all four answers within one viewport.
 A single row above the question shows the current streak, best streak, answer
 count, average answer time, and the average for the last ten answers. Short
 landscape viewports place answers beside the question.
+Inside TapTap, the layout uses the host's safe area and menu bounds to keep
+the header controls and kana chart clear of the platform menu.
 
 ## Keyboard controls
 
@@ -59,5 +61,8 @@ Use captures of this web game for its listing.
 The [TapTap information page](https://www.taptap.cn/app/1031166) was approved and
 published on November 6, 2026. The playable update `V-20261106` is under review,
 with automatic publication after approval. Its required qualifications are
-approved. TapTap-hosted physical-device checks remain unverified. See the
+approved. The hosted game passed Galaxy S22 Ultra checks on November 6. The
+tested safe-area fix is uploaded as H5 version `440368`, package `160052`.
+The review submission still uses `438689`; replacing it requires withdrawing
+and resubmitting that review. See the
 [release record](../../docs/releases/2026-11-06-taptap-information-page.md).

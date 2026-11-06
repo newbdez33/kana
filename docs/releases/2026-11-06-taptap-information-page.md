@@ -21,8 +21,8 @@ On November 6, the public page loaded while logged out on both client tabs.
 The developer center showed the information-page version as published.
 
 The local game passed nine unit tests and browser checks for keyboard controls,
-retained records, and four phone or landscape viewports. These checks do not
-verify the TapTap-hosted runtime on a physical device.
+retained records, and four phone or landscape viewports. Physical TapTap checks
+on a Galaxy S22 Ultra also passed, as recorded below.
 
 ## Playable version under review
 
@@ -47,11 +47,60 @@ browser game at a phone viewport; it is not a physical-device capture. One cut
 removes the gap between the gameplay and chart recordings.
 
 The final submission preview confirmed H5 version `438689`, both client play
-states, and immediate publication after approval. The hosted version has not
-yet been verified on a physical phone through the TapTap test QR code. QR
-scanning is a self-test entry point; the console accepted this submission without
-a recorded phone test. Track the review result and this remaining validation in
+states, and immediate publication after approval. QR scanning is a self-test
+entry point; the console accepted this submission before the physical test.
+Track the corrected package and public-play check in
 [issue #10](https://github.com/newbdez33/kana/issues/10).
+
+## Physical validation and safe-area fix
+
+Tested on November 6 using a Samsung Galaxy S22 Ultra (`SM-S9080`), Android 16,
+connected to `jx`. TapTap `2.96.15-rel#100300` was installed from the official
+download page. Its in-app component update and restart were required before
+the H5 runtime could start. The embedded runtime reported Chromium 121 with
+TBS `048919`, a 384 by 824 CSS-pixel viewport, and pixel ratio 2.8125.
+
+The developer-test QR payload was decoded locally and opened through TapTap's
+native deep link. Tests ran inside TapTap on the physical phone. Camera or
+gallery QR recognition was not validated; media-library access was not granted.
+Touch input used the device's actual screen coordinates. DOM checks used the
+hosted game's debugging endpoint.
+
+The original package passed correct-answer, correction, timeout, chart,
+background, and statistics checks. It exposed one layout defect: the native
+menu overlapped the pause and chart buttons. The runtime now reads TapTap's
+safe area and menu bounds. The header and chart dialog stay below that area;
+ordinary browsers retain their existing spacing.
+
+The corrected package is uploaded for self-test:
+
+- H5 version: `440368`; package: `160052`; portrait; base library `2.4.0`.
+- File: `kana-h5-1.0.0-safe-area.zip`; 3,406,198 bytes.
+- SHA-256: `7ddde299c6fbbd348203d41447c1cb7da9c14a41ee91805a539f306e711df9dc`.
+
+Physical checks passed:
+
+- All four answer positions accept touch input and remain within the viewport.
+- Twelve consecutive correct answers in the corrected package produced a best
+  streak of 12 and a cumulative answer count of 23.
+- Wrong answers reset the current streak, preserve the best, and highlight the
+  correct answer. A five-second timeout does not increase the answer count.
+- Manual pause, both 46-kana charts, nested pause reasons, and resume work.
+  Chart scrolling reaches the final kana. The chart close button stays clear
+  of the native menu.
+- Background and recent-apps navigation retain the active question and time.
+- A cold app restart into the corrected package retained the prior 11 answers,
+  best streak of 10, and average times. The current streak reset as intended.
+- The native menu ends at CSS y=67; the corrected header buttons start at y=82.
+  The original controls overlapped that menu.
+
+Nine local unit tests passed after the fix. Device screenshots and check results
+are under `build/taptap-s22-20261106/` and are not committed. The phone is left
+with the corrected test game paused.
+
+The active review still uses `438689`. The corrected package is **not** part of
+that submission. Replacing it requires withdrawing the current review, selecting
+`440368`, and resubmitting. This would restart the review queue.
 
 ## Advertising follow-up
 

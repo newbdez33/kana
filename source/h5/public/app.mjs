@@ -2,6 +2,27 @@ import { Game, QUESTION_MS } from './engine.mjs';
 import { entries, rows } from './kana-data.mjs';
 
 const byId = id => document.getElementById(id);
+
+function updateHostInsets() {
+  const host = globalThis.tap;
+  if (!host) return;
+  try {
+    const system = host.getSystemInfoSync?.();
+    const menu = host.getMenuButtonBoundingClientRect?.();
+    const top = Math.max(0, system?.safeArea?.top ?? 0, menu?.bottom ?? 0);
+    const height = system?.windowHeight ?? innerHeight;
+    const bottom = Math.max(0, height - (system?.safeArea?.bottom ?? height));
+    const style = document.documentElement.style;
+    style.setProperty('--host-safe-top', `${top ? top + 8 : 0}px`);
+    style.setProperty('--host-safe-bottom', `${bottom}px`);
+  } catch {
+    // A host geometry failure must not prevent practice from starting.
+  }
+}
+
+updateHostInsets();
+window.addEventListener('resize', updateHostInsets);
+
 const storageKey = 'kana.h5.statistics.v1';
 let saved;
 try { saved = JSON.parse(localStorage.getItem(storageKey)); } catch { /* Practice also works without storage. */ }

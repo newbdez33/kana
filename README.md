@@ -32,7 +32,9 @@ states and capture instructions.
 
 The [TapTap H5 information page](https://www.taptap.cn/app/1031166) was approved
 and published on November 6, 2026. The playable update `V-20261106` is under
-review; public play is not yet enabled. See the
+review; public play is not yet enabled. Physical S22 checks passed. A fix for
+the TapTap menu overlap is tested and uploaded, pending replacement of the
+package under review. See the
 [release record](docs/releases/2026-11-06-taptap-information-page.md)
 for the verified status and remaining checks.
 
