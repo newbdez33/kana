@@ -5,6 +5,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 1rem/1.8 -apple-
 :lang(ja){font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic Medium","Yu Gothic","Noto Sans JP",sans-serif}
 :lang(zh-Hans){font-family:"PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",sans-serif}
 .wordmark,.hero h1,h2,.glyph,.mark{font-family:"Hiragino Mincho ProN","Hiragino Mincho Pro","Yu Mincho","Noto Serif JP","Songti SC","Times New Roman",serif}
+:lang(en):is(.hero h1,h2){font-family:ui-serif,"New York",Georgia,"Times New Roman",serif;letter-spacing:-.01em}
 a{color:inherit;text-underline-offset:.22em}a:focus-visible{outline:3px solid var(--red);outline-offset:5px}
 img{display:block;max-width:100%}
 .wrap{width:min(1120px,calc(100% - 64px));margin:auto}
