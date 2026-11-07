@@ -32,7 +32,8 @@ states and capture instructions.
 
 Android **1.0.0 (2)** passed Google Play review, as confirmed by the owner on
 September 29, 2026. The target audience is **13+**. Automatic full rollout was
-configured at submission. Public availability remains to be verified.
+configured at submission. The Google Play listing was publicly available on
+November 7, 2026, and kana.jacky.jp links to it.
 See the [release record](docs/releases/2026-09-28-android-review.md)
 for validation and remaining checks.
 
