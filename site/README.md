@@ -8,7 +8,7 @@ external fonts.
 - `public/`, `public/zh.html`, `public/en.html`: app pages in Japanese, Chinese and English.
 - `public/privacy/`: privacy policy in the same three languages.
 - `public/app-ads.txt`: the AdMob publisher record for app-ads.txt verification.
-- `public/assets/`: app icon, App Store badges and the two screen images.
+- `public/assets/`: app icon, App Store and Google Play badges and the two screen images.
 
 Deploy from this directory with the personal Cloudflare account:
 
