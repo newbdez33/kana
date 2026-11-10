@@ -278,3 +278,21 @@ After both reviews pass, enable advertising, create the banner unit, complete
 the privacy declaration, build with the real unit identifier, and verify loading,
 layout, cleanup, background return, and records on S22 before publication.
 Status screenshots are in `build/taptap-ad-setup-20261106/` and are not committed.
+
+## Advertising readiness — 2026-11-10 (JST)
+
+The advertising page now marks all four prerequisites complete: developer
+verification, configured payment details, the effective incentive agreement,
+and approved mini-game filing. The activation button is enabled.
+
+Activation requires a separate Creative Workshop Content Operations Agreement,
+dated March 11, 2026. Section 4.2 includes an exclusive worldwide license with
+no license fee and rights to sublicense, adapt, and use content for machine
+learning. Owner approval of this new agreement is pending. The earlier
+incentive agreement does not approve this separate contract.
+
+No new agreement was accepted, no live banner unit was created, and no
+ad-enabled package was uploaded during this check. The banner implementation
+is pushed in PR #13. After agreement approval and activation, the remaining
+steps are banner configuration, the privacy declaration, S22 checks with real
+ads, and release submission.
