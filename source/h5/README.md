@@ -1,5 +1,11 @@
 # Jumping Kana · 跳跳五十音
 
+> Moved on November 10, 2026 to
+> [newbdez33/jumping-kana](https://github.com/newbdez33/jumping-kana).
+> This copy is retained as source history. Use the standalone repository for
+> builds, tests, releases, and future changes. The documentation below records
+> the state before the split.
+
 A rabbit journey game for TapTap H5 distribution. A correct answer moves
 the rabbit one step across the stream. Every eight correct answers unlock
 the next meadow. It uses the existing four-choice, five-second practice

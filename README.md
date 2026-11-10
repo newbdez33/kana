@@ -31,14 +31,12 @@ states and capture instructions.
 ## Release status
 
 The original [TapTap H5 game](https://www.taptap.cn/app/1031166) was published
-on November 6, 2026, with H5 version `440518`. The November 10 update turns
-that web game into **跳跳五十音 / Jumping Kana**, a separate rabbit journey
-game intended for TapTap-only distribution. Native Kana keeps its existing
-name and distribution. See the
-[Jumping Kana release record](docs/releases/2026-11-10-jumping-kana.md)
-for the current draft and device checks, and the
-[original release record](docs/releases/2026-11-06-taptap-information-page.md)
-for the published version.
+on November 6, 2026. **跳跳五十音 / Jumping Kana** now has its own repository:
+[newbdez33/jumping-kana](https://github.com/newbdez33/jumping-kana). Its November
+10 update is under review. See the
+[current release record](https://github.com/newbdez33/jumping-kana/blob/main/docs/releases/2026-11-10-jumping-kana.md)
+for publication and device status. Native Kana keeps its existing name and
+distribution.
 
 Android **1.0.0 (2)** passed Google Play review, as confirmed by the owner on
 September 29, 2026. The target audience is **13+**. Automatic full rollout was
@@ -98,19 +96,12 @@ mini-tool README for the release status and remaining container checks.
 
 ### TapTap H5 game
 
-Jumping Kana lives in [source/h5](source/h5/README.md). Correct answers move a
-rabbit across the stream, with a new meadow every eight steps. It reuses the
-native kana table and font, preserves existing statistics, and supports touch,
-mouse, and keyboard input. Build it and run its local tests with:
-
-```sh
-cd source/h5
-npm test
-```
-
-The H5 README describes the local preview and TapTap ZIP format. Follow the game
-on [TapTap](https://www.taptap.cn/app/1031166). Track advertising and platform
-follow-ups in [issue #10](https://github.com/newbdez33/kana/issues/10).
+Jumping Kana moved to [its standalone repository](https://github.com/newbdez33/jumping-kana).
+That repository contains the game, kana data, font, artwork, tests, and release
+materials, and builds without this native project. The `source/h5` copy on
+this branch is retained as import history. Make future H5 changes in the new
+repository and track platform work in
+[Jumping Kana issue #1](https://github.com/newbdez33/jumping-kana/issues/1).
 
 ## Roadmap
 

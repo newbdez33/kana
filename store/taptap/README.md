@@ -1,5 +1,9 @@
 # Jumping Kana store materials
 
+> Current materials live in
+> [newbdez33/jumping-kana](https://github.com/newbdez33/jumping-kana/tree/main/store/taptap).
+> This copy is retained as import history.
+
 These files describe the TapTap H5 game, app `1031166`.
 
 | File | Use | Size |

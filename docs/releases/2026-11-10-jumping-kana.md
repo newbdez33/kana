@@ -1,5 +1,11 @@
 # Jumping Kana H5 update — 2026-11-10
 
+> This record moved to the
+> [standalone Jumping Kana repository](https://github.com/newbdez33/jumping-kana/blob/main/docs/releases/2026-11-10-jumping-kana.md).
+> Update `V-20261106-1` / H5 `459669` was submitted at 14:14 on November 10,
+> 2026 (as displayed) and is under review. The content below is the pre-split
+> record; use the linked record for current status.
+
 The owner chose **跳跳五十音 / Jumping Kana** as a separate TapTap-only game.
 The new game combines Kana practice with a rabbit journey and original
 picture-book artwork inspired by the mood of Pyon. Native Kana and Pyon are
