@@ -1,0 +1,10 @@
+{
+  "appId": "1031166",
+  "title": "跳跳五十音",
+  "shortDescription": "认出一个假名，帮小兔向前跳一步",
+  "description": "认识一个假名，向前跳一步。和小兔跳跳一起，踏着溪流上的小石头，走进温柔的五十音花田。\n\n【五秒一题，轻轻一跳】\n围绕 46 个基础假名，辨认平假名、片假名和罗马音，从四个答案中选出对应的一项。答对后，小兔会跳到下一块石头；每前进 8 步，就来到下一片花田。\n\n【答错也可以慢慢记】\n答错或时间到，正确答案会标成绿色。记住读音后，再继续出发。当前连对会重新计算，已经走过的旅程会保留。\n\n【练习看得见】\n累计答题、平均用时、最近 10 题、最长连对和当前连对同屏显示。旅程和练习记录保存在本机，下次还能接着走。\n\n【随身带一本五十音图】\n随时查看平假名、片假名和罗马音对照。翻开笔记或暂停时，答题计时也会停下来。\n\n支持触屏、鼠标和键盘。Q / W / A / S 对应四个答案；方向键移动选择，回车或空格确认。\n\n在 TapTap 内直接游玩，无需安装独立应用。界面为简体中文。",
+  "developerMessage": "我们想把每天的一点练习，变成一段轻松的小旅行。\n\n跳跳不会催你，也不会因为一次答错就让你从头走过。记住刚才的假名，再往前迈一步，就已经有收获。希望这只小兔和溪边的花田，能陪你慢慢熟悉五十音。",
+  "version": "1.1.0",
+  "aiContent": "The rabbit, meadow, and app icon are original illustrations generated with AI assistance. The game has no live generative AI feature.",
+  "distributionIntent": "A separate TapTap-only H5 game. Existing Kana and Pyon products and their shared code are outside the intended exclusive content scope."
+}

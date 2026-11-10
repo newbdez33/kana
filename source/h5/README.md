@@ -1,21 +1,33 @@
-# Kana H5
+# Jumping Kana · 跳跳五十音
 
-A browser game for TapTap H5 distribution. It uses the existing four-choice,
-five-second game rules. The build reads the 46 basic kana directly from the
-native `AppConfig.swift` table and copies the existing kana font.
+A rabbit journey game for TapTap H5 distribution. A correct answer moves
+the rabbit one step across the stream. Every eight correct answers unlock
+the next meadow. It uses the existing four-choice, five-second practice
+rules and reads the 46 basic kana from the native `AppConfig.swift` table.
 
-The first version has a Simplified Chinese interface, a kana chart, pause and
+The game has a Simplified Chinese interface, a kana chart, pause and
 resume, and local practice statistics. It has no external runtime dependencies.
 It uses the TapTap host for optional banner ads. Native billing and ad-removal
 purchases are not shared with this H5 version.
 
-The phone layout follows the native iOS practice screen. The light gray question
-area uses 60 percent of the available height; four white answer cells fill the
-remaining 40 percent. The menu and statistics sit above the question. A single
-row shows the answer count, average time, last-ten average, best streak, and
-current streak. Landscape viewports place the answers left of the question.
-Inside TapTap, the layout uses the host's safe area and menu bounds to keep
-the menu button and kana chart clear of the platform menu.
+The cream and sage interface places a kana prompt above an illustrated rabbit
+and stream. Four large answer cells stay visible on a phone. A single row
+shows the answer count, average time, last-ten average, best streak, and current
+streak. Short landscape viewports place the answers beside the scene. Inside
+TapTap, the layout uses the host's safe area and menu bounds to keep controls
+clear of the platform menu. Artwork provenance is in [ASSETS.md](ASSETS.md).
+
+The journey persists under `jumping-kana.journey.v1`. Wrong answers and timeouts
+reset the current streak but do not remove journey progress. Existing practice
+records keep the `kana.h5.statistics.v1` key. The four meadow themes cycle as
+the journey continues. Rabbit motion respects reduced-motion settings and
+pauses with the game.
+
+This is a separate TapTap product. Native Kana and Pyon keep their existing
+names and distribution. The intended exclusive content is the new game;
+the shared practice code, kana data, and pre-existing font need an explicit
+exclusion from any exclusive advertising license. A new title alone does
+not settle that contract scope.
 
 Phones start practice when the font is ready. Correct answers advance immediately,
 as in iOS. Wrong answers and timeouts highlight the correct answer for review.
@@ -51,6 +63,8 @@ python3 -m http.server 8798 --directory ../../build/h5
 
 Tests cover answer equivalence, the timer deadline, concurrent pause reasons,
 duplicate input, statistics, stored data validation, and the banner lifecycle.
+Journey tests cover progress, the eight-step boundary, theme cycling, reload,
+invalid stored data, and safe integer limits.
 Banner tests cover the initial delay, display-time limit, background entry,
 layout changes, load failures, and late callbacks after a question change.
 Browser checks must
@@ -97,9 +111,10 @@ button, next-question cleanup, background return, and unchanged records.
 
 As checked on November 10, 2026 (JST), all four activation prerequisites are
 complete, including mini-game filing approval. Advertising remains inactive.
-Activation requires a separate content operations agreement whose exclusive
-rights to game levels need clarification for Kana's distribution across
-platforms. No live banner unit is configured. After scope clarification and
+Activation requires a separate content operations agreement. The owner chose
+a new TapTap-only game, Jumping Kana, while keeping native Kana and Pyon
+separate. The license boundary for pre-existing shared resources still needs
+clarification. No live banner unit is configured. After scope clarification and
 owner approval, enable ads, create the banner unit, complete the required
 privacy declaration, and test the configured package in TapTap before
 publication. The published package `440518` has no ads. See the
@@ -113,13 +128,13 @@ folder and `index.html` directly inside that folder. From this directory:
 
 ```sh
 npm run build
-(cd ../../build && zip -r kana-h5.zip h5)
+(cd ../../build && zip -r jumping-kana-1.1.0.zip h5)
 ```
 
 The native Android and iOS packages are separate products of this repository.
 Use captures of this web game for its listing.
 
-The [TapTap H5 game](https://www.taptap.cn/app/1031166) was approved and published
+The original [TapTap H5 game](https://www.taptap.cn/app/1031166) was approved and published
 on November 6, 2026, at 16:30. Both Android and iOS listings offer play through
 the TapTap app. The published update `V-20261106` uses H5 version `440518`,
 package `160144`, resubmitted at 14:12 with updated screenshots and gameplay
@@ -129,3 +144,8 @@ developer-test checks. Public S22 checks also passed for all four answer
 positions, corrections, timeout, menu and chart pauses, and stored records
 after a cold restart. See the
 [release record](../../docs/releases/2026-11-06-taptap-information-page.md).
+
+The November 10 Jumping Kana update replaces the H5 presentation and adds the
+persistent rabbit journey. See its
+[release record](../../docs/releases/2026-11-10-jumping-kana.md) for the package,
+device checks, store draft, and current publication status.

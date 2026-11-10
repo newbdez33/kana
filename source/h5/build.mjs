@@ -1,4 +1,4 @@
-import { cp, mkdir, readFile, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
@@ -14,6 +14,7 @@ if (entries.length !== 46 || entries.some(entry => entry.length !== 3 || entry.s
   throw new Error('The basic kana table must contain 46 complete entries.');
 }
 
+await rm(output, { recursive: true, force: true });
 await mkdir(path.join(output, 'assets'), { recursive: true });
 await cp(path.join(source, 'public'), output, { recursive: true });
 await cp(path.join(root, 'source/kana/kana/resources/fonts/Hosohuwafont.ttf'), path.join(output, 'assets/kana.ttf'));

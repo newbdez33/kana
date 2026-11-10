@@ -30,13 +30,15 @@ states and capture instructions.
 
 ## Release status
 
-The [TapTap H5 game](https://www.taptap.cn/app/1031166) was approved and published
-on November 6, 2026, at 16:30. Version `V-20261106` uses H5 version `440518`;
-both Android and iOS listings now offer play through the TapTap app. The phone UI
-follows iOS. Public S22 checks passed for touch answers, statistics, corrections,
-pause, kana charts, and records after a cold restart. See the
-[release record](docs/releases/2026-11-06-taptap-information-page.md)
-for the verified status and remaining checks.
+The original [TapTap H5 game](https://www.taptap.cn/app/1031166) was published
+on November 6, 2026, with H5 version `440518`. The November 10 update turns
+that web game into **跳跳五十音 / Jumping Kana**, a separate rabbit journey
+game intended for TapTap-only distribution. Native Kana keeps its existing
+name and distribution. See the
+[Jumping Kana release record](docs/releases/2026-11-10-jumping-kana.md)
+for the current draft and device checks, and the
+[original release record](docs/releases/2026-11-06-taptap-information-page.md)
+for the published version.
 
 Android **1.0.0 (2)** passed Google Play review, as confirmed by the owner on
 September 29, 2026. The target audience is **13+**. Automatic full rollout was
@@ -96,11 +98,10 @@ mini-tool README for the release status and remaining container checks.
 
 ### TapTap H5 game
 
-The mobile browser game lives in [source/h5](source/h5/README.md). Its phone
-layout and immediate answer progression follow the iOS practice screen. It
-reuses the native kana table and font, keeps statistics and the current streak
-in one row, and supports touch, mouse, and keyboard input. Build it and run its
-local tests with:
+Jumping Kana lives in [source/h5](source/h5/README.md). Correct answers move a
+rabbit across the stream, with a new meadow every eight steps. It reuses the
+native kana table and font, preserves existing statistics, and supports touch,
+mouse, and keyboard input. Build it and run its local tests with:
 
 ```sh
 cd source/h5

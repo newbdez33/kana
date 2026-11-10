@@ -2,6 +2,7 @@ import { Game, QUESTION_MS } from './engine.mjs';
 import { entries, rows } from './kana-data.mjs';
 import { PracticeBanner } from './ads.mjs';
 import { bannerAdUnitId } from './ad-config.mjs';
+import { Journey, STEPS_PER_MEADOW } from './journey.mjs';
 
 const byId = id => document.getElementById(id);
 
@@ -26,14 +27,19 @@ updateHostInsets();
 window.addEventListener('resize', updateHostInsets);
 
 const storageKey = 'kana.h5.statistics.v1';
-let saved;
-try { saved = JSON.parse(localStorage.getItem(storageKey)); } catch { /* Practice also works without storage. */ }
-const game = new Game(entries, saved);
+const journeyKey = 'jumping-kana.journey.v1';
+function readSaved(key) {
+  try { return JSON.parse(localStorage.getItem(key)); } catch { return null; }
+}
+const game = new Game(entries, readSaved(storageKey));
+const journey = new Journey(readSaved(journeyKey));
 const answerButtons = [...byId('answers').querySelectorAll('button')];
 const answerKeys = answerButtons.map(button => button.querySelector('.answer-key').textContent.toLowerCase());
 const chart = byId('chart');
 const phoneLayout = matchMedia('(max-width:700px), (pointer:coarse)');
+const reducedMotion = matchMedia('(prefers-reduced-motion:reduce)');
 let feedbackTimeout = null;
+let rabbitAnimation = null;
 let chartType = 1;
 let lastProgressSecond = null;
 let lastTimerText = null;
@@ -55,9 +61,9 @@ function bannerPlacement(size) {
   const available = Math.min(panel.width, innerWidth) - 16;
   const width = size.width || available;
   const height = size.height;
-  const statisticsBottom = byId('answer-count').closest('.statistics').getBoundingClientRect().bottom;
+  const questionTop = byId('question-content').getBoundingClientRect().top;
   if (width < 300 || width > available || height > innerHeight * 0.1 ||
-      panel.bottom - height - 52 - statisticsBottom < 80) return null;
+      panel.bottom - height - 52 - questionTop < 185) return null;
   return { left: panel.left + (panel.width - width) / 2, top: panel.bottom - height - 12, width, height };
 }
 
@@ -67,8 +73,41 @@ window.addEventListener('pageshow', () => banner.setActive(!document.hidden));
 byId('banner-close').addEventListener('click', () => banner.hide());
 
 function save() {
-  try { localStorage.setItem(storageKey, JSON.stringify(game.savedStatistics())); }
+  try {
+    localStorage.setItem(storageKey, JSON.stringify(game.savedStatistics()));
+    localStorage.setItem(journeyKey, JSON.stringify(journey.savedProgress()));
+  }
   catch { byId('storage-note').textContent = '浏览器未允许保存，记录仅在本次练习中保留。'; }
+}
+
+const stones = Array.from({ length: STEPS_PER_MEADOW }, () => {
+  const stone = document.createElement('span');
+  stone.className = 'trail-stone';
+  return stone;
+});
+byId('trail-stones').append(...stones);
+
+function renderJourney(newMeadow = false) {
+  const { meadow, step, remaining } = journey.view;
+  byId('scene').dataset.meadow = meadow.id;
+  byId('meadow-name').textContent = meadow.name;
+  byId('journey-count').textContent = `再跳 ${remaining} 步，到下一片花田`;
+  byId('trail-note').textContent = `已经跳过 ${journey.hops} 步 · ${meadow.note}`;
+  byId('rabbit-position').classList.toggle('new-meadow', newMeadow);
+  byId('rabbit-position').style.setProperty('--rabbit-x', `${11 + step * 78 / (STEPS_PER_MEADOW - 1)}%`);
+  stones.forEach((stone, index) => stone.classList.toggle('visited', index <= step));
+}
+
+function animateRabbit(kind, newMeadow = false) {
+  rabbitAnimation?.cancel();
+  if (reducedMotion.matches || typeof byId('rabbit').animate !== 'function') return;
+  const keyframes = kind === 'correct'
+    ? [{ transform: 'translateY(0) scale(1.06,.94)', opacity: newMeadow ? 0 : 1 },
+      { transform: 'translateY(-35%) rotate(-7deg) scale(.95,1.05)', offset: .48, opacity: 1 },
+      { transform: 'translateY(0) scale(1.06,.94)', offset: .86 },
+      { transform: 'translateY(0) scale(1)' }]
+    : [{ transform: 'rotate(0)' }, { transform: 'rotate(-6deg)' }, { transform: 'rotate(3deg)' }, { transform: 'rotate(0)' }];
+  rabbitAnimation = byId('rabbit').animate(keyframes, { duration: kind === 'correct' ? 420 : 330, easing: 'ease-in-out' });
 }
 
 function renderStatistics() {
@@ -117,7 +156,7 @@ function renderQuestion() {
     button.setAttribute('aria-label', game.question.choices[index]);
   });
   byId('feedback').className = '';
-  byId('feedback').textContent = '';
+  byId('feedback').textContent = '选出对应的假名或罗马音，帮跳跳向前跳。';
   byId('next').hidden = true;
   renderTime(performance.now());
 }
@@ -142,7 +181,7 @@ function renderResult() {
   if (hadAnswerFocus && !game.pauses.size) answerButtons[correctIndex].focus({ preventScroll: true });
   const feedback = byId('feedback');
   feedback.className = kind === 'correct' ? 'success' : 'error';
-  feedback.textContent = kind === 'correct' ? `答对了，已经连对 ${game.streak} 题！` : `${kind === 'timeout' ? '时间到' : '再记住一次'}：${game.question.kana.join(' · ')}。点击正确答案继续。`;
+  feedback.textContent = kind === 'correct' ? `答对了，跳跳又前进了一步！` : `${kind === 'timeout' ? '休息一下，记住' : '这次记住了'}：${game.question.kana.join(' · ')}。点绿色答案继续。`;
   byId('next').hidden = kind === 'correct';
   byId('next').disabled = game.pauses.size > 0;
   renderStatistics();
@@ -151,13 +190,17 @@ function renderResult() {
 
 function finishQuestion() {
   clearTimeout(feedbackTimeout);
+  const { kind } = game.result;
+  const newMeadow = journey.record(kind);
   save();
-  if (game.result.kind === 'correct') {
+  renderJourney(newMeadow);
+  animateRabbit(kind, newMeadow);
+  if (kind === 'correct') {
     renderStatistics();
     startQuestion();
     byId('feedback').className = 'success';
-    byId('feedback').textContent = `连对 ${game.streak} 题`;
-    feedbackTimeout = setTimeout(() => { byId('feedback').textContent = ''; }, 650);
+    byId('feedback').textContent = newMeadow ? `到达${journey.view.meadow.name}！带着记住的假名继续走。` : `轻轻一跳，连对 ${game.streak} 题！`;
+    feedbackTimeout = setTimeout(() => { byId('feedback').textContent = '选出对应的假名或罗马音，帮跳跳向前跳。'; }, 1100);
   } else {
     renderResult();
     if (game.pauses.size === 0) banner.show();
@@ -196,6 +239,9 @@ function setMenuOpen(open) {
 
 function syncPause() {
   const manual = game.pauses.has('manual');
+  byId('scene').dataset.paused = game.pauses.size > 0;
+  if (game.pauses.size) rabbitAnimation?.pause();
+  else if (rabbitAnimation?.playState === 'paused') rabbitAnimation.play();
   byId('pause-panel').hidden = !manual;
   byId('pause').textContent = manual ? '继续' : '暂停';
   if (game.phase === 'playing') answerButtons.forEach(button => { button.disabled = game.pauses.size > 0; });
@@ -302,6 +348,7 @@ document.addEventListener('keydown', event => {
 });
 if (document.hidden) pause('visibility');
 renderStatistics();
+renderJourney();
 async function startPhonePractice() {
   await document.fonts.ready;
   if (phoneLayout.matches && game.phase === 'ready') startPractice();
