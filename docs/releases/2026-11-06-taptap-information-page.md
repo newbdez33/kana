@@ -286,10 +286,19 @@ verification, configured payment details, the effective incentive agreement,
 and approved mini-game filing. The activation button is enabled.
 
 Activation requires a separate Creative Workshop Content Operations Agreement,
-dated March 11, 2026. Section 4.2 includes an exclusive worldwide license with
-no license fee and rights to sublicense, adapt, and use content for machine
-learning. Owner approval of this new agreement is pending. The earlier
-incentive agreement does not approve this separate contract.
+dated March 11, 2026. It describes game levels embedded in the publisher's
+game. Section 4.2 grants exclusive worldwide rights to those game levels,
+with no license fee and rights to sublicense, adapt, and use them for machine
+learning. This wording does not establish the scope of rights over Kana's
+separate iOS version or releases through other channels.
+
+The [general mini-game developer agreement](https://developer.taptap.cn/minigameapidoc/tap-operation/platform/development-agreement/)
+dated September 17, 2026 provides a non-exclusive license in sections 8.1
+through 8.3. That general license does not resolve the scope of the separate
+advertising contract. Kana is intended for non-exclusive distribution across
+platforms. Keep activation pending until the publisher clarifies the scope
+and the owner approves the applicable terms. The earlier incentive agreement
+does not approve this separate contract.
 
 No new agreement was accepted, no live banner unit was created, and no
 ad-enabled package was uploaded during this check. The banner implementation

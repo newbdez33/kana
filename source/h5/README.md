@@ -95,12 +95,16 @@ verify the display flow, but a configured package must pass a physical TapTap
 test before publication. Verify ad loading, its actual dimensions, the close
 button, next-question cleanup, background return, and unchanged records.
 
-As checked on November 7, 2026 (JST), the incentive agreement is effective for
-November. Personal payment details and mini-game filing for H5 `440518` are
-both under review. The ad activation button remains disabled until both reviews
-pass. No live banner unit is configured. After approval, enable ads, create the
-banner unit, complete the required privacy declaration, and test the configured
-package in TapTap before publication. The published package `440518` has no ads.
+As checked on November 10, 2026 (JST), all four activation prerequisites are
+complete, including mini-game filing approval. Advertising remains inactive.
+Activation requires a separate content operations agreement whose exclusive
+rights to game levels need clarification for Kana's distribution across
+platforms. No live banner unit is configured. After scope clarification and
+owner approval, enable ads, create the banner unit, complete the required
+privacy declaration, and test the configured package in TapTap before
+publication. The published package `440518` has no ads. See the
+[release record](../../docs/releases/2026-11-06-taptap-information-page.md)
+for the agreement distinction.
 
 ## TapTap release
 
