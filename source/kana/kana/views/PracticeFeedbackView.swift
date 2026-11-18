@@ -35,11 +35,12 @@ final class PracticeFeedbackView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        let width = max(0, bounds.width - 40)
-        combo.frame = CGRect(x: 20, y: 10, width: width * 0.5, height: 18)
-        stageName.frame = CGRect(x: 20 + width * 0.5, y: 10, width: width * 0.5, height: 18)
-        progress.frame = CGRect(x: 20, y: 33, width: width, height: 2)
-        message.frame = CGRect(x: 20, y: bounds.height - 26, width: width, height: 18)
+        let header = safeAreaLayoutGuide.layoutFrame
+        let width = max(0, header.width - 40)
+        combo.frame = CGRect(x: header.minX + 20, y: 10, width: width * 0.5, height: 18)
+        stageName.frame = CGRect(x: header.minX + 20 + width * 0.5, y: 10, width: width * 0.5, height: 18)
+        progress.frame = CGRect(x: header.minX + 20, y: 33, width: width, height: 2)
+        message.frame = CGRect(x: 20, y: bounds.height - 26, width: max(0, bounds.width - 40), height: 18)
         let diameter = max(0, min(bounds.width * 0.64, bounds.height - 88))
         ring.path = UIBezierPath(ovalIn: CGRect(x: (bounds.width - diameter) / 2,
                                               y: (bounds.height - diameter) / 2 + 6,

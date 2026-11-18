@@ -3,6 +3,85 @@ import CoreGraphics
 @testable import kana
 
 final class PracticeLayoutTests: XCTestCase {
+    func testSideStatusBarDoesNotReserveTheWholeAnswerEdge() {
+        let bounds = CGRect(x: 0, y: 0, width: 466, height: 678)
+        let safeArea = CGRect(x: 0, y: 0, width: 382, height: 644)
+        let status = CGRect(x: 382, y: 0, width: 84, height: 170)
+        let layout = PracticeLayout(bounds: bounds, safeArea: safeArea,
+                                    prefersColumns: false, occlusions: [status])
+        XCTAssertEqual(layout.question.width, bounds.width)
+        XCTAssertEqual(layout.answers.width, bounds.width)
+        XCTAssertEqual(layout.answers.maxY, safeArea.maxY)
+        XCTAssertFalse(layout.answers.intersects(status))
+    }
+
+    func testLeadingStatusBarAlsoReleasesTheSpaceBelowIt() {
+        let bounds = CGRect(x: 0, y: 0, width: 466, height: 678)
+        let safeArea = CGRect(x: 84, y: 0, width: 382, height: 644)
+        let status = CGRect(x: 0, y: 0, width: 84, height: 170)
+        let layout = PracticeLayout(bounds: bounds, safeArea: safeArea,
+                                    prefersColumns: false, occlusions: [status], rightToLeft: true)
+        XCTAssertEqual(layout.answers.minX, bounds.minX)
+        XCTAssertEqual(layout.question.width, bounds.width)
+        XCTAssertFalse(layout.answers.intersects(status))
+    }
+
+    func testUnexplainedSafeAreaInsetsRemainReserved() {
+        let bounds = CGRect(x: 0, y: 0, width: 466, height: 678)
+        let safeArea = CGRect(x: 28, y: 12, width: 354, height: 612)
+        let layout = PracticeLayout(bounds: bounds, safeArea: safeArea, prefersColumns: false)
+        XCTAssertEqual(layout.question.union(layout.answers), safeArea)
+    }
+
+    func testAdditionalSideInsetsAreNotRemovedByTheStatusBar() {
+        let bounds = CGRect(x: 0, y: 0, width: 466, height: 678)
+        let safeArea = CGRect(x: 0, y: 12, width: 298, height: 612)
+        let status = CGRect(x: 382, y: 0, width: 84, height: 170)
+        let layout = PracticeLayout(bounds: bounds, safeArea: safeArea,
+                                    prefersColumns: false, occlusions: [status])
+        XCTAssertEqual(layout.question.union(layout.answers), safeArea)
+    }
+
+    func testAnswerPaneAvoidsAStatusBarThatReachesItsRows() {
+        let bounds = CGRect(x: 0, y: 0, width: 466, height: 260)
+        let safeArea = CGRect(x: 0, y: 0, width: 382, height: 226)
+        let status = CGRect(x: 382, y: 0, width: 84, height: 170)
+        let layout = PracticeLayout(bounds: bounds, safeArea: safeArea,
+                                    prefersColumns: false, occlusions: [status])
+        XCTAssertEqual(layout.answers.maxX, status.minX)
+        XCTAssertFalse(layout.answers.intersects(status))
+    }
+
+    func testReclaimingTheSideDoesNotMoveTheFold() {
+        let bounds = CGRect(x: 0, y: 0, width: 951, height: 669)
+        let safeArea = CGRect(x: 0, y: 0, width: 867, height: 635)
+        let fold = CGRect(x: 459, y: 0, width: 33, height: 669)
+        let status = CGRect(x: 867, y: 0, width: 84, height: 170)
+        let layout = PracticeLayout(bounds: bounds, safeArea: safeArea, prefersColumns: true,
+                                    divisions: [fold], occlusions: [status])
+        XCTAssertEqual(layout.answers.maxX, fold.minX)
+        XCTAssertEqual(layout.question.minX, fold.maxX)
+        XCTAssertEqual(layout.question.maxX, bounds.maxX)
+        XCTAssertFalse(layout.answers.intersects(status))
+    }
+
+    func testBannerAvoidsOcclusionsOnlyAtItsOwnHeight() {
+        let status = CGRect(x: 382, y: 0, width: 84, height: 170)
+        let highBanner = CGRect(x: 0, y: 140, width: 466, height: 60)
+        let lowBanner = highBanner.offsetBy(dx: 0, dy: 100)
+        XCTAssertEqual(PracticeLayout.horizontalFrame(in: highBanner, avoiding: [status]).maxX, status.minX)
+        XCTAssertEqual(PracticeLayout.horizontalFrame(in: lowBanner, avoiding: [status]), lowBanner)
+    }
+
+    func testOverlappingOcclusionsKeepTheSameFreeIntervalInEitherOrder() {
+        let bounds = CGRect(x: 0, y: 0, width: 466, height: 200)
+        let status = CGRect(x: 382, y: 0, width: 84, height: 170)
+        let camera = CGRect(x: 400, y: 29, width: 37, height: 37)
+        let available = PracticeLayout.horizontalFrame(in: bounds, avoiding: [status, camera])
+        XCTAssertEqual(available.maxX, status.minX)
+        XCTAssertEqual(available, PracticeLayout.horizontalFrame(in: bounds, avoiding: [camera, status]))
+    }
+
     func testCompactPortraitKeepsQuestionAboveAllAnswers() {
         let bounds = CGRect(x: 0, y: 0, width: 382, height: 678)
         let layout = PracticeLayout(bounds: bounds, prefersColumns: false)

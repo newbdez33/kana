@@ -1,6 +1,6 @@
 import AppKit
 
-// Usage: swift scripts/render-store.swift store/metadata.json captures output [android]
+// Usage: swift scripts/render-store.swift store/metadata.json captures output [android|duo]
 struct StoreCopy: Decodable {
     let appName: String
     let shots: [[String]]
@@ -25,7 +25,8 @@ enum RenderError: Error {
 
 guard (4...5).contains(CommandLine.arguments.count) else { throw RenderError.invalidArguments }
 let android = CommandLine.arguments.count == 5 && CommandLine.arguments[4] == "android"
-guard CommandLine.arguments.count == 4 || android else { throw RenderError.invalidArguments }
+let duo = CommandLine.arguments.count == 5 && CommandLine.arguments[4] == "duo"
+guard CommandLine.arguments.count == 4 || android || duo else { throw RenderError.invalidArguments }
 let copyURL = URL(fileURLWithPath: CommandLine.arguments[1])
 let sourceRoot = URL(fileURLWithPath: CommandLine.arguments[2])
 let outputRoot = URL(fileURLWithPath: CommandLine.arguments[3])
@@ -85,9 +86,9 @@ func text(_ value: String, locale: String, rect: CGRect, size: CGFloat,
 func render(locale: String, copy: StoreCopy, device: String,
             order: Int, shot: [String]) throws -> RenderedScreenshot {
     guard shot.count == 4 else { throw RenderError.invalidCopy(locale) }
-    let ipad = device == "ipad"
-    let width = android ? 1080 : (ipad ? 2064 : 1320)
-    let height = android ? 1920 : (ipad ? 2752 : 2868)
+    let largeLayout = device == "ipad" || device == "duo"
+    let width = android ? 1080 : (duo ? 2007 : (largeLayout ? 2064 : 1320))
+    let height = android ? 1920 : (duo ? 2853 : (largeLayout ? 2752 : 2868))
     let language = locale == "en-US" ? "en" : locale
     let source = "\(language)/\(device)/\(shot[3])"
     let sourceURL = sourceRoot.appendingPathComponent(source)
@@ -117,33 +118,33 @@ func render(locale: String, copy: StoreCopy, device: String,
         backgrounds[order].setFill()
         NSBezierPath(rect: CGRect(x: 0, y: 0, width: width, height: height)).fill()
         let foreground = order < 2 ? ink : paper
-        let margin: CGFloat = ipad ? 156 : 104
+        let margin: CGFloat = largeLayout ? 156 : 104
         let textWidth = CGFloat(width) - 2 * margin
         try text(copy.appName, locale: locale,
-                 rect: CGRect(x: margin, y: ipad ? 70 : 76, width: textWidth, height: 88),
-                 size: ipad ? 48 : 38, minimum: 32, bold: true,
+                 rect: CGRect(x: margin, y: largeLayout ? 70 : 76, width: textWidth, height: 88),
+                 size: largeLayout ? 48 : 38, minimum: 32, bold: true,
                  color: foreground.withAlphaComponent(0.75))
         titleSize = try text(shot[0], locale: locale,
-                                 rect: CGRect(x: margin, y: ipad ? 202 : 192, width: textWidth,
-                                              height: ipad ? 302 : 272),
-                                 size: ipad ? 124 : 100, minimum: ipad ? 94 : 76,
+                                 rect: CGRect(x: margin, y: largeLayout ? 202 : 192, width: textWidth,
+                                              height: largeLayout ? 302 : 272),
+                                 size: largeLayout ? 124 : 100, minimum: largeLayout ? 94 : 76,
                                  bold: true, color: foreground)
         captionSize = try text(shot[1], locale: locale,
-                                   rect: CGRect(x: margin, y: ipad ? 518 : 490, width: textWidth,
-                                                height: ipad ? 160 : 148),
-                                   size: ipad ? 61 : 49, minimum: ipad ? 48 : 39,
+                                   rect: CGRect(x: margin, y: largeLayout ? 518 : 490, width: textWidth,
+                                                height: largeLayout ? 160 : 148),
+                                   size: largeLayout ? 61 : 49, minimum: largeLayout ? 48 : 39,
                                    bold: false, color: foreground.withAlphaComponent(0.88))
-        let imageHeight: CGFloat = ipad ? 1940 : 2098
+        let imageHeight: CGFloat = largeLayout ? 1940 : 2098
         let imageWidth = imageHeight * CGFloat(width) / CGFloat(height)
         let imageRect = CGRect(x: (CGFloat(width) - imageWidth) / 2,
                                y: CGFloat(height) - imageHeight - 74,
                                width: imageWidth, height: imageHeight)
         ink.setFill()
         NSBezierPath(roundedRect: imageRect.insetBy(dx: -14, dy: -14),
-                     xRadius: ipad ? 40 : 56, yRadius: ipad ? 40 : 56).fill()
+                     xRadius: largeLayout ? 40 : 56, yRadius: largeLayout ? 40 : 56).fill()
         context.saveGState()
-        NSBezierPath(roundedRect: imageRect, xRadius: ipad ? 26 : 42,
-                     yRadius: ipad ? 26 : 42).addClip()
+        NSBezierPath(roundedRect: imageRect, xRadius: largeLayout ? 26 : 42,
+                     yRadius: largeLayout ? 26 : 42).addClip()
         image.draw(in: imageRect, from: .zero, operation: .sourceOver, fraction: 1,
                    respectFlipped: true, hints: [.interpolation: NSImageInterpolation.high])
         context.restoreGState()
@@ -161,7 +162,7 @@ func render(locale: String, copy: StoreCopy, device: String,
 }
 
 var outputs: [RenderedScreenshot] = []
-for device in android ? ["phone", "tablet"] : ["iphone", "ipad"] {
+for device in android ? ["phone", "tablet"] : (duo ? ["duo"] : ["iphone", "ipad"]) {
     for locale in locales {
         guard let copy = copies[locale], copy.shots.count == 4 else {
             throw RenderError.invalidCopy(locale)

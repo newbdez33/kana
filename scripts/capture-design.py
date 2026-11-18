@@ -12,6 +12,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--device', required=True, help='Simulator UDID')
     parser.add_argument('--language', default='en')
+    parser.add_argument('--display', help='Simulator display ID, such as 3 for the Duo inner display')
     parser.add_argument('--store-listing', action='store_true', help='Capture display states without purchase transactions')
     parser.add_argument('--output', required=True, type=Path)
     args = parser.parse_args()
@@ -43,9 +44,11 @@ def main():
                 while process.poll() is None:
                     for marker in sorted(output.glob('*.marker')):
                         screenshot = marker.with_suffix('.png')
-                        subprocess.run([
-                            'xcrun', 'simctl', 'io', args.device, 'screenshot', str(screenshot),
-                        ], check=True, capture_output=True, timeout=15)
+                        capture = ['xcrun', 'simctl', 'io', args.device, 'screenshot']
+                        if args.display:
+                            capture.append(f'--display={args.display}')
+                        capture.append(str(screenshot))
+                        subprocess.run(capture, check=True, capture_output=True, timeout=15)
                         marker.unlink()
                         print(f'Captured {screenshot.name}', flush=True)
                     if time.monotonic() > deadline:
