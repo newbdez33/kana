@@ -7,7 +7,7 @@ The `appName` field is the label on the artwork; it does not rename the app.
 The English store name is `Japanese kana - learning`, with the subtitle
 `Challenge yourself`. Both fit the current 30-character limits.
 
-The public App Store version is **1.1.0 (17)**, released on October 6, 2026.
+Version **1.1.0 (17)** was released on October 6, 2026.
 It contains the practice and coffee redesign and fixes unreadable kana chart
 text in Dark Mode. The app and its first coffee purchase were submitted
 together on September 27, 2026, with automatic release after approval.
@@ -15,6 +15,23 @@ together on September 27, 2026, with automatic release after approval.
 The store copy focuses on timed questions and the best correct-answer streak.
 It explains that ads appear only after an incorrect answer or a timeout. Coffee
 support is presented as an optional way to support the author.
+
+## TestFlight 1.2.1 (23)
+
+Uploaded on November 17, 2026. App Store Connect reports `VALID` and
+`IN_BETA_TESTING` for build `b176a9ba-e247-4b03-9798-2d867380d240`. The existing
+internal group has access to all builds. English, Japanese, and Simplified
+Chinese test notes were saved and read back.
+
+This build fixes excess space beside the Duo practice screen, cold-launch
+layout, banner visibility, and answer cell sizes after rotation. See the
+[release record](../docs/releases/2026-11-17-ios-testflight.md) for validation and
+artifact paths. The 1.2.1 App Store version contains all 20 Duo screenshots.
+
+Version 1.2.1 was submitted for App Store review at 21:44 JST on November 17,
+2026. App Store Connect confirmed `READY_FOR_SALE` on November 18 after automatic
+release. The [five-language release notes](release-notes/1.2.1.json) and review
+notes were saved and read back before submission.
 
 ## TestFlight 1.1.1 (18)
 
@@ -60,6 +77,56 @@ The 40 store images cover five languages and two sizes: iPhone 18 Pro Max
 (1320 × 2868) and iPad Pro 13-inch (2064 × 2752). They use fixed sample statistics
 and a local StoreKit price in the Japanese storefront. The IAP review screenshot
 uses the native coffee screen without the marketing frame.
+
+### iPhone Duo
+
+The Duo set has the same four scenes, order, and five languages as the iPhone
+set: 20 images in total. Each image uses a native inner-display capture at
+2007 × 2853 pixels, rendered as an opaque RGB PNG with the existing store copy
+and artwork style. The captures include the practice layout fixes from
+November 17, 2026.
+
+| Practice | Statistics | Kana chart | Coffee support |
+| --- | --- | --- | --- |
+| <img src="screenshots/duo/en-practice.png" width="200" alt="Practice on iPhone Duo"> | <img src="screenshots/duo/en-statistics.png" width="200" alt="Practice statistics on iPhone Duo"> | <img src="screenshots/duo/en-chart.png" width="200" alt="Kana chart on iPhone Duo"> | <img src="screenshots/duo/en-coffee.png" width="200" alt="Coffee support on iPhone Duo"> |
+
+For Duo, open the simulator's inner display and rotate it to portrait before
+capturing. Run the following command once for each language, using a fresh
+output directory:
+
+```sh
+python3 scripts/capture-design.py \
+  --device DUO_SIMULATOR_UDID \
+  --display 3 \
+  --language en \
+  --store-listing \
+  --output build/store-duo-native/en/duo
+
+# After capturing en, ja, zh-Hans, zh-Hant, and ko:
+swift scripts/render-store.swift \
+  store/metadata.json build/store-duo-native build/store-duo-marketing duo
+```
+
+Use `xcrun simctl io DUO_SIMULATOR_UDID enumerate` to confirm the inner display
+ID. The preview reads its available devices and image dimensions from
+`layout.json`. The repository keeps the four English Duo samples; all 20 images
+and their preview remain in `build/store-duo-marketing/`.
+The full screenshot ZIP and upload receipts are also preserved outside the
+worktree in `~/Library/Developer/Kana/releases/2026-11-17-1.2.1-23/`.
+
+On November 17, 2026, all five native capture runs passed. All 20 composed images
+passed dimension, opacity, and text-fit checks and were reviewed in the browser.
+App Store Connect confirmed all 20 uploads as `COMPLETE`, with checksums and
+order matching the local files. Each language has four Duo screenshots, four
+iPhone screenshots, and four iPad screenshots in **version 1.2.1**
+(`a89ef65c-1613-4f99-af8c-711dbec0f2f4`). The inherited iPhone and iPad files match
+the published 1.2.0 version. All 60 screenshots were verified again before
+submitting build 23 for review. Version 1.2.1 reports `READY_FOR_SALE` as of
+November 18, 2026.
+Upload receipts are in `build/store-duo-upload/`.
+
+The dimensions follow Apple's
+[screenshot specifications](https://developer.apple.com/help/app-store-connect/reference/app-information/screenshot-specifications).
 
 ## Generate the preview
 

@@ -43,7 +43,7 @@
     <div>
       <p class="eyebrow">Kana · 五十音</p>
       <h1>A little practice, every day.</h1>
-      <p class="intro">App Store screenshots and copy · 1.1.0</p>
+      <p class="intro">App Store screenshots and copy</p>
     </div>
     <div class="controls">
       <label>Language
@@ -91,13 +91,18 @@
     const response = await fetch('metadata.json');
     if (!response.ok) throw new Error('Metadata could not be loaded.');
     const metadata = await response.json();
+    const layoutResponse = await fetch('layout.json');
+    if (!layoutResponse.ok) throw new Error('Screenshot layout could not be loaded.');
+    const layouts = await layoutResponse.json();
+    const deviceNames = { iphone: 'iPhone', ipad: 'iPad', duo: 'iPhone Duo', phone: 'Phone', tablet: 'Tablet' };
+    const devices = [...new Set(layouts.map(layout => layout.device))];
+    device.replaceChildren(...devices.map(value => new Option(deviceNames[value] ?? value, value)));
+    if (devices.includes(params.get('device'))) device.value = params.get('device');
     const android = Boolean(metadata['en-US'].shortDescription);
     if (android) {
       document.querySelector('.intro').textContent = 'Google Play screenshots and copy · 1.0.0';
       document.querySelector('.copy h2').textContent = 'Short description';
       document.querySelector('details').hidden = true;
-      device.replaceChildren(...[['phone', 'Phone'], ['tablet', 'Tablet']].map(([value, label]) => new Option(label, value)));
-      if (['phone', 'tablet'].includes(params.get('device'))) device.value = params.get('device');
     }
     function render() {
       const copy = metadata[locale.value];
@@ -107,13 +112,15 @@
         const link = document.createElement('a');
         const image = document.createElement('img');
         const label = document.createElement('figcaption');
+        const layout = layouts.find(item => item.device === device.value && item.locale === locale.value && item.order === index);
+        if (!layout) throw new Error('Screenshot layout is incomplete.');
         link.href = `screenshots/${device.value}/${locale.value}/${number}-${slug}.png`;
         link.target = '_blank';
         link.rel = 'noopener';
         image.src = link.href;
         image.alt = `${title.replaceAll('\n', ' ')} ${caption.replaceAll('\n', ' ')}`;
-        image.width = android ? 1080 : (device.value === 'iphone' ? 1320 : 2064);
-        image.height = android ? 1920 : (device.value === 'iphone' ? 2868 : 2752);
+        image.width = layout.width;
+        image.height = layout.height;
         label.textContent = `${number} · ${title.replaceAll('\n', ' ')}`;
         link.append(image);
         figure.append(link, label);
@@ -127,7 +134,8 @@
         element.lang = locale.value;
         element.textContent = value;
       }
-      const dimensions = android ? '1080 × 1920' : (device.value === 'iphone' ? '1320 × 2868' : '2064 × 2752');
+      const layout = layouts.find(item => item.device === device.value && item.locale === locale.value);
+      const dimensions = `${layout.width} × ${layout.height}`;
       document.querySelector('#dimensions').textContent = `${dimensions} px · Select a screenshot to view the full-size PNG.`;
       history.replaceState(null, '', `?locale=${locale.value}&device=${device.value}`);
       status.hidden = true;

@@ -4,6 +4,41 @@ struct PracticeLayout {
     let question: CGRect
     let answers: CGRect
 
+    init(bounds: CGRect, safeArea: CGRect, prefersColumns: Bool, divisions: [CGRect] = [],
+         occlusions: [CGRect] = [], rightToLeft: Bool = false) {
+        var available = safeArea
+        // A side status bar reserves only part of the edge. Keep other safe-area insets.
+        if occlusions.contains(where: { $0.minX <= bounds.minX && $0.maxX >= safeArea.minX
+            && $0.maxX < bounds.midX && $0.intersects(bounds) }) {
+            available.origin.x = bounds.minX
+            available.size.width = safeArea.maxX - bounds.minX
+        }
+        if occlusions.contains(where: { $0.maxX >= bounds.maxX && $0.minX <= safeArea.maxX
+            && $0.minX > bounds.midX && $0.intersects(bounds) }) {
+            available.size.width = bounds.maxX - available.minX
+        }
+        let panes = PracticeLayout(bounds: available, prefersColumns: prefersColumns,
+                                   divisions: divisions, rightToLeft: rightToLeft)
+        question = panes.question
+        answers = Self.horizontalFrame(in: panes.answers, avoiding: occlusions)
+    }
+
+    /// Keep a row at its current height and use the widest unobstructed interval.
+    static func horizontalFrame(in bounds: CGRect, avoiding occlusions: [CGRect]) -> CGRect {
+        var candidates = [bounds]
+        for region in occlusions {
+            candidates = candidates.flatMap { frame -> [CGRect] in
+                let overlap = frame.intersection(region)
+                guard !overlap.isNull, overlap.width > 0, overlap.height > 0 else { return [frame] }
+                return [
+                    CGRect(x: frame.minX, y: frame.minY, width: overlap.minX - frame.minX, height: frame.height),
+                    CGRect(x: overlap.maxX, y: frame.minY, width: frame.maxX - overlap.maxX, height: frame.height)
+                ]
+            }
+        }
+        return candidates.max { $0.width < $1.width } ?? bounds
+    }
+
     init(bounds: CGRect, prefersColumns: Bool, divisions: [CGRect] = [], rightToLeft: Bool = false) {
         var available = bounds
         for region in divisions {

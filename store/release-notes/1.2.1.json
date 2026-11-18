@@ -1,0 +1,7 @@
+{
+  "en-US": "• Fixed excess space beside the practice screen on iPhone Duo.\n• Improved question and ad placement during startup, folding, and rotation.\n• Fixed answer button sizes after layout changes.",
+  "ja": "・iPhone Duoの練習画面に大きな余白ができる問題を修正しました。\n・起動時、折りたたみ時、回転時の問題と広告の配置を改善しました。\n・レイアウト変更後の選択肢ボタンのサイズを修正しました。",
+  "zh-Hans": "• 修复 iPhone Duo 练习画面侧边出现大块留白的问题。\n• 优化启动、折叠和旋转时题目与广告的布局。\n• 修复布局变化后答案按钮尺寸不正确的问题。",
+  "zh-Hant": "• 修正 iPhone Duo 練習畫面側邊出現大片空白的問題。\n• 改善啟動、摺疊和旋轉時題目與廣告的配置。\n• 修正版面變更後答案按鈕尺寸不正確的問題。",
+  "ko": "• iPhone Duo 연습 화면 옆에 큰 빈 공간이 생기는 문제를 수정했습니다.\n• 앱 시작, 기기 접기 및 화면 회전 시 문제와 광고의 배치를 개선했습니다.\n• 화면 구성이 바뀐 후 답변 버튼 크기가 맞지 않는 문제를 수정했습니다."
+}

@@ -46,6 +46,33 @@ final class KanaUITests: XCTestCase {
         attach("question")
     }
 
+    func testRotationKeepsFourAnswerTargetsVisible() {
+        let grid = app.collectionViews["answerGrid"]
+        XCTAssertTrue(grid.cells.firstMatch.waitForExistence(timeout: 10))
+        let statusBar = app.statusBars.firstMatch
+        let window = app.windows.firstMatch
+        if statusBar.exists, statusBar.frame.minX > window.frame.midX,
+           statusBar.frame.maxY < grid.frame.minY {
+            XCTAssertEqual(grid.frame.maxX, window.frame.maxX, accuracy: 1)
+        }
+        defer { XCUIDevice.shared.orientation = .portrait }
+        for orientation in [UIDeviceOrientation.landscapeLeft, .landscapeRight, .portrait] {
+            XCUIDevice.shared.orientation = orientation
+            let completeGrid = NSPredicate { _, _ in
+                let cells = grid.cells.allElementsBoundByIndex
+                guard cells.count == 4 else { return false }
+                return cells.allSatisfy { cell in
+                    cell.isHittable && grid.frame.insetBy(dx: -1, dy: -1).contains(cell.frame)
+                        && abs(cell.frame.width - grid.frame.width / 2) <= 1
+                        && abs(cell.frame.height - grid.frame.height / 2) <= 1
+                }
+            }
+            let expectation = XCTNSPredicateExpectation(predicate: completeGrid, object: nil)
+            XCTAssertEqual(XCTWaiter.wait(for: [expectation], timeout: 5), .completed)
+            attach("practice-rotation-\(orientation.rawValue)")
+        }
+    }
+
     func testHomeReturnAllowsAnswers() {
         let answers = app.collectionViews.firstMatch.cells
         XCTAssertTrue(answers.firstMatch.waitForExistence(timeout: 10))

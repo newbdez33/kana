@@ -9,12 +9,18 @@ final class PracticeView: UIView {
     let menuContainer = UIView()
     let bannerView = BannerView()
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: AnswerGridLayout())
-    private let content = PracticeContentView()
+    private let questionPane = UIView()
+    private let answerPane = UIView()
+    private var divisions: [CGRect] = []
     private let prompt = UIView()
     private(set) var bannerHeight: NSLayoutConstraint!
     private var menuHeight: NSLayoutConstraint!
     private var promptMinimumHeight: NSLayoutConstraint!
     private var glyphMaximumHeight: NSLayoutConstraint!
+    private var bannerLeft: NSLayoutConstraint!
+    private var bannerRight: NSLayoutConstraint!
+    private var occlusions: [CGRect] = []
+    private var previousBounds = CGRect.zero
 
     var isMenuExpanded = false {
         didSet {
@@ -40,15 +46,20 @@ final class PracticeView: UIView {
         scrollView.alwaysBounceVertical = true
         scrollView.showsVerticalScrollIndicator = false
         scrollView.contentInsetAdjustmentBehavior = .never
-        addSubview(content)
-        content.question.addSubview(scrollView)
+        questionPane.backgroundColor = .kanaKeyGrayColor()
+        answerPane.backgroundColor = .white
+        questionPane.accessibilityIdentifier = "questionPane"
+        answerPane.accessibilityIdentifier = "answerPane"
+        addSubview(questionPane)
+        addSubview(answerPane)
+        questionPane.addSubview(scrollView)
         scrollView.addSubview(prompt)
         prompt.addSubview(menuContainer)
         prompt.addSubview(statisticsView)
         prompt.addSubview(feedbackView)
         prompt.addSubview(questionLabel)
-        prompt.addSubview(bannerView)
-        content.answers.addSubview(collectionView)
+        questionPane.addSubview(bannerView)
+        answerPane.addSubview(collectionView)
 
         questionLabel.font = UIFont(name: "Hosofuwafont", size: 155)
         questionLabel.textColor = .kanaBlackColor()
@@ -58,11 +69,12 @@ final class PracticeView: UIView {
         questionLabel.accessibilityIdentifier = "questionLabel"
         collectionView.backgroundColor = .white
         collectionView.isScrollEnabled = false
+        collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.accessibilityIdentifier = "answerGrid"
         menuContainer.clipsToBounds = true
         bannerView.clipsToBounds = true
 
-        for child in [scrollView, content, prompt, menuContainer, statisticsView, questionLabel, bannerView, collectionView, feedbackView] {
+        for child in [scrollView, prompt, menuContainer, statisticsView, questionLabel, bannerView, collectionView, feedbackView] {
             child.translatesAutoresizingMaskIntoConstraints = false
         }
         let labelArea = UILayoutGuide()
@@ -72,18 +84,17 @@ final class PracticeView: UIView {
         promptMinimumHeight = labelArea.heightAnchor.constraint(greaterThanOrEqualToConstant: 160)
         glyphMaximumHeight = questionLabel.heightAnchor.constraint(lessThanOrEqualTo: labelArea.heightAnchor, constant: -80)
         let viewportHeight = prompt.heightAnchor.constraint(equalTo: scrollView.frameLayoutGuide.heightAnchor)
-        viewportHeight.priority = .defaultHigh
+        // Shrink the glyph before making the prompt taller than its viewport.
+        viewportHeight.priority = UILayoutPriority(999)
+        bannerLeft = bannerView.leftAnchor.constraint(equalTo: questionPane.leftAnchor)
+        bannerRight = bannerView.rightAnchor.constraint(equalTo: questionPane.rightAnchor)
         let labelWidth = questionLabel.widthAnchor.constraint(equalTo: prompt.widthAnchor, multiplier: 0.35)
         labelWidth.priority = .defaultHigh
         NSLayoutConstraint.activate([
-            content.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            content.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            content.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            content.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            scrollView.topAnchor.constraint(equalTo: content.question.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: content.question.bottomAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: content.question.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: content.question.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: questionPane.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bannerView.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: questionPane.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: questionPane.trailingAnchor),
             prompt.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
             prompt.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
             prompt.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
@@ -91,18 +102,18 @@ final class PracticeView: UIView {
             prompt.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
             viewportHeight,
             menuContainer.topAnchor.constraint(equalTo: prompt.topAnchor),
-            menuContainer.leadingAnchor.constraint(equalTo: prompt.leadingAnchor),
-            menuContainer.trailingAnchor.constraint(equalTo: prompt.trailingAnchor),
+            menuContainer.leadingAnchor.constraint(equalTo: questionPane.safeAreaLayoutGuide.leadingAnchor),
+            menuContainer.trailingAnchor.constraint(equalTo: questionPane.safeAreaLayoutGuide.trailingAnchor),
             menuHeight,
             statisticsView.topAnchor.constraint(equalTo: menuContainer.bottomAnchor, constant: 12),
-            statisticsView.leadingAnchor.constraint(equalTo: prompt.leadingAnchor),
-            statisticsView.trailingAnchor.constraint(equalTo: prompt.trailingAnchor),
-            bannerView.bottomAnchor.constraint(equalTo: prompt.bottomAnchor),
-            bannerView.leadingAnchor.constraint(equalTo: prompt.leadingAnchor),
-            bannerView.trailingAnchor.constraint(equalTo: prompt.trailingAnchor),
+            statisticsView.leadingAnchor.constraint(equalTo: questionPane.safeAreaLayoutGuide.leadingAnchor),
+            statisticsView.trailingAnchor.constraint(equalTo: questionPane.safeAreaLayoutGuide.trailingAnchor),
+            bannerView.bottomAnchor.constraint(equalTo: questionPane.bottomAnchor),
+            bannerLeft,
+            bannerRight,
             bannerHeight,
             labelArea.topAnchor.constraint(equalTo: statisticsView.bottomAnchor),
-            labelArea.bottomAnchor.constraint(equalTo: bannerView.topAnchor),
+            labelArea.bottomAnchor.constraint(equalTo: prompt.bottomAnchor),
             promptMinimumHeight,
             feedbackView.topAnchor.constraint(equalTo: labelArea.topAnchor),
             feedbackView.bottomAnchor.constraint(equalTo: labelArea.bottomAnchor),
@@ -114,41 +125,33 @@ final class PracticeView: UIView {
             glyphMaximumHeight,
             questionLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 240),
             labelWidth,
-            collectionView.topAnchor.constraint(equalTo: content.answers.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: content.answers.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: content.answers.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: content.answers.trailingAnchor)
+            collectionView.topAnchor.constraint(equalTo: answerPane.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: answerPane.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: answerPane.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: answerPane.trailingAnchor)
         ])
-    }
-}
-
-private final class PracticeContentView: UIView {
-    let question = UIView()
-    let answers = UIView()
-    private var divisions: [CGRect] = []
-    private var previousBounds = CGRect.zero
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        question.backgroundColor = .kanaKeyGrayColor()
-        answers.backgroundColor = .white
-        question.accessibilityIdentifier = "questionPane"
-        answers.accessibilityIdentifier = "answerPane"
-        addSubview(question)
-        addSubview(answers)
         setNeedsUpdateConstraints()
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+        setNeedsUpdateConstraints()
+    }
+
+    override func safeAreaInsetsDidChange() {
+        super.safeAreaInsetsDidChange()
+        setNeedsUpdateConstraints()
+        setNeedsLayout()
     }
 
     override func updateConstraints() {
         if #available(iOS 27.1, *) {
-            // UIKit tracks this query and invalidates constraints when the fold changes.
-            let frames = reservedRegions(kind: .division, options: .includeInactive).map(\.frame)
-            if frames != divisions {
-                divisions = frames
+            // UIKit invalidates these queries when system UI or the fold moves.
+            let divisions = reservedRegions(kind: .division, options: .includeInactive).map(\.frame)
+            let regions = reservedRegions(kind: .occlusion).map(\.frame)
+            if self.divisions != divisions || occlusions != regions {
+                self.divisions = divisions
+                occlusions = regions
                 setNeedsLayout()
             }
         }
@@ -163,12 +166,20 @@ private final class PracticeContentView: UIView {
         }
         let layout = PracticeLayout(
             bounds: bounds,
+            safeArea: bounds.inset(by: safeAreaInsets),
             prefersColumns: traitCollection.horizontalSizeClass == .regular || traitCollection.verticalSizeClass == .compact,
             divisions: divisions,
+            occlusions: occlusions,
             rightToLeft: effectiveUserInterfaceLayoutDirection == .rightToLeft
         )
-        question.frame = layout.question
-        answers.frame = layout.answers
+        questionPane.frame = layout.question
+        answerPane.frame = layout.answers
+        let pane = layout.question
+        let banner = CGRect(x: pane.minX, y: pane.maxY - bannerHeight.constant,
+                            width: pane.width, height: bannerHeight.constant)
+        let available = PracticeLayout.horizontalFrame(in: banner, avoiding: occlusions)
+        bannerLeft.constant = available.minX - pane.minX
+        bannerRight.constant = available.maxX - pane.maxX
     }
 }
 
@@ -185,5 +196,14 @@ private final class AnswerGridLayout: UICollectionViewFlowLayout {
 
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         collectionView?.bounds.size != newBounds.size
+    }
+
+    override func invalidationContext(forBoundsChange newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {
+        let context = super.invalidationContext(forBoundsChange: newBounds)
+        if let context = context as? UICollectionViewFlowLayoutInvalidationContext,
+           collectionView?.bounds.size != newBounds.size {
+            context.invalidateFlowLayoutDelegateMetrics = true
+        }
+        return context
     }
 }

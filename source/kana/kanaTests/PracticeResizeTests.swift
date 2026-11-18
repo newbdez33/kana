@@ -4,6 +4,56 @@ import UIKit
 
 @MainActor
 final class PracticeResizeTests: XCTestCase {
+    func testBannerStaysVisibleWhenPromptNeedsToScroll() {
+        let practice = PracticeView(frame: CGRect(x: 0, y: 0, width: 466, height: 678))
+        practice.bannerHeight.constant = 60
+        for expanded in [false, true] {
+            practice.isMenuExpanded = expanded
+            practice.setNeedsLayout()
+            practice.layoutIfNeeded()
+            let banner = practice.bannerView.convert(practice.bannerView.bounds, to: practice)
+            let answers = practice.collectionView.convert(practice.collectionView.bounds, to: practice)
+            XCTAssertEqual(banner.height, 60, accuracy: 0.5)
+            XCTAssertEqual(banner.maxY, answers.minY, accuracy: 0.5)
+            XCTAssertLessThanOrEqual(practice.scrollView.frame.maxY, banner.minY + 0.5)
+        }
+    }
+
+    func testPracticeUsesSpaceBelowSideOcclusions() throws {
+        guard #available(iOS 27.1, *) else { throw XCTSkip("Reserved regions require iOS 27.1") }
+        let scenes = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
+        let scene = try XCTUnwrap(scenes.first { $0.activationState == .foregroundActive } ?? scenes.first)
+        let window = UIWindow(windowScene: scene)
+        let controller = UIViewController()
+        let practice = PracticeView()
+        controller.view = practice
+        // A controller can lay out its view before the window supplies reserved regions.
+        practice.frame = scene.coordinateSpace.bounds
+        practice.layoutIfNeeded()
+        window.rootViewController = controller
+        window.isHidden = false
+        defer { window.isHidden = true }
+        window.layoutIfNeeded()
+        practice.layoutIfNeeded()
+        let regions = practice.reservedRegions(kind: .occlusion).map(\.frame)
+        let answers = practice.collectionView.convert(practice.collectionView.bounds, to: practice)
+        guard practice.bounds.height > practice.bounds.width,
+              regions.contains(where: { $0.maxX >= practice.bounds.maxX && $0.minX > practice.bounds.midX }),
+              regions.allSatisfy({ $0.maxY < answers.minY }) else {
+            throw XCTSkip("This check requires a portrait window with a side status bar")
+        }
+        XCTAssertEqual(answers.maxX, practice.bounds.maxX, accuracy: 0.5)
+        let glyph = practice.questionLabel.convert(practice.questionLabel.bounds, to: practice)
+        XCTAssertEqual(glyph.midX, practice.bounds.midX, accuracy: 0.5)
+        let menu = practice.statisticsView.menuButton
+        let menuFrame = menu.convert(menu.bounds, to: practice)
+        for region in regions {
+            XCTAssertFalse(menuFrame.intersects(region))
+            XCTAssertFalse(glyph.intersects(region))
+            XCTAssertFalse(answers.intersects(region))
+        }
+    }
+
     func testResizeKeepsTheRunningTimer() throws {
         let controller = QuestionViewController()
         controller.loadViewIfNeeded()
@@ -53,6 +103,15 @@ final class PracticeResizeTests: XCTestCase {
             XCTAssertNil(controller.timer)
             XCTAssertFalse(controller.menuController!.view.isHidden)
             XCTAssertEqual(controller.collectionView.numberOfItems(inSection: 0), 4)
+            let grid = controller.collectionView
+            grid.layoutIfNeeded()
+            for index in 0..<4 {
+                let cell = try XCTUnwrap(grid.layoutAttributesForItem(at: IndexPath(item: index, section: 0)))
+                XCTAssertEqual(cell.frame.width, grid.bounds.width / 2, accuracy: 0.5)
+                XCTAssertEqual(cell.frame.height, grid.bounds.height / 2, accuracy: 0.5)
+                XCTAssertLessThanOrEqual(cell.frame.maxX, grid.bounds.maxX + 0.5)
+                XCTAssertLessThanOrEqual(cell.frame.maxY, grid.bounds.maxY + 0.5)
+            }
         }
 
         controller.setMenuExpanded(false)
